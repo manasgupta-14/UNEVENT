@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { createPortal } from 'react-dom'
+import { useLocation, useNavigate } from 'react-router'
 import {
   AnimatePresence,
   MotionConfig,
@@ -292,6 +293,9 @@ const MobileDrawer = ({ open, onClose, active, onNavigate }) => {
 }
 
 const Navbar = () => {
+  const { pathname } = useLocation()
+  const navigate = useNavigate()
+  const onService = pathname.startsWith('/services')
   const [scrolled, setScrolled] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
   const [megaOpen, setMegaOpen] = useState(false)
@@ -299,6 +303,7 @@ const Navbar = () => {
   const [active, setActive] = useState('home')
   const headerRef = useRef(null)
   const closeTimer = useRef(null)
+  const current = onService ? 'services' : active
 
   const { scrollY, scrollYProgress } = useScroll()
   const progress = useSpring(scrollYProgress, { stiffness: 140, damping: 28, mass: 0.4 })
@@ -326,7 +331,8 @@ const Navbar = () => {
 
   const handleHome = (event) => {
     event.preventDefault()
-    window.scrollTo({ top: 0, behavior: 'smooth' })
+    if (pathname !== '/') navigate('/')
+    else window.scrollTo({ top: 0, behavior: 'smooth' })
     handleNavigate('home')
   }
 
@@ -362,6 +368,7 @@ const Navbar = () => {
   }, [menuOpen])
 
   useEffect(() => {
+    if (pathname !== '/') return undefined
     const targets = spyIds.map((id) => document.getElementById(id)).filter(Boolean)
     if (!targets.length) return undefined
     const observer = new IntersectionObserver(
@@ -374,7 +381,7 @@ const Navbar = () => {
     )
     targets.forEach((target) => observer.observe(target))
     return () => observer.disconnect()
-  }, [])
+  }, [pathname])
 
   return (
     <MotionConfig reducedMotion="user">
@@ -393,7 +400,7 @@ const Navbar = () => {
             <nav aria-label="Primary" className="hidden lg:block">
               <ul className="flex items-center gap-1" onMouseLeave={() => setHovered(null)}>
                 {navItems.map((item) => {
-                  const isActive = item.mega ? megaOpen : active === item.key
+                  const isActive = item.mega ? megaOpen || onService : current === item.key
                   const content = (
                     <>
                       {hovered === item.key && (
@@ -482,7 +489,7 @@ const Navbar = () => {
         />
       </header>
 
-      <MobileDrawer open={menuOpen} onClose={() => setMenuOpen(false)} active={active} onNavigate={handleNavigate} />
+      <MobileDrawer open={menuOpen} onClose={() => setMenuOpen(false)} active={current} onNavigate={handleNavigate} />
     </MotionConfig>
   )
 }

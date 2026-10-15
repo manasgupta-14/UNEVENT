@@ -1,13 +1,30 @@
 import { motion } from 'framer-motion'
 import SectionHeading from './ui/SectionHeading'
 import { Arrow } from './ui/icons'
+import { articles, cases } from '../data/content'
+import { services } from '../data/services'
 import { rise, stagger, viewport } from '../lib/motion'
 
-const insights = [
-  { id: 1, type: 'Article', title: 'The Future of Proactive Cybersecurity', date: 'Oct 12, 2026', readTime: '5 min read' },
-  { id: 2, type: 'Case Study', title: 'How We Mitigated Legal Risks for a Fintech Startup', date: 'Sep 28, 2026', readTime: '8 min read' },
-  { id: 3, type: 'Article', title: 'Navigating Governance in the Era of AI', date: 'Sep 15, 2026', readTime: '6 min read' },
-]
+const formatDate = (value) =>
+  new Date(value).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric', timeZone: 'UTC' })
+
+const fromArticle = (article) => ({
+  id: article.slug,
+  type: 'Article',
+  title: article.title,
+  summary: article.summary,
+  meta: [formatDate(article.date), `${article.read} min read`],
+})
+
+const fromCase = (entry) => ({
+  id: entry.title,
+  type: 'Case Study',
+  title: entry.title,
+  summary: entry.challenge,
+  meta: [services.find((service) => service.slug === entry.division).name, 'Illustrative case'],
+})
+
+const insights = [fromArticle(articles[0]), fromArticle(articles[1]), fromCase(cases[0])]
 
 const badge = {
   Article: 'bg-[#1473E6]/10 text-[#1473E6]',
@@ -16,9 +33,9 @@ const badge = {
 
 const Meta = ({ item, dark = false }) => (
   <div className={`flex items-center gap-3 text-sm ${dark ? 'text-slate-400' : 'text-slate-500'}`}>
-    <span>{item.date}</span>
+    <span>{item.meta[0]}</span>
     <span className={`h-1 w-1 rounded-full ${dark ? 'bg-slate-600' : 'bg-slate-300'}`} />
-    <span>{item.readTime}</span>
+    <span>{item.meta[1]}</span>
   </div>
 )
 
@@ -46,6 +63,7 @@ const Featured = ({ item }) => (
 
     <div className="relative">
       <h3 className="max-w-lg font-display text-3xl font-bold leading-tight text-white lg:text-4xl">{item.title}</h3>
+      <p className="mt-4 max-w-md text-base leading-relaxed text-slate-300">{item.summary}</p>
       <div className="mt-6 flex items-center justify-between gap-4">
         <Meta item={item} dark />
         <span className="flex h-12 w-12 items-center justify-center rounded-full bg-[#F5B82E] text-[#0B1730] transition-transform duration-300 group-hover:-rotate-45">

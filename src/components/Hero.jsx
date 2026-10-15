@@ -8,10 +8,10 @@ const SHIELD = 'M100 15L160 40V90C160 135 135 170 100 185C65 170 40 135 40 90V40
 const SHIELD_INNER = 'M100 25L150 46V88C150 125 129 154 100 168C71 154 50 125 50 88V46L100 25Z'
 
 const nodes = [
-  { cx: 100, cy: 58, color: '#1473E6' },
-  { cx: 62, cy: 92, color: '#F5B82E' },
-  { cx: 138, cy: 92, color: '#A855F7' },
-  { cx: 76, cy: 134, color: '#F97316' },
+  { cx: 100, cy: 58, color: '#1685DB' },
+  { cx: 62, cy: 92, color: '#E9AB27' },
+  { cx: 138, cy: 92, color: '#7146C8' },
+  { cx: 76, cy: 134, color: '#C58A19' },
   { cx: 124, cy: 134, color: '#1473E6' },
 ]
 
@@ -29,7 +29,7 @@ const links = [
 ]
 
 const chips = [
-  { id: 'protect', label: 'Threat blocked', pos: 'left-0 top-[8%] sm:-left-6', depth: 22, delay: '0s' },
+  { id: 'protect', label: 'Threat blocked', pos: 'left-0 top-[5%] sm:-left-6', depth: 22, delay: '0s' },
   { id: 'counsel', label: 'Contract reviewed', pos: 'right-0 top-[18%] sm:-right-4', depth: 30, delay: '1.2s' },
   { id: 'govern', label: 'Policy compliant', pos: 'left-0 bottom-[14%] sm:-left-4', depth: 26, delay: '2.1s' },
   { id: 'labs', label: 'Automation live', pos: 'right-0 bottom-[6%] sm:-right-6', depth: 34, delay: '0.6s' },
@@ -56,7 +56,7 @@ const FloatingChip = ({ chip, sx, sy }) => {
   return (
     <motion.div style={{ x, y }} className={`absolute z-20 ${chip.pos}`}>
       <div
-        className="animate-float flex items-center gap-3 rounded-xl border border-white/10 bg-[#0B1730]/70 px-3.5 py-2.5 shadow-[0_18px_40px_-16px_rgba(0,0,0,0.8)] backdrop-blur-md"
+        className="animate-float flex items-center gap-3 rounded-xl border border-white/20 bg-[#0B1730]/70 px-3.5 py-2.5 shadow-[0_15px_40px_-16px_rgba(0,0,0,0.8)] backdrop-blur-md"
         style={{ animationDelay: chip.delay }}
       >
         <span className="relative flex h-2.5 w-2.5">
@@ -177,6 +177,75 @@ const ShieldVisual = () => {
         </svg>
       </motion.div>
 
+      <motion.div
+        style={{ rotateX, rotateY, transformPerspective: 1000 }}
+        className="absolute inset-[10%] [transform-style:preserve-3d]"
+      >
+        <svg viewBox="0 0 200 200" className="h-full w-full overflow-visible drop-shadow-[0_0_44px_rgba(20,115,230,0.45)]" fill="none" aria-hidden="true">
+          <defs>
+            <linearGradient id="heroShield" x1="100" y1="15" x2="100" y2="185" gradientUnits="userSpaceOnUse">
+              <stop offset="0" stopColor="#1473E6" stopOpacity="0.45" />
+              <stop offset="1" stopColor="#0B1730" stopOpacity="0.15" />
+            </linearGradient>
+            <linearGradient id="heroStroke" x1="40" y1="15" x2="160" y2="185" gradientUnits="userSpaceOnUse">
+              <stop offset="0" stopColor="#F5B82E" />
+              <stop offset="0.55" stopColor="#1473E6" />
+              <stop offset="1" stopColor="#F5B82E" />
+            </linearGradient>
+            <linearGradient id="heroScan" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stopColor="#1473E6" stopOpacity="0" />
+              <stop offset="0.5" stopColor="#60A5FA" stopOpacity="0.55" />
+              <stop offset="1" stopColor="#1473E6" stopOpacity="0" />
+            </linearGradient>
+            <clipPath id="heroClip">
+              <path d={SHIELD} />
+            </clipPath>
+          </defs>
+
+          <motion.path
+            d={SHIELD}
+            fill="url(#heroShield)"
+            stroke="url(#heroStroke)"
+            strokeWidth="2.3"
+            strokeLinejoin="round"
+            initial={{ pathLength: 0 }}
+            animate={{ pathLength: 1 }}
+            transition={{ duration: 1.8, delay: 0.3, ease: 'easeInOut' }}
+          />
+          <path d={SHIELD_INNER} stroke="#F5B82E" strokeOpacity="0.55" strokeWidth="1" strokeDasharray="3 5" className="animate-dash" />
+
+          <g clipPath="url(#heroClip)">
+            <rect x="36" y="20" width="128" height="26" fill="url(#heroScan)" className="animate-scan-y" />
+          </g>
+
+          <g strokeWidth="1" strokeDasharray="3 5" strokeOpacity="0.6" stroke="#60A5FA">
+            {links.map(([x1, y1, x2, y2]) => (
+              <line key={`${x1}-${y1}-${x2}-${y2}`} x1={x1} y1={y1} x2={x2} y2={y2} className="animate-dash" />
+            ))}
+          </g>
+
+          {nodes.map((node, index) => (
+            <g key={`${node.cx}-${node.cy}`}>
+              <circle cx={node.cx} cy={node.cy} r="11" stroke={node.color} strokeOpacity="0.28" />
+              <circle
+                cx={node.cx}
+                cy={node.cy}
+                r="6"
+                fill="#0B1730"
+                stroke={node.color}
+                strokeWidth="2"
+                className="animate-node origin-self"
+                style={{ animationDelay: `${index * 0.35}s` }}
+              />
+            </g>
+          ))}
+
+          <circle cx="100" cy="100" r="22" stroke="#F5B82E" strokeOpacity="0.25" />
+          <circle cx="100" cy="100" r="15" fill="#0B1730" stroke="#F5B82E" strokeWidth="2.5" />
+          <circle cx="100" cy="100" r="4.5" fill="#F5B82E" className="animate-node origin-self" />
+        </svg>
+      </motion.div>
+
       {chips.map((chip) => (
         <FloatingChip key={chip.id} chip={chip} sx={sx} sy={sy} />
       ))}
@@ -197,9 +266,9 @@ const Hero = () => {
       onPointerMove={handleMove}
       className="relative isolate flex min-h-[calc(100svh-5rem)] items-center overflow-hidden bg-[#0B1730]"
     >
-      <NetworkCanvas className="opacity-70" />
+      <NetworkCanvas className="opacity-80" />
       <div className="pointer-events-none absolute inset-0 -z-10 bg-[linear-gradient(rgba(255,255,255,0.045)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.045)_1px,transparent_1px)] [background-size:56px_56px] [mask-image:radial-gradient(ellipse_at_center,black,transparent_78%)]" />
-      <div className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(620px_circle_at_var(--mx,70%)_var(--my,30%),rgba(20,115,230,0.2),transparent_60%)]" />
+      <div className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(500px_circle_at_var(--mx,70%)_var(--my,30%),rgba(20,115,230,0.2),transparent_60%)]" />
       <div className="pointer-events-none absolute -left-32 top-10 -z-10 h-[420px] w-[420px] animate-float rounded-full bg-[#1473E6]/20 blur-[110px]" />
       <div className="pointer-events-none absolute -right-24 bottom-0 -z-10 h-[380px] w-[380px] animate-float rounded-full bg-[#F5B82E]/10 blur-[110px]" style={{ animationDelay: '2s' }} />
       <div className="pointer-events-none absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-[#0B1730] to-transparent" />

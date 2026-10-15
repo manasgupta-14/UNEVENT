@@ -1,8 +1,8 @@
 const items = [
-  { label: 'Cyber threats', color: '#1473E6' },
-  { label: 'Legal risk', color: '#F5B82E' },
-  { label: 'Compliance failures', color: '#A855F7' },
-  { label: 'Technology challenges', color: '#F97316' },
+  { label: 'Cyber threats', color: '#1685DB' },
+  { label: 'Legal risk', color: '#E9AB27' },
+  { label: 'Compliance failures', color: '#7146C8' },
+  { label: 'Technology challenges', color: '#C58A19' },
 ]
 
 const Track = ({ hidden = false }) => (
@@ -21,11 +21,16 @@ const Track = ({ hidden = false }) => (
 )
 
 const Marquee = () => (
-  <div className="relative overflow-hidden border-y border-white/10 bg-[#0B1730] py-5 [mask-image:linear-gradient(90deg,transparent,black_10%,black_90%,transparent)]">
-    <div className="flex w-max animate-marquee hover:[animation-play-state:paused]">
-      <Track />
-      <Track hidden />
+  <div className="relative overflow-hidden border-y border-white/10 bg-[#0B1730] py-5">
+    <div className="[mask-image:linear-gradient(90deg,transparent,black_10%,black_90%,transparent)]">
+      <div className="flex w-max animate-marquee hover:[animation-play-state:paused]">
+        <Track />
+        <Track hidden />
+      </div>
     </div>
+
+    <div className="pointer-events-none absolute inset-y-0 left-0 w-24 bg-gradient-to-r from-[#60A5FA]/25 to-transparent" />
+    <div className="pointer-events-none absolute inset-y-0 right-0 w-24 bg-gradient-to-l from-[#60A5FA]/25 to-transparent" />
   </div>
 )
 

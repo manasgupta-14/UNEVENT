@@ -43,7 +43,7 @@ const ServiceCard = ({ service }) => {
         d={icons[service.id]}
         color={service.accent}
         strokeWidth={1}
-        className="pointer-events-none absolute -bottom-6 -right-6 h-44 w-44 rotate-12 opacity-[0.07] transition-all duration-700 group-hover:rotate-0 group-hover:scale-110 group-hover:opacity-[0.14]"
+        className="pointer-events-none absolute -bottom-6 -right-6 h-44 w-44 rotate-12 opacity-[0.08] transition-all duration-700 group-hover:rotate-0 group-hover:scale-110 group-hover:opacity-[0.14]"
       />
 
       <div className="relative flex h-16 w-16 items-center justify-center rounded-2xl border transition-transform duration-500 group-hover:-rotate-6 group-hover:scale-105" style={{ borderColor: `${service.accent}40`, backgroundColor: `${service.accent}1A` }}>

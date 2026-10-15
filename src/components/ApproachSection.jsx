@@ -30,7 +30,7 @@ const steps = [
   },
 ]
 
-const Step = ({ step, index, progress }) => {
+const Step = ({ step, index, progress, onEnter, onLeave }) => {
   const start = index * 0.26
   const lit = useTransform(progress, [start - 0.08, start + 0.02], [0, 1])
   const borderColor = useTransform(lit, [0, 1], ['rgba(255,255,255,0.14)', '#F5B82E'])
@@ -41,7 +41,11 @@ const Step = ({ step, index, progress }) => {
   const y = useTransform(lit, [0, 1], [14, 0])
 
   return (
-    <li className="relative flex gap-5 lg:flex-col lg:items-center lg:px-5 lg:text-center">
+    <li
+      onMouseEnter={onEnter}
+      onMouseLeave={onLeave}
+      className="relative flex cursor-pointer gap-5 lg:flex-col lg:items-center lg:px-5 lg:text-center"
+    >
       <motion.div
         style={{ borderColor, boxShadow, scale }}
         className="relative z-10 flex h-[68px] w-[68px] shrink-0 items-center justify-center rounded-2xl border-2 bg-[#0B1730]"
@@ -64,7 +68,23 @@ const Step = ({ step, index, progress }) => {
 const ApproachSection = () => {
   const ref = useRef(null)
   const { scrollYProgress } = useScroll({ target: ref, offset: ['start 60%', 'end 75%'] })
-  const progress = useSpring(scrollYProgress, { stiffness: 120, damping: 26, mass: 0.4 })
+
+  const springConfig = { stiffness: 120, damping: 26, mass: 0.4 }
+  const scrollProgress = useSpring(scrollYProgress, springConfig)
+  const hoverMix = useSpring(0, springConfig)
+  const hoverStep = useSpring(0, springConfig)
+  const hoverLine = useSpring(0, springConfig)
+
+  const progress = useTransform([scrollProgress, hoverStep, hoverMix], ([s, h, m]) => s + (h - s) * m)
+  const lineProgress = useTransform([scrollProgress, hoverLine, hoverMix], ([s, l, m]) => s + (l - s) * m)
+
+  const handleEnter = (index) => {
+    hoverStep.set(index * 0.26 + 0.02)
+    hoverLine.set(index / (steps.length - 1))
+    hoverMix.set(1)
+  }
+
+  const handleLeave = () => hoverMix.set(0)
 
   return (
     <section id="approach" ref={ref} className="relative isolate overflow-hidden bg-[#0B1730] py-24 lg:py-32">
@@ -82,15 +102,22 @@ const ApproachSection = () => {
 
         <div className="relative mt-16 lg:mt-20">
           <div className="absolute bottom-[34px] left-[33px] top-[34px] w-[2px] rounded-full bg-white/10 lg:hidden">
-            <motion.div style={{ scaleY: progress }} className="h-full origin-top rounded-full bg-gradient-to-b from-[#F5B82E] to-[#1473E6]" />
+            <motion.div style={{ scaleY: lineProgress }} className="h-full origin-top rounded-full bg-gradient-to-b from-[#F5B82E] to-[#1473E6]" />
           </div>
           <div className="absolute left-[12.5%] right-[12.5%] top-[33px] hidden h-[2px] rounded-full bg-white/10 lg:block">
-            <motion.div style={{ scaleX: progress }} className="h-full origin-left rounded-full bg-gradient-to-r from-[#F5B82E] to-[#1473E6]" />
+            <motion.div style={{ scaleX: lineProgress }} className="h-full origin-left rounded-full bg-gradient-to-r from-[#F5B82E] to-[#1473E6]" />
           </div>
 
           <ol className="relative grid gap-10 lg:grid-cols-4 lg:gap-0">
             {steps.map((step, index) => (
-              <Step key={step.id} step={step} index={index} progress={progress} />
+              <Step
+                key={step.id}
+                step={step}
+                index={index}
+                progress={progress}
+                onEnter={() => handleEnter(index)}
+                onLeave={handleLeave}
+              />
             ))}
           </ol>
         </div>
