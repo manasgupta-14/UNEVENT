@@ -83,4 +83,260 @@ export const services = [
     ],
     cta: 'Discuss your legal risk',
   },
+  {
+    slug: 'govern',
+    name: 'Govern',
+    area: 'Governance and compliance',
+    color: '#7146C8',
+    headline: 'Make compliance failures a non-event.',
+    short: 'Keep policies, controls and audit evidence in order all year, not only before an audit.',
+    problems: ['Policies that exist but nobody follows',
+      'Audit evidence scattered across drives and chats',
+      'No single view of open compliance gaps',
+      'Vendor risk reviewed once and forgotten'],
+    offerings: [
+      ['Compliance gap assessment',
+        'Where you stand against the requirements that apply to you.'],
+      ['Policy management',
+        'Draft, review, approve and publish policies with a clear history.'],
+      ['Risk registers',
+        'Risks, owners, ratings and treatment plans in one list.'],
+      ['Audit evidence',
+        'Collect and organize evidence as you go.'],
+      ['Governance reporting',
+        'Status reports leadership can read in five minutes.'],
+    ],
+    process: ['Baseline',
+      'Gap review',
+      'Plan',
+      'Implement',
+      'Report'],
+    deliverables: ['Gap assessment',
+      'Policy set',
+      'Risk register',
+      'Status report'],
+    faqs: [
+      ['Which frameworks do you cover?',
+        'We confirm the scope for each engagement. Support for a framework never means a certification or a compliance guarantee.'],
+      ['Will this get us certified?',
+        'Certification comes from the certifying body. We help you prepare and keep your records in order.'],
+      ['Can we track progress ourselves?',
+        'Yes. A shared status view is planned as part of the client portal.'],
+    ],
+    cta: 'Request a governance review',
+  },
+  {
+    slug: 'labs',
+    name: 'Labs',
+    area: 'Technology and innovation',
+    color: '#C58A19',
+    headline: 'Make technology challenges a non-event.',
+    short: 'Custom software, automation and AI tools for the problems off-the-shelf products miss.',
+    problems: ['Manual workflows that eat the team\'s week', 'Dashboards that need a developer for every change',
+      'Tools that do not talk to each other',
+      'Ideas that never get past the slide deck'],
+    offerings: [
+      ['Custom web applications',
+        'Built with React, Node.js and MongoDB, or your stack.'],
+      ['AI-assisted workflows',
+        'Drafting, triage and summarizing where it saves real time.'],
+      ['Process automation',
+        'Replace repeated manual steps with reliable ones.'],
+      ['Internal dashboards',
+        'Live views of the numbers your team checks daily.'],
+      ['API integration',
+        'Connect the systems you already use.'],
+      ['Prototypes and proofs of concept',
+        'Test the idea before committing the budget.'],
+    ],
+    process: ['Discover',
+      'Design',
+      'Prototype',
+      'Build',
+      'Test',
+      'Deploy',
+      'Maintain'],
+    deliverables: ['Working prototype',
+      'Production application',
+      'Documentation',
+      'Support plan'],
+    faqs: [
+      ['Do you build security into the software?',
+        'Yes. Authentication, testing, monitoring and secure deployment are part of any production build.'],
+      ['Can we start small?',
+        'Yes. Most projects begin with a prototype so you can see it working first.'],
+      ['Who owns the code?',
+        'Ownership is agreed in the contract before work begins.'],
+    ],
+    cta: 'Discuss a technology project',
+  },
+]
+
+export const industries = [
+  {
+    name: 'Technology and SaaS',
+    slug: 'saas',
+    divisions: ['protect',
+      'govern',
+      'labs'],
+    challenge: 'Customers ask for security questionnaires and proof of controls before they sign.',
+    approach: 'Assess security posture, organize evidence and build the tooling that keeps it current.'
+  },
+  {
+    name: 'Financial services',
+    slug: 'finance',
+    divisions: ['protect',
+      'counsel',
+      'govern'],
+    challenge: 'Heavy regulation, sensitive data and third-party vendors that all need oversight.',
+    approach: 'Map controls to obligations, review vendor contracts and track gaps in one register.'
+  },
+  {
+    name: 'Healthcare',
+    slug: 'health',
+    divisions: ['protect',
+      'govern'],
+    challenge: 'Patient data is a high-value target and policies must hold up in practice.',
+    approach: 'Review access to sensitive systems, then document and test response plans.'
+  },
+  {
+    name: 'E-commerce',
+    slug: 'ecom',
+    divisions: ['protect',
+      'counsel',
+      'labs'],
+    challenge: 'Payment flows, customer data and many suppliers behind one storefront.',
+    approach: 'Harden the checkout path, review supplier terms and automate repetitive operations.'
+  },
+  {
+    name: 'Professional services',
+    slug: 'prof',
+    divisions: ['counsel', 'govern'],
+    challenge: 'Client confidentiality and contract exposure across many engagements',
+    approach: 'Standardize contract review and keep policies and evidence audit-ready'
+  },
+]
+
+export const cases = [
+  {
+    title: 'A SaaS team prepares for its first enterprise security review',
+    division: 'protect',
+    challenge: 'A growing product team kept losing deals at the security questionnaire stage.',
+    risks: 'No asset list, shared admin accounts, no written incident plan.', solution: 'Assessment, a ranked fix list and a one-page incident plan.',
+    result: 'Illustrative outcome: the team answers questionnaires from one maintained document.'
+  },
+  {
+    title: 'A services firm brings contract review into one process',
+    division: 'counsel',
+    challenge: 'Client contracts were reviewed differently by every partner.',
+    risks: 'Inconsistent liability and data clauses across active engagements.', solution: 'A shared clause checklist and a risk register with owners.',
+    result: 'Illustrative outcome: every new contract gets the same first-pass review'
+  },
+  {
+    title: 'A clinic group turns scattered policies into one set',
+    division: 'govern',
+    challenge: 'Policies lived in email attachments and nobody knew which version was current.',
+    risks: 'Outdated procedures and missing review dates.',
+    solution: 'A policy library with owners, review cycles and an approval trail.', result: 'Illustrative outcome: one source of truth, reviewed on a schedule.'
+  },
+  {
+    title: 'An online retailer automates its supplier onboarding',
+    division: 'labs',
+    challenge: 'Onboarding each supplier took days of spreadsheet and email work.', risks: 'Missing documents and inconsistent checks.',
+    solution: 'A small internal app with a checklist, reminders and status view.', result: 'Illustrative outcome: onboarding status visible to the whole team.'
+  },
+]
+
+export const articles = [
+  {
+    slug: 'first-hour-of-an-incident',
+    title: 'What to do in the first hour of a security incident',
+    category: 'Cybersecurity',
+    date: '2026-09-18',
+    read: 5,
+    summary: 'A short, practical order of operations for the first sixty minutes.', body: ['The first hour decides how big an incident gets. The aim is not to solve it. The aim is to stop it growing and to keep the facts straight.',
+      'Start by naming one person in charge. Then record what you know, with times. Isolate the affected systems without wiping them, because you will need the evidence.',
+      'Tell the people who need to know: your security contact, leadership and, where required, your lawyers. Keep the circle small until you understand the scope.', 'Afterward, write down what slowed you down. That list is the best input for your next incident plan.']
+  },
+  {
+    slug: 'five-contract-clauses',
+    title: 'Five contract clauses to read twice',
+    category: 'Legal and Contract Risk',
+    date: '2026-09-09',
+    read: 4,
+    summary: 'Where technology contracts tend to hide the real risk.',
+    body: ['Liability caps, indemnities, data handling, termination and subcontracting. These five clauses decide who pays when something fails.',
+      'Read the cap against the size of the possible loss, not against the contract value. Check whether data breaches sit inside or outside the cap.',
+      'This is general information, not legal advice. Have a qualified lawyer review any contract that matters.']
+  },
+  {
+    slug: 'audit-evidence-all-year',
+    title: 'Collect audit evidence all year, not in the last week',
+    category: 'Governance and Compliance',
+    date: '2026-08-27',
+    read: 6,
+    summary: 'A habit that makes audits quieter and cheaper.',
+    body: ['Most audit stress comes from searching for proof of things that were done months ago.',
+      'Pick a small set of recurring controls. Assign each an owner and a place to save evidence when the control runs.',
+      'A monthly ten-minute review of what is missing is enough to keep the pile small.']
+  },
+  {
+    slug: 'where-ai-saves-time',
+    title: 'Where AI actually saves time in a small team',
+    category: 'AI and Technology',
+    date: '2026-08-14',
+    read: 5,
+    summary: 'Triage, drafting and summarizing, with a human check at the end.',
+    body: ['The best early uses are narrow and boring: sorting incoming requests, drafting first replies and summarizing long threads.',
+      'Keep a person responsible for the result. Log what the tool produced so you can review mistakes.',
+      'Start with one workflow, measure the time saved, then decide on the next.']
+  },
+  {
+    slug: 'a-simple-risk-register',
+    title: 'How to start a risk register in an afternoon',
+    category: 'Business Risk Management',
+    date: '2026-07-30',
+    read: 4,
+    summary: 'Five columns are enough to begin.',
+    body: ['A risk register needs five columns: the risk, who owns it, how likely, how bad, and what happens next.',
+      'List ten risks in a meeting. Rate them roughly. Assign every one an owner.', 'Review it monthly. A register that is read is better than a perfect one that is not.']
+  },
+  {
+    slug: 'vendor-questions',
+    title: 'Seven questions to ask every new vendor',
+    category: 'Cybersecurity',
+    date: '2026-07-11',
+    read: 3,
+    summary: 'Short questions that surface most vendor risk early.',
+    body: ['Where is our data stored? Who can access it? How do you handle incidents? Do you use subcontractors? What happens to our data when we leave?',
+      'Add two of your own that match your industry. Keep the answers on file.']
+  },
+]
+export const categories = ['All', ...Array.from(new Set(articles.map((a) => a.category)))]
+
+export const jobs = [
+  {
+    id: 'sec-analyst',
+    title: 'Security Analyst',
+    team: 'Protect',
+    where: 'Remote or hybrid',
+    skills: 'Vulnerability triage, reporting, clear writing',
+    about: 'Run assessments and turn findings into plain-language reports.'
+  },
+  {
+    id: 'grc-specialist',
+    title: 'GRC Specialist',
+    team: 'Govern',
+    where: 'Remote or hybrid',
+    skills: 'Policies, risk registers, audit preparation',
+    about: 'Help clients build and maintain governance programs.'
+  },
+  {
+    id: 'fullstack-dev',
+    title: 'Full-stack Developer',
+    team: 'Labs',
+    where: 'Remote',
+    skills: 'React, Node.js, Express, MongoDB',
+    about: 'Build internal tools, dashboards and client-facing apps.'
+  },
 ]
