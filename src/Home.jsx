@@ -1,5 +1,6 @@
 import Hero from './components/Hero'
 import Marquee from './components/Marquee'
+import AboutSection from './components/AboutSection'
 import ServicesSection from './components/ServicesSection'
 import ApproachSection from './components/ApproachSection'
 import IndustriesSection from './components/IndustriesSection'
@@ -10,6 +11,7 @@ const Home = () => (
   <>
     <Hero />
     <Marquee />
+    <AboutSection />
     <ServicesSection />
     <ApproachSection />
     <IndustriesSection />

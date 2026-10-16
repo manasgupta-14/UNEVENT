@@ -90,8 +90,8 @@ const ServicesSection = () => (
       <div className="flex flex-col justify-between gap-8 lg:flex-row lg:items-end">
         <SectionHeading
           badge="Our services"
-          title="Four divisions. One outcome: nothing happens."
-          text="Each UNEVENT division is built to prevent problems rather than react to them, so risk stays a non-event."
+          title="Four services. One goal: no surprises."
+          text="Cybersecurity, legal risk, compliance and custom software. Each one is built to prevent problems, not just react to them."
         />
         <motion.p
           variants={rise}
@@ -100,7 +100,7 @@ const ServicesSection = () => (
           viewport={viewport}
           className="max-w-sm text-sm leading-relaxed text-slate-500"
         >
-          Pick one division or combine them. Every engagement starts with understanding your business.
+          Pick one service or combine them. We start by learning how your business works.
         </motion.p>
       </div>
 
