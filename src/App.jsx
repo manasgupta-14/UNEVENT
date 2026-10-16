@@ -8,6 +8,8 @@ import Home from './Home'
 const IndustriesPage = lazy(() => import('./pages/industries/IndustriesPage'))
 const InsightsPage = lazy(() => import('./pages/insights/InsightsPage'))
 const ArticlePage = lazy(() => import('./pages/insights/ArticlePage'))
+const CaseStudiesPage = lazy(() => import('./pages/case-studies/CaseStudiesPage'))
+const CareersPage = lazy(() => import('./pages/careers/CareersPage'))
 
 const modules = import.meta.glob('./pages/*Page.jsx')
 
@@ -61,6 +63,24 @@ const App = () => (
           element={
             <Suspense fallback={<div className="p-8">Loading...</div>}>
               <ArticlePage />
+            </Suspense>
+          }
+        />
+
+        <Route
+          path="/case-studies"
+          element={
+            <Suspense fallback={<div className="p-8">Loading...</div>}>
+              <CaseStudiesPage />
+            </Suspense>
+          }
+        />
+
+        <Route
+          path="/careers"
+          element={
+            <Suspense fallback={<div className="p-8">Loading...</div>}>
+              <CareersPage />
             </Suspense>
           }
         />
