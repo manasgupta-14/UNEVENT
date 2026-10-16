@@ -1,11 +1,11 @@
-import { useEffect, useRef } from 'react'
-import { animate, useInView } from 'framer-motion'
+ import { useEffect, useRef } from 'react'
+ import { animate, useInView } from 'framer-motion'
 
-const CountUp = ({ to, duration = 1.4 }) => {
-  const ref = useRef(null)
-  const inView = useInView(ref, { once: true })
+   const CountUp = ({ to, duration = 1.4 }) => {
+   const ref = useRef(null)
+   const inView = useInView(ref, { once: true })
 
-  useEffect(() => {
+    useEffect(() => {
     if (!inView) return undefined
     const controls = animate(0, to, {
       duration,
@@ -15,9 +15,9 @@ const CountUp = ({ to, duration = 1.4 }) => {
       },
     })
     return () => controls.stop()
-  }, [inView, to, duration])
+    }, [inView, to, duration])
 
-  return <span ref={ref}>0</span>
+    return <span ref={ref}>0</span>
 }
-
-export default CountUp
+ 
+    export default CountUp
