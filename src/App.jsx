@@ -6,6 +6,8 @@ import ScrollManager from './components/ScrollManager'
 import Home from './Home'
 
 const IndustriesPage = lazy(() => import('./pages/industries/IndustriesPage'))
+const InsightsPage = lazy(() => import('./pages/insights/InsightsPage'))
+const ArticlePage = lazy(() => import('./pages/insights/ArticlePage'))
 
 const modules = import.meta.glob('./pages/*Page.jsx')
 
@@ -41,6 +43,24 @@ const App = () => (
           element={
             <Suspense fallback={<div className="p-8">Loading...</div>}>
               <IndustriesPage />
+            </Suspense>
+          }
+        />
+
+        <Route
+          path="/insights"
+          element={
+            <Suspense fallback={<div className="p-8">Loading...</div>}>
+              <InsightsPage />
+            </Suspense>
+          }
+        />
+
+        <Route
+          path="/insights/:slug"
+          element={
+            <Suspense fallback={<div className="p-8">Loading...</div>}>
+              <ArticlePage />
             </Suspense>
           }
         />
