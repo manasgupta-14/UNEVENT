@@ -19,6 +19,7 @@ const navItems = [
   { key: 'services', label: 'Services', mega: true },
   { key: 'industries', label: 'Industries', href: '/industries' },
   { key: 'insights', label: 'Insights', href: '/insights' },
+  { key: 'case-studies', label: 'Case Studies', href: '/case-studies' },
   { key: 'about', label: 'About', href: '#about' },
   { key: 'contact', label: 'Contact', href: '#contact' },
 ]
@@ -303,7 +304,7 @@ const Navbar = () => {
   const [active, setActive] = useState('home')
   const headerRef = useRef(null)
   const closeTimer = useRef(null)
-  const routeKey = pathname.startsWith('/industries') ? 'industries' : pathname.startsWith('/insights') ? 'insights' : null
+  const routeKey = pathname.startsWith('/industries') ? 'industries' : pathname.startsWith('/insights') ? 'insights' : pathname.startsWith('/case-studies') ? 'case-studies' : null
   const current = onService ? 'services' : routeKey ?? active
  
   const { scrollY, scrollYProgress } = useScroll()

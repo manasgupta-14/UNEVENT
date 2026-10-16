@@ -22,7 +22,7 @@ const fromArticle = (article) => ({
 
 const fromCase = (entry) => ({
   id: entry.title,
-  href: '/insights',
+  href: '/case-studies',
   type: 'Case Study',
   title: entry.title,
   summary: entry.challenge,
