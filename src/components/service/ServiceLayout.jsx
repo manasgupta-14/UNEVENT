@@ -1,4 +1,3 @@
-import { useEffect } from 'react'
 import { Navigate } from 'react-router'
 import ServiceHero from './ServiceHero'
 import ServiceProblems from './ServiceProblems'
@@ -6,17 +5,16 @@ import ServiceOfferings from './ServiceOfferings'
 import ServiceProcess from './ServiceProcess'
 import ServiceFaq from './ServiceFaq'
 import ServiceCta from './ServiceCta'
+import usePageMeta from '../../hooks/usePageMeta'
 import { getService } from '../../data/services'
 
 const ServiceLayout = ({ slug }) => {
   const service = getService(slug)
 
-  useEffect(() => {
-    if (service) document.title = `UNEVENT ${service.name} | ${service.headline}`
-    return () => {
-      document.title = 'UNEVENT | Make Risk an Non-Event'
-    }
-  }, [service])
+  usePageMeta({
+    title: service ? `${service.name} | ${service.area} by UNEVENT` : 'UNEVENT',
+    description: service?.short,
+  })
 
   if (!service) return <Navigate to="/" replace />
 

@@ -5,6 +5,8 @@ import Footer from './components/Footer'
 import ScrollManager from './components/ScrollManager'
 import Home from './Home'
 
+const IndustriesPage = lazy(() => import('./pages/industries/IndustriesPage'))
+
 const modules = import.meta.glob('./pages/*Page.jsx')
 
 const servicePages = Object.entries(modules).map(([path, loader]) => ({
@@ -33,6 +35,15 @@ const App = () => (
             }
           />
         ))}
+
+        <Route
+          path="/industries"
+          element={
+            <Suspense fallback={<div className="p-8">Loading...</div>}>
+              <IndustriesPage />
+            </Suspense>
+          }
+        />
 
         <Route path="*" element={<Home />} />
       </Routes>

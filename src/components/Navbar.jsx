@@ -17,7 +17,7 @@ import { icons, services } from '../data/services'
 const navItems = [
   { key: 'home', label: 'Home', href: '#' },
   { key: 'services', label: 'Services', mega: true },
-  { key: 'industries', label: 'Industries', href: '#industries' },
+  { key: 'industries', label: 'Industries', href: '/industries' },
   { key: 'insights', label: 'Insights', href: '#insights' },
   { key: 'about', label: 'About', href: '#about' },
   { key: 'contact', label: 'Contact', href: '#contact' },
@@ -303,7 +303,7 @@ const Navbar = () => {
   const [active, setActive] = useState('home')
   const headerRef = useRef(null)
   const closeTimer = useRef(null)
-  const current = onService ? 'services' : active
+  const current = onService ? 'services' : pathname === '/industries' ? 'industries' : active
 
   const { scrollY, scrollYProgress } = useScroll()
   const progress = useSpring(scrollYProgress, { stiffness: 140, damping: 28, mass: 0.4 })
@@ -328,6 +328,14 @@ const Navbar = () => {
     setMegaOpen(false)
     setMenuOpen(false)
   }, [])
+
+  const handleRoute = (event, key, href) => {
+    if (href?.startsWith('/')) {
+      event.preventDefault()
+      navigate(href)
+    }
+    handleNavigate(key)
+  }
 
   const handleHome = (event) => {
     event.preventDefault()
@@ -445,7 +453,7 @@ const Navbar = () => {
                       ) : (
                         <a
                           href={item.href}
-                          onClick={item.key === 'home' ? handleHome : () => handleNavigate(item.key)}
+                          onClick={item.key === 'home' ? handleHome : (event) => handleRoute(event, item.key, item.href)}
                           className={cls}
                         >
                           {content}

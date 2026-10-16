@@ -6,18 +6,26 @@ import ApproachSection from './components/ApproachSection'
 import IndustriesSection from './components/IndustriesSection'
 import InsightsSection from './components/InsightsSection'
 import CtaSection from './components/CtaSection'
+import usePageMeta from './hooks/usePageMeta'
 
-const Home = () => (
-  <>
-    <Hero />
-    <Marquee />
-    <AboutSection />
-    <ServicesSection />
-    <ApproachSection />
-    <IndustriesSection />
-    <InsightsSection />
-    <CtaSection />
-  </>
-)
+const Home = () => {
+  usePageMeta({
+    title: 'UNEVENT | Cybersecurity, Legal Risk, Compliance & Tech',
+    description: 'UNEVENT helps businesses stop cyber, legal and compliance problems before they happen, and builds the software that keeps them stopped.',
+  })
+
+  return (
+    <>
+      <Hero />
+      <Marquee />
+      <AboutSection />
+      <ServicesSection />
+      <ApproachSection />
+      <IndustriesSection />
+      <InsightsSection />
+      <CtaSection />
+    </>
+  )
+}
 
 export default Home
