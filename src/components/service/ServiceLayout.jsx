@@ -14,7 +14,7 @@ const ServiceLayout = ({ slug }) => {
   useEffect(() => {
     if (service) document.title = `UNEVENT ${service.name} | ${service.headline}`
     return () => {
-      document.title = 'UNEVENT | Make Risk an Non-Event'
+      document.title = 'UNEVENT | Make Risk a Non-Event'
     }
   }, [service])
 

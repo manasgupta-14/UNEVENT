@@ -19,11 +19,11 @@ const navItems = [
   { key: 'services', label: 'Services', mega: true },
   { key: 'industries', label: 'Industries', href: '#industries' },
   { key: 'insights', label: 'Insights', href: '#insights' },
-  { key: 'about', label: 'About', href: '#about' },
-  { key: 'contact', label: 'Contact', href: '#contact' },
+  { key: 'about', label: 'About', href: '/about' },
+  { key: 'contact', label: 'Contact', href: '/contact' },
 ]
 
-const spyIds = ['industries', 'insights', 'about', 'contact']
+const spyIds = ['industries', 'insights', 'contact']
 
 const ease = [0.22, 1, 0.36, 1]
 
@@ -155,7 +155,7 @@ const MegaMenu = ({ onNavigate, onEnter, onLeave }) => (
             Tell us what you are dealing with and we will map it to the right team.
           </p>
         </div>
-        <MagneticButton href="#contact" onClick={() => onNavigate('contact')} className="relative mt-6 self-start">
+        <MagneticButton href="/book" onClick={() => onNavigate('book')} className="relative mt-6 self-start">
           Book a Consultation
         </MagneticButton>
       </motion.div>
@@ -280,7 +280,7 @@ const MobileDrawer = ({ open, onClose, active, onNavigate }) => {
             </motion.nav>
 
             <div className="relative shrink-0 border-t border-white/10 p-5">
-              <MagneticButton href="#contact" onClick={() => onNavigate('contact')} size="lg" className="w-full">
+              <MagneticButton href="/book" onClick={() => onNavigate('book')} size="lg" className="w-full">
                 Book a Consultation
               </MagneticButton>
             </div>
@@ -296,6 +296,8 @@ const Navbar = () => {
   const { pathname } = useLocation()
   const navigate = useNavigate()
   const onService = pathname.startsWith('/services')
+  const onAbout = pathname === '/about'
+  const onContact = pathname === '/contact'
   const [scrolled, setScrolled] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
   const [megaOpen, setMegaOpen] = useState(false)
@@ -303,7 +305,7 @@ const Navbar = () => {
   const [active, setActive] = useState('home')
   const headerRef = useRef(null)
   const closeTimer = useRef(null)
-  const current = onService ? 'services' : active
+  const current = onService ? 'services' : onAbout ? 'about' : onContact ? 'contact' : active
 
   const { scrollY, scrollYProgress } = useScroll()
   const progress = useSpring(scrollYProgress, { stiffness: 140, damping: 28, mass: 0.4 })
@@ -324,7 +326,7 @@ const Navbar = () => {
   }, [])
 
   const handleNavigate = useCallback((key) => {
-    setActive(key)
+    if (key !== 'about' && key !== 'contact') setActive(key)
     setMegaOpen(false)
     setMenuOpen(false)
   }, [])
@@ -458,7 +460,7 @@ const Navbar = () => {
             </nav>
 
             <div className="hidden lg:block">
-              <MagneticButton href="#contact" onClick={() => handleNavigate('contact')}>
+              <MagneticButton href="/book" onClick={() => handleNavigate('book')}>
                 Book a Consultation
               </MagneticButton>
             </div>

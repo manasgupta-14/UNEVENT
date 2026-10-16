@@ -19,11 +19,11 @@ const socials = [
 ]
 
 const company = [
-  { label: 'About Us', href: '#about' },
+  { label: 'About Us', href: '/about' },
   { label: 'Industries', href: '#industries' },
   { label: 'Insights & Case Studies', href: '#insights' },
   { label: 'Careers', href: '#' },
-  { label: 'Contact Us', href: '#contact' },
+  { label: 'Contact Us', href: '/contact' },
 ]
 
 const contact = [
