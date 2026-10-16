@@ -19,10 +19,10 @@ const CtaSection = () => (
               Get started
             </motion.span>
             <motion.h2 variants={rise} className="mt-6 font-display text-3xl font-bold leading-[1.12] tracking-tight text-white sm:text-5xl">
-              Let&apos;s Discuss Your Requirements
+              Tell us your biggest risk.
             </motion.h2>
             <motion.p variants={rise} className="mt-6 max-w-2xl text-lg leading-relaxed text-slate-300">
-              Tell us what you are dealing with. Our team will come back with a proactive plan built around your business.
+              Security, contracts, compliance or software: share what worries you and we will reply with a clear, practical plan.
             </motion.p>
             <motion.div variants={rise} className="mt-10 flex flex-col gap-4 sm:flex-row">
               <MagneticButton href="/book" size="lg">

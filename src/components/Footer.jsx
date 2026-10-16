@@ -20,9 +20,10 @@ const socials = [
 
 const company = [
   { label: 'About Us', href: '/about' },
-  { label: 'Industries', href: '#industries' },
-  { label: 'Insights & Case Studies', href: '#insights' },
-  { label: 'Careers', href: '#' },
+  { label: 'Industries', href: '/industries' },
+  { label: 'Insights', href: '/insights' },
+  { label: 'Case Studies', href: '/case-studies' },
+  { label: 'Careers', href: '/careers' },
   { label: 'Contact Us', href: '/contact' },
 ]
 
@@ -77,7 +78,7 @@ const Footer = () => {
           <div>
             <Logo onClick={(event) => { event.preventDefault(); toTop() }} />
             <p className="mt-6 max-w-sm text-sm leading-relaxed text-slate-400">
-              Make it a non-event. We provide proactive cybersecurity, legal counsel, governance and technology solutions for modern businesses.
+              Make risk a non-event. Cybersecurity, legal risk, compliance and custom software, from one team.
             </p>
             <div className="mt-7 flex gap-3">
               {socials.map((social) => (

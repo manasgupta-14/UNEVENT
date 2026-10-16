@@ -212,8 +212,8 @@ export const industries = [
     name: 'Professional services',
     slug: 'prof',
     divisions: ['counsel', 'govern'],
-    challenge: 'Client confidentiality and contract exposure across many engagements',
-    approach: 'Standardize contract review and keep policies and evidence audit-ready'
+    challenge: 'Client confidentiality and contract exposure across many engagements.',
+    approach: 'Standardize contract review and keep policies and evidence audit-ready.'
   },
 ]
 

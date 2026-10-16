@@ -8,6 +8,11 @@ import Home from './Home'
 const About = lazy(() => import('./components/About'))
 const Contact = lazy(() => import('./components/Contact'))
 const Book = lazy(() => import('./components/Book'))
+const IndustriesPage = lazy(() => import('./pages/industries/IndustriesPage'))
+const InsightsPage = lazy(() => import('./pages/insights/InsightsPage'))
+const ArticlePage = lazy(() => import('./pages/insights/ArticlePage'))
+const CaseStudiesPage = lazy(() => import('./pages/case-studies/CaseStudiesPage'))
+const CareersPage = lazy(() => import('./pages/careers/CareersPage'))
 
 const modules = import.meta.glob('./pages/*Page.jsx')
 
@@ -66,6 +71,51 @@ const App = () => (
             }
           />
         ))}
+
+        <Route
+          path="/industries"
+          element={
+            <Suspense fallback={loading}>
+              <IndustriesPage />
+            </Suspense>
+          }
+        />
+
+        <Route
+          path="/insights"
+          element={
+            <Suspense fallback={loading}>
+              <InsightsPage />
+            </Suspense>
+          }
+        />
+
+        <Route
+          path="/insights/:slug"
+          element={
+            <Suspense fallback={loading}>
+              <ArticlePage />
+            </Suspense>
+          }
+        />
+
+        <Route
+          path="/case-studies"
+          element={
+            <Suspense fallback={loading}>
+              <CaseStudiesPage />
+            </Suspense>
+          }
+        />
+
+        <Route
+          path="/careers"
+          element={
+            <Suspense fallback={loading}>
+              <CareersPage />
+            </Suspense>
+          }
+        />
 
         <Route path="*" element={<Home />} />
       </Routes>

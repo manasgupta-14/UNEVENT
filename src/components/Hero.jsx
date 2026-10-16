@@ -283,7 +283,7 @@ const Hero = () => {
               <span className="absolute inline-flex h-full w-full animate-ping-slow rounded-full bg-[#F5B82E]" />
               <span className="relative inline-flex h-2 w-2 rounded-full bg-[#F5B82E]" />
             </span>
-            We make it a non-event.
+            Cybersecurity · Legal risk · Compliance · Technology
           </motion.span>
 
           <h1 className="mt-7 font-display text-[2.7rem] font-extrabold leading-[1.04] tracking-tight text-white sm:text-6xl lg:text-[4.3rem]">
@@ -301,7 +301,7 @@ const Hero = () => {
           </h1>
 
           <motion.p variants={rise} className="mt-7 max-w-xl text-lg leading-relaxed text-slate-300 sm:text-xl">
-            Proactive cybersecurity, legal risk management, governance and technology solutions designed to help businesses prevent problems before they escalate.
+            UNEVENT helps businesses stop cyber, legal and compliance problems before they happen, and builds the software that keeps them stopped.
           </motion.p>
 
           <motion.div variants={rise} className="mt-10 flex flex-col gap-4 sm:flex-row">
@@ -321,7 +321,7 @@ const Hero = () => {
                 className="group inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3.5 py-1.5 text-sm font-semibold text-slate-200 outline-none backdrop-blur transition-all duration-300 hover:-translate-y-0.5 hover:border-white/30 hover:bg-white/10 focus-visible:ring-2 focus-visible:ring-[#F5B82E]"
               >
                 <span className="h-2 w-2 rounded-full transition-transform duration-300 group-hover:scale-150" style={{ backgroundColor: service.accent, boxShadow: `0 0 10px ${service.accent}` }} />
-                {service.name}
+                {service.name}<span className="font-medium text-slate-400">· {service.field}</span>
               </a>
             ))}
           </motion.div>

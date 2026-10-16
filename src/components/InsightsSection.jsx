@@ -1,3 +1,4 @@
+import { Link } from 'react-router'
 import { motion } from 'framer-motion'
 import SectionHeading from './ui/SectionHeading'
 import { Arrow } from './ui/icons'
@@ -5,11 +6,14 @@ import { articles, cases } from '../data/content'
 import { services } from '../data/services'
 import { rise, stagger, viewport } from '../lib/motion'
 
+const MotionLink = motion.create(Link)
+
 const formatDate = (value) =>
   new Date(value).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric', timeZone: 'UTC' })
 
 const fromArticle = (article) => ({
   id: article.slug,
+  href: `/insights/${article.slug}`,
   type: 'Article',
   title: article.title,
   summary: article.summary,
@@ -18,6 +22,7 @@ const fromArticle = (article) => ({
 
 const fromCase = (entry) => ({
   id: entry.title,
+  href: '/case-studies',
   type: 'Case Study',
   title: entry.title,
   summary: entry.challenge,
@@ -40,9 +45,9 @@ const Meta = ({ item, dark = false }) => (
 )
 
 const Featured = ({ item }) => (
-  <motion.a
+  <MotionLink
     variants={rise}
-    href="#insights"
+    to={item.href}
     className="group relative flex min-h-[420px] flex-col justify-between overflow-hidden rounded-3xl bg-[#0B1730] p-8 outline-none focus-visible:ring-2 focus-visible:ring-[#1473E6] lg:col-span-7 lg:p-10"
   >
     <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(520px_circle_at_90%_0%,rgba(20,115,230,0.35),transparent_60%),radial-gradient(420px_circle_at_0%_100%,rgba(245,184,46,0.14),transparent_60%)]" />
@@ -71,15 +76,15 @@ const Featured = ({ item }) => (
         </span>
       </div>
     </div>
-  </motion.a>
+  </MotionLink>
 )
 
 const Compact = ({ item }) => {
   const gold = item.type === 'Case Study'
   return (
-    <motion.a
+    <MotionLink
       variants={rise}
-      href="#insights"
+      to={item.href}
       className="group relative flex flex-1 flex-col justify-between gap-6 overflow-hidden rounded-3xl border border-slate-200 bg-white p-7 outline-none transition-all duration-500 hover:-translate-y-1 hover:border-[#1473E6]/40 hover:shadow-[0_28px_60px_-28px_rgba(20,115,230,0.45)] focus-visible:ring-2 focus-visible:ring-[#1473E6]"
     >
       <span className={`absolute inset-y-0 left-0 w-1 origin-top scale-y-0 transition-transform duration-500 group-hover:scale-y-100 ${gold ? 'bg-[#F5B82E]' : 'bg-[#1473E6]'}`} />
@@ -93,7 +98,7 @@ const Compact = ({ item }) => {
           <Arrow className="h-4 w-4 transition-transform duration-300 group-hover:-rotate-45" />
         </span>
       </div>
-    </motion.a>
+    </MotionLink>
   )
 }
 
@@ -102,17 +107,17 @@ const InsightsSection = () => (
     <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
       <div className="flex flex-col justify-between gap-6 sm:flex-row sm:items-end">
         <SectionHeading badge="Featured insights" title="Perspective from the front line of risk" text="Articles and case studies on how proactive teams keep problems from becoming incidents." />
-        <motion.a
+        <MotionLink
           variants={rise}
           initial="hidden"
           whileInView="show"
           viewport={viewport}
-          href="#insights"
+          to="/insights"
           className="group inline-flex w-fit items-center gap-2 rounded-full border border-slate-300 px-5 py-2.5 text-sm font-bold text-[#0B1730] outline-none transition-colors hover:border-[#0B1730] hover:bg-[#0B1730] hover:text-white focus-visible:ring-2 focus-visible:ring-[#1473E6]"
         >
           View all insights
           <Arrow className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
-        </motion.a>
+        </MotionLink>
       </div>
 
       <motion.div variants={stagger(0.12)} initial="hidden" whileInView="show" viewport={viewport} className="mt-14 grid gap-6 lg:grid-cols-12">

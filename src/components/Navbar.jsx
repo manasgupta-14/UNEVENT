@@ -17,13 +17,16 @@ import { icons, services } from '../data/services'
 const navItems = [
   { key: 'home', label: 'Home', href: '#' },
   { key: 'services', label: 'Services', mega: true },
-  { key: 'industries', label: 'Industries', href: '#industries' },
-  { key: 'insights', label: 'Insights', href: '#insights' },
+  { key: 'industries', label: 'Industries', href: '/industries' },
+  { key: 'insights', label: 'Insights', href: '/insights' },
+  { key: 'case-studies', label: 'Case Studies', href: '/case-studies' },
   { key: 'about', label: 'About', href: '/about' },
   { key: 'contact', label: 'Contact', href: '/contact' },
 ]
 
 const spyIds = ['industries', 'insights', 'contact']
+
+const routeKeys = ['about', 'contact', 'industries', 'insights', 'case-studies']
 
 const ease = [0.22, 1, 0.36, 1]
 
@@ -268,9 +271,8 @@ const MobileDrawer = ({ open, onClose, active, onNavigate }) => {
                     variants={itemVariants}
                     href={item.href}
                     onClick={() => onNavigate(item.key)}
-                    className={`relative flex items-center justify-between rounded-xl px-4 py-3.5 text-base font-semibold outline-none transition-colors focus-visible:ring-2 focus-visible:ring-[#F5B82E] ${
-                      active === item.key ? 'bg-white/[0.07] text-white' : 'text-slate-200 hover:bg-white/5'
-                    }`}
+                    className={`relative flex items-center justify-between rounded-xl px-4 py-3.5 text-base font-semibold outline-none transition-colors focus-visible:ring-2 focus-visible:ring-[#F5B82E] ${active === item.key ? 'bg-white/[0.07] text-white' : 'text-slate-200 hover:bg-white/5'
+                      }`}
                   >
                     {item.label}
                     {active === item.key && <span className="h-1.5 w-1.5 rounded-full bg-[#F5B82E]" />}
@@ -305,7 +307,18 @@ const Navbar = () => {
   const [active, setActive] = useState('home')
   const headerRef = useRef(null)
   const closeTimer = useRef(null)
-  const current = onService ? 'services' : onAbout ? 'about' : onContact ? 'contact' : active
+  const routeKey = pathname.startsWith('/industries')
+    ? 'industries'
+    : pathname.startsWith('/insights')
+      ? 'insights'
+      : pathname.startsWith('/case-studies')
+        ? 'case-studies'
+        : onAbout
+          ? 'about'
+          : onContact
+            ? 'contact'
+            : null
+  const current = onService ? 'services' : routeKey ?? active
 
   const { scrollY, scrollYProgress } = useScroll()
   const progress = useSpring(scrollYProgress, { stiffness: 140, damping: 28, mass: 0.4 })
@@ -326,10 +339,18 @@ const Navbar = () => {
   }, [])
 
   const handleNavigate = useCallback((key) => {
-    if (key !== 'about' && key !== 'contact') setActive(key)
+    if (!routeKeys.includes(key)) setActive(key)
     setMegaOpen(false)
     setMenuOpen(false)
   }, [])
+
+  const handleRoute = (event, key, href) => {
+    if (href?.startsWith('/')) {
+      event.preventDefault()
+      navigate(href)
+    }
+    handleNavigate(key)
+  }
 
   const handleHome = (event) => {
     event.preventDefault()
@@ -389,11 +410,10 @@ const Navbar = () => {
     <MotionConfig reducedMotion="user">
       <header
         ref={headerRef}
-        className={`sticky top-0 z-50 border-b transition-all duration-500 ${
-          scrolled
+        className={`sticky top-0 z-50 border-b transition-all duration-500 ${scrolled
             ? 'border-white/10 bg-[#0B1730]/80 shadow-[0_12px_40px_-14px_rgba(0,0,0,0.7)] backdrop-blur-xl'
             : 'border-transparent bg-[#0B1730]'
-        }`}
+          }`}
       >
         <div className="mx-auto flex max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
           <div className={`flex w-full items-center justify-between transition-[height] duration-500 ease-out ${scrolled ? 'h-16' : 'h-20'}`}>
@@ -426,9 +446,8 @@ const Navbar = () => {
                     </>
                   )
 
-                  const cls = `relative block rounded-lg px-4 py-2 text-sm font-semibold outline-none transition-colors duration-200 focus-visible:ring-2 focus-visible:ring-[#F5B82E] ${
-                    isActive ? 'text-white' : 'text-slate-300 hover:text-white'
-                  }`
+                  const cls = `relative block rounded-lg px-4 py-2 text-sm font-semibold outline-none transition-colors duration-200 focus-visible:ring-2 focus-visible:ring-[#F5B82E] ${isActive ? 'text-white' : 'text-slate-300 hover:text-white'
+                    }`
 
                   return (
                     <li key={item.key} onMouseEnter={() => setHovered(item.key)}>
@@ -447,7 +466,7 @@ const Navbar = () => {
                       ) : (
                         <a
                           href={item.href}
-                          onClick={item.key === 'home' ? handleHome : () => handleNavigate(item.key)}
+                          onClick={item.key === 'home' ? handleHome : (event) => handleRoute(event, item.key, item.href)}
                           className={cls}
                         >
                           {content}
