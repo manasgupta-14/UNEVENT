@@ -25,7 +25,7 @@ const CtaSection = () => (
               Security, contracts, compliance or software: share what worries you and we will reply with a clear, practical plan.
             </motion.p>
             <motion.div variants={rise} className="mt-10 flex flex-col gap-4 sm:flex-row">
-              <MagneticButton href="mailto:hello@unevent.com?subject=Consultation%20request" size="lg">
+              <MagneticButton href="/book" size="lg">
                 Book a Consultation
               </MagneticButton>
               <MagneticButton href="mailto:hello@unevent.com" tone="ghost" size="lg" arrow={false}>

@@ -28,7 +28,7 @@ const ScrollManager = () => {
         navigate(href)
         return
       }
-      if (href.length > 1 && href.startsWith('#') && pathname !== '/') {
+      if (href.length > 1 && href.startsWith('#') && pathname !== '/' && !document.getElementById(href.slice(1))) {
         event.preventDefault()
         navigate(`/${href}`)
       }

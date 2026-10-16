@@ -20,11 +20,13 @@ const navItems = [
   { key: 'industries', label: 'Industries', href: '/industries' },
   { key: 'insights', label: 'Insights', href: '/insights' },
   { key: 'case-studies', label: 'Case Studies', href: '/case-studies' },
-  { key: 'about', label: 'About', href: '#about' },
-  { key: 'contact', label: 'Contact', href: '#contact' },
+  { key: 'about', label: 'About', href: '/about' },
+  { key: 'contact', label: 'Contact', href: '/contact' },
 ]
 
-const spyIds = ['industries', 'insights', 'about', 'contact']
+const spyIds = ['industries', 'insights', 'contact']
+
+const routeKeys = ['about', 'contact', 'industries', 'insights', 'case-studies']
 
 const ease = [0.22, 1, 0.36, 1]
 
@@ -156,7 +158,7 @@ const MegaMenu = ({ onNavigate, onEnter, onLeave }) => (
             Tell us what you are dealing with and we will map it to the right team.
           </p>
         </div>
-        <MagneticButton href="#contact" onClick={() => onNavigate('contact')} className="relative mt-6 self-start">
+        <MagneticButton href="/book" onClick={() => onNavigate('book')} className="relative mt-6 self-start">
           Book a Consultation
         </MagneticButton>
       </motion.div>
@@ -269,9 +271,8 @@ const MobileDrawer = ({ open, onClose, active, onNavigate }) => {
                     variants={itemVariants}
                     href={item.href}
                     onClick={() => onNavigate(item.key)}
-                    className={`relative flex items-center justify-between rounded-xl px-4 py-3.5 text-base font-semibold outline-none transition-colors focus-visible:ring-2 focus-visible:ring-[#F5B82E] ${
-                      active === item.key ? 'bg-white/[0.07] text-white' : 'text-slate-200 hover:bg-white/5'
-                    }`}
+                    className={`relative flex items-center justify-between rounded-xl px-4 py-3.5 text-base font-semibold outline-none transition-colors focus-visible:ring-2 focus-visible:ring-[#F5B82E] ${active === item.key ? 'bg-white/[0.07] text-white' : 'text-slate-200 hover:bg-white/5'
+                      }`}
                   >
                     {item.label}
                     {active === item.key && <span className="h-1.5 w-1.5 rounded-full bg-[#F5B82E]" />}
@@ -281,7 +282,7 @@ const MobileDrawer = ({ open, onClose, active, onNavigate }) => {
             </motion.nav>
 
             <div className="relative shrink-0 border-t border-white/10 p-5">
-              <MagneticButton href="#contact" onClick={() => onNavigate('contact')} size="lg" className="w-full">
+              <MagneticButton href="/book" onClick={() => onNavigate('book')} size="lg" className="w-full">
                 Book a Consultation
               </MagneticButton>
             </div>
@@ -297,6 +298,8 @@ const Navbar = () => {
   const { pathname } = useLocation()
   const navigate = useNavigate()
   const onService = pathname.startsWith('/services')
+  const onAbout = pathname === '/about'
+  const onContact = pathname === '/contact'
   const [scrolled, setScrolled] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
   const [megaOpen, setMegaOpen] = useState(false)
@@ -304,9 +307,19 @@ const Navbar = () => {
   const [active, setActive] = useState('home')
   const headerRef = useRef(null)
   const closeTimer = useRef(null)
-  const routeKey = pathname.startsWith('/industries') ? 'industries' : pathname.startsWith('/insights') ? 'insights' : pathname.startsWith('/case-studies') ? 'case-studies' : null
+  const routeKey = pathname.startsWith('/industries')
+    ? 'industries'
+    : pathname.startsWith('/insights')
+      ? 'insights'
+      : pathname.startsWith('/case-studies')
+        ? 'case-studies'
+        : onAbout
+          ? 'about'
+          : onContact
+            ? 'contact'
+            : null
   const current = onService ? 'services' : routeKey ?? active
- 
+
   const { scrollY, scrollYProgress } = useScroll()
   const progress = useSpring(scrollYProgress, { stiffness: 140, damping: 28, mass: 0.4 })
 
@@ -326,7 +339,7 @@ const Navbar = () => {
   }, [])
 
   const handleNavigate = useCallback((key) => {
-    setActive(key)
+    if (!routeKeys.includes(key)) setActive(key)
     setMegaOpen(false)
     setMenuOpen(false)
   }, [])
@@ -397,11 +410,10 @@ const Navbar = () => {
     <MotionConfig reducedMotion="user">
       <header
         ref={headerRef}
-        className={`sticky top-0 z-50 border-b transition-all duration-500 ${
-          scrolled
+        className={`sticky top-0 z-50 border-b transition-all duration-500 ${scrolled
             ? 'border-white/10 bg-[#0B1730]/80 shadow-[0_12px_40px_-14px_rgba(0,0,0,0.7)] backdrop-blur-xl'
             : 'border-transparent bg-[#0B1730]'
-        }`}
+          }`}
       >
         <div className="mx-auto flex max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
           <div className={`flex w-full items-center justify-between transition-[height] duration-500 ease-out ${scrolled ? 'h-16' : 'h-20'}`}>
@@ -434,9 +446,8 @@ const Navbar = () => {
                     </>
                   )
 
-                  const cls = `relative block rounded-lg px-4 py-2 text-sm font-semibold outline-none transition-colors duration-200 focus-visible:ring-2 focus-visible:ring-[#F5B82E] ${
-                    isActive ? 'text-white' : 'text-slate-300 hover:text-white'
-                  }`
+                  const cls = `relative block rounded-lg px-4 py-2 text-sm font-semibold outline-none transition-colors duration-200 focus-visible:ring-2 focus-visible:ring-[#F5B82E] ${isActive ? 'text-white' : 'text-slate-300 hover:text-white'
+                    }`
 
                   return (
                     <li key={item.key} onMouseEnter={() => setHovered(item.key)}>
@@ -468,7 +479,7 @@ const Navbar = () => {
             </nav>
 
             <div className="hidden lg:block">
-              <MagneticButton href="#contact" onClick={() => handleNavigate('contact')}>
+              <MagneticButton href="/book" onClick={() => handleNavigate('book')}>
                 Book a Consultation
               </MagneticButton>
             </div>

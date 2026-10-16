@@ -5,6 +5,9 @@ import Footer from './components/Footer'
 import ScrollManager from './components/ScrollManager'
 import Home from './Home'
 
+const About = lazy(() => import('./components/About'))
+const Contact = lazy(() => import('./components/Contact'))
+const Book = lazy(() => import('./components/Book'))
 const IndustriesPage = lazy(() => import('./pages/industries/IndustriesPage'))
 const InsightsPage = lazy(() => import('./pages/insights/InsightsPage'))
 const ArticlePage = lazy(() => import('./pages/insights/ArticlePage'))
@@ -18,6 +21,8 @@ const servicePages = Object.entries(modules).map(([path, loader]) => ({
   Page: lazy(loader),
 }))
 
+const loading = <div className="p-8">Loading...</div>
+
 const App = () => (
   <div className="min-h-screen bg-[#F8FAFC] font-sans text-[#334155]">
     <Navbar />
@@ -28,12 +33,39 @@ const App = () => (
       <Routes>
         <Route path="/" element={<Home />} />
 
+        <Route
+          path="/about"
+          element={
+            <Suspense fallback={loading}>
+              <About />
+            </Suspense>
+          }
+        />
+
+        <Route
+          path="/contact"
+          element={
+            <Suspense fallback={loading}>
+              <Contact />
+            </Suspense>
+          }
+        />
+
+        <Route
+          path="/book"
+          element={
+            <Suspense fallback={loading}>
+              <Book />
+            </Suspense>
+          }
+        />
+
         {servicePages.map(({ slug, Page }) => (
           <Route
             key={slug}
             path={`/services/${slug}`}
             element={
-              <Suspense fallback={<div className="p-8">Loading...</div>}>
+              <Suspense fallback={loading}>
                 <Page />
               </Suspense>
             }
@@ -43,7 +75,7 @@ const App = () => (
         <Route
           path="/industries"
           element={
-            <Suspense fallback={<div className="p-8">Loading...</div>}>
+            <Suspense fallback={loading}>
               <IndustriesPage />
             </Suspense>
           }
@@ -52,7 +84,7 @@ const App = () => (
         <Route
           path="/insights"
           element={
-            <Suspense fallback={<div className="p-8">Loading...</div>}>
+            <Suspense fallback={loading}>
               <InsightsPage />
             </Suspense>
           }
@@ -61,7 +93,7 @@ const App = () => (
         <Route
           path="/insights/:slug"
           element={
-            <Suspense fallback={<div className="p-8">Loading...</div>}>
+            <Suspense fallback={loading}>
               <ArticlePage />
             </Suspense>
           }
@@ -70,7 +102,7 @@ const App = () => (
         <Route
           path="/case-studies"
           element={
-            <Suspense fallback={<div className="p-8">Loading...</div>}>
+            <Suspense fallback={loading}>
               <CaseStudiesPage />
             </Suspense>
           }
@@ -79,7 +111,7 @@ const App = () => (
         <Route
           path="/careers"
           element={
-            <Suspense fallback={<div className="p-8">Loading...</div>}>
+            <Suspense fallback={loading}>
               <CareersPage />
             </Suspense>
           }
