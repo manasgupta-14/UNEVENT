@@ -14,14 +14,14 @@ import { details, email, formCopy, hero, map, meta, socials } from '../data/cont
 import { rgba, tint } from '../lib/color'
 import { ease, rise, stagger } from '../lib/motion'
 
-const initialForm = { name: '', email: '', company: '', phone: '', service: '', message: '', consent: false }
+const initialForm = { name: '', email: '', company: '', timeline: '', service: '', message: '', consent: false }
 
 const validators = {
   name: (v) => (v.trim().length < 2 ? 'Please enter your full name.' : ''),
   email: (v) => (/^\S+@\S+\.\S+$/.test(v.trim()) ? '' : 'Please enter a valid work email.'),
   company: (v) => (v.trim() ? '' : 'Please enter your company name.'),
-  phone: (v) => (!v.trim() || /^[+\d][\d\s()-]{6,}$/.test(v.trim()) ? '' : 'Please enter a valid phone number.'),
-  service: (v) => (v ? '' : 'Please choose a service.'),
+  timeline: () => '',
+  service: (v) => (v ? '' : 'Please choose a practice.'),
   message: (v) => (v.trim().length < 20 ? 'Tell us a little more (at least 20 characters).' : ''),
   consent: (v) => (v ? '' : 'Please agree so we can contact you.'),
 }
@@ -68,7 +68,7 @@ const Hero = () => (
     <div className="pointer-events-none absolute -left-32 top-0 -z-10 h-[360px] w-[360px] animate-float rounded-full bg-[#1473E6]/20 blur-[110px]" />
     <div className="pointer-events-none absolute -right-24 bottom-0 -z-10 h-[300px] w-[300px] animate-float rounded-full bg-[#F5B82E]/10 blur-[110px]" style={{ animationDelay: '2s' }} />
 
-    <div className="relative mx-auto max-w-7xl px-4 pb-16 pt-28 sm:px-6 sm:pt-32 lg:px-8 lg:pb-20 lg:pt-36">
+    <div className="relative mx-auto max-w-7xl px-4 pb-16 pt-10 sm:px-6 sm:pt-12 lg:px-8 lg:pb-20 lg:pt-14">
       <div className="grid items-center gap-14 lg:grid-cols-[1.1fr_0.9fr] lg:gap-10">
       <m.div variants={stagger(0.1, 0.1)} initial="hidden" animate="show" className="max-w-3xl">
         <m.div variants={rise}>
@@ -142,8 +142,8 @@ const ContactForm = () => {
       `Name: ${form.name.trim()}`,
       `Email: ${form.email.trim()}`,
       `Company: ${form.company.trim()}`,
-      form.phone.trim() && `Phone: ${form.phone.trim()}`,
-      `Service: ${service ? `${service.name} (${service.field})` : form.service}`,
+      form.timeline.trim() && `Timeline: ${form.timeline.trim()}`,
+      `Practice: ${service ? `${service.name} (${service.field})` : form.service}`,
       '',
       form.message.trim(),
     ]
@@ -189,21 +189,21 @@ const ContactForm = () => {
       </p>
 
       <div className="mt-8 grid gap-5 sm:grid-cols-2">
-        <Field id="name" label="Full name" required error={errors.name}>
+        <Field id="name" label="Name" required error={errors.name}>
           <input {...fieldProps('name')} type="text" autoComplete="name" placeholder="Jane Doe" aria-required="true" />
         </Field>
-        <Field id="email" label="Work email" required error={errors.email}>
+        <Field id="email" label="Business email" required error={errors.email}>
           <input {...fieldProps('email')} type="email" autoComplete="email" placeholder="jane@company.com" aria-required="true" />
         </Field>
-        <Field id="company" label="Company name" required error={errors.company}>
+        <Field id="company" label="Organisation" required error={errors.company}>
           <input {...fieldProps('company')} type="text" autoComplete="organization" placeholder="Your company" aria-required="true" />
         </Field>
-        <Field id="phone" label="Phone" error={errors.phone}>
-          <input {...fieldProps('phone')} type="tel" autoComplete="tel" placeholder="+1 555 000 0000" />
+        <Field id="timeline" label="Timeline" error={errors.timeline}>
+          <input {...fieldProps('timeline')} type="text" placeholder="e.g. audit in 6 weeks" />
         </Field>
-        <Field id="service" label="Service of interest" required error={errors.service} className="sm:col-span-2">
+        <Field id="service" label="Practice / topic" required error={errors.service} className="sm:col-span-2">
           <select {...fieldProps('service')} aria-required="true" className={`${inputClass(errors.service)} [&>option]:bg-[#0B1730] [&>option]:text-white`}>
-            <option value="">Choose a service</option>
+            <option value="">Choose a practice</option>
             {services.map((service) => (
               <option key={service.slug} value={service.slug}>
                 UNEVENT {service.name} ({service.field})
@@ -212,7 +212,7 @@ const ContactForm = () => {
             <option value="general">Not sure yet</option>
           </select>
         </Field>
-        <Field id="message" label="Business requirements" required error={errors.message} className="sm:col-span-2">
+        <Field id="message" label="Brief description of the issue" required error={errors.message} className="sm:col-span-2">
           <textarea {...fieldProps('message')} rows={5} placeholder="Tell us what you are dealing with..." aria-required="true" className={`${inputClass(errors.message)} resize-none`} />
         </Field>
       </div>

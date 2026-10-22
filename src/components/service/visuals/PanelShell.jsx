@@ -8,13 +8,13 @@ const PanelShell = ({ color, title, chips = [], children }) => (
       <div className="absolute inset-x-0 top-0 h-px" style={{ background: `linear-gradient(90deg, transparent, ${color}, transparent)` }} />
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(rgba(255,255,255,0.05)_1px,transparent_1px)] [background-size:20px_20px] [mask-image:linear-gradient(to_bottom,black,transparent_75%)]" />
       <div className="relative flex items-center justify-between border-b border-white/10 px-5 py-3">
-        <div className="flex items-center gap-2">
-          <span className="h-2.5 w-2.5 rounded-full" style={{ backgroundColor: color }} />
+        <div className="flex min-w-0 items-center gap-2">
+          <span className="h-2.5 w-2.5 shrink-0 rounded-full" style={{ backgroundColor: color }} />
           <span className="h-2.5 w-2.5 rounded-full bg-white/20" />
           <span className="h-2.5 w-2.5 rounded-full bg-white/20" />
-          <span className="ml-3 font-mono text-xs text-slate-400">{title}</span>
+          <span className="ml-3 truncate font-mono text-xs text-slate-400">{title}</span>
         </div>
-        <span className="rounded-full border border-white/10 bg-white/5 px-2.5 py-0.5 text-[11px] font-semibold text-slate-400">Illustrative</span>
+        <span className="ml-2 shrink-0 rounded-full border border-white/10 bg-white/5 px-2.5 py-0.5 text-[10px] sm:text-[11px] font-semibold text-slate-400">Illustrative sample data</span>
       </div>
       <div className="relative p-5 sm:p-6">{children}</div>
     </div>

@@ -90,7 +90,7 @@ const Hero = () => {
       <div className="pointer-events-none absolute -right-24 bottom-0 -z-10 h-[320px] w-[320px] animate-float rounded-full bg-[#F5B82E]/10 blur-[110px]" style={{ animationDelay: '2s' }} />
       <div className="pointer-events-none absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-[#0B1730] to-transparent" />
 
-      <div className="relative mx-auto w-full max-w-7xl px-4 py-20 sm:px-6 lg:px-8 lg:py-28">
+      <div className="relative mx-auto w-full max-w-7xl px-4 pb-20 pt-10 sm:px-6 lg:px-8 lg:pb-24 lg:pt-14">
         <div className="grid items-center gap-14 lg:grid-cols-[1.1fr_0.9fr] lg:gap-10">
         <m.div variants={stagger(0.1, 0.1)} initial="hidden" animate="show" className="max-w-3xl">
           <m.div variants={rise}>
@@ -318,7 +318,7 @@ const DivisionsSection = () => (
       </div>
 
       <Reveal className="mt-12 flex flex-col gap-4 sm:flex-row">
-        <MagneticButton href="/#services" size="lg">Explore Our Services</MagneticButton>
+        <MagneticButton href="/#practice" size="lg">Explore Our Practices</MagneticButton>
         <MagneticButton href="#contact" tone="ghost" size="lg" arrow={false}>Discuss a risk</MagneticButton>
       </Reveal>
     </div>

@@ -40,6 +40,7 @@
     100% { transform: translateY(170px); opacity: 0; }
   }
 
+  /* Right -> left. */
   @keyframes marquee {
     0% { transform: translateX(0); }
     100% { transform: translateX(-50%); }
@@ -83,7 +84,7 @@
 
 html {
   scroll-behavior: smooth;
-  scroll-padding-top: 5rem;
+  scroll-padding-top: 4.5rem;
   -webkit-text-size-adjust: 100%;
   overflow-x: clip;
 }
@@ -126,7 +127,35 @@ body {
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
   overflow-x: clip;
-  min-width: 320px;
+  min-width: 280px;
+  padding-left: env(safe-area-inset-left);
+  padding-right: env(safe-area-inset-right);
+  -webkit-tap-highlight-color: transparent;
+}
+
+a,
+button,
+summary,
+[role="tab"] {
+  touch-action: manipulation;
+}
+
+input,
+select,
+textarea {
+  max-width: 100%;
+}
+
+@media (max-width: 360px) {
+  html {
+    font-size: 93.75%;
+  }
+}
+
+@media (max-height: 520px) and (orientation: landscape) {
+  #home {
+    min-height: auto;
+  }
 }
 
 ::selection {

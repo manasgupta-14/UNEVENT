@@ -53,7 +53,7 @@ const ArticlePage = () => {
           <div className="pointer-events-none absolute inset-0 -z-10 bg-[linear-gradient(rgba(255,255,255,0.045)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.045)_1px,transparent_1px)] [background-size:56px_56px] [mask-image:radial-gradient(ellipse_at_center,black,transparent_78%)]" />
           <div className="pointer-events-none absolute inset-0 -z-10" style={{ background: `radial-gradient(700px circle at 80% 0%, ${rgba(color, 0.3)}, transparent 62%)` }} />
 
-          <m.div variants={stagger(0.1, 0.1)} initial="hidden" animate="show" className="mx-auto max-w-4xl px-4 pb-16 pt-14 sm:px-6 lg:px-8 lg:pb-20 lg:pt-20">
+          <m.div variants={stagger(0.1, 0.1)} initial="hidden" animate="show" className="mx-auto max-w-4xl px-4 pb-16 pt-8 sm:px-6 lg:px-8 lg:pb-20 lg:pt-10">
             <m.nav variants={rise} aria-label="Breadcrumb" className="flex flex-wrap items-center gap-2 text-sm font-semibold text-slate-400">
               <Link to="/" className="outline-none transition-colors hover:text-white focus-visible:text-white">Home</Link>
               <span aria-hidden="true">/</span>

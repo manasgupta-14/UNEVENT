@@ -1,6 +1,6 @@
-import BarChartPanel from './BarChartPanel'
+import PieChartPanel from './PieChartPanel'
 import { contactChart } from '../../data/contact'
 
-const ContactChart = () => <BarChartPanel chart={contactChart} />
+const ContactChart = () => <PieChartPanel chart={contactChart} />
 
 export default ContactChart

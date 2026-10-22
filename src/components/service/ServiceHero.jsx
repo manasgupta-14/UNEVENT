@@ -36,12 +36,12 @@ const ServiceHero = ({ service }) => {
       <div className="pointer-events-none absolute -left-24 top-24 -z-10 h-[360px] w-[360px] animate-float rounded-full blur-[110px]" style={{ backgroundColor: rgba(service.color, 0.22) }} />
       <div className="pointer-events-none absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-[#0B1730] to-transparent" />
 
-      <div className="mx-auto grid max-w-7xl items-start gap-12 px-4 pb-16 pt-8 sm:px-6 lg:grid-cols-[1.02fr_0.98fr] lg:gap-10 lg:px-8 lg:pb-24 lg:pt-12">
+      <div className="mx-auto grid max-w-7xl items-start gap-12 px-4 pb-16 pt-6 sm:px-6 lg:grid-cols-[1.02fr_0.98fr] lg:gap-10 lg:px-8 lg:pb-24 lg:pt-8">
         <m.div variants={stagger(0.1, 0.1)} initial="hidden" animate="show">
           <m.nav variants={rise} aria-label="Breadcrumb" className="flex flex-wrap items-center gap-2 text-sm font-semibold text-slate-400">
             <a href="/" className="outline-none transition-colors hover:text-white focus-visible:text-white">Home</a>
             <span aria-hidden="true">/</span>
-            <a href="/#services" className="outline-none transition-colors hover:text-white focus-visible:text-white">Services</a>
+            <a href="/#practice" className="outline-none transition-colors hover:text-white focus-visible:text-white">Practice</a>
             <span aria-hidden="true">/</span>
             <span className="text-white">{service.name}</span>
           </m.nav>
@@ -84,8 +84,8 @@ const ServiceHero = ({ service }) => {
             <MagneticButton href="#contact" size="lg">
               {service.cta}
             </MagneticButton>
-            <MagneticButton href="/#services" tone="ghost" size="lg" arrow={false}>
-              All services
+            <MagneticButton href="/#practice" tone="ghost" size="lg" arrow={false}>
+              All practices
             </MagneticButton>
           </m.div>
 

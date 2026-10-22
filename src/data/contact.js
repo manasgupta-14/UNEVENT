@@ -8,9 +8,9 @@ export const meta = {
 
 export const hero = {
   badge: 'Contact us',
-  lead: ['Tell us what you', 'are dealing with.'],
-  accent: 'We will help you find the next practical step.',
-  text: 'Share your situation, deadline and the type of support you need. A real person will reply.',
+  lead: ['Tell us what you’re', 'dealing with.'],
+  accent: 'We’ll help you identify the next practical step.',
+  text: 'Share the situation, your deadline and the type of support you are looking for. Avoid sending confidential documents through the initial form; use an agreed secure channel when needed.',
 }
 
 export const formCopy = {

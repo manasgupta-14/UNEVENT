@@ -27,7 +27,7 @@ export const services = content.map((item) => ({
   points: item.offerings.slice(0, 3).map((offering) => offering[0]),
   accent: item.color,
   ink: ink[item.slug],
-  href: `/services/${item.slug}`,
+  href: `/practice/${item.slug}`,
 }))
 
 export const getService = (slug) => services.find((service) => service.slug === slug)

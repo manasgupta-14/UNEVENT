@@ -32,10 +32,10 @@ const links = [
 ]
 
 const chips = [
-  { id: 'protect', label: 'Threat blocked', pos: 'left-0 top-[5%] lg:-left-6', depth: 22, delay: '0s' },
-  { id: 'counsel', label: 'Contract reviewed', pos: 'right-0 top-[18%] lg:-right-4', depth: 30, delay: '1.2s' },
-  { id: 'govern', label: 'Policy compliant', pos: 'left-0 bottom-[14%] lg:-left-4', depth: 26, delay: '2.1s' },
-  { id: 'labs', label: 'Automation live', pos: 'right-0 bottom-[6%] lg:-right-6', depth: 34, delay: '0.6s' },
+  { id: 'protect', label: 'Sample finding', pos: 'left-[3%] top-[8%]', depth: 22, delay: '0s' },
+  { id: 'counsel', label: 'Flagged clause', pos: 'right-[3%] top-[20%]', depth: 30, delay: '1.2s' },
+  { id: 'govern', label: 'Control status', pos: 'left-[3%] bottom-[16%]', depth: 26, delay: '2.1s' },
+  { id: 'labs', label: 'Automation output', pos: 'right-[3%] bottom-[8%]', depth: 34, delay: '0.6s' },
 ]
 
 const Word = ({ children, delay, className = '' }) => (
@@ -240,7 +240,7 @@ const Hero = () => {
     <section
       id="home"
       onPointerMove={handleMove}
-      className="relative isolate flex min-h-[calc(100svh-5rem)] items-center overflow-hidden bg-[#0B1730]"
+      className="relative isolate flex min-h-[calc(100svh-8.5rem)] items-center overflow-hidden bg-[#0B1730]"
     >
       {showCanvas && (
         <Suspense fallback={null}>
@@ -253,7 +253,7 @@ const Hero = () => {
       <div className="pointer-events-none absolute -right-24 bottom-0 -z-10 h-[380px] w-[380px] rounded-full bg-[#F5B82E]/10 blur-[110px]" style={{ animationDelay: '2s' }} />
       <div className="pointer-events-none absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-[#0B1730] to-transparent" />
 
-      <div className="relative mx-auto grid w-full max-w-7xl items-center gap-14 px-4 py-16 sm:px-6 lg:grid-cols-[1.05fr_0.95fr] lg:gap-8 lg:px-8 lg:py-24">
+      <div className="relative mx-auto grid w-full max-w-7xl items-center gap-14 px-4 pb-16 pt-8 sm:px-6 lg:grid-cols-[1.05fr_0.95fr] lg:gap-8 lg:px-8 lg:pb-20 lg:pt-10">
         <m.div variants={stagger(0.07, 0.05)} initial="hidden" animate="show" className="relative z-10 min-w-0">
           <m.span
             variants={rise}
@@ -281,14 +281,14 @@ const Hero = () => {
           </h1>
 
           <m.p variants={rise} className="mt-7 max-w-xl text-lg leading-relaxed text-slate-300 sm:text-xl">
-            UNEVENT is a risk advisory firm helping organisations identify and prioritise cyber, legal and compliance exposure, and turn findings into practical controls using expert advice, curated solutions and in-house technology.
+            UNEVENT is a risk advisory firm helping organisations identify and prioritise cyber, legal and compliance exposure—and turn findings into practical controls. We combine expert-led advisory with curated products and services and in-house technology to strengthen prevention, readiness and response.
           </m.p>
 
           <m.div variants={rise} className="mt-10 flex flex-col gap-4 sm:flex-row">
             <MagneticButton href="/book" size="lg">
               Discuss a risk
             </MagneticButton>
-            <MagneticButton href="#services" tone="ghost" size="lg" arrow={false}>
+            <MagneticButton href="#practice" tone="ghost" size="lg" arrow={false}>
               Explore our four practices
             </MagneticButton>
           </m.div>
@@ -297,7 +297,7 @@ const Hero = () => {
             {services.map((service) => (
               <a
                 key={service.id}
-                href="#services"
+                href="#practice"
                 className="group inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3.5 py-1.5 text-sm font-semibold text-slate-200 outline-none backdrop-blur transition-all duration-300 hover:-translate-y-0.5 hover:border-white/30 hover:bg-white/10 focus-visible:ring-2 focus-visible:ring-[#F5B82E]"
               >
                 <span className="h-2 w-2 rounded-full transition-transform duration-300 group-hover:scale-150" style={{ backgroundColor: service.accent, boxShadow: `0 0 10px ${service.accent}` }} />

@@ -9,10 +9,10 @@ export const hero = {
   badge: 'About UNEVENT',
   lead: ['Prevention', 'beats'],
   accent: 'crisis management.',
-  text: 'UNEVENT is a risk advisory firm. We help organisations catch exposure while it is still small across security, legal, compliance and technology, with expert advice and the right technology.',
+  text: 'Risk rarely arrives as one isolated problem. A security weakness can delay a sale; a contract clause can expand liability; a compliance gap can leave evidence missing; and a disconnected workflow can make every control harder to operate. UNEVENT brings risk advisory and technology together across Protect, Counsel, Govern and Labs—helping teams identify what matters, act on it and stay ready as conditions change.',
   stats: [
-    { key: 'divisions', label: 'Divisions' },
-    { key: 'offerings', label: 'Services' },
+    { key: 'divisions', label: 'Practices' },
+    { key: 'offerings', label: 'Offerings' },
     { key: 'values', label: 'Core values' },
   ],
 }
@@ -109,7 +109,7 @@ export const values = [
 ]
 
 export const divisionsSection = {
-  badge: 'Four divisions',
+  badge: 'Four practices',
   title: 'One team, four ways to make it a non-event.',
 }
 

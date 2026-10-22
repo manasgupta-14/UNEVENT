@@ -74,7 +74,7 @@ const ServiceCard = ({ service }) => {
       </ul>
 
       <div className="relative mt-auto flex items-center justify-between border-t border-slate-100 pt-6">
-        <span className="text-sm font-bold text-[#0B1730]">Explore Service</span>
+        <span className="text-sm font-bold text-[#0B1730]">Explore Practice</span>
         <span className="flex h-9 w-9 items-center justify-center rounded-full border border-slate-200 text-[#0B1730] transition-all duration-300 group-hover:border-transparent group-hover:text-white group-hover:[background-color:var(--accent)]">
           <Arrow className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5" />
         </span>
@@ -84,15 +84,15 @@ const ServiceCard = ({ service }) => {
 }
 
 const ServicesSection = () => (
-  <section id="services" className="relative overflow-hidden bg-[#F8FAFC] py-24 lg:py-32">
+  <section id="practice" className="relative overflow-hidden bg-[#F8FAFC] py-24 lg:py-32">
     <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(rgba(11,23,48,0.07)_1px,transparent_1px)] [background-size:24px_24px] [mask-image:linear-gradient(to_bottom,black,transparent_70%)]" />
     <div className="pointer-events-none absolute -right-40 top-0 h-[420px] w-[420px] rounded-full bg-[#1473E6]/10 blur-[110px]" />
     <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
       <div className="flex flex-col justify-between gap-8 lg:flex-row lg:items-end">
         <SectionHeading
-          badge="Our services"
-          title="Four practices. One joined-up risk approach."
-          text="Protect, Counsel and Govern are the risk practices. Labs is the technology layer that puts agreed controls into practice, with curated and in-house solutions."
+          badge="Our practices"
+          title="Four connected practices. One practical approach to risk."
+          text="Protect identifies cyber exposure. Counsel helps clarify legal and commercial risk. Govern turns obligations into owned controls and evidence. Labs brings the right technology—curated or built in-house—to put agreed actions into practice."
         />
         <m.p
           variants={rise}
@@ -101,7 +101,7 @@ const ServicesSection = () => (
           viewport={viewport}
           className="max-w-sm text-sm leading-relaxed text-slate-500"
         >
-          Pick one service or combine them. We start by learning how your business works.
+          Pick one practice or combine them. We start by learning how your business works.
         </m.p>
       </div>
 

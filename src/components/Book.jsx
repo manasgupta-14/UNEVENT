@@ -55,7 +55,7 @@ const Hero = () => (
     <div className="pointer-events-none absolute inset-0 -z-10 bg-[linear-gradient(rgba(255,255,255,0.045)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.045)_1px,transparent_1px)] [background-size:56px_56px] [mask-image:radial-gradient(ellipse_at_center,black,transparent_78%)]" />
     <div className="pointer-events-none absolute -left-32 top-0 -z-10 h-[340px] w-[340px] animate-float rounded-full bg-[#1473E6]/20 blur-[110px]" />
     <div className="pointer-events-none absolute -right-24 bottom-0 -z-10 h-[280px] w-[280px] animate-float rounded-full bg-[#F5B82E]/10 blur-[110px]" style={{ animationDelay: '2s' }} />
-    <div className="relative mx-auto max-w-7xl px-4 pb-14 pt-28 sm:px-6 sm:pt-32 lg:px-8 lg:pb-16 lg:pt-36">
+    <div className="relative mx-auto max-w-7xl px-4 pb-14 pt-10 sm:px-6 sm:pt-12 lg:px-8 lg:pb-16 lg:pt-14">
       <m.div variants={stagger(0.1, 0.1)} initial="hidden" animate="show" className="max-w-3xl">
         <m.div variants={rise}>
           <Eyebrow>{hero.badge}</Eyebrow>
@@ -205,7 +205,7 @@ const ConfirmPopup = ({ booking, reference, days, onClose }) => {
   const time = times.find((item) => item.value === booking.time)
 
   const rows = [
-    ['Service', `UNEVENT ${service.name} (${service.area})`],
+    ['Practice', `UNEVENT ${service.name} (${service.area})`],
     ['Meeting', `${meeting.label} (${meeting.length})`],
     ['Date', date.long],
     ['Time', time.label],

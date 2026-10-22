@@ -33,10 +33,10 @@ const Matrix = ({ activeSlug, onPick }) => (
         animate={{ y: ['-30%', '460%'] }}
         transition={{ duration: 5.5, repeat: Infinity, ease: 'linear' }}
       />
-      <div className="relative grid grid-cols-[1.5fr_repeat(4,1fr)] items-end gap-2 px-2 pb-3 text-center">
-        <span className="text-left text-xs font-semibold text-slate-400">Industry</span>
+      <div className="relative grid grid-cols-[1.4fr_repeat(4,minmax(0,1fr))] items-end gap-2 px-2 pb-3 text-center">
+        <span className="text-left text-[10px] font-semibold text-slate-400 sm:text-xs">Industry</span>
         {services.map((service) => (
-          <span key={service.id} className="text-xs font-bold" style={{ color: tint(service.accent, 0.35) }}>
+          <span key={service.id} className="truncate text-[10px] font-bold sm:text-xs" style={{ color: tint(service.accent, 0.35) }}>
             {service.name}
           </span>
         ))}
@@ -48,10 +48,10 @@ const Matrix = ({ activeSlug, onPick }) => (
             key={item.slug}
             type="button"
             onClick={() => onPick(item.slug)}
-            aria-label={`${item.name}: see risks and services`}
-            className={`relative grid w-full grid-cols-[1.5fr_repeat(4,1fr)] items-center gap-2 rounded-xl border px-2 py-3.5 text-left outline-none transition-colors focus-visible:ring-2 focus-visible:ring-[#F5B82E] ${on ? 'border-[#F5B82E]/50 bg-white/10' : 'border-transparent hover:bg-white/5'}`}
+            aria-label={`${item.name}: see risks and practices`}
+            className={`relative grid w-full grid-cols-[1.4fr_repeat(4,minmax(0,1fr))] items-center gap-2 rounded-xl border px-2 py-3.5 text-left outline-none transition-colors focus-visible:ring-2 focus-visible:ring-[#F5B82E] ${on ? 'border-[#F5B82E]/50 bg-white/10' : 'border-transparent hover:bg-white/5'}`}
           >
-            <span className="text-sm font-semibold text-slate-100">{item.name}</span>
+            <span className="text-xs font-semibold text-slate-100 sm:text-sm">{item.name}</span>
             {services.map((service, col) => (
               <span key={service.id} className="flex justify-center">
                 {item.divisions.includes(service.id) ? (
@@ -72,7 +72,7 @@ const Matrix = ({ activeSlug, onPick }) => (
           </button>
         )
       })}
-      <p className="relative mt-4 px-2 text-xs leading-relaxed text-slate-400">A glowing dot means we use that service for that industry. Tap a row for details.</p>
+      <p className="relative mt-4 px-2 text-xs leading-relaxed text-slate-400">A glowing dot means we use that practice for that industry. Tap a row for details.</p>
     </div>
   </TiltPanel>
 )
@@ -81,7 +81,7 @@ const Hero = ({ activeSlug, onPick }) => {
   const words = 'Risk looks different in every industry.'.split(' ')
   const stats = [
     { value: industries.length, label: 'Industries' },
-    { value: services.length, label: 'Services' },
+    { value: services.length, label: 'Practices' },
     { value: industries.reduce((sum, item) => sum + item.divisions.length, 0), label: 'Ways we help' },
   ]
 
@@ -92,7 +92,7 @@ const Hero = ({ activeSlug, onPick }) => {
       <div className="pointer-events-none absolute -left-32 top-10 -z-10 h-[420px] w-[420px] animate-float rounded-full bg-[#1473E6]/20 blur-[110px]" />
       <div className="pointer-events-none absolute -right-24 bottom-0 -z-10 h-[380px] w-[380px] animate-float rounded-full bg-[#F5B82E]/10 blur-[110px]" style={{ animationDelay: '2s' }} />
 
-      <div className="mx-auto grid max-w-7xl items-center gap-14 px-4 pb-20 pt-14 sm:px-6 lg:grid-cols-[1fr_1fr] lg:gap-10 lg:px-8 lg:pb-28 lg:pt-20">
+      <div className="mx-auto grid max-w-7xl items-center gap-14 px-4 pb-20 pt-8 sm:px-6 lg:grid-cols-[1fr_1fr] lg:gap-10 lg:px-8 lg:pb-28 lg:pt-10">
         <m.div variants={stagger(0.1, 0.1)} initial="hidden" animate="show" className="relative z-10">
           <m.nav variants={rise} aria-label="Breadcrumb" className="flex items-center gap-2 text-sm font-semibold text-slate-400">
             <Link to="/" className="outline-none transition-colors hover:text-white focus-visible:text-white">Home</Link>
@@ -114,7 +114,7 @@ const Hero = ({ activeSlug, onPick }) => {
           </h1>
 
           <m.p variants={rise} className="mt-7 max-w-xl text-lg leading-relaxed text-slate-300 sm:text-xl">
-            Every sector faces different problems. Pick yours to see its main risk and the UNEVENT services that deal with it.
+            Explore common exposure patterns by industry and see how UNEVENT’s practices may help.
           </m.p>
 
           <m.div variants={rise} className="mt-10 flex flex-col gap-4 sm:flex-row">
@@ -149,8 +149,8 @@ const Explorer = ({ slug, onPick }) => {
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <SectionHeading
           badge="Pick your industry"
-          title="What can go wrong, and how we stop it"
-          text="Choose a sector to see its biggest risk, what we do about it, and which services we bring."
+          title="What can go wrong, and how we help reduce it"
+          text="Choose a sector to see its biggest risk, what we do about it, and which practices we bring."
         />
 
         <div className="mt-12 grid gap-6 lg:grid-cols-[0.8fr_1.2fr]">
@@ -203,7 +203,7 @@ const Explorer = ({ slug, onPick }) => {
                 </div>
               </div>
 
-              <p className="mt-9 text-sm font-bold text-slate-300">Services we bring to {item.name.toLowerCase()}</p>
+              <p className="mt-9 text-sm font-bold text-slate-300">Practices we bring to {item.name.toLowerCase()}</p>
               <m.div variants={stagger(0.08, 0.15)} initial="hidden" animate="show" className="mt-3 flex flex-wrap gap-3">
                 {used.map((service) => (
                   <m.div key={service.id} variants={rise}>
@@ -238,7 +238,7 @@ const IndustriesPage = () => {
 
   usePageMeta({
     title: 'Industries We Serve | UNEVENT',
-    description: `See the main risks in ${industries.map((item) => item.name.toLowerCase()).join(', ')} and the UNEVENT security, legal, compliance and technology services that prevent them.`,
+    description: `See the main risks in ${industries.map((item) => item.name.toLowerCase()).join(', ')} and the UNEVENT security, legal, compliance and technology practices that help reduce them.`,
   })
 
   const pick = (next, scroll = true) => {

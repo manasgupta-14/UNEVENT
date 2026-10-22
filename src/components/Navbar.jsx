@@ -17,7 +17,7 @@ import { rectOf } from '../lib/pointer'
 
 const navItems = [
   { key: 'home', label: 'Home', href: '#' },
-  { key: 'services', label: 'Services', mega: true },
+  { key: 'practice', label: 'Practices', mega: true },
   { key: 'industries', label: 'Industries', href: '/industries' },
   { key: 'insights', label: 'Insights', href: '/insights' },
   { key: 'case-studies', label: 'Scenarios', href: '/case-studies' },
@@ -25,13 +25,14 @@ const navItems = [
   { key: 'contact', label: 'Contact', href: '/contact' },
 ]
 
+// Same order as the sections on the home page (and as the navbar items).
 const sectionKeys = {
   home: 'home',
-  about: 'about',
-  services: 'services',
-  approach: 'services',
+  practice: 'practice',
+  approach: 'practice',
   industries: 'industries',
   insights: 'insights',
+  about: 'about',
   contact: 'contact',
 }
 
@@ -94,7 +95,7 @@ const ServiceTile = ({ service, onNavigate }) => {
     <m.a
       variants={itemVariants}
       href={service.href}
-      onClick={() => onNavigate('services')}
+      onClick={() => onNavigate('practice')}
       onMouseMove={handleMove}
       whileHover={{ y: -3 }}
       transition={{ duration: 0.25, ease }}
@@ -123,7 +124,7 @@ const ServiceTile = ({ service, onNavigate }) => {
         </span>
         <span className="mt-1.5 block text-[13px] leading-relaxed text-slate-400">{service.desc}</span>
         <span className="mt-3 inline-flex items-center gap-1.5 text-xs font-semibold text-slate-300 transition-colors group-hover:text-white">
-          Explore Service
+          Explore Practice
           <Arrow className="h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-1" />
         </span>
       </span>
@@ -135,7 +136,7 @@ const MegaMenu = ({ onNavigate, onEnter, onLeave }) => (
   <m.div
     initial={{ opacity: 0, y: -10, clipPath: 'inset(0 0 100% 0)' }}
     animate={{ opacity: 1, y: 0, clipPath: 'inset(0 0 0% 0)', transition: { duration: 0.4, ease } }}
-    exit={{ opacity: 0, y: -6, clipPath: 'inset(0 0 40% 0)', transition: { duration: 0.18 } }}
+    exit={{ opacity: 0, y: -6, clipPath: 'inset(0 0 40% 0)', pointerEvents: 'none', transition: { duration: 0.18 } }}
     onMouseEnter={onEnter}
     onMouseLeave={onLeave}
     className="absolute inset-x-0 top-full hidden border-t border-white/10 bg-[#0B1730]/95 shadow-[0_40px_80px_-20px_rgba(0,0,0,0.75)] backdrop-blur-2xl lg:block"
@@ -164,7 +165,7 @@ const MegaMenu = ({ onNavigate, onEnter, onLeave }) => (
             <span className="absolute inline-flex h-full w-full animate-ping-slow rounded-full bg-[#F5B82E]" />
             <span className="relative inline-flex h-3 w-3 rounded-full bg-[#F5B82E]" />
           </span>
-          <h3 className="text-lg font-bold leading-snug text-white">Not sure which division fits?</h3>
+          <h3 className="text-lg font-bold leading-snug text-white">Not sure which practice fits?</h3>
           <p className="mt-2 text-[13px] leading-relaxed text-slate-300">
             Tell us what you are dealing with and we will map it to the right team.
           </p>
@@ -205,12 +206,12 @@ const MobileDrawer = ({ open, onClose, active, onNavigate }) => {
             animate={{ x: 0 }}
             exit={{ x: '100%' }}
             transition={{ type: 'spring', stiffness: 320, damping: 34 }}
-            className="absolute right-0 top-0 flex h-full w-[88%] max-w-sm flex-col overflow-hidden border-l border-white/10 bg-[#0B1730] shadow-2xl"
+            className="absolute right-0 top-0 flex h-dvh w-[88%] max-w-sm flex-col overflow-hidden border-l border-white/10 bg-[#0B1730] shadow-2xl"
           >
             <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(rgba(255,255,255,0.06)_1px,transparent_1px)] [background-size:22px_22px] [mask-image:linear-gradient(to_bottom,black,transparent_70%)]" />
             <div className="pointer-events-none absolute -right-16 -top-16 h-56 w-56 rounded-full bg-[#1473E6]/25 blur-3xl" />
 
-            <div className="relative flex h-20 shrink-0 items-center justify-between border-b border-white/10 px-5">
+            <div className="relative flex h-16 shrink-0 items-center justify-between border-b border-white/10 px-5 pt-[env(safe-area-inset-top)]">
               <Logo onClick={() => onNavigate('home')} />
               <m.button
                 ref={closeRef}
@@ -239,7 +240,7 @@ const MobileDrawer = ({ open, onClose, active, onNavigate }) => {
                       aria-expanded={servicesOpen}
                       className="flex w-full items-center justify-between rounded-xl px-4 py-3.5 text-left text-base font-semibold text-slate-200 outline-none transition-colors hover:bg-white/5 focus-visible:ring-2 focus-visible:ring-[#F5B82E]"
                     >
-                      Services
+                      Practices
                       <Chevron open={servicesOpen} />
                     </button>
                     <AnimatePresence initial={false}>
@@ -256,7 +257,7 @@ const MobileDrawer = ({ open, onClose, active, onNavigate }) => {
                               <a
                                 key={service.id}
                                 href={service.href}
-                                onClick={() => onNavigate('services')}
+                                onClick={() => onNavigate('practice')}
                                 className="flex items-center gap-3 rounded-xl px-3 py-2.5 outline-none transition-colors hover:bg-white/5 focus-visible:ring-2 focus-visible:ring-[#F5B82E]"
                               >
                                 <span
@@ -292,7 +293,7 @@ const MobileDrawer = ({ open, onClose, active, onNavigate }) => {
               )}
             </m.nav>
 
-            <div className="relative shrink-0 space-y-3 border-t border-white/10 p-5">
+            <div className="relative shrink-0 space-y-3 border-t border-white/10 p-5 pb-[max(1.25rem,env(safe-area-inset-bottom))]">
               <MagneticButton href="/book" onClick={() => onNavigate('book')} size="lg" className="w-full">
                 Book a Consultation
               </MagneticButton>
@@ -308,7 +309,7 @@ const MobileDrawer = ({ open, onClose, active, onNavigate }) => {
 const Navbar = () => {
   const { pathname } = useLocation()
   const navigate = useNavigate()
-  const onService = pathname.startsWith('/services')
+  const onService = pathname.startsWith('/practice')
   const onAbout = pathname === '/about'
   const onContact = pathname === '/contact'
   const [scrolled, setScrolled] = useState(false)
@@ -329,7 +330,7 @@ const Navbar = () => {
           : onContact
             ? 'contact'
             : null
-  const current = onService ? 'services' : routeKey ?? active
+  const current = onService ? 'practice' : routeKey ?? active
 
   const { scrollY, scrollYProgress } = useScroll()
   const progress = useSpring(scrollYProgress, { stiffness: 140, damping: 28, mass: 0.4 })
@@ -345,7 +346,7 @@ const Navbar = () => {
 
   const closeMega = useCallback(() => {
     clearTimeout(closeTimer.current)
-    closeTimer.current = setTimeout(() => setMegaOpen(false), 140)
+    closeTimer.current = setTimeout(() => setMegaOpen(false), 220)
   }, [])
 
   const handleNavigate = useCallback((key) => {
@@ -413,12 +414,13 @@ const Navbar = () => {
           return element ? { key: sectionKeys[id], top: element.getBoundingClientRect().top + window.scrollY } : null
         })
         .filter(Boolean)
+        .sort((a, b) => a.top - b.top)
       pageHeight = document.documentElement.scrollHeight
     }
 
     const update = () => {
       frame = 0
-      const line = window.scrollY + window.innerHeight * 0.35
+      const line = window.scrollY + (headerRef.current?.offsetHeight ?? 64) + 24
       let key = 'home'
       marks.forEach((mark) => {
         if (mark.top <= line) key = mark.key
@@ -454,13 +456,13 @@ const Navbar = () => {
     <MotionConfig reducedMotion="user">
       <header
         ref={headerRef}
-        className={`sticky top-0 z-50 border-b transition-all duration-500 ${scrolled
+        className={`sticky top-0 z-50 border-b pt-[env(safe-area-inset-top)] transition-[background-color,border-color,box-shadow] duration-300 ${scrolled
             ? 'border-white/10 bg-[#0B1730]/80 shadow-[0_12px_40px_-14px_rgba(0,0,0,0.7)] backdrop-blur-xl'
             : 'border-transparent bg-[#0B1730]'
           }`}
       >
         <div className="mx-auto flex max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
-          <div className={`flex w-full items-center justify-between transition-[height] duration-500 ease-out ${scrolled ? 'h-16' : 'h-20'}`}>
+          <div className="flex h-16 w-full items-center justify-between">
             <Logo onClick={handleHome} />
 
             <nav aria-label="Primary" className="hidden lg:block">
@@ -491,11 +493,21 @@ const Navbar = () => {
                     </>
                   )
 
-                  const cls = `relative block rounded-lg px-3 py-2 text-sm font-semibold outline-none transition-colors duration-200 xl:px-4 focus-visible:ring-2 focus-visible:ring-[#F5B82E] ${lit ? 'text-white' : 'text-slate-300 hover:text-white'
+                  const bridge = item.mega ? 'before:absolute before:inset-x-0 before:-inset-y-4' : ''
+                  const cls = `${bridge} relative block rounded-lg px-3 py-2 text-sm font-semibold outline-none transition-colors duration-200 xl:px-4 focus-visible:ring-2 focus-visible:ring-[#F5B82E] ${lit ? 'text-white' : 'text-slate-300 hover:text-white'
                     }`
 
                   return (
-                    <li key={item.key} onMouseEnter={() => setHovered(item.key)}>
+                    <li
+                      key={item.key}
+                      onMouseEnter={() => {
+                        setHovered(item.key)
+                        if (!item.mega) {
+                          clearTimeout(closeTimer.current)
+                          setMegaOpen(false)
+                        }
+                      }}
+                    >
                       {item.mega ? (
                         <button
                           type="button"
@@ -503,7 +515,7 @@ const Navbar = () => {
                           aria-expanded={megaOpen}
                           onMouseEnter={openMega}
                           onMouseLeave={closeMega}
-                          onClick={() => setMegaOpen((value) => !value)}
+                          onClick={openMega}
                           className={cls}
                         >
                           {content}
