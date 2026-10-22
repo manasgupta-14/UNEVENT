@@ -1,4 +1,4 @@
-import { motion } from 'framer-motion'
+import { m } from 'framer-motion'
 import PanelShell from './PanelShell'
 import { rgba, tint } from '../../../lib/color'
 
@@ -36,14 +36,14 @@ const ProtectVisual = ({ service }) => {
         ))}
         <div className="absolute inset-x-0 top-1/2 h-px" style={{ backgroundColor: rgba(color, 0.25) }} />
         <div className="absolute inset-y-0 left-1/2 w-px" style={{ backgroundColor: rgba(color, 0.25) }} />
-        <motion.div
+        <m.div
           className="absolute inset-0 rounded-full"
           style={{ background: `conic-gradient(from 0deg, transparent 0deg, transparent 240deg, ${rgba(color, 0.55)} 360deg)` }}
           animate={{ rotate: 360 }}
           transition={{ duration: 5, repeat: Infinity, ease: 'linear' }}
         />
         {blips.map((blip) => (
-          <motion.span
+          <m.span
             key={`${blip.x}-${blip.y}`}
             className="absolute h-2.5 w-2.5 -translate-x-1/2 -translate-y-1/2 rounded-full"
             style={{ left: `${blip.x}%`, top: `${blip.y}%`, backgroundColor: blip.tone, boxShadow: `0 0 14px ${blip.tone}` }}
@@ -62,7 +62,7 @@ const ProtectVisual = ({ service }) => {
               <span style={{ color: finding.tone }}>{finding.level}</span>
             </div>
             <div className="h-1.5 overflow-hidden rounded-full bg-white/10">
-              <motion.div
+              <m.div
                 className="h-full rounded-full"
                 style={{ backgroundColor: finding.tone }}
                 initial={{ width: 0 }}

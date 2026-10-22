@@ -1,5 +1,6 @@
-import { motion, useMotionValue, useSpring } from 'framer-motion'
+import { m, useMotionValue, useSpring } from 'framer-motion'
 import { Arrow } from './icons'
+import { rectOf } from '../../lib/pointer'
 
 const tones = {
   gold: 'bg-[#F5B82E] text-[#0B1730] shadow-[0_0_0_1px_rgba(245,184,46,0.6),0_10px_30px_-10px_rgba(245,184,46,0.6)] hover:shadow-[0_0_0_1px_rgba(245,184,46,0.9),0_16px_40px_-10px_rgba(245,184,46,0.85)]',
@@ -20,7 +21,7 @@ const MagneticButton = ({ href, children, tone = 'gold', size = 'md', arrow = tr
   const y = useSpring(rawY, { stiffness: 260, damping: 18, mass: 0.4 })
 
   const handleMove = (event) => {
-    const rect = event.currentTarget.getBoundingClientRect()
+    const rect = rectOf(event.currentTarget)
     rawX.set((event.clientX - (rect.left + rect.width / 2)) * 0.22)
     rawY.set((event.clientY - (rect.top + rect.height / 2)) * 0.3)
   }
@@ -31,7 +32,7 @@ const MagneticButton = ({ href, children, tone = 'gold', size = 'md', arrow = tr
   }
 
   return (
-    <motion.a
+    <m.a
       href={href}
       onClick={onClick}
       onMouseMove={handleMove}
@@ -45,7 +46,7 @@ const MagneticButton = ({ href, children, tone = 'gold', size = 'md', arrow = tr
       )}
       <span className="relative">{children}</span>
       {arrow && <Arrow className="relative h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />}
-    </motion.a>
+    </m.a>
   )
 }
 

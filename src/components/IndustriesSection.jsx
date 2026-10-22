@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { motion } from 'framer-motion'
+import { m } from 'framer-motion'
 import SectionHeading from './ui/SectionHeading'
 import { Arrow, GlyphIcon } from './ui/icons'
 import { industries } from '../data/content'
@@ -34,7 +34,7 @@ const Panel = ({ item, active, onActivate }) => {
   const divisions = item.divisions.map((slug) => services.find((service) => service.slug === slug))
 
   return (
-    <motion.div
+    <m.div
       variants={rise}
       tabIndex={0}
       onMouseEnter={onActivate}
@@ -99,7 +99,7 @@ const Panel = ({ item, active, onActivate }) => {
           <Arrow className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
         </a>
       </div>
-    </motion.div>
+    </m.div>
   )
 }
 
@@ -116,11 +116,11 @@ const IndustriesSection = () => {
           title="Built for sectors where one incident changes everything"
           text="We bring the same proactive approach to teams that handle sensitive data, regulated workflows and high-stakes operations."
         />
-        <motion.div variants={stagger(0.1)} initial="hidden" whileInView="show" viewport={viewport} className="mt-14 flex flex-col gap-4 lg:h-[500px] lg:flex-row">
+        <m.div variants={stagger(0.1)} initial="hidden" whileInView="show" viewport={viewport} className="mt-14 flex flex-col gap-4 lg:h-[500px] lg:flex-row">
           {industries.map((item, index) => (
             <Panel key={item.slug} item={item} active={active === index} onActivate={() => setActive(index)} />
           ))}
-        </motion.div>
+        </m.div>
       </div>
     </section>
   )

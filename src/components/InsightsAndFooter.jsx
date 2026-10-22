@@ -1,5 +1,5 @@
 import React from 'react';
-import { motion } from 'framer-motion';
+import { m } from 'framer-motion';
 
 const InsightsAndFooter = () => {
     const insights = [
@@ -46,7 +46,7 @@ const InsightsAndFooter = () => {
 
                     <div className="flex flex-col md:flex-row justify-between items-end mb-12">
                         <div>
-                            <motion.h2
+                            <m.h2
                                 initial={{ opacity: 0, x: -20 }}
                                 whileInView={{ opacity: 1, x: 0 }}
                                 viewport={{ once: true }}
@@ -54,8 +54,8 @@ const InsightsAndFooter = () => {
                                 className="text-3xl md:text-4xl font-bold text-white mb-4"
                             >
                                 Featured <span className="text-yellow-500">Insights</span>
-                            </motion.h2>
-                            <motion.p
+                            </m.h2>
+                            <m.p
                                 initial={{ opacity: 0 }}
                                 whileInView={{ opacity: 1 }}
                                 viewport={{ once: true }}
@@ -63,9 +63,9 @@ const InsightsAndFooter = () => {
                                 className="text-gray-400 max-w-xl"
                             >
                                 Explore our latest articles, case studies, and expert perspectives on risk management and technology.
-                            </motion.p>
+                            </m.p>
                         </div>
-                        <motion.a
+                        <m.a
                             href="#"
                             initial={{ opacity: 0 }}
                             whileInView={{ opacity: 1 }}
@@ -76,10 +76,10 @@ const InsightsAndFooter = () => {
                             <svg className="w-5 h-5 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                             </svg>
-                        </motion.a>
+                        </m.a>
                     </div>
 
-                    <motion.div
+                    <m.div
                         variants={containerVariants}
                         initial="hidden"
                         whileInView="visible"
@@ -87,7 +87,7 @@ const InsightsAndFooter = () => {
                         className="grid grid-cols-1 md:grid-cols-3 gap-8"
                     >
                         {insights.map((insight) => (
-                            <motion.div
+                            <m.div
                                 key={insight.id}
                                 variants={itemVariants}
                                 whileHover={{ y: -10 }}
@@ -115,16 +115,16 @@ const InsightsAndFooter = () => {
                                         </svg>
                                     </div>
                                 </div>
-                            </motion.div>
+                            </m.div>
                         ))}
-                    </motion.div>
+                    </m.div>
 
                 </div>
             </section>
 
             <section className="py-20 relative z-10">
                 <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <motion.div
+                    <m.div
                         initial={{ opacity: 0, scale: 0.95 }}
                         whileInView={{ opacity: 1, scale: 1 }}
                         viewport={{ once: true }}
@@ -138,14 +138,14 @@ const InsightsAndFooter = () => {
                         <p className="text-gray-300 text-lg md:text-xl mb-10 max-w-2xl mx-auto relative z-10">
                             Let's Discuss Your Requirements. Our team is ready to build a proactive strategy tailored to your business.
                         </p>
-                        <motion.button
+                        <m.button
                             whileHover={{ scale: 1.05 }}
                             whileTap={{ scale: 0.95 }}
                             className="bg-yellow-500 hover:bg-yellow-400 text-[#0B1730] px-8 py-4 rounded-lg font-bold text-lg transition-all shadow-[0_0_20px_rgba(245,158,11,0.3)] relative z-10"
                         >
                             Get in Touch Today
-                        </motion.button>
-                    </motion.div>
+                        </m.button>
+                    </m.div>
                 </div>
             </section>
 

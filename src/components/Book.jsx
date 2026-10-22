@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import { createPortal } from 'react-dom'
-import { AnimatePresence, motion } from 'framer-motion'
+import { AnimatePresence, m } from 'framer-motion'
 import usePageMeta from '../hooks/usePageMeta'
 import NetworkCanvas from './ui/NetworkCanvas'
 import SpotlightCard from './ui/SpotlightCard'
@@ -56,20 +56,20 @@ const Hero = () => (
     <div className="pointer-events-none absolute -left-32 top-0 -z-10 h-[340px] w-[340px] animate-float rounded-full bg-[#1473E6]/20 blur-[110px]" />
     <div className="pointer-events-none absolute -right-24 bottom-0 -z-10 h-[280px] w-[280px] animate-float rounded-full bg-[#F5B82E]/10 blur-[110px]" style={{ animationDelay: '2s' }} />
     <div className="relative mx-auto max-w-7xl px-4 pb-14 pt-28 sm:px-6 sm:pt-32 lg:px-8 lg:pb-16 lg:pt-36">
-      <motion.div variants={stagger(0.1, 0.1)} initial="hidden" animate="show" className="max-w-3xl">
-        <motion.div variants={rise}>
+      <m.div variants={stagger(0.1, 0.1)} initial="hidden" animate="show" className="max-w-3xl">
+        <m.div variants={rise}>
           <Eyebrow>{hero.badge}</Eyebrow>
-        </motion.div>
-        <motion.h1 variants={rise} className="mt-7 font-display text-[2.3rem] font-extrabold leading-[1.08] tracking-tight text-white sm:text-5xl lg:text-6xl">
+        </m.div>
+        <m.h1 variants={rise} className="mt-7 font-display text-[2.3rem] font-extrabold leading-[1.08] tracking-tight text-white sm:text-5xl lg:text-6xl">
           {hero.lead}
           <span className="block animate-gradient bg-gradient-to-r from-[#F5B82E] via-[#FFE29A] to-[#F5B82E] bg-[length:220%_auto] bg-clip-text text-transparent">
             {hero.accent}
           </span>
-        </motion.h1>
-        <motion.p variants={rise} className="mt-6 max-w-xl text-lg leading-relaxed text-slate-300 sm:text-xl">
+        </m.h1>
+        <m.p variants={rise} className="mt-6 max-w-xl text-lg leading-relaxed text-slate-300 sm:text-xl">
           {hero.text}
-        </motion.p>
-      </motion.div>
+        </m.p>
+      </m.div>
     </div>
   </section>
 )
@@ -82,7 +82,7 @@ const Stepper = ({ step }) => (
       return (
         <li key={item.key} className="flex flex-1 items-center last:flex-none" aria-current={now ? 'step' : undefined}>
           <span className="flex items-center gap-2.5">
-            <motion.span
+            <m.span
               animate={{ scale: now ? 1.12 : 1 }}
               className={`flex h-9 w-9 items-center justify-center rounded-full border text-sm font-extrabold transition-colors duration-500 ${
                 done
@@ -93,14 +93,14 @@ const Stepper = ({ step }) => (
               }`}
             >
               {done ? <Check className="h-4 w-4" /> : index + 1}
-            </motion.span>
+            </m.span>
             <span className={`hidden text-sm font-bold transition-colors duration-300 sm:block ${now ? 'text-white' : done ? 'text-slate-300' : 'text-slate-500'}`}>
               {item.label}
             </span>
           </span>
           {index < steps.length - 1 && (
             <span className="relative mx-3 h-px flex-1 bg-white/10">
-              <motion.span
+              <m.span
                 className="absolute inset-y-0 left-0 bg-gradient-to-r from-[#F5B82E] to-[#1473E6]"
                 initial={false}
                 animate={{ width: done ? '100%' : '0%' }}
@@ -115,7 +115,7 @@ const Stepper = ({ step }) => (
 )
 
 const Choice = ({ selected, onClick, color = '#1473E6', children }) => (
-  <motion.button
+  <m.button
     type="button"
     onClick={onClick}
     aria-pressed={selected}
@@ -139,11 +139,11 @@ const Choice = ({ selected, onClick, color = '#1473E6', children }) => (
     >
       {selected && <Check className="h-3.5 w-3.5" color="#0B1730" />}
     </span>
-  </motion.button>
+  </m.button>
 )
 
 const Pill = ({ selected, onClick, children }) => (
-  <motion.button
+  <m.button
     type="button"
     onClick={onClick}
     aria-pressed={selected}
@@ -156,7 +156,7 @@ const Pill = ({ selected, onClick, children }) => (
     }`}
   >
     {children}
-  </motion.button>
+  </m.button>
 )
 
 const SummaryCard = ({ booking, days }) => {
@@ -232,14 +232,14 @@ const ConfirmPopup = ({ booking, reference, days, onClose }) => {
   const mailHref = `mailto:${email}?subject=${encodeURIComponent(`Consultation booking ${reference}`)}&body=${encodeURIComponent(mailBody)}`
 
   return createPortal(
-    <motion.div
+    <m.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       className="fixed inset-0 z-[100] flex items-center justify-center overflow-y-auto bg-[#050B18]/80 p-4 backdrop-blur-sm"
       onClick={onClose}
     >
-      <motion.div
+      <m.div
         role="dialog"
         aria-modal="true"
         aria-labelledby="booking-title"
@@ -267,14 +267,14 @@ const ConfirmPopup = ({ booking, reference, days, onClose }) => {
         </button>
 
         <div className="relative p-7 sm:p-9">
-          <motion.span
+          <m.span
             initial={{ scale: 0.4, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             transition={{ duration: 0.6, delay: 0.15, ease }}
             className="flex h-16 w-16 items-center justify-center rounded-full border border-[#F5B82E]/60 bg-[#F5B82E]/15 shadow-[0_0_34px_rgba(245,184,46,0.45)]"
           >
             <Check className="h-8 w-8" color="#F5B82E" />
-          </motion.span>
+          </m.span>
           <h2 id="booking-title" className="mt-5 font-display text-2xl font-extrabold text-white sm:text-3xl">{popup.title}</h2>
           <p className="mt-2 text-slate-300">{popup.text}</p>
 
@@ -284,7 +284,7 @@ const ConfirmPopup = ({ booking, reference, days, onClose }) => {
 
           <dl className="mt-6 divide-y divide-white/10 rounded-2xl border border-white/10 bg-white/[0.04]">
             {rows.map(([label, value], index) => (
-              <motion.div
+              <m.div
                 key={label}
                 initial={{ opacity: 0, x: -12 }}
                 animate={{ opacity: 1, x: 0 }}
@@ -293,12 +293,12 @@ const ConfirmPopup = ({ booking, reference, days, onClose }) => {
               >
                 <dt className="w-24 shrink-0 text-xs font-bold uppercase tracking-widest text-slate-500">{label}</dt>
                 <dd className="break-words font-semibold text-white">{value}</dd>
-              </motion.div>
+              </m.div>
             ))}
           </dl>
 
           <div className="mt-7 flex flex-col gap-3 sm:flex-row">
-            <motion.button
+            <m.button
               type="button"
               onClick={onClose}
               whileHover={{ y: -2 }}
@@ -306,7 +306,7 @@ const ConfirmPopup = ({ booking, reference, days, onClose }) => {
               className="inline-flex flex-1 items-center justify-center rounded-xl bg-[#F5B82E] px-6 py-3.5 font-bold text-[#0B1730] shadow-[0_10px_30px_-10px_rgba(245,184,46,0.6)] outline-none transition-shadow duration-300 hover:shadow-[0_16px_40px_-10px_rgba(245,184,46,0.85)] focus-visible:ring-2 focus-visible:ring-white"
             >
               {popup.done}
-            </motion.button>
+            </m.button>
             <a
               href={mailHref}
               className="inline-flex flex-1 items-center justify-center rounded-xl border border-white/20 bg-white/5 px-6 py-3.5 text-center text-sm font-bold text-white outline-none transition-all duration-300 hover:border-white/45 hover:bg-white/10 focus-visible:ring-2 focus-visible:ring-[#F5B82E]"
@@ -315,8 +315,8 @@ const ConfirmPopup = ({ booking, reference, days, onClose }) => {
             </a>
           </div>
         </div>
-      </motion.div>
-    </motion.div>,
+      </m.div>
+    </m.div>,
     document.body,
   )
 }
@@ -395,7 +395,7 @@ const Book = () => {
                 </p>
 
                 <AnimatePresence mode="wait" initial={false}>
-                  <motion.div
+                  <m.div
                     key={step}
                     initial={{ opacity: 0, x: 28 }}
                     animate={{ opacity: 1, x: 0 }}
@@ -473,7 +473,7 @@ const Book = () => {
                         </Field>
                       </div>
                     )}
-                  </motion.div>
+                  </m.div>
                 </AnimatePresence>
               </div>
 
@@ -489,7 +489,7 @@ const Book = () => {
                 ) : (
                   <span />
                 )}
-                <motion.button
+                <m.button
                   type="button"
                   disabled={!isLast && !canContinue}
                   onClick={isLast ? confirm : () => setStep(step + 1)}
@@ -500,7 +500,7 @@ const Book = () => {
                   <span className="pointer-events-none absolute inset-y-0 left-0 w-1/3 animate-shimmer bg-gradient-to-r from-transparent via-white/60 to-transparent" />
                   <span className="relative">{isLast ? 'Confirm booking' : 'Continue'}</span>
                   <Arrow className="relative h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
-                </motion.button>
+                </m.button>
               </div>
             </div>
           </SpotlightCard>

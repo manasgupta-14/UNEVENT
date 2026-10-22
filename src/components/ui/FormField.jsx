@@ -1,4 +1,4 @@
-import { AnimatePresence, motion } from 'framer-motion'
+import { AnimatePresence, m } from 'framer-motion'
 
 export const Field = ({ id, label, required = false, error, children, className = '' }) => (
   <div className={`group ${className}`}>
@@ -16,7 +16,7 @@ export const Field = ({ id, label, required = false, error, children, className 
     {children}
     <AnimatePresence initial={false}>
       {error && (
-        <motion.p
+        <m.p
           id={`${id}-error`}
           role="alert"
           initial={{ opacity: 0, y: -4, height: 0 }}
@@ -25,7 +25,7 @@ export const Field = ({ id, label, required = false, error, children, className 
           className="mt-1.5 text-sm font-medium text-red-300"
         >
           {error}
-        </motion.p>
+        </m.p>
       )}
     </AnimatePresence>
   </div>

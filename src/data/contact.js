@@ -9,8 +9,8 @@ export const meta = {
 export const hero = {
   badge: 'Contact us',
   lead: ['Tell us what you', 'are dealing with.'],
-  accent: 'We will make it a non-event.',
-  text: 'Share a few details and our team will reply with a clear, proactive plan built around your business.',
+  accent: 'We will help you find the next practical step.',
+  text: 'Share your situation, deadline and the type of support you need. A real person will reply.',
 }
 
 export const formCopy = {
@@ -115,7 +115,7 @@ export const map = {
 export const contactChart = {
   badge: 'What happens next',
   title: 'From your message to our reply.',
-  note: 'Typical reply within two business days.',
+  note: 'Typical reply within two business days (to be confirmed before launch).',
   unit: 'Progress toward your reply',
   bars: [
     {

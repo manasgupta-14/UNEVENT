@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router'
-import { AnimatePresence, MotionConfig, motion } from 'framer-motion'
+import { AnimatePresence, MotionConfig, m } from 'framer-motion'
 import usePageMeta from '../../hooks/usePageMeta'
 import NetworkCanvas from '../../components/ui/NetworkCanvas'
 import TiltPanel from '../../components/ui/TiltPanel'
@@ -24,9 +24,9 @@ const byId = (id) => services.find((service) => service.id === id)
 
 const Word = ({ children, delay, className = '' }) => (
   <span className="inline-block overflow-hidden pb-[0.14em] align-bottom">
-    <motion.span className={`inline-block ${className}`} initial={{ y: '115%' }} animate={{ y: 0 }} transition={{ duration: 0.9, delay, ease }}>
+    <m.span className={`inline-block ${className}`} initial={{ y: '115%' }} animate={{ y: 0 }} transition={{ duration: 0.9, delay, ease }}>
       {children}
-    </motion.span>
+    </m.span>
   </span>
 )
 
@@ -46,7 +46,7 @@ const Pipeline = () => {
     <TiltPanel className="relative mx-auto w-full max-w-[520px]">
       <div className="absolute -inset-6 rounded-full blur-3xl transition-colors duration-700" style={{ backgroundColor: rgba(service.accent, 0.2) }} />
       <div className="relative overflow-hidden rounded-3xl border border-white/15 bg-[#0B1730]/75 p-6 shadow-[0_40px_90px_-30px_rgba(20,115,230,0.55)] backdrop-blur-xl sm:p-7">
-        <motion.span
+        <m.span
           aria-hidden="true"
           className="pointer-events-none absolute inset-x-0 top-0 h-20 bg-gradient-to-b from-transparent via-[#1473E6]/15 to-transparent"
           animate={{ y: ['-30%', '560%'] }}
@@ -65,11 +65,11 @@ const Pipeline = () => {
         </div>
 
         <AnimatePresence mode="wait">
-          <motion.div key={active} initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }} transition={{ duration: 0.4, ease }} className="relative">
+          <m.div key={active} initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }} transition={{ duration: 0.4, ease }} className="relative">
             <h3 className="mt-5 font-display text-lg font-bold leading-snug text-white">{item.title}</h3>
             <ol className="relative mt-6 space-y-5">
               <div className="absolute inset-y-3 left-[11px] w-px bg-white/10">
-                <motion.span
+                <m.span
                   className="block h-full origin-top"
                   style={{ background: `linear-gradient(${service.accent}, #F5B82E)` }}
                   initial={{ scaleY: 0 }}
@@ -78,8 +78,8 @@ const Pipeline = () => {
                 />
               </div>
               {stages.map((stage, index) => (
-                <motion.li key={stage.key} initial={{ opacity: 0.3 }} animate={{ opacity: 1 }} transition={{ delay: 0.3 + index * 0.6, duration: 0.4 }} className="relative flex gap-4">
-                  <motion.span
+                <m.li key={stage.key} initial={{ opacity: 0.3 }} animate={{ opacity: 1 }} transition={{ delay: 0.3 + index * 0.6, duration: 0.4 }} className="relative flex gap-4">
+                  <m.span
                     initial={{ scale: 0.6, backgroundColor: '#0B1730' }}
                     animate={{ scale: 1, backgroundColor: service.accent }}
                     transition={{ delay: 0.3 + index * 0.6, duration: 0.4 }}
@@ -90,10 +90,10 @@ const Pipeline = () => {
                     <p className="text-sm font-bold text-white">{stage.label}</p>
                     <p className="mt-0.5 line-clamp-2 text-sm leading-snug text-slate-400">{item[stage.key]}</p>
                   </div>
-                </motion.li>
+                </m.li>
               ))}
             </ol>
-          </motion.div>
+          </m.div>
         </AnimatePresence>
 
         <div className="relative mt-6 flex items-center gap-2" role="group" aria-label="Choose an example">
@@ -130,17 +130,17 @@ const Hero = () => {
       <div className="pointer-events-none absolute -right-24 bottom-0 -z-10 h-[380px] w-[380px] animate-float rounded-full bg-[#F5B82E]/10 blur-[110px]" style={{ animationDelay: '2s' }} />
 
       <div className="mx-auto grid max-w-7xl items-center gap-14 px-4 pb-20 pt-14 sm:px-6 lg:grid-cols-[1.05fr_0.95fr] lg:gap-8 lg:px-8 lg:pb-28 lg:pt-20">
-        <motion.div variants={stagger(0.1, 0.1)} initial="hidden" animate="show" className="relative z-10">
-          <motion.nav variants={rise} aria-label="Breadcrumb" className="flex items-center gap-2 text-sm font-semibold text-slate-400">
+        <m.div variants={stagger(0.1, 0.1)} initial="hidden" animate="show" className="relative z-10">
+          <m.nav variants={rise} aria-label="Breadcrumb" className="flex items-center gap-2 text-sm font-semibold text-slate-400">
             <Link to="/" className="outline-none transition-colors hover:text-white focus-visible:text-white">Home</Link>
             <span aria-hidden="true">/</span>
-            <span className="text-white">Case studies</span>
-          </motion.nav>
+            <span className="text-white">Illustrative scenarios</span>
+          </m.nav>
 
-          <motion.span variants={rise} className="mt-7 inline-flex items-center gap-2.5 rounded-full border border-[#F5B82E]/40 bg-[#F5B82E]/10 px-4 py-1.5 text-sm font-semibold text-[#FFE29A] backdrop-blur">
+          <m.span variants={rise} className="mt-7 inline-flex items-center gap-2.5 rounded-full border border-[#F5B82E]/40 bg-[#F5B82E]/10 px-4 py-1.5 text-sm font-semibold text-[#FFE29A] backdrop-blur">
             <span className="h-2 w-2 rounded-full bg-[#F5B82E]" />
             Illustrative examples, not real client results
-          </motion.span>
+          </m.span>
 
           <h1 className="mt-6 font-display text-[2.6rem] font-extrabold leading-[1.06] tracking-tight text-white sm:text-6xl lg:text-[3.8rem]">
             {words.map((word, index) => {
@@ -155,19 +155,19 @@ const Hero = () => {
             })}
           </h1>
 
-          <motion.p variants={rise} className="mt-7 max-w-xl text-lg leading-relaxed text-slate-300 sm:text-xl">
+          <m.p variants={rise} className="mt-7 max-w-xl text-lg leading-relaxed text-slate-300 sm:text-xl">
             Each scenario shows the challenge, the risks we found, our solution and the outcome. Verified case studies will replace these once client work is cleared for publication.
-          </motion.p>
+          </m.p>
 
-          <motion.div variants={rise} className="mt-10 grid max-w-md grid-cols-3 gap-6 border-t border-white/10 pt-8">
+          <m.div variants={rise} className="mt-10 grid max-w-md grid-cols-3 gap-3 border-t sm:gap-6 border-white/10 pt-8">
             {stats.map((stat) => (
-              <div key={stat.label}>
-                <p className="font-display text-3xl font-extrabold text-white"><CountUp to={stat.value} /></p>
-                <p className="mt-1 text-sm text-slate-400">{stat.label}</p>
+              <div key={stat.label} className="min-w-0">
+                <p className="font-display text-2xl font-extrabold text-white sm:text-3xl"><CountUp to={stat.value} /></p>
+                <p className="mt-1 text-xs text-slate-400 sm:text-sm">{stat.label}</p>
               </div>
             ))}
-          </motion.div>
-        </motion.div>
+          </m.div>
+        </m.div>
 
         <Pipeline />
       </div>
@@ -179,7 +179,7 @@ const CaseCard = ({ item }) => {
   const service = byId(item.division)
 
   return (
-    <motion.article
+    <m.article
       variants={rise}
       initial="hidden"
       whileInView="show"
@@ -208,9 +208,9 @@ const CaseCard = ({ item }) => {
         </Link>
       </div>
 
-      <motion.div variants={stagger(0.15, 0.2)} initial="hidden" whileInView="show" viewport={viewport} className="relative mt-10">
+      <m.div variants={stagger(0.15, 0.2)} initial="hidden" whileInView="show" viewport={viewport} className="relative mt-10">
         <div aria-hidden="true" className="absolute inset-x-0 top-5 hidden h-px bg-slate-200 lg:block">
-          <motion.span
+          <m.span
             variants={{ hidden: { scaleX: 0 }, show: { scaleX: 1, transition: { duration: 1.4, delay: 0.3, ease } } }}
             className="block h-full origin-left"
             style={{ background: `linear-gradient(90deg, ${service.accent}, ${tint(service.accent, 0.5)})` }}
@@ -220,7 +220,7 @@ const CaseCard = ({ item }) => {
           {stages.map((stage, index) => {
             const last = index === stages.length - 1
             return (
-              <motion.li key={stage.key} variants={rise} className="flex flex-col">
+              <m.li key={stage.key} variants={rise} className="flex flex-col">
                 <span className="relative z-10 flex h-10 w-10 items-center justify-center rounded-full border-2 bg-white text-sm font-extrabold" style={{ borderColor: service.accent, color: service.ink }}>
                   {index + 1}
                 </span>
@@ -231,18 +231,18 @@ const CaseCard = ({ item }) => {
                   <h3 className="text-sm font-bold text-[#0B1730]">{stage.label}</h3>
                   <p className="mt-2 text-[15px] leading-relaxed text-[#334155]">{item[stage.key]}</p>
                 </div>
-              </motion.li>
+              </m.li>
             )
           })}
         </ol>
-      </motion.div>
-    </motion.article>
+      </m.div>
+    </m.article>
   )
 }
 
 const CaseStudiesPage = () => {
   usePageMeta({
-    title: 'Case Studies | UNEVENT',
+    title: 'Illustrative Scenarios | UNEVENT',
     description: 'Illustrative scenarios showing how UNEVENT approaches security, legal, compliance and technology problems. These are examples, not real client results.',
   })
 

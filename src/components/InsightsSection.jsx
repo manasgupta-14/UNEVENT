@@ -1,12 +1,12 @@
 import { Link } from 'react-router'
-import { motion } from 'framer-motion'
+import { m } from 'framer-motion'
 import SectionHeading from './ui/SectionHeading'
 import { Arrow } from './ui/icons'
 import { articles, cases } from '../data/content'
 import { services } from '../data/services'
 import { rise, stagger, viewport } from '../lib/motion'
 
-const MotionLink = motion.create(Link)
+const MotionLink = m.create(Link)
 
 const formatDate = (value) =>
   new Date(value).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric', timeZone: 'UTC' })
@@ -106,7 +106,7 @@ const InsightsSection = () => (
   <section id="insights" className="relative bg-[#F8FAFC] py-24 lg:py-32">
     <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
       <div className="flex flex-col justify-between gap-6 sm:flex-row sm:items-end">
-        <SectionHeading badge="Featured insights" title="Perspective from the front line of risk" text="Articles and case studies on how proactive teams keep problems from becoming incidents." />
+        <SectionHeading badge="Featured insights" title="Perspective from the front line of risk" text="Articles and illustrative scenarios on how teams reduce exposure and stay ready." />
         <MotionLink
           variants={rise}
           initial="hidden"
@@ -120,14 +120,14 @@ const InsightsSection = () => (
         </MotionLink>
       </div>
 
-      <motion.div variants={stagger(0.12)} initial="hidden" whileInView="show" viewport={viewport} className="mt-14 grid gap-6 lg:grid-cols-12">
+      <m.div variants={stagger(0.12)} initial="hidden" whileInView="show" viewport={viewport} className="mt-14 grid gap-6 lg:grid-cols-12">
         <Featured item={insights[0]} />
         <div className="flex flex-col gap-6 lg:col-span-5">
           {insights.slice(1).map((item) => (
             <Compact key={item.id} item={item} />
           ))}
         </div>
-      </motion.div>
+      </m.div>
     </div>
   </section>
 )

@@ -1,6 +1,6 @@
 import { useRef, useState } from 'react'
 import { Link } from 'react-router'
-import { AnimatePresence, MotionConfig, motion } from 'framer-motion'
+import { AnimatePresence, MotionConfig, m } from 'framer-motion'
 import usePageMeta from '../../hooks/usePageMeta'
 import NetworkCanvas from '../../components/ui/NetworkCanvas'
 import TiltPanel from '../../components/ui/TiltPanel'
@@ -35,9 +35,9 @@ const teamOf = (job) => services.find((service) => service.name === job.team) ??
 
 const Word = ({ children, delay, className = '' }) => (
   <span className="inline-block overflow-hidden pb-[0.14em] align-bottom">
-    <motion.span className={`inline-block ${className}`} initial={{ y: '115%' }} animate={{ y: 0 }} transition={{ duration: 0.9, delay, ease }}>
+    <m.span className={`inline-block ${className}`} initial={{ y: '115%' }} animate={{ y: 0 }} transition={{ duration: 0.9, delay, ease }}>
       {children}
-    </motion.span>
+    </m.span>
   </span>
 )
 
@@ -60,17 +60,17 @@ const Hero = () => {
       <div className="pointer-events-none absolute -right-24 bottom-0 -z-10 h-[380px] w-[380px] animate-float rounded-full bg-[#F5B82E]/10 blur-[110px]" style={{ animationDelay: '2s' }} />
 
       <div className="mx-auto grid max-w-7xl items-center gap-14 px-4 pb-20 pt-14 sm:px-6 lg:grid-cols-[1.05fr_0.95fr] lg:gap-8 lg:px-8 lg:pb-28 lg:pt-20">
-        <motion.div variants={stagger(0.1, 0.1)} initial="hidden" animate="show" className="relative z-10">
-          <motion.nav variants={rise} aria-label="Breadcrumb" className="flex items-center gap-2 text-sm font-semibold text-slate-400">
+        <m.div variants={stagger(0.1, 0.1)} initial="hidden" animate="show" className="relative z-10">
+          <m.nav variants={rise} aria-label="Breadcrumb" className="flex items-center gap-2 text-sm font-semibold text-slate-400">
             <Link to="/" className="outline-none transition-colors hover:text-white focus-visible:text-white">Home</Link>
             <span aria-hidden="true">/</span>
             <span className="text-white">Careers</span>
-          </motion.nav>
+          </m.nav>
 
-          <motion.span variants={rise} className="mt-7 inline-flex items-center gap-2.5 rounded-full border border-[#F5B82E]/40 bg-[#F5B82E]/10 px-4 py-1.5 text-sm font-semibold text-[#FFE29A] backdrop-blur">
+          <m.span variants={rise} className="mt-7 inline-flex items-center gap-2.5 rounded-full border border-[#F5B82E]/40 bg-[#F5B82E]/10 px-4 py-1.5 text-sm font-semibold text-[#FFE29A] backdrop-blur">
             <span className="h-2 w-2 rounded-full bg-[#F5B82E]" />
             We are hiring
-          </motion.span>
+          </m.span>
 
           <h1 className="mt-6 font-display text-[2.6rem] font-extrabold leading-[1.06] tracking-tight text-white sm:text-6xl lg:text-[3.8rem]">
             {words.map((word, index) => {
@@ -85,11 +85,11 @@ const Hero = () => {
             })}
           </h1>
 
-          <motion.p variants={rise} className="mt-7 max-w-xl text-lg leading-relaxed text-slate-300 sm:text-xl">
+          <m.p variants={rise} className="mt-7 max-w-xl text-lg leading-relaxed text-slate-300 sm:text-xl">
             We hire people who like preventing problems. Join a team that blends cybersecurity, legal risk, governance and software to make risk a non-event.
-          </motion.p>
+          </m.p>
 
-          <motion.div variants={rise} className="mt-9 flex flex-col gap-4 sm:flex-row">
+          <m.div variants={rise} className="mt-9 flex flex-col gap-4 sm:flex-row">
             <button
               type="button"
               onClick={() => scrollTo('roles')}
@@ -99,22 +99,22 @@ const Hero = () => {
               <span className="relative">See open roles</span>
               <Arrow className="relative h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
             </button>
-          </motion.div>
+          </m.div>
 
-          <motion.div variants={rise} className="mt-12 grid max-w-md grid-cols-3 gap-6 border-t border-white/10 pt-8">
+          <m.div variants={rise} className="mt-12 grid max-w-md grid-cols-3 gap-3 border-t sm:gap-6 border-white/10 pt-8">
             {stats.map((stat) => (
-              <div key={stat.label}>
-                <p className="font-display text-3xl font-extrabold text-white"><CountUp to={stat.value} /></p>
-                <p className="mt-1 text-sm text-slate-400">{stat.label}</p>
+              <div key={stat.label} className="min-w-0">
+                <p className="font-display text-2xl font-extrabold text-white sm:text-3xl"><CountUp to={stat.value} /></p>
+                <p className="mt-1 text-xs text-slate-400 sm:text-sm">{stat.label}</p>
               </div>
             ))}
-          </motion.div>
-        </motion.div>
+          </m.div>
+        </m.div>
 
         <TiltPanel className="relative mx-auto w-full max-w-[520px]">
           <div className="absolute -inset-6 rounded-full bg-[#1473E6]/20 blur-3xl" />
           <div className="relative overflow-hidden rounded-3xl border border-white/15 bg-[#0B1730]/75 p-6 shadow-[0_40px_90px_-30px_rgba(20,115,230,0.55)] backdrop-blur-xl sm:p-7">
-            <motion.span
+            <m.span
               aria-hidden="true"
               className="pointer-events-none absolute inset-x-0 top-0 h-20 bg-gradient-to-b from-transparent via-[#1473E6]/15 to-transparent"
               animate={{ y: ['-30%', '560%'] }}
@@ -131,11 +131,11 @@ const Hero = () => {
               <span className="text-xs font-semibold text-slate-400">{jobs.length} roles</span>
             </div>
 
-            <motion.ul variants={stagger(0.12, 0.5)} initial="hidden" animate="show" className="relative mt-6 space-y-3">
+            <m.ul variants={stagger(0.12, 0.5)} initial="hidden" animate="show" className="relative mt-6 space-y-3">
               {jobs.map((job) => {
                 const team = teamOf(job)
                 return (
-                  <motion.li key={job.id} variants={rise}>
+                  <m.li key={job.id} variants={rise}>
                     <button
                       type="button"
                       onClick={() => scrollTo('roles')}
@@ -150,10 +150,10 @@ const Hero = () => {
                       </span>
                       <Arrow className="h-4 w-4 shrink-0 text-slate-500" />
                     </button>
-                  </motion.li>
+                  </m.li>
                 )
               })}
-            </motion.ul>
+            </m.ul>
           </div>
         </TiltPanel>
       </div>
@@ -166,9 +166,9 @@ const Values = () => (
     <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(rgba(11,23,48,0.07)_1px,transparent_1px)] [background-size:24px_24px] [mask-image:linear-gradient(to_bottom,black,transparent_70%)]" />
     <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
       <SectionHeading badge="Life at UNEVENT" title="What it is like to work here" text="No big-company layers. Just focused people doing careful work for clients who rely on it." />
-      <motion.div variants={stagger(0.1)} initial="hidden" whileInView="show" viewport={viewport} className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+      <m.div variants={stagger(0.1)} initial="hidden" whileInView="show" viewport={viewport} className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
         {values.map((item, index) => (
-          <motion.div
+          <m.div
             key={item.title}
             variants={rise}
             className="group relative overflow-hidden rounded-3xl border border-slate-200 bg-white p-7 shadow-[0_30px_70px_-50px_rgba(11,23,48,0.5)] transition-transform duration-300 hover:-translate-y-1.5"
@@ -180,9 +180,9 @@ const Values = () => (
             <p className="mt-5 text-xs font-bold text-[#92600A]">0{index + 1}</p>
             <h3 className="mt-1 font-display text-lg font-bold leading-snug text-[#0B1730]">{item.title}</h3>
             <p className="mt-3 text-[15px] leading-relaxed text-[#334155]">{item.text}</p>
-          </motion.div>
+          </m.div>
         ))}
-      </motion.div>
+      </m.div>
     </div>
   </section>
 )
@@ -190,7 +190,7 @@ const Values = () => (
 const JobCard = ({ job, onApply }) => {
   const team = teamOf(job)
   return (
-    <motion.article
+    <m.article
       variants={rise}
       className="relative overflow-hidden rounded-3xl border border-slate-200 bg-white p-7 shadow-[0_30px_70px_-50px_rgba(11,23,48,0.5)] sm:p-9"
     >
@@ -220,7 +220,7 @@ const JobCard = ({ job, onApply }) => {
           <Arrow className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
         </button>
       </div>
-    </motion.article>
+    </m.article>
   )
 }
 
@@ -228,11 +228,11 @@ const Roles = ({ onApply }) => (
   <section id="roles" className="relative bg-white py-20 lg:py-28">
     <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
       <SectionHeading badge="Open roles" title="Find the role that fits" text="Pick a role, then send your details. We read every application." />
-      <motion.div variants={stagger(0.12)} initial="hidden" whileInView="show" viewport={viewport} className="mt-12 space-y-6">
+      <m.div variants={stagger(0.12)} initial="hidden" whileInView="show" viewport={viewport} className="mt-12 space-y-6">
         {jobs.map((job) => (
           <JobCard key={job.id} job={job} onApply={onApply} />
         ))}
-      </motion.div>
+      </m.div>
       <p className="mt-10 text-center text-[15px] text-[#334155]">
         Do not see your role? Write to{' '}
         <a href="mailto:hello@unevent.com?subject=General%20application" className="font-bold text-[#1473E6] underline-offset-4 hover:underline">
@@ -248,16 +248,16 @@ const Process = () => (
   <section className="relative overflow-hidden bg-[#F8FAFC] py-20 lg:py-28">
     <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
       <SectionHeading badge="Hiring process" title="Simple and respectful" text="Four steps, no trick questions." />
-      <motion.div variants={stagger(0.15, 0.1)} initial="hidden" whileInView="show" viewport={viewport} className="relative mt-12">
+      <m.div variants={stagger(0.15, 0.1)} initial="hidden" whileInView="show" viewport={viewport} className="relative mt-12">
         <div aria-hidden="true" className="absolute inset-x-0 top-5 hidden h-px bg-slate-200 lg:block">
-          <motion.span
+          <m.span
             variants={{ hidden: { scaleX: 0 }, show: { scaleX: 1, transition: { duration: 1.4, delay: 0.3, ease } } }}
             className="block h-full origin-left bg-gradient-to-r from-[#1473E6] to-[#F5B82E]"
           />
         </div>
         <ol className="relative grid gap-5 md:grid-cols-2 lg:grid-cols-4">
           {steps.map((step, index) => (
-            <motion.li key={step.title} variants={rise} className="flex flex-col">
+            <m.li key={step.title} variants={rise} className="flex flex-col">
               <span className="relative z-10 flex h-10 w-10 items-center justify-center rounded-full border-2 border-[#1473E6] bg-white text-sm font-extrabold text-[#1473E6]">
                 {index + 1}
               </span>
@@ -265,10 +265,10 @@ const Process = () => (
                 <h3 className="text-sm font-bold text-[#0B1730]">{step.title}</h3>
                 <p className="mt-2 text-[15px] leading-relaxed text-[#334155]">{step.text}</p>
               </div>
-            </motion.li>
+            </m.li>
           ))}
         </ol>
-      </motion.div>
+      </m.div>
     </div>
   </section>
 )
@@ -352,10 +352,10 @@ const ApplyForm = ({ jobId, setJobId }) => {
           text="Tell us who you are and attach your resume. If there is a match, we will be in touch."
         />
 
-        <motion.div variants={rise} initial="hidden" whileInView="show" viewport={viewport} className="rounded-3xl border border-white/15 bg-white p-6 shadow-[0_40px_90px_-30px_rgba(20,115,230,0.55)] sm:p-9">
+        <m.div variants={rise} initial="hidden" whileInView="show" viewport={viewport} className="rounded-3xl border border-white/15 bg-white p-6 shadow-[0_40px_90px_-30px_rgba(20,115,230,0.55)] sm:p-9">
           <AnimatePresence mode="wait">
             {reference ? (
-              <motion.div key="done" initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }} transition={{ duration: 0.4, ease }} className="py-6 text-center" role="status">
+              <m.div key="done" initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }} transition={{ duration: 0.4, ease }} className="py-6 text-center" role="status">
                 <span className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-[#F5B82E]/20">
                   <Check className="h-7 w-7" color="#92600A" />
                 </span>
@@ -366,9 +366,9 @@ const ApplyForm = ({ jobId, setJobId }) => {
                 <button type="button" onClick={reset} className="mt-7 rounded-xl border border-slate-300 px-5 py-2.5 text-sm font-bold text-[#0B1730] outline-none transition-colors hover:border-[#0B1730] hover:bg-[#0B1730] hover:text-white focus-visible:ring-2 focus-visible:ring-[#1473E6]">
                   Apply for another role
                 </button>
-              </motion.div>
+              </m.div>
             ) : (
-              <motion.form key="form" onSubmit={submit} noValidate initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="space-y-5">
+              <m.form key="form" onSubmit={submit} noValidate initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="space-y-5">
                 <Field id="role" label="Role">
                   <select id="role" value={jobId} onChange={(event) => setJobId(event.target.value)} className={inputClass}>
                     <option value="">Select a role</option>
@@ -414,10 +414,10 @@ const ApplyForm = ({ jobId, setJobId }) => {
                   {busy ? 'Sending…' : 'Send application'}
                   {!busy && <Arrow className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />}
                 </button>
-              </motion.form>
+              </m.form>
             )}
           </AnimatePresence>
-        </motion.div>
+        </m.div>
       </div>
     </section>
   )

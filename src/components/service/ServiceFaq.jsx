@@ -1,11 +1,11 @@
 import { useState } from 'react'
-import { AnimatePresence, motion } from 'framer-motion'
+import { AnimatePresence, m } from 'framer-motion'
 import SectionHeading from '../ui/SectionHeading'
 import { Arrow } from '../ui/icons'
 import { ease, rise, stagger, viewport } from '../../lib/motion'
 
 const FaqItem = ({ service, question, answer, open, onToggle, index }) => (
-  <motion.div
+  <m.div
     variants={rise}
     className="overflow-hidden rounded-2xl border bg-white transition-[border-color,box-shadow] duration-500"
     style={{ borderColor: open ? service.color : '#E2E8F0', boxShadow: open ? `0 24px 50px -28px ${service.color}88` : '0 0 0 rgba(0,0,0,0)' }}
@@ -19,7 +19,7 @@ const FaqItem = ({ service, question, answer, open, onToggle, index }) => (
         className="flex w-full items-center justify-between gap-6 px-6 py-5 text-left outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[#1473E6]"
       >
         <span className="font-display text-base font-bold text-[#0B1730] sm:text-lg">{question}</span>
-        <motion.span
+        <m.span
           animate={{ rotate: open ? 45 : 0, backgroundColor: open ? service.color : '#F1F5F9', color: open ? '#FFFFFF' : '#0B1730' }}
           transition={{ duration: 0.3, ease }}
           className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full"
@@ -27,12 +27,12 @@ const FaqItem = ({ service, question, answer, open, onToggle, index }) => (
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" className="h-4 w-4" aria-hidden="true">
             <path d="M12 5v14M5 12h14" />
           </svg>
-        </motion.span>
+        </m.span>
       </button>
     </h3>
     <AnimatePresence initial={false}>
       {open && (
-        <motion.div
+        <m.div
           id={`faq-panel-${index}`}
           role="region"
           initial={{ height: 0, opacity: 0 }}
@@ -41,10 +41,10 @@ const FaqItem = ({ service, question, answer, open, onToggle, index }) => (
           transition={{ duration: 0.4, ease }}
         >
           <p className="px-6 pb-6 text-[15px] leading-relaxed text-[#334155]">{answer}</p>
-        </motion.div>
+        </m.div>
       )}
     </AnimatePresence>
-  </motion.div>
+  </m.div>
 )
 
 const ServiceFaq = ({ service }) => {
@@ -64,7 +64,7 @@ const ServiceFaq = ({ service }) => {
             <Arrow className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
           </a>
         </div>
-        <motion.div variants={stagger(0.1)} initial="hidden" whileInView="show" viewport={viewport} className="space-y-4">
+        <m.div variants={stagger(0.1)} initial="hidden" whileInView="show" viewport={viewport} className="space-y-4">
           {service.faqs.map(([question, answer], index) => (
             <FaqItem
               key={question}
@@ -76,7 +76,7 @@ const ServiceFaq = ({ service }) => {
               onToggle={() => setOpenIndex(openIndex === index ? -1 : index)}
             />
           ))}
-        </motion.div>
+        </m.div>
       </div>
     </section>
   )

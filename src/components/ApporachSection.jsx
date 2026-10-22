@@ -1,5 +1,5 @@
 import React from 'react';
-import { motion } from 'framer-motion';
+import { m } from 'framer-motion';
 
 const ApproachSection = () => {
     const steps = [
@@ -69,7 +69,7 @@ const ApproachSection = () => {
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
 
                 <div className="text-center mb-20">
-                    <motion.h2
+                    <m.h2
                         initial={{ opacity: 0, y: -20 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
@@ -77,8 +77,8 @@ const ApproachSection = () => {
                         className="text-3xl md:text-4xl font-bold text-white mb-4"
                     >
                         Our <span className="text-yellow-500">Approach</span>
-                    </motion.h2>
-                    <motion.p
+                    </m.h2>
+                    <m.p
                         initial={{ opacity: 0 }}
                         whileInView={{ opacity: 1 }}
                         viewport={{ once: true }}
@@ -86,10 +86,10 @@ const ApproachSection = () => {
                         className="text-gray-400 max-w-2xl mx-auto text-lg"
                     >
                         A proven 4-step workflow to ensure seamless service delivery and continuous improvement.
-                    </motion.p>
+                    </m.p>
                 </div>
 
-                <motion.div
+                <m.div
                     variants={containerVariants}
                     initial="hidden"
                     whileInView="visible"
@@ -100,7 +100,7 @@ const ApproachSection = () => {
 
                     <div className="grid grid-cols-1 md:grid-cols-4 gap-12 md:gap-6 relative z-10">
                         {steps.map((step, index) => (
-                            <motion.div
+                            <m.div
                                 key={step.id}
                                 variants={itemVariants}
                                 className="relative flex flex-col items-center group"
@@ -122,10 +122,10 @@ const ApproachSection = () => {
                                         {step.description}
                                     </p>
                                 </div>
-                            </motion.div>
+                            </m.div>
                         ))}
                     </div>
-                </motion.div>
+                </m.div>
 
             </div>
         </section>

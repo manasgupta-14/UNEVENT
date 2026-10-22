@@ -9,7 +9,7 @@ export const hero = {
   badge: 'About UNEVENT',
   lead: ['Prevention', 'beats'],
   accent: 'crisis management.',
-  text: 'We help organizations catch problems while they are still small, across security, legal, compliance and technology, so risk stays a non-event.',
+  text: 'UNEVENT is a risk advisory firm. We help organisations catch exposure while it is still small across security, legal, compliance and technology, with expert advice and the right technology.',
   stats: [
     { key: 'divisions', label: 'Divisions' },
     { key: 'offerings', label: 'Services' },
@@ -45,7 +45,7 @@ export const mission = {
   label: 'Mission',
   color: '#1473E6',
   icon: 'M12 3a9 9 0 100 18 9 9 0 000-18z M12 7a5 5 0 100 10 5 5 0 000-10z M12 11a1 1 0 100 2 1 1 0 000-2z',
-  headline: 'Help organizations prevent and manage business risk.',
+  headline: 'Help organisations identify, reduce and manage business risk.',
   text: 'We look across cybersecurity, legal, compliance and technology, rank what we find by real risk, and turn it into plain steps a team can act on.',
   points: ['Find it early', 'Rank by real risk', 'Fix with clear owners'],
 }

@@ -1,6 +1,6 @@
 import { useMemo, useState } from 'react'
 import { Link } from 'react-router'
-import { AnimatePresence, MotionConfig, motion } from 'framer-motion'
+import { AnimatePresence, MotionConfig, m } from 'framer-motion'
 import usePageMeta from '../../hooks/usePageMeta'
 import NetworkCanvas from '../../components/ui/NetworkCanvas'
 import CountUp from '../../components/ui/CountUp'
@@ -15,9 +15,9 @@ const PER_PAGE = 4
 
 const Word = ({ children, delay, className = '' }) => (
   <span className="inline-block overflow-hidden pb-[0.14em] align-bottom">
-    <motion.span className={`inline-block ${className}`} initial={{ y: '115%' }} animate={{ y: 0 }} transition={{ duration: 0.9, delay, ease }}>
+    <m.span className={`inline-block ${className}`} initial={{ y: '115%' }} animate={{ y: 0 }} transition={{ duration: 0.9, delay, ease }}>
       {children}
-    </motion.span>
+    </m.span>
   </span>
 )
 
@@ -37,7 +37,8 @@ const Constellation = ({ onPick }) => {
   }))
 
   return (
-    <TiltPanel className="relative mx-auto aspect-square w-full max-w-[520px]">
+    <div className="relative mx-auto w-full max-w-[520px]">
+    <TiltPanel className="relative aspect-square w-full">
       <div className="absolute inset-[8%] rounded-full bg-[#1473E6]/25 blur-3xl" />
       <div className="absolute inset-[2%] animate-spin-slow rounded-full border border-dashed border-[#1473E6]/35">
         <span className="absolute left-1/2 top-0 h-2.5 w-2.5 -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#F5B82E] shadow-[0_0_16px_#F5B82E]" />
@@ -76,19 +77,20 @@ const Constellation = ({ onPick }) => {
         </div>
       ))}
 
-      <Link
-        to={`/insights/${latest.slug}`}
-        className="absolute -bottom-3 left-1/2 z-20 w-[86%] max-w-[360px] -translate-x-1/2 rounded-xl border border-[#F5B82E]/40 bg-[#0B1730]/80 px-4 py-3 shadow-[0_20px_50px_-20px_rgba(0,0,0,0.9)] outline-none backdrop-blur-md transition-colors hover:border-[#F5B82E] focus-visible:ring-2 focus-visible:ring-[#F5B82E]"
-      >
-        <span className="block text-[11px] font-bold text-[#F5B82E]">Latest · {formatDate(latest.date)}</span>
-        <span className="mt-0.5 line-clamp-1 block text-sm font-bold text-white">{latest.title}</span>
-      </Link>
     </TiltPanel>
+    <Link
+      to={`/insights/${latest.slug}`}
+      className="relative z-20 mx-auto mt-6 block w-full max-w-[360px] rounded-xl border border-[#F5B82E]/40 bg-[#0B1730]/80 px-4 py-3 shadow-[0_20px_50px_-20px_rgba(0,0,0,0.9)] outline-none backdrop-blur-md transition-colors hover:border-[#F5B82E] focus-visible:ring-2 focus-visible:ring-[#F5B82E] xl:absolute xl:-bottom-3 xl:left-1/2 xl:mt-0 xl:w-[86%] xl:-translate-x-1/2"
+    >
+      <span className="block text-[11px] font-bold text-[#F5B82E]">Latest · {formatDate(latest.date)}</span>
+      <span className="mt-0.5 line-clamp-2 block text-sm font-bold text-white xl:line-clamp-1">{latest.title}</span>
+    </Link>
+    </div>
   )
 }
 
 const Hero = ({ onPick }) => {
-  const words = 'Practical guides to prevent risk.'.split(' ')
+  const words = 'Practical guides to reduce risk.'.split(' ')
   const stats = [
     { value: articles.length, label: 'Articles' },
     { value: categories.length - 1, label: 'Topics' },
@@ -103,12 +105,12 @@ const Hero = ({ onPick }) => {
       <div className="pointer-events-none absolute -right-24 bottom-0 -z-10 h-[380px] w-[380px] animate-float rounded-full bg-[#F5B82E]/10 blur-[110px]" style={{ animationDelay: '2s' }} />
 
       <div className="mx-auto grid max-w-7xl items-center gap-14 px-4 pb-24 pt-14 sm:px-6 lg:grid-cols-[1.05fr_0.95fr] lg:gap-8 lg:px-8 lg:pb-28 lg:pt-20">
-        <motion.div variants={stagger(0.1, 0.1)} initial="hidden" animate="show" className="relative z-10">
-          <motion.nav variants={rise} aria-label="Breadcrumb" className="flex items-center gap-2 text-sm font-semibold text-slate-400">
+        <m.div variants={stagger(0.1, 0.1)} initial="hidden" animate="show" className="relative z-10">
+          <m.nav variants={rise} aria-label="Breadcrumb" className="flex items-center gap-2 text-sm font-semibold text-slate-400">
             <Link to="/" className="outline-none transition-colors hover:text-white focus-visible:text-white">Home</Link>
             <span aria-hidden="true">/</span>
             <span className="text-white">Insights</span>
-          </motion.nav>
+          </m.nav>
 
           <h1 className="mt-6 font-display text-[2.6rem] font-extrabold leading-[1.06] tracking-tight text-white sm:text-6xl lg:text-[3.8rem]">
             {words.map((word, index) => {
@@ -123,19 +125,19 @@ const Hero = ({ onPick }) => {
             })}
           </h1>
 
-          <motion.p variants={rise} className="mt-7 max-w-xl text-lg leading-relaxed text-slate-300 sm:text-xl">
+          <m.p variants={rise} className="mt-7 max-w-xl text-lg leading-relaxed text-slate-300 sm:text-xl">
             Short articles on cybersecurity, legal risk, compliance and technology, written in plain language. Each one takes five minutes or less.
-          </motion.p>
+          </m.p>
 
-          <motion.div variants={rise} className="mt-10 grid max-w-md grid-cols-3 gap-6 border-t border-white/10 pt-8">
+          <m.div variants={rise} className="mt-10 grid max-w-md grid-cols-3 gap-3 border-t sm:gap-6 border-white/10 pt-8">
             {stats.map((stat) => (
-              <div key={stat.label}>
-                <p className="font-display text-3xl font-extrabold text-white"><CountUp to={stat.value} /></p>
-                <p className="mt-1 text-sm text-slate-400">{stat.label}</p>
+              <div key={stat.label} className="min-w-0">
+                <p className="font-display text-2xl font-extrabold text-white sm:text-3xl"><CountUp to={stat.value} /></p>
+                <p className="mt-1 text-xs text-slate-400 sm:text-sm">{stat.label}</p>
               </div>
             ))}
-          </motion.div>
-        </motion.div>
+          </m.div>
+        </m.div>
 
         <Constellation onPick={onPick} />
       </div>
@@ -173,7 +175,7 @@ const Toolbar = ({ cat, onCat, q, onQ, count }) => (
               onClick={() => onCat(item)}
               className={`relative inline-flex items-center gap-2 rounded-full border px-4 py-2 text-sm font-bold outline-none transition-colors focus-visible:ring-2 focus-visible:ring-[#1473E6] ${on ? 'border-transparent text-white' : 'border-slate-200 bg-white text-[#334155] hover:border-[#1473E6]/50'}`}
             >
-              {on && <motion.span layoutId="cat-pill" transition={{ type: 'spring', stiffness: 380, damping: 34 }} className="absolute inset-0 rounded-full bg-[#0B1730]" />}
+              {on && <m.span layoutId="cat-pill" transition={{ type: 'spring', stiffness: 380, damping: 34 }} className="absolute inset-0 rounded-full bg-[#0B1730]" />}
               <span className="relative">{item}</span>
               <span className={`relative rounded-full px-2 py-0.5 text-xs ${on ? 'bg-white/15 text-white' : 'bg-slate-100 text-slate-500'}`}>{total}</span>
             </button>
@@ -202,7 +204,7 @@ const Pager = ({ page, pages, onPage }) => (
     <div className="w-full max-w-xs text-center">
       <p className="text-sm font-semibold text-slate-500">Page {page} of {pages}</p>
       <div className="mt-2 h-1 overflow-hidden rounded-full bg-slate-200">
-        <motion.span className="block h-full rounded-full bg-gradient-to-r from-[#F5B82E] to-[#1473E6]" animate={{ width: `${(page / pages) * 100}%` }} transition={{ duration: 0.5, ease }} />
+        <m.span className="block h-full rounded-full bg-gradient-to-r from-[#F5B82E] to-[#1473E6]" animate={{ width: `${(page / pages) * 100}%` }} transition={{ duration: 0.5, ease }} />
       </div>
     </div>
     <button
@@ -268,13 +270,13 @@ const InsightsPage = () => {
               </button>
             </div>
           ) : (
-            <motion.div layout className="grid gap-6 md:grid-cols-2">
+            <m.div layout className="grid gap-6 md:grid-cols-2">
               <AnimatePresence mode="popLayout">
                 {shown.map((item, index) => (
                   <InsightCard key={item.slug} article={item} index={index} />
                 ))}
               </AnimatePresence>
-            </motion.div>
+            </m.div>
           )}
 
           {pages > 1 && <Pager page={page} pages={pages} onPage={changePage} />}

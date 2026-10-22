@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { AnimatePresence, motion } from 'framer-motion'
+import { AnimatePresence, m } from 'framer-motion'
 import PanelShell from './PanelShell'
 import { rgba, tint } from '../../../lib/color'
 
@@ -45,7 +45,7 @@ const CounselVisual = ({ service }) => {
         {clauses.map((clause, index) => {
           const on = active === index
           return (
-            <motion.li
+            <m.li
               key={clause.label}
               animate={{ borderColor: on ? rgba(color, 0.7) : 'rgba(255,255,255,0.08)', backgroundColor: on ? rgba(color, 0.1) : 'rgba(255,255,255,0.025)' }}
               transition={{ duration: 0.5 }}
@@ -55,7 +55,7 @@ const CounselVisual = ({ service }) => {
                 <span className="text-sm font-bold text-white">{clause.label}</span>
                 <AnimatePresence>
                   {on && (
-                    <motion.span
+                    <m.span
                       initial={{ opacity: 0, scale: 0.7, x: 8 }}
                       animate={{ opacity: 1, scale: 1, x: 0 }}
                       exit={{ opacity: 0, scale: 0.7 }}
@@ -66,13 +66,13 @@ const CounselVisual = ({ service }) => {
                         <path d="M5 3v18l2-1 2 1 2-1 2 1 2-1 2 1V3H5zm4 5h6v2H9V8z" />
                       </svg>
                       Review
-                    </motion.span>
+                    </m.span>
                   )}
                 </AnimatePresence>
               </div>
               <div className="mt-3 space-y-2">
                 <div className="relative h-2 overflow-hidden rounded-full bg-white/10">
-                  <motion.span
+                  <m.span
                     className="absolute inset-y-0 left-0 rounded-full"
                     style={{ backgroundColor: color }}
                     animate={{ width: on ? '78%' : '0%' }}
@@ -81,10 +81,10 @@ const CounselVisual = ({ service }) => {
                 </div>
                 <div className="h-2 w-2/3 rounded-full bg-white/10" />
               </div>
-              <motion.p animate={{ opacity: on ? 1 : 0.4 }} className="mt-3 text-xs font-semibold" style={{ color: on ? light : '#64748B' }}>
+              <m.p animate={{ opacity: on ? 1 : 0.4 }} className="mt-3 text-xs font-semibold" style={{ color: on ? light : '#64748B' }}>
                 {clause.note}
-              </motion.p>
-            </motion.li>
+              </m.p>
+            </m.li>
           )
         })}
       </ul>
