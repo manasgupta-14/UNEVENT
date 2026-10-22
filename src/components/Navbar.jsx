@@ -4,7 +4,7 @@ import { useLocation, useNavigate } from 'react-router'
 import {
   AnimatePresence,
   MotionConfig,
-  motion,
+  m,
   useMotionValueEvent,
   useScroll,
   useSpring,
@@ -13,18 +13,29 @@ import MagneticButton from './ui/MagneticButton'
 import { Logo } from './ui/Logo'
 import { Arrow } from './ui/icons'
 import { icons, services } from '../data/services'
+import { rectOf } from '../lib/pointer'
 
 const navItems = [
   { key: 'home', label: 'Home', href: '#' },
   { key: 'services', label: 'Services', mega: true },
   { key: 'industries', label: 'Industries', href: '/industries' },
   { key: 'insights', label: 'Insights', href: '/insights' },
-  { key: 'case-studies', label: 'Case Studies', href: '/case-studies' },
+  { key: 'case-studies', label: 'Scenarios', href: '/case-studies' },
   { key: 'about', label: 'About', href: '/about' },
   { key: 'contact', label: 'Contact', href: '/contact' },
 ]
 
-const spyIds = ['industries', 'insights', 'contact']
+const sectionKeys = {
+  home: 'home',
+  about: 'about',
+  services: 'services',
+  approach: 'services',
+  industries: 'industries',
+  insights: 'insights',
+  contact: 'contact',
+}
+
+const sectionOrder = Object.keys(sectionKeys)
 
 const routeKeys = ['about', 'contact', 'industries', 'insights', 'case-studies']
 
@@ -56,7 +67,7 @@ const ServiceIcon = ({ id, color, className = 'h-5 w-5' }) => (
 )
 
 const Chevron = ({ open }) => (
-  <motion.svg
+  <m.svg
     viewBox="0 0 24 24"
     fill="none"
     stroke="currentColor"
@@ -69,18 +80,18 @@ const Chevron = ({ open }) => (
     aria-hidden="true"
   >
     <path d="M6 9l6 6 6-6" />
-  </motion.svg>
+  </m.svg>
 )
 
 const ServiceTile = ({ service, onNavigate }) => {
   const handleMove = (event) => {
-    const rect = event.currentTarget.getBoundingClientRect()
+    const rect = rectOf(event.currentTarget)
     event.currentTarget.style.setProperty('--x', `${event.clientX - rect.left}px`)
     event.currentTarget.style.setProperty('--y', `${event.clientY - rect.top}px`)
   }
 
   return (
-    <motion.a
+    <m.a
       variants={itemVariants}
       href={service.href}
       onClick={() => onNavigate('services')}
@@ -116,12 +127,12 @@ const ServiceTile = ({ service, onNavigate }) => {
           <Arrow className="h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-1" />
         </span>
       </span>
-    </motion.a>
+    </m.a>
   )
 }
 
 const MegaMenu = ({ onNavigate, onEnter, onLeave }) => (
-  <motion.div
+  <m.div
     initial={{ opacity: 0, y: -10, clipPath: 'inset(0 0 100% 0)' }}
     animate={{ opacity: 1, y: 0, clipPath: 'inset(0 0 0% 0)', transition: { duration: 0.4, ease } }}
     exit={{ opacity: 0, y: -6, clipPath: 'inset(0 0 40% 0)', transition: { duration: 0.18 } }}
@@ -131,7 +142,7 @@ const MegaMenu = ({ onNavigate, onEnter, onLeave }) => (
   >
     <div className="pointer-events-none absolute inset-0 animate-scan bg-[radial-gradient(rgba(255,255,255,0.07)_1px,transparent_1px)] [background-size:22px_22px] [mask-image:linear-gradient(to_bottom,black,transparent_85%)]" />
     <div className="pointer-events-none absolute -top-24 left-1/4 h-48 w-96 rounded-full bg-[#1473E6]/20 blur-3xl" />
-    <motion.div
+    <m.div
       variants={listVariants}
       initial="hidden"
       animate="show"
@@ -142,7 +153,7 @@ const MegaMenu = ({ onNavigate, onEnter, onLeave }) => (
           <ServiceTile key={service.id} service={service} onNavigate={onNavigate} />
         ))}
       </div>
-      <motion.div
+      <m.div
         variants={itemVariants}
         className="relative col-span-4 flex flex-col justify-between overflow-hidden rounded-2xl border border-[#F5B82E]/25 bg-gradient-to-br from-[#F5B82E]/15 via-[#F5B82E]/5 to-transparent p-6"
       >
@@ -161,9 +172,9 @@ const MegaMenu = ({ onNavigate, onEnter, onLeave }) => (
         <MagneticButton href="/book" onClick={() => onNavigate('book')} className="relative mt-6 self-start">
           Book a Consultation
         </MagneticButton>
-      </motion.div>
-    </motion.div>
-  </motion.div>
+      </m.div>
+    </m.div>
+  </m.div>
 )
 
 const MobileDrawer = ({ open, onClose, active, onNavigate }) => {
@@ -178,7 +189,7 @@ const MobileDrawer = ({ open, onClose, active, onNavigate }) => {
     <AnimatePresence>
       {open && (
         <div className="fixed inset-0 z-[70] lg:hidden">
-          <motion.div
+          <m.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
@@ -186,7 +197,7 @@ const MobileDrawer = ({ open, onClose, active, onNavigate }) => {
             onClick={onClose}
             className="absolute inset-0 bg-[#050B18]/75 backdrop-blur-sm"
           />
-          <motion.aside
+          <m.aside
             role="dialog"
             aria-modal="true"
             aria-label="Main menu"
@@ -201,7 +212,7 @@ const MobileDrawer = ({ open, onClose, active, onNavigate }) => {
 
             <div className="relative flex h-20 shrink-0 items-center justify-between border-b border-white/10 px-5">
               <Logo onClick={() => onNavigate('home')} />
-              <motion.button
+              <m.button
                 ref={closeRef}
                 onClick={onClose}
                 whileTap={{ scale: 0.9, rotate: 90 }}
@@ -211,10 +222,10 @@ const MobileDrawer = ({ open, onClose, active, onNavigate }) => {
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" className="h-5 w-5">
                   <path d="M6 6l12 12M18 6L6 18" />
                 </svg>
-              </motion.button>
+              </m.button>
             </div>
 
-            <motion.nav
+            <m.nav
               variants={listVariants}
               initial="hidden"
               animate="show"
@@ -222,7 +233,7 @@ const MobileDrawer = ({ open, onClose, active, onNavigate }) => {
             >
               {navItems.map((item) =>
                 item.mega ? (
-                  <motion.div key={item.key} variants={itemVariants}>
+                  <m.div key={item.key} variants={itemVariants}>
                     <button
                       onClick={() => setServicesOpen((value) => !value)}
                       aria-expanded={servicesOpen}
@@ -233,7 +244,7 @@ const MobileDrawer = ({ open, onClose, active, onNavigate }) => {
                     </button>
                     <AnimatePresence initial={false}>
                       {servicesOpen && (
-                        <motion.div
+                        <m.div
                           initial={{ height: 0, opacity: 0 }}
                           animate={{ height: 'auto', opacity: 1 }}
                           exit={{ height: 0, opacity: 0 }}
@@ -261,12 +272,12 @@ const MobileDrawer = ({ open, onClose, active, onNavigate }) => {
                               </a>
                             ))}
                           </div>
-                        </motion.div>
+                        </m.div>
                       )}
                     </AnimatePresence>
-                  </motion.div>
+                  </m.div>
                 ) : (
-                  <motion.a
+                  <m.a
                     key={item.key}
                     variants={itemVariants}
                     href={item.href}
@@ -276,17 +287,17 @@ const MobileDrawer = ({ open, onClose, active, onNavigate }) => {
                   >
                     {item.label}
                     {active === item.key && <span className="h-1.5 w-1.5 rounded-full bg-[#F5B82E]" />}
-                  </motion.a>
+                  </m.a>
                 )
               )}
-            </motion.nav>
+            </m.nav>
 
-            <div className="relative shrink-0 border-t border-white/10 p-5">
+            <div className="relative shrink-0 space-y-3 border-t border-white/10 p-5">
               <MagneticButton href="/book" onClick={() => onNavigate('book')} size="lg" className="w-full">
                 Book a Consultation
               </MagneticButton>
             </div>
-          </motion.aside>
+          </m.aside>
         </div>
       )}
     </AnimatePresence>,
@@ -325,7 +336,6 @@ const Navbar = () => {
 
   useMotionValueEvent(scrollY, 'change', (value) => {
     setScrolled(value > 12)
-    if (value < 160) setActive('home')
   })
 
   const openMega = useCallback(() => {
@@ -392,18 +402,52 @@ const Navbar = () => {
 
   useEffect(() => {
     if (pathname !== '/') return undefined
-    const targets = spyIds.map((id) => document.getElementById(id)).filter(Boolean)
-    if (!targets.length) return undefined
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) setActive(entry.target.id)
+    let frame = 0
+    let marks = []
+    let pageHeight = 0
+
+    const measure = () => {
+      marks = sectionOrder
+        .map((id) => {
+          const element = document.getElementById(id)
+          return element ? { key: sectionKeys[id], top: element.getBoundingClientRect().top + window.scrollY } : null
         })
-      },
-      { rootMargin: '-40% 0px -55% 0px' }
-    )
-    targets.forEach((target) => observer.observe(target))
-    return () => observer.disconnect()
+        .filter(Boolean)
+      pageHeight = document.documentElement.scrollHeight
+    }
+
+    const update = () => {
+      frame = 0
+      const line = window.scrollY + window.innerHeight * 0.35
+      let key = 'home'
+      marks.forEach((mark) => {
+        if (mark.top <= line) key = mark.key
+      })
+      if (window.innerHeight + window.scrollY >= pageHeight - 6) key = 'contact'
+      setActive(key)
+    }
+
+    const schedule = () => {
+      if (!frame) frame = requestAnimationFrame(update)
+    }
+
+    const remeasure = () => {
+      measure()
+      schedule()
+    }
+
+    remeasure()
+    window.addEventListener('scroll', schedule, { passive: true })
+    window.addEventListener('resize', remeasure)
+    const observer = new ResizeObserver(remeasure)
+    observer.observe(document.body)
+
+    return () => {
+      window.removeEventListener('scroll', schedule)
+      window.removeEventListener('resize', remeasure)
+      observer.disconnect()
+      if (frame) cancelAnimationFrame(frame)
+    }
   }, [pathname])
 
   return (
@@ -422,11 +466,12 @@ const Navbar = () => {
             <nav aria-label="Primary" className="hidden lg:block">
               <ul className="flex items-center gap-1" onMouseLeave={() => setHovered(null)}>
                 {navItems.map((item) => {
-                  const isActive = item.mega ? megaOpen || onService : current === item.key
+                  const isActive = current === item.key
+                  const lit = isActive || (item.mega && megaOpen)
                   const content = (
                     <>
                       {hovered === item.key && (
-                        <motion.span
+                        <m.span
                           layoutId="nav-hover"
                           className="absolute inset-0 rounded-lg bg-white/[0.08]"
                           transition={{ type: 'spring', stiffness: 420, damping: 34 }}
@@ -437,8 +482,8 @@ const Navbar = () => {
                         {item.mega && <Chevron open={megaOpen} />}
                       </span>
                       {isActive && (
-                        <motion.span
-                          layoutId={item.mega ? undefined : 'nav-active'}
+                        <m.span
+                          layoutId="nav-active"
                           className="absolute inset-x-4 -bottom-0.5 h-[2px] rounded-full bg-[#F5B82E]"
                           transition={{ type: 'spring', stiffness: 420, damping: 34 }}
                         />
@@ -446,7 +491,7 @@ const Navbar = () => {
                     </>
                   )
 
-                  const cls = `relative block rounded-lg px-4 py-2 text-sm font-semibold outline-none transition-colors duration-200 focus-visible:ring-2 focus-visible:ring-[#F5B82E] ${isActive ? 'text-white' : 'text-slate-300 hover:text-white'
+                  const cls = `relative block rounded-lg px-3 py-2 text-sm font-semibold outline-none transition-colors duration-200 xl:px-4 focus-visible:ring-2 focus-visible:ring-[#F5B82E] ${lit ? 'text-white' : 'text-slate-300 hover:text-white'
                     }`
 
                   return (
@@ -478,13 +523,13 @@ const Navbar = () => {
               </ul>
             </nav>
 
-            <div className="hidden lg:block">
+            <div className="hidden items-center lg:flex">
               <MagneticButton href="/book" onClick={() => handleNavigate('book')}>
                 Book a Consultation
               </MagneticButton>
             </div>
 
-            <motion.button
+            <m.button
               onClick={() => setMenuOpen(true)}
               whileTap={{ scale: 0.92 }}
               aria-label="Open menu"
@@ -496,7 +541,7 @@ const Navbar = () => {
                 <span className="h-[2px] w-3 rounded-full bg-[#F5B82E] transition-all duration-300 group-hover:w-5" />
                 <span className="h-[2px] w-4 rounded-full bg-white transition-all duration-300 group-hover:w-5" />
               </span>
-            </motion.button>
+            </m.button>
           </div>
         </div>
 
@@ -504,7 +549,7 @@ const Navbar = () => {
           {megaOpen && <MegaMenu onNavigate={handleNavigate} onEnter={openMega} onLeave={closeMega} />}
         </AnimatePresence>
 
-        <motion.div
+        <m.div
           style={{ scaleX: progress }}
           className="absolute inset-x-0 bottom-0 h-[2px] origin-left bg-gradient-to-r from-[#1473E6] via-[#F5B82E] to-[#F5B82E]"
         />

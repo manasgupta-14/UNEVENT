@@ -1,4 +1,4 @@
-import { motion } from 'framer-motion'
+import { m } from 'framer-motion'
 import PanelShell from './PanelShell'
 import CountUp from '../../ui/CountUp'
 import { rgba, tint } from '../../../lib/color'
@@ -9,7 +9,7 @@ const CheckRow = ({ label, index, color }) => (
   <li className="flex items-center gap-3 text-sm font-semibold text-slate-200">
     <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-md border" style={{ borderColor: rgba(color, 0.55), backgroundColor: rgba(color, 0.16) }}>
       <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke={tint(color, 0.55)} strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-        <motion.path
+        <m.path
           d="M5 12.5l4.5 4.5L19 7.5"
           initial={{ pathLength: 0 }}
           animate={{ pathLength: [0, 1, 1, 0] }}
@@ -38,7 +38,7 @@ const GovernVisual = ({ service }) => {
         <div className="relative h-[118px] w-[118px] shrink-0">
           <svg viewBox="0 0 120 120" className="h-full w-full" fill="none" aria-hidden="true">
             <circle cx="60" cy="60" r="50" stroke="rgba(255,255,255,0.1)" strokeWidth="9" />
-            <motion.circle
+            <m.circle
               cx="60"
               cy="60"
               r="50"
@@ -74,7 +74,7 @@ const GovernVisual = ({ service }) => {
         <div className="mt-4 flex h-20 items-end gap-2.5">
           {bars.map((height, index) => (
             <div key={height} className="flex h-full flex-1 items-end">
-              <motion.span
+              <m.span
                 className="w-full rounded-t-md"
                 style={{ height: `${height}%`, originY: 1, background: `linear-gradient(to top, ${rgba(color, 0.35)}, ${light})` }}
                 initial={{ scaleY: 0.2 }}
@@ -89,9 +89,9 @@ const GovernVisual = ({ service }) => {
       <div className="mt-5 space-y-2.5">
         {service.process.slice(0, 3).map((step, index) => (
           <div key={step} className="flex items-center gap-3">
-            <span className="w-20 shrink-0 text-xs font-semibold text-slate-400">{step}</span>
+            <span className="w-16 shrink-0 break-words text-xs font-semibold text-slate-400 sm:w-20">{step}</span>
             <div className="h-1.5 flex-1 overflow-hidden rounded-full bg-white/10">
-              <motion.div
+              <m.div
                 className="h-full rounded-full"
                 style={{ background: `linear-gradient(90deg, ${color}, ${light})` }}
                 initial={{ width: 0 }}

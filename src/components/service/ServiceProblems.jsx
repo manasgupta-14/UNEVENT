@@ -1,19 +1,20 @@
-import { motion } from 'framer-motion'
+import { m } from 'framer-motion'
 import SectionHeading from '../ui/SectionHeading'
 import { Check, GlyphIcon } from '../ui/icons'
 import { rise, stagger, viewport } from '../../lib/motion'
+import { rectOf } from '../../lib/pointer'
 
 const alert = 'M12 9v4m0 4h.01M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z'
 
 const ProblemCard = ({ service, text, index }) => {
   const handleMove = (event) => {
-    const rect = event.currentTarget.getBoundingClientRect()
+    const rect = rectOf(event.currentTarget)
     event.currentTarget.style.setProperty('--x', `${event.clientX - rect.left}px`)
     event.currentTarget.style.setProperty('--y', `${event.clientY - rect.top}px`)
   }
 
   return (
-    <motion.li
+    <m.li
       variants={rise}
       onMouseMove={handleMove}
       style={{ '--accent': service.color, '--glow': `${service.color}55` }}
@@ -35,7 +36,7 @@ const ProblemCard = ({ service, text, index }) => {
         <Check className="h-4 w-4" />
         A non-event with UNEVENT
       </span>
-    </motion.li>
+    </m.li>
   )
 }
 
@@ -49,11 +50,11 @@ const ServiceProblems = ({ service }) => (
         title="Problems we help you prevent"
         text="These are the situations most teams meet right before an incident. They are also the easiest to fix early."
       />
-      <motion.ul variants={stagger(0.1)} initial="hidden" whileInView="show" viewport={viewport} className="mt-14 grid gap-6 sm:grid-cols-2 xl:grid-cols-4">
+      <m.ul variants={stagger(0.1)} initial="hidden" whileInView="show" viewport={viewport} className="mt-14 grid gap-6 sm:grid-cols-2 xl:grid-cols-4">
         {service.problems.map((text, index) => (
           <ProblemCard key={text} service={service} text={text} index={index} />
         ))}
-      </motion.ul>
+      </m.ul>
     </div>
   </section>
 )

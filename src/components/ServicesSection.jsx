@@ -1,8 +1,9 @@
-import { motion, useMotionValue, useSpring } from 'framer-motion'
+import { m, useMotionValue, useSpring } from 'framer-motion'
 import SectionHeading from './ui/SectionHeading'
 import { Arrow, Check, GlyphIcon } from './ui/icons'
 import { icons, services } from '../data/services'
 import { rise, stagger, viewport } from '../lib/motion'
+import { rectOf } from '../lib/pointer'
 
 const ServiceCard = ({ service }) => {
   const rx = useMotionValue(0)
@@ -11,7 +12,7 @@ const ServiceCard = ({ service }) => {
   const rotateY = useSpring(ry, { stiffness: 180, damping: 20, mass: 0.5 })
 
   const handleMove = (event) => {
-    const rect = event.currentTarget.getBoundingClientRect()
+    const rect = rectOf(event.currentTarget)
     const px = (event.clientX - rect.left) / rect.width
     const py = (event.clientY - rect.top) / rect.height
     ry.set((px - 0.5) * 9)
@@ -26,7 +27,7 @@ const ServiceCard = ({ service }) => {
   }
 
   return (
-    <motion.a
+    <m.a
       variants={rise}
       href={service.href}
       onMouseMove={handleMove}
@@ -78,7 +79,7 @@ const ServiceCard = ({ service }) => {
           <Arrow className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5" />
         </span>
       </div>
-    </motion.a>
+    </m.a>
   )
 }
 
@@ -90,10 +91,10 @@ const ServicesSection = () => (
       <div className="flex flex-col justify-between gap-8 lg:flex-row lg:items-end">
         <SectionHeading
           badge="Our services"
-          title="Four services. One goal: no surprises."
-          text="Cybersecurity, legal risk, compliance and custom software. Each one is built to prevent problems, not just react to them."
+          title="Four practices. One joined-up risk approach."
+          text="Protect, Counsel and Govern are the risk practices. Labs is the technology layer that puts agreed controls into practice, with curated and in-house solutions."
         />
-        <motion.p
+        <m.p
           variants={rise}
           initial="hidden"
           whileInView="show"
@@ -101,10 +102,10 @@ const ServicesSection = () => (
           className="max-w-sm text-sm leading-relaxed text-slate-500"
         >
           Pick one service or combine them. We start by learning how your business works.
-        </motion.p>
+        </m.p>
       </div>
 
-      <motion.div
+      <m.div
         variants={stagger(0.12)}
         initial="hidden"
         whileInView="show"
@@ -114,7 +115,7 @@ const ServicesSection = () => (
         {services.map((service) => (
           <ServiceCard key={service.id} service={service} />
         ))}
-      </motion.div>
+      </m.div>
     </div>
   </section>
 )

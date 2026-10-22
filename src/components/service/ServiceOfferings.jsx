@@ -1,7 +1,8 @@
-import { motion } from 'framer-motion'
+import { m } from 'framer-motion'
 import SectionHeading from '../ui/SectionHeading'
 import { rgba, tint } from '../../lib/color'
 import { rise, stagger, viewport } from '../../lib/motion'
+import { rectOf } from '../../lib/pointer'
 
 const spanFor = (count, index) => {
   const remainder = count % 3
@@ -12,13 +13,13 @@ const spanFor = (count, index) => {
 
 const OfferingCard = ({ service, title, text, index, span }) => {
   const handleMove = (event) => {
-    const rect = event.currentTarget.getBoundingClientRect()
+    const rect = rectOf(event.currentTarget)
     event.currentTarget.style.setProperty('--x', `${event.clientX - rect.left}px`)
     event.currentTarget.style.setProperty('--y', `${event.clientY - rect.top}px`)
   }
 
   return (
-    <motion.li
+    <m.li
       variants={rise}
       onMouseMove={handleMove}
       whileHover={{ y: -4 }}
@@ -41,7 +42,7 @@ const OfferingCard = ({ service, title, text, index, span }) => {
           Included in {service.name}
         </span>
       </div>
-    </motion.li>
+    </m.li>
   )
 }
 
@@ -56,11 +57,11 @@ const ServiceOfferings = ({ service }) => (
         title={`Everything inside UNEVENT ${service.name}`}
         text="Use one offering on its own or combine several. Each one is scoped with you before work starts."
       />
-      <motion.ul variants={stagger(0.09)} initial="hidden" whileInView="show" viewport={viewport} className="mt-14 grid gap-5 md:grid-cols-2 lg:grid-cols-6">
+      <m.ul variants={stagger(0.09)} initial="hidden" whileInView="show" viewport={viewport} className="mt-14 grid gap-5 md:grid-cols-2 lg:grid-cols-6">
         {service.offerings.map(([title, text], index) => (
           <OfferingCard key={title} service={service} title={title} text={text} index={index} span={spanFor(service.offerings.length, index)} />
         ))}
-      </motion.ul>
+      </m.ul>
     </div>
   </section>
 )

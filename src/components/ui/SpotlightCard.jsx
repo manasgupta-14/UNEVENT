@@ -1,8 +1,9 @@
-import { motion, useMotionValue, useSpring } from 'framer-motion'
+import { m, useMotionValue, useSpring } from 'framer-motion'
 import { rgba } from '../../lib/color'
+import { rectOf } from '../../lib/pointer'
 
-const MotionLink = motion.a
-const MotionBox = motion.div
+const MotionLink = m.a
+const MotionBox = m.div
 
 const SpotlightCard = ({ children, color = '#1473E6', tilt = 5, href, className = '' }) => {
   const rx = useMotionValue(0)
@@ -10,9 +11,10 @@ const SpotlightCard = ({ children, color = '#1473E6', tilt = 5, href, className 
   const rotateX = useSpring(rx, { stiffness: 160, damping: 20, mass: 0.5 })
   const rotateY = useSpring(ry, { stiffness: 160, damping: 20, mass: 0.5 })
   const Tag = href ? MotionLink : MotionBox
+  const flat = tilt === 0
 
   const handleMove = (event) => {
-    const rect = event.currentTarget.getBoundingClientRect()
+    const rect = rectOf(event.currentTarget)
     const px = (event.clientX - rect.left) / rect.width
     const py = (event.clientY - rect.top) / rect.height
     ry.set((px - 0.5) * tilt * 2)
@@ -31,8 +33,8 @@ const SpotlightCard = ({ children, color = '#1473E6', tilt = 5, href, className 
       href={href}
       onMouseMove={handleMove}
       onMouseLeave={handleLeave}
-      style={{ rotateX, rotateY, transformPerspective: 1000, '--accent': color }}
-      className={`group relative block overflow-hidden rounded-3xl border border-white/10 bg-white/[0.04] outline-none backdrop-blur transition-[border-color,box-shadow] duration-500 hover:border-[var(--accent)] hover:shadow-[0_30px_70px_-34px_var(--accent)] focus-visible:ring-2 focus-visible:ring-[#F5B82E] ${className}`}
+      style={flat ? { '--accent': color } : { rotateX, rotateY, transformPerspective: 1000, '--accent': color }}
+      className={`group relative block overflow-hidden rounded-3xl border border-white/10 bg-white/[0.04] outline-none ${flat ? '' : 'backdrop-blur'} transition-[border-color,box-shadow] duration-500 hover:border-[var(--accent)] hover:shadow-[0_30px_70px_-34px_var(--accent)] focus-visible:ring-2 focus-visible:ring-[#F5B82E] ${className}`}
     >
       <span
         className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-100"

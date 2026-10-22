@@ -1,4 +1,4 @@
-import { motion } from 'framer-motion'
+import { m } from 'framer-motion'
 import SectionHeading from './ui/SectionHeading'
 import { rise, stagger, viewport } from '../lib/motion'
 
@@ -22,11 +22,11 @@ const AboutSection = () => (
     <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
       <SectionHeading
         badge="About UNEVENT"
-        title="We stop business problems before they start."
-        text="UNEVENT is a risk-prevention company. One team covers cybersecurity, legal risk, compliance and custom software."
+        title="Risk advisory, built around proof."
+        text="UNEVENT is a risk advisory firm. We help organisations identify exposure earlier, make better-informed decisions and put practical controls in place across cyber, legal, compliance and technology."
       />
 
-      <motion.div
+      <m.div
         variants={stagger(0.1)}
         initial="hidden"
         whileInView="show"
@@ -34,12 +34,12 @@ const AboutSection = () => (
         className="mt-12 grid gap-6 md:grid-cols-3"
       >
         {points.map((point) => (
-          <motion.div key={point.label} variants={rise} className="rounded-2xl border border-slate-200 bg-[#F8FAFC] p-6">
+          <m.div key={point.label} variants={rise} className="rounded-2xl border border-slate-200 bg-[#F8FAFC] p-6">
             <h3 className="font-display text-lg font-bold text-[#0B1730]">{point.label}</h3>
             <p className="mt-2 text-[15px] leading-relaxed text-[#334155]">{point.text}</p>
-          </motion.div>
+          </m.div>
         ))}
-      </motion.div>
+      </m.div>
 
       <p className="mt-8 text-sm text-slate-500">
         UNEVENT is not a law firm. Legal advice comes from qualified lawyers, and we work alongside yours.

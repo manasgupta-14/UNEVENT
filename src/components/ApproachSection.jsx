@@ -1,5 +1,5 @@
 import { useRef } from 'react'
-import { motion, useScroll, useSpring, useTransform } from 'framer-motion'
+import { m, useScroll, useSpring, useTransform } from 'framer-motion'
 import SectionHeading from './ui/SectionHeading'
 import { GlyphIcon } from './ui/icons'
 
@@ -46,21 +46,21 @@ const Step = ({ step, index, progress, onEnter, onLeave }) => {
       onMouseLeave={onLeave}
       className="relative flex cursor-pointer gap-5 lg:flex-col lg:items-center lg:px-5 lg:text-center"
     >
-      <motion.div
+      <m.div
         style={{ borderColor, boxShadow, scale }}
         className="relative z-10 flex h-[68px] w-[68px] shrink-0 items-center justify-center rounded-2xl border-2 bg-[#0B1730]"
       >
-        <motion.span style={{ color }} className="flex">
+        <m.span style={{ color }} className="flex">
           <GlyphIcon d={step.d} className="h-8 w-8" />
-        </motion.span>
+        </m.span>
         <span className="absolute -right-2.5 -top-2.5 flex h-6 min-w-6 items-center justify-center rounded-full bg-[#F5B82E] px-1 text-[11px] font-extrabold text-[#0B1730]">
           {step.id}
         </span>
-      </motion.div>
-      <motion.div style={{ opacity, y }} className="pt-1 lg:pt-6">
+      </m.div>
+      <m.div style={{ opacity, y }} className="pt-1 lg:pt-6">
         <h3 className="font-display text-xl font-bold text-white">{step.title}</h3>
         <p className="mt-2 max-w-xs text-sm leading-relaxed text-slate-300">{step.text}</p>
-      </motion.div>
+      </m.div>
     </li>
   )
 }
@@ -102,10 +102,10 @@ const ApproachSection = () => {
 
         <div className="relative mt-16 lg:mt-20">
           <div className="absolute bottom-[34px] left-[33px] top-[34px] w-[2px] rounded-full bg-white/10 lg:hidden">
-            <motion.div style={{ scaleY: lineProgress }} className="h-full origin-top rounded-full bg-gradient-to-b from-[#F5B82E] to-[#1473E6]" />
+            <m.div style={{ scaleY: lineProgress }} className="h-full origin-top rounded-full bg-gradient-to-b from-[#F5B82E] to-[#1473E6]" />
           </div>
           <div className="absolute left-[12.5%] right-[12.5%] top-[33px] hidden h-[2px] rounded-full bg-white/10 lg:block">
-            <motion.div style={{ scaleX: lineProgress }} className="h-full origin-left rounded-full bg-gradient-to-r from-[#F5B82E] to-[#1473E6]" />
+            <m.div style={{ scaleX: lineProgress }} className="h-full origin-left rounded-full bg-gradient-to-r from-[#F5B82E] to-[#1473E6]" />
           </div>
 
           <ol className="relative grid gap-10 lg:grid-cols-4 lg:gap-0">

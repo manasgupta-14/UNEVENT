@@ -1,8 +1,11 @@
-import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion'
+import { lazy, Suspense, useEffect, useState } from 'react'
+import { m, useMotionValue, useSpring, useTransform } from 'framer-motion'
 import MagneticButton from './ui/MagneticButton'
-import NetworkCanvas from './ui/NetworkCanvas'
 import { services } from '../data/services'
 import { ease, rise, stagger } from '../lib/motion'
+import { rectOf } from '../lib/pointer'
+
+const NetworkCanvas = lazy(() => import('./ui/NetworkCanvas'))
 
 const SHIELD = 'M100 15L160 40V90C160 135 135 170 100 185C65 170 40 135 40 90V40L100 15Z'
 const SHIELD_INNER = 'M100 25L150 46V88C150 125 129 154 100 168C71 154 50 125 50 88V46L100 25Z'
@@ -29,46 +32,55 @@ const links = [
 ]
 
 const chips = [
-  { id: 'protect', label: 'Threat blocked', pos: 'left-0 top-[5%] sm:-left-6', depth: 22, delay: '0s' },
-  { id: 'counsel', label: 'Contract reviewed', pos: 'right-0 top-[18%] sm:-right-4', depth: 30, delay: '1.2s' },
-  { id: 'govern', label: 'Policy compliant', pos: 'left-0 bottom-[14%] sm:-left-4', depth: 26, delay: '2.1s' },
-  { id: 'labs', label: 'Automation live', pos: 'right-0 bottom-[6%] sm:-right-6', depth: 34, delay: '0.6s' },
+  { id: 'protect', label: 'Threat blocked', pos: 'left-0 top-[5%] lg:-left-6', depth: 22, delay: '0s' },
+  { id: 'counsel', label: 'Contract reviewed', pos: 'right-0 top-[18%] lg:-right-4', depth: 30, delay: '1.2s' },
+  { id: 'govern', label: 'Policy compliant', pos: 'left-0 bottom-[14%] lg:-left-4', depth: 26, delay: '2.1s' },
+  { id: 'labs', label: 'Automation live', pos: 'right-0 bottom-[6%] lg:-right-6', depth: 34, delay: '0.6s' },
 ]
 
 const Word = ({ children, delay, className = '' }) => (
   <span className="inline-block overflow-hidden pb-[0.14em] align-bottom">
-    <motion.span
+    <m.span
       className={`inline-block ${className}`}
       initial={{ y: '115%' }}
       animate={{ y: 0 }}
-      transition={{ duration: 0.9, delay, ease }}
+      transition={{ duration: 0.7, delay, ease }}
     >
       {children}
-    </motion.span>
+    </m.span>
   </span>
 )
 
-const FloatingChip = ({ chip, sx, sy }) => {
+const ChipBody = ({ chip, delay }) => {
   const service = services.find((item) => item.id === chip.id)
+
+  return (
+    <div
+      className="flex min-w-0 items-center gap-2.5 rounded-xl border border-white/20 bg-[#0B1730]/70 px-3 py-2.5 shadow-[0_15px_40px_-16px_rgba(0,0,0,0.8)] backdrop-blur-md sm:gap-3 sm:px-3.5"
+      style={delay ? { animationDelay: delay } : undefined}
+    >
+      <span className="relative flex h-2.5 w-2.5 shrink-0">
+        <span className="absolute inline-flex h-full w-full animate-ping-slow rounded-full" style={{ backgroundColor: service.accent }} />
+        <span className="relative inline-flex h-2.5 w-2.5 rounded-full" style={{ backgroundColor: service.accent }} />
+      </span>
+      <span className="min-w-0 leading-tight">
+        <span className="block text-[11px] font-semibold text-slate-400">{service.name}</span>
+        <span className="block text-xs font-bold text-white">{chip.label}</span>
+      </span>
+    </div>
+  )
+}
+
+const FloatingChip = ({ chip, sx, sy }) => {
   const x = useTransform(sx, [-0.5, 0.5], [-chip.depth, chip.depth])
   const y = useTransform(sy, [-0.5, 0.5], [-chip.depth, chip.depth])
 
   return (
-    <motion.div style={{ x, y }} className={`absolute z-20 ${chip.pos}`}>
-      <div
-        className="animate-float flex items-center gap-3 rounded-xl border border-white/20 bg-[#0B1730]/70 px-3.5 py-2.5 shadow-[0_15px_40px_-16px_rgba(0,0,0,0.8)] backdrop-blur-md"
-        style={{ animationDelay: chip.delay }}
-      >
-        <span className="relative flex h-2.5 w-2.5">
-          <span className="absolute inline-flex h-full w-full animate-ping-slow rounded-full" style={{ backgroundColor: service.accent }} />
-          <span className="relative inline-flex h-2.5 w-2.5 rounded-full" style={{ backgroundColor: service.accent }} />
-        </span>
-        <span className="leading-tight">
-          <span className="block text-[11px] font-semibold text-slate-400">{service.name}</span>
-          <span className="block text-xs font-bold text-white">{chip.label}</span>
-        </span>
+    <m.div style={{ x, y }} className={`absolute z-20 hidden sm:block ${chip.pos}`}>
+      <div className="animate-float" style={{ animationDelay: chip.delay }}>
+        <ChipBody chip={chip} />
       </div>
-    </motion.div>
+    </m.div>
   )
 }
 
@@ -81,7 +93,7 @@ const ShieldVisual = () => {
   const rotateX = useTransform(sy, [-0.5, 0.5], [12, -12])
 
   const handleMove = (event) => {
-    const rect = event.currentTarget.getBoundingClientRect()
+    const rect = rectOf(event.currentTarget)
     px.set((event.clientX - rect.left) / rect.width - 0.5)
     py.set((event.clientY - rect.top) / rect.height - 0.5)
   }
@@ -92,13 +104,13 @@ const ShieldVisual = () => {
   }
 
   return (
-    <motion.div
+    <m.div
       initial={{ opacity: 0, scale: 0.92 }}
       animate={{ opacity: 1, scale: 1 }}
       transition={{ duration: 1.1, delay: 0.3, ease }}
       onPointerMove={handleMove}
       onPointerLeave={handleLeave}
-      className="relative mx-auto aspect-square w-full max-w-[520px]"
+      className="relative aspect-square w-full"
     >
       <div className="absolute inset-[8%] rounded-full bg-[#1473E6]/25 blur-3xl" />
       <div className="absolute inset-[2%] animate-spin-slow rounded-full border border-dashed border-[#1473E6]/35">
@@ -108,7 +120,7 @@ const ShieldVisual = () => {
         <span className="absolute bottom-0 left-1/2 h-2 w-2 -translate-x-1/2 translate-y-1/2 rounded-full bg-[#1473E6] shadow-[0_0_14px_#1473E6]" />
       </div>
 
-      <motion.div
+      <m.div
         style={{ rotateX, rotateY, transformPerspective: 1000 }}
         className="absolute inset-[10%] [transform-style:preserve-3d]"
       >
@@ -133,7 +145,7 @@ const ShieldVisual = () => {
             </clipPath>
           </defs>
 
-          <motion.path
+          <m.path
             d={SHIELD}
             fill="url(#heroShield)"
             stroke="url(#heroStroke)"
@@ -175,87 +187,51 @@ const ShieldVisual = () => {
           <circle cx="100" cy="100" r="15" fill="#0B1730" stroke="#F5B82E" strokeWidth="2.5" />
           <circle cx="100" cy="100" r="4.5" fill="#F5B82E" className="animate-node origin-self" />
         </svg>
-      </motion.div>
-
-      <motion.div
-        style={{ rotateX, rotateY, transformPerspective: 1000 }}
-        className="absolute inset-[10%] [transform-style:preserve-3d]"
-      >
-        <svg viewBox="0 0 200 200" className="h-full w-full overflow-visible drop-shadow-[0_0_44px_rgba(20,115,230,0.45)]" fill="none" aria-hidden="true">
-          <defs>
-            <linearGradient id="heroShield" x1="100" y1="15" x2="100" y2="185" gradientUnits="userSpaceOnUse">
-              <stop offset="0" stopColor="#1473E6" stopOpacity="0.45" />
-              <stop offset="1" stopColor="#0B1730" stopOpacity="0.15" />
-            </linearGradient>
-            <linearGradient id="heroStroke" x1="40" y1="15" x2="160" y2="185" gradientUnits="userSpaceOnUse">
-              <stop offset="0" stopColor="#F5B82E" />
-              <stop offset="0.55" stopColor="#1473E6" />
-              <stop offset="1" stopColor="#F5B82E" />
-            </linearGradient>
-            <linearGradient id="heroScan" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0" stopColor="#1473E6" stopOpacity="0" />
-              <stop offset="0.5" stopColor="#60A5FA" stopOpacity="0.55" />
-              <stop offset="1" stopColor="#1473E6" stopOpacity="0" />
-            </linearGradient>
-            <clipPath id="heroClip">
-              <path d={SHIELD} />
-            </clipPath>
-          </defs>
-
-          <motion.path
-            d={SHIELD}
-            fill="url(#heroShield)"
-            stroke="url(#heroStroke)"
-            strokeWidth="2.3"
-            strokeLinejoin="round"
-            initial={{ pathLength: 0 }}
-            animate={{ pathLength: 1 }}
-            transition={{ duration: 1.8, delay: 0.3, ease: 'easeInOut' }}
-          />
-          <path d={SHIELD_INNER} stroke="#F5B82E" strokeOpacity="0.55" strokeWidth="1" strokeDasharray="3 5" className="animate-dash" />
-
-          <g clipPath="url(#heroClip)">
-            <rect x="36" y="20" width="128" height="26" fill="url(#heroScan)" className="animate-scan-y" />
-          </g>
-
-          <g strokeWidth="1" strokeDasharray="3 5" strokeOpacity="0.6" stroke="#60A5FA">
-            {links.map(([x1, y1, x2, y2]) => (
-              <line key={`${x1}-${y1}-${x2}-${y2}`} x1={x1} y1={y1} x2={x2} y2={y2} className="animate-dash" />
-            ))}
-          </g>
-
-          {nodes.map((node, index) => (
-            <g key={`${node.cx}-${node.cy}`}>
-              <circle cx={node.cx} cy={node.cy} r="11" stroke={node.color} strokeOpacity="0.28" />
-              <circle
-                cx={node.cx}
-                cy={node.cy}
-                r="6"
-                fill="#0B1730"
-                stroke={node.color}
-                strokeWidth="2"
-                className="animate-node origin-self"
-                style={{ animationDelay: `${index * 0.35}s` }}
-              />
-            </g>
-          ))}
-
-          <circle cx="100" cy="100" r="22" stroke="#F5B82E" strokeOpacity="0.25" />
-          <circle cx="100" cy="100" r="15" fill="#0B1730" stroke="#F5B82E" strokeWidth="2.5" />
-          <circle cx="100" cy="100" r="4.5" fill="#F5B82E" className="animate-node origin-self" />
-        </svg>
-      </motion.div>
+      </m.div>
 
       {chips.map((chip) => (
         <FloatingChip key={chip.id} chip={chip} sx={sx} sy={sy} />
       ))}
-    </motion.div>
+    </m.div>
   )
 }
 
+const ShieldBlock = () => (
+  <div className="mx-auto w-full max-w-[520px] min-w-0">
+    <ShieldVisual />
+    <div className="mt-6 grid grid-cols-2 gap-3 sm:hidden">
+      {chips.map((chip) => (
+        <ChipBody key={chip.id} chip={chip} />
+      ))}
+    </div>
+  </div>
+)
+
 const Hero = () => {
+  const [showCanvas, setShowCanvas] = useState(false)
+
+  useEffect(() => {
+    // Decorative background: start it after the page has finished loading so it never competes with the first paint.
+    let idleId
+    let timerId
+    const start = () => setShowCanvas(true)
+    const schedule = () => {
+      timerId = window.setTimeout(() => {
+        if ('requestIdleCallback' in window) idleId = window.requestIdleCallback(start, { timeout: 2000 })
+        else start()
+      }, 1200)
+    }
+    if (document.readyState === 'complete') schedule()
+    else window.addEventListener('load', schedule, { once: true })
+    return () => {
+      window.removeEventListener('load', schedule)
+      window.clearTimeout(timerId)
+      if (idleId && 'cancelIdleCallback' in window) window.cancelIdleCallback(idleId)
+    }
+  }, [])
+
   const handleMove = (event) => {
-    const rect = event.currentTarget.getBoundingClientRect()
+    const rect = rectOf(event.currentTarget)
     event.currentTarget.style.setProperty('--mx', `${event.clientX - rect.left}px`)
     event.currentTarget.style.setProperty('--my', `${event.clientY - rect.top}px`)
   }
@@ -266,16 +242,20 @@ const Hero = () => {
       onPointerMove={handleMove}
       className="relative isolate flex min-h-[calc(100svh-5rem)] items-center overflow-hidden bg-[#0B1730]"
     >
-      <NetworkCanvas className="opacity-80" />
+      {showCanvas && (
+        <Suspense fallback={null}>
+          <NetworkCanvas className="opacity-80" />
+        </Suspense>
+      )}
       <div className="pointer-events-none absolute inset-0 -z-10 bg-[linear-gradient(rgba(255,255,255,0.045)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.045)_1px,transparent_1px)] [background-size:56px_56px] [mask-image:radial-gradient(ellipse_at_center,black,transparent_78%)]" />
       <div className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(500px_circle_at_var(--mx,70%)_var(--my,30%),rgba(20,115,230,0.2),transparent_60%)]" />
-      <div className="pointer-events-none absolute -left-32 top-10 -z-10 h-[420px] w-[420px] animate-float rounded-full bg-[#1473E6]/20 blur-[110px]" />
-      <div className="pointer-events-none absolute -right-24 bottom-0 -z-10 h-[380px] w-[380px] animate-float rounded-full bg-[#F5B82E]/10 blur-[110px]" style={{ animationDelay: '2s' }} />
+      <div className="pointer-events-none absolute -left-32 top-10 -z-10 h-[420px] w-[420px] rounded-full bg-[#1473E6]/20 blur-[110px]" />
+      <div className="pointer-events-none absolute -right-24 bottom-0 -z-10 h-[380px] w-[380px] rounded-full bg-[#F5B82E]/10 blur-[110px]" style={{ animationDelay: '2s' }} />
       <div className="pointer-events-none absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-[#0B1730] to-transparent" />
 
       <div className="relative mx-auto grid w-full max-w-7xl items-center gap-14 px-4 py-16 sm:px-6 lg:grid-cols-[1.05fr_0.95fr] lg:gap-8 lg:px-8 lg:py-24">
-        <motion.div variants={stagger(0.1, 0.1)} initial="hidden" animate="show" className="relative z-10">
-          <motion.span
+        <m.div variants={stagger(0.07, 0.05)} initial="hidden" animate="show" className="relative z-10 min-w-0">
+          <m.span
             variants={rise}
             className="inline-flex items-center gap-2.5 rounded-full border border-[#1473E6]/30 bg-[#1473E6]/10 px-4 py-1.5 text-sm font-semibold text-blue-200 backdrop-blur"
           >
@@ -283,16 +263,16 @@ const Hero = () => {
               <span className="absolute inline-flex h-full w-full animate-ping-slow rounded-full bg-[#F5B82E]" />
               <span className="relative inline-flex h-2 w-2 rounded-full bg-[#F5B82E]" />
             </span>
-            Cybersecurity · Legal risk · Compliance · Technology
-          </motion.span>
+            Risk advisory · Cyber · Legal · Compliance · Technology
+          </m.span>
 
           <h1 className="mt-7 font-display text-[2.7rem] font-extrabold leading-[1.04] tracking-tight text-white sm:text-6xl lg:text-[4.3rem]">
             <span className="block">
-              <Word delay={0.25}>Make</Word> <Word delay={0.33}>Risk</Word> <Word delay={0.41}>a</Word>
+              <Word delay={0.05}>Make</Word> <Word delay={0.11}>Risk</Word> <Word delay={0.17}>a</Word>
             </span>
             <span className="block">
               <Word
-                delay={0.5}
+                delay={0.25}
                 className="animate-gradient bg-gradient-to-r from-[#F5B82E] via-[#FFE29A] to-[#F5B82E] bg-[length:220%_auto] bg-clip-text text-transparent"
               >
                 Non-Event.
@@ -300,20 +280,20 @@ const Hero = () => {
             </span>
           </h1>
 
-          <motion.p variants={rise} className="mt-7 max-w-xl text-lg leading-relaxed text-slate-300 sm:text-xl">
-            UNEVENT helps businesses stop cyber, legal and compliance problems before they happen, and builds the software that keeps them stopped.
-          </motion.p>
+          <m.p variants={rise} className="mt-7 max-w-xl text-lg leading-relaxed text-slate-300 sm:text-xl">
+            UNEVENT is a risk advisory firm helping organisations identify and prioritise cyber, legal and compliance exposure, and turn findings into practical controls using expert advice, curated solutions and in-house technology.
+          </m.p>
 
-          <motion.div variants={rise} className="mt-10 flex flex-col gap-4 sm:flex-row">
-            <MagneticButton href="#services" size="lg">
-              Explore Our Services
+          <m.div variants={rise} className="mt-10 flex flex-col gap-4 sm:flex-row">
+            <MagneticButton href="/book" size="lg">
+              Discuss a risk
             </MagneticButton>
-            <MagneticButton href="#contact" tone="ghost" size="lg" arrow={false}>
-              Talk to Our Team
+            <MagneticButton href="#services" tone="ghost" size="lg" arrow={false}>
+              Explore our four practices
             </MagneticButton>
-          </motion.div>
+          </m.div>
 
-          <motion.div variants={rise} className="mt-10 flex flex-wrap items-center gap-2.5">
+          <m.div variants={rise} className="mt-10 flex flex-wrap items-center gap-2.5">
             {services.map((service) => (
               <a
                 key={service.id}
@@ -324,10 +304,10 @@ const Hero = () => {
                 {service.name}<span className="font-medium text-slate-400">· {service.field}</span>
               </a>
             ))}
-          </motion.div>
-        </motion.div>
+          </m.div>
+        </m.div>
 
-        <ShieldVisual />
+        <ShieldBlock />
       </div>
 
       <div className="pointer-events-none absolute bottom-6 left-1/2 hidden -translate-x-1/2 md:block" aria-hidden="true">

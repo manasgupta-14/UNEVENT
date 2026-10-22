@@ -1,21 +1,22 @@
 import { Link } from 'react-router'
-import { motion } from 'framer-motion'
+import { m } from 'framer-motion'
 import { Arrow } from './ui/icons'
 import { categoryColor, formatDate } from '../lib/insights'
 import { rgba } from '../lib/color'
 import { ease } from '../lib/motion'
+import { rectOf } from '../lib/pointer'
 
 const InsightCard = ({ article, index = 0 }) => {
   const color = categoryColor(article.category)
 
   const handleMove = (event) => {
-    const rect = event.currentTarget.getBoundingClientRect()
+    const rect = rectOf(event.currentTarget)
     event.currentTarget.style.setProperty('--x', `${event.clientX - rect.left}px`)
     event.currentTarget.style.setProperty('--y', `${event.clientY - rect.top}px`)
   }
 
   return (
-    <motion.div
+    <m.div
       layout
       initial={{ opacity: 0, y: 24 }}
       animate={{ opacity: 1, y: 0 }}
@@ -48,7 +49,7 @@ const InsightCard = ({ article, index = 0 }) => {
           </span>
         </div>
       </Link>
-    </motion.div>
+    </m.div>
   )
 }
 

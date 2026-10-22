@@ -1,5 +1,6 @@
-import { motion, useMotionValue, useSpring } from 'framer-motion'
+import { m, useMotionValue, useSpring } from 'framer-motion'
 import { ease } from '../../lib/motion'
+import { rectOf } from '../../lib/pointer'
 
 const TiltPanel = ({ children, className = '', max = 7 }) => {
   const rx = useMotionValue(0)
@@ -8,7 +9,7 @@ const TiltPanel = ({ children, className = '', max = 7 }) => {
   const rotateY = useSpring(ry, { stiffness: 120, damping: 18, mass: 0.6 })
 
   const handleMove = (event) => {
-    const rect = event.currentTarget.getBoundingClientRect()
+    const rect = rectOf(event.currentTarget)
     ry.set(((event.clientX - rect.left) / rect.width - 0.5) * max * 2)
     rx.set((0.5 - (event.clientY - rect.top) / rect.height) * max * 2)
   }
@@ -19,7 +20,7 @@ const TiltPanel = ({ children, className = '', max = 7 }) => {
   }
 
   return (
-    <motion.div
+    <m.div
       initial={{ opacity: 0, y: 36, scale: 0.96 }}
       animate={{ opacity: 1, y: 0, scale: 1 }}
       transition={{ duration: 1, delay: 0.3, ease }}
@@ -29,7 +30,7 @@ const TiltPanel = ({ children, className = '', max = 7 }) => {
       className={className}
     >
       {children}
-    </motion.div>
+    </m.div>
   )
 }
 

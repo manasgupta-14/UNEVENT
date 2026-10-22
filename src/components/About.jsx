@@ -1,6 +1,6 @@
 import { useRef } from 'react'
 import {
-  motion,
+  m,
   useMotionTemplate,
   useMotionValue,
   useScroll,
@@ -27,6 +27,7 @@ import {
 } from '../data/about'
 import { rgba, tint } from '../lib/color'
 import { ease, rise, stagger } from '../lib/motion'
+import { rectOf } from '../lib/pointer'
 
 const counts = {
   divisions: services.length,
@@ -36,19 +37,19 @@ const counts = {
 
 const Word = ({ children, delay, className = '' }) => (
   <span className="inline-block overflow-hidden pb-[0.14em] align-bottom">
-    <motion.span
+    <m.span
       className={`inline-block ${className}`}
       initial={{ y: '115%' }}
       animate={{ y: 0 }}
       transition={{ duration: 0.9, delay, ease }}
     >
       {children}
-    </motion.span>
+    </m.span>
   </span>
 )
 
 const Reveal = ({ children, className = '', delay = 0 }) => (
-  <motion.div
+  <m.div
     initial={{ opacity: 0, y: 28 }}
     whileInView={{ opacity: 1, y: 0 }}
     viewport={{ once: true, margin: '-80px' }}
@@ -56,7 +57,7 @@ const Reveal = ({ children, className = '', delay = 0 }) => (
     className={className}
   >
     {children}
-  </motion.div>
+  </m.div>
 )
 
 const Eyebrow = ({ children, live = false }) => (
@@ -75,7 +76,7 @@ const Hero = () => {
   const spotlight = useMotionTemplate`radial-gradient(520px circle at ${mx}px ${my}px, rgba(20,115,230,0.18), transparent 70%)`
 
   const handleMove = (event) => {
-    const rect = event.currentTarget.getBoundingClientRect()
+    const rect = rectOf(event.currentTarget)
     mx.set(event.clientX - rect.left)
     my.set(event.clientY - rect.top)
   }
@@ -83,7 +84,7 @@ const Hero = () => {
   return (
     <section onMouseMove={handleMove} className="relative isolate flex items-center overflow-hidden bg-[#0B1730]">
       <NetworkCanvas className="opacity-60" />
-      <motion.div style={{ background: spotlight }} className="pointer-events-none absolute inset-0 -z-10" />
+      <m.div style={{ background: spotlight }} className="pointer-events-none absolute inset-0 -z-10" />
       <div className="pointer-events-none absolute inset-0 -z-10 bg-[linear-gradient(rgba(255,255,255,0.045)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.045)_1px,transparent_1px)] [background-size:56px_56px] [mask-image:radial-gradient(ellipse_at_center,black,transparent_78%)]" />
       <div className="pointer-events-none absolute -left-32 top-0 -z-10 h-[380px] w-[380px] animate-float rounded-full bg-[#1473E6]/20 blur-[110px]" />
       <div className="pointer-events-none absolute -right-24 bottom-0 -z-10 h-[320px] w-[320px] animate-float rounded-full bg-[#F5B82E]/10 blur-[110px]" style={{ animationDelay: '2s' }} />
@@ -91,10 +92,10 @@ const Hero = () => {
 
       <div className="relative mx-auto w-full max-w-7xl px-4 py-20 sm:px-6 lg:px-8 lg:py-28">
         <div className="grid items-center gap-14 lg:grid-cols-[1.1fr_0.9fr] lg:gap-10">
-        <motion.div variants={stagger(0.1, 0.1)} initial="hidden" animate="show" className="max-w-3xl">
-          <motion.div variants={rise}>
+        <m.div variants={stagger(0.1, 0.1)} initial="hidden" animate="show" className="max-w-3xl">
+          <m.div variants={rise}>
             <Eyebrow live>{hero.badge}</Eyebrow>
-          </motion.div>
+          </m.div>
 
           <h1 className="mt-7 font-display text-[2.5rem] font-extrabold leading-[1.05] tracking-tight text-white sm:text-6xl">
             <span className="block">
@@ -114,24 +115,24 @@ const Hero = () => {
             </span>
           </h1>
 
-          <motion.p variants={rise} className="mt-7 max-w-xl text-lg leading-relaxed text-slate-300 sm:text-xl">
+          <m.p variants={rise} className="mt-7 max-w-xl text-lg leading-relaxed text-slate-300 sm:text-xl">
             {hero.text}
-          </motion.p>
+          </m.p>
 
-          <motion.dl variants={rise} className="mt-10 grid max-w-xl grid-cols-3 gap-3 sm:gap-4">
+          <m.dl variants={rise} className="mt-10 grid max-w-xl grid-cols-3 gap-2 sm:gap-4">
             {hero.stats.map((stat) => (
-              <div key={stat.key} className="rounded-2xl border border-white/10 bg-white/5 px-4 py-4 backdrop-blur">
+              <div key={stat.key} className="min-w-0 rounded-2xl border border-white/10 bg-white/5 px-2.5 py-4 backdrop-blur sm:px-4">
                 <dt className="sr-only">{stat.label}</dt>
-                <dd className="font-display text-3xl font-extrabold text-white sm:text-4xl">
+                <dd className="font-display text-2xl font-extrabold text-white sm:text-4xl">
                   <CountUp to={counts[stat.key]} />
                 </dd>
-                <p aria-hidden="true" className="mt-1 text-xs font-semibold uppercase tracking-widest text-slate-400">
+                <p aria-hidden="true" className="mt-1 text-[10px] font-semibold uppercase tracking-wider text-slate-400 sm:text-xs sm:tracking-widest">
                   {stat.label}
                 </p>
               </div>
             ))}
-          </motion.dl>
-        </motion.div>
+          </m.dl>
+        </m.div>
         <RiskChart />
         </div>
       </div>
@@ -160,7 +161,7 @@ const StorySection = () => {
 
         <div className="relative pl-12 sm:pl-14">
           <span className="absolute left-[15px] top-2 bottom-2 w-px bg-white/10 sm:left-[19px]" />
-          <motion.span
+          <m.span
             style={{ scaleY: fill }}
             className="absolute left-[15px] top-2 bottom-2 w-px origin-top bg-gradient-to-b from-[#F5B82E] to-[#1473E6] sm:left-[19px]"
           />
@@ -168,7 +169,7 @@ const StorySection = () => {
           <div className="space-y-6">
             {story.chapters.map((chapter, index) => (
               <Reveal key={chapter.label} delay={index * 0.05} className="relative">
-                <motion.span
+                <m.span
                   initial={{ scale: 0.6, backgroundColor: '#132854' }}
                   whileInView={{ scale: 1, backgroundColor: '#F5B82E' }}
                   viewport={{ once: true, margin: '-30% 0px' }}
@@ -176,7 +177,7 @@ const StorySection = () => {
                   className="absolute -left-12 top-7 flex h-8 w-8 items-center justify-center rounded-full border border-[#F5B82E]/60 text-xs font-extrabold text-[#0B1730] shadow-[0_0_18px_rgba(245,184,46,0.55)] sm:-left-14 sm:h-10 sm:w-10 sm:text-sm"
                 >
                   {String(index + 1).padStart(2, '0')}
-                </motion.span>
+                </m.span>
                 <SpotlightCard color="#1473E6" tilt={3}>
                   <div className="p-7 sm:p-8">
                     <p className="text-xs font-bold uppercase tracking-widest text-[#F5B82E]">{chapter.label}</p>
@@ -318,7 +319,7 @@ const DivisionsSection = () => (
 
       <Reveal className="mt-12 flex flex-col gap-4 sm:flex-row">
         <MagneticButton href="/#services" size="lg">Explore Our Services</MagneticButton>
-        <MagneticButton href="#contact" tone="ghost" size="lg" arrow={false}>Talk to Our Team</MagneticButton>
+        <MagneticButton href="#contact" tone="ghost" size="lg" arrow={false}>Discuss a risk</MagneticButton>
       </Reveal>
     </div>
   </section>

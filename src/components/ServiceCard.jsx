@@ -1,5 +1,5 @@
 import React from 'react';
-import { motion } from 'framer-motion';
+import { m } from 'framer-motion';
 
 const ServiceCard = () => {
     const services = [
@@ -88,7 +88,7 @@ const ServiceCard = () => {
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
                 <div className="text-center mb-16">
-                    <motion.h2
+                    <m.h2
                         initial={{ opacity: 0, y: -20 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
@@ -96,8 +96,8 @@ const ServiceCard = () => {
                         className="text-3xl md:text-4xl font-bold text-white mb-4"
                     >
                         Comprehensive <span className="text-yellow-500">Solutions</span>
-                    </motion.h2>
-                    <motion.p
+                    </m.h2>
+                    <m.p
                         initial={{ opacity: 0 }}
                         whileInView={{ opacity: 1 }}
                         viewport={{ once: true }}
@@ -105,10 +105,10 @@ const ServiceCard = () => {
                         className="text-gray-400 max-w-2xl mx-auto"
                     >
                         Integrated services designed to protect your assets, ensure compliance, and drive technological innovation.
-                    </motion.p>
+                    </m.p>
                 </div>
 
-                <motion.div
+                <m.div
                     variants={containerVariants}
                     initial="hidden"
                     whileInView="visible"
@@ -116,7 +116,7 @@ const ServiceCard = () => {
                     className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8"
                 >
                     {services.map((service) => (
-                        <motion.a
+                        <m.a
                             href={service.link}
                             key={service.id}
                             variants={itemVariants}
@@ -146,9 +146,9 @@ const ServiceCard = () => {
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
                                 </svg>
                             </div>
-                        </motion.a>
+                        </m.a>
                     ))}
-                </motion.div>
+                </m.div>
 
             </div>
         </section>

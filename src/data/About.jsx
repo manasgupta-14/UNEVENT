@@ -1,4 +1,4 @@
-import { motion } from 'framer-motion'
+import { m } from 'framer-motion'
 import usePageMeta from '../hooks/usePageMeta.js'
 import CTA from '../components/CTA.jsx'
 import MagneticButton from '../components/ui/MagneticButton'
@@ -16,19 +16,19 @@ const values = [
 
 const Word = ({ children, delay, className = '' }) => (
   <span className="inline-block overflow-hidden pb-[0.14em] align-bottom">
-    <motion.span
+    <m.span
       className={`inline-block ${className}`}
       initial={{ y: '115%' }}
       animate={{ y: 0 }}
       transition={{ duration: 0.9, delay, ease }}
     >
       {children}
-    </motion.span>
+    </m.span>
   </span>
 )
 
 const Reveal = ({ children, className = '', delay = 0 }) => (
-  <motion.div
+  <m.div
     initial={{ opacity: 0, y: 28 }}
     whileInView={{ opacity: 1, y: 0 }}
     viewport={{ once: true, margin: '-80px' }}
@@ -36,7 +36,7 @@ const Reveal = ({ children, className = '', delay = 0 }) => (
     className={className}
   >
     {children}
-  </motion.div>
+  </m.div>
 )
 
 const Eyebrow = ({ children }) => (
@@ -60,10 +60,10 @@ export default function About() {
         <div className="pointer-events-none absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-[#0B1730] to-transparent" />
 
         <div className="relative mx-auto w-full max-w-7xl px-4 py-20 sm:px-6 lg:px-8 lg:py-28">
-          <motion.div variants={stagger(0.1, 0.1)} initial="hidden" animate="show" className="max-w-3xl">
-            <motion.div variants={rise}>
+          <m.div variants={stagger(0.1, 0.1)} initial="hidden" animate="show" className="max-w-3xl">
+            <m.div variants={rise}>
               <Eyebrow>About UNEVENT</Eyebrow>
-            </motion.div>
+            </m.div>
 
             <h1 className="mt-7 font-display text-[2.5rem] font-extrabold leading-[1.05] tracking-tight text-white sm:text-6xl">
               <span className="block">
@@ -79,10 +79,10 @@ export default function About() {
               </span>
             </h1>
 
-            <motion.p variants={rise} className="mt-7 max-w-xl text-lg leading-relaxed text-slate-300 sm:text-xl">
-              UNEVENT exists to help organizations stop problems while they are still small.
-            </motion.p>
-          </motion.div>
+            <m.p variants={rise} className="mt-7 max-w-xl text-lg leading-relaxed text-slate-300 sm:text-xl">
+              UNEVENT is a risk advisory firm that helps organisations spot exposure while it is still small and act on it.
+            </m.p>
+          </m.div>
         </div>
       </section>
 
@@ -164,7 +164,7 @@ export default function About() {
 
           <Reveal className="mt-12 flex flex-col gap-4 sm:flex-row">
             <MagneticButton href="#services" size="lg">Explore Our Services</MagneticButton>
-            <MagneticButton href="#contact" tone="ghost" size="lg" arrow={false}>Talk to Our Team</MagneticButton>
+            <MagneticButton href="#contact" tone="ghost" size="lg" arrow={false}>Discuss a risk</MagneticButton>
           </Reveal>
         </div>
       </section>

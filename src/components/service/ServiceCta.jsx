@@ -1,4 +1,4 @@
-import { motion } from 'framer-motion'
+import { m } from 'framer-motion'
 import MagneticButton from '../ui/MagneticButton'
 import NetworkCanvas from '../ui/NetworkCanvas'
 import { Arrow } from '../ui/icons'
@@ -12,7 +12,7 @@ const ServiceCta = ({ service }) => {
   return (
     <section id="contact" className="relative bg-[#F8FAFC] pb-24 lg:pb-32">
       <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-        <motion.div variants={rise} initial="hidden" whileInView="show" viewport={viewport} className="relative overflow-hidden rounded-[2rem] p-px">
+        <m.div variants={rise} initial="hidden" whileInView="show" viewport={viewport} className="relative overflow-hidden rounded-[2rem] p-px">
           <span
             className="absolute left-1/2 top-1/2 aspect-square w-[260%] -translate-x-1/2 -translate-y-1/2 animate-beam"
             style={{ background: `conic-gradient(from 0deg, transparent 0deg, transparent 240deg, ${service.color} 295deg, #F5B82E 335deg, transparent 360deg)` }}
@@ -20,36 +20,36 @@ const ServiceCta = ({ service }) => {
           <div className="relative isolate overflow-hidden rounded-[calc(2rem-1px)] bg-[#0B1730] px-6 py-16 text-center sm:px-12 lg:py-24">
             <NetworkCanvas className="opacity-60" density={9000} reach={110} />
             <div className="pointer-events-none absolute inset-0 -z-10" style={{ background: `radial-gradient(600px circle at 50% 0%, ${rgba(service.color, 0.38)}, transparent 65%), radial-gradient(420px circle at 100% 100%, rgba(245,184,46,0.14), transparent 60%)` }} />
-            <motion.div variants={stagger(0.1)} initial="hidden" whileInView="show" viewport={viewport} className="relative mx-auto flex max-w-3xl flex-col items-center">
-              <motion.span variants={rise} className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-3.5 py-1.5 text-sm font-semibold text-slate-200 backdrop-blur">
+            <m.div variants={stagger(0.1)} initial="hidden" whileInView="show" viewport={viewport} className="relative mx-auto flex max-w-3xl flex-col items-center">
+              <m.span variants={rise} className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-3.5 py-1.5 text-sm font-semibold text-slate-200 backdrop-blur">
                 <span className="h-1.5 w-1.5 rounded-full" style={{ backgroundColor: service.color, boxShadow: `0 0 10px ${service.color}` }} />
                 UNEVENT {service.name}
-              </motion.span>
-              <motion.h2 variants={rise} className="mt-6 font-display text-3xl font-bold leading-[1.12] tracking-tight text-white sm:text-5xl">
+              </m.span>
+              <m.h2 variants={rise} className="mt-6 font-display text-3xl font-bold leading-[1.12] tracking-tight text-white sm:text-5xl">
                 Let&apos;s Discuss Your Requirements
-              </motion.h2>
-              <motion.p variants={rise} className="mt-6 max-w-2xl text-lg leading-relaxed text-slate-300">
+              </m.h2>
+              <m.p variants={rise} className="mt-6 max-w-2xl text-lg leading-relaxed text-slate-300">
                 Tell us what you are dealing with. Our team will come back with a proactive plan built around your business.
-              </motion.p>
-              <motion.div variants={rise} className="mt-10 flex flex-col gap-4 sm:flex-row">
+              </m.p>
+              <m.div variants={rise} className="mt-10 flex flex-col gap-4 sm:flex-row">
                 <MagneticButton href={`mailto:hello@unevent.com?subject=${encodeURIComponent(service.cta)}`} size="lg">
                   {service.cta}
                 </MagneticButton>
                 <MagneticButton href="mailto:hello@unevent.com" tone="ghost" size="lg" arrow={false}>
                   hello@unevent.com
                 </MagneticButton>
-              </motion.div>
-            </motion.div>
+              </m.div>
+            </m.div>
           </div>
-        </motion.div>
+        </m.div>
 
-        <motion.div variants={stagger(0.1)} initial="hidden" whileInView="show" viewport={viewport} className="mt-16">
-          <motion.h3 variants={rise} className="font-display text-xl font-bold text-[#0B1730]">
+        <m.div variants={stagger(0.1)} initial="hidden" whileInView="show" viewport={viewport} className="mt-16">
+          <m.h3 variants={rise} className="font-display text-xl font-bold text-[#0B1730]">
             Explore other divisions
-          </motion.h3>
+          </m.h3>
           <div className="mt-6 grid gap-5 md:grid-cols-3">
             {others.map((item) => (
-              <motion.a
+              <m.a
                 key={item.slug}
                 variants={rise}
                 href={item.href}
@@ -67,10 +67,10 @@ const ServiceCta = ({ service }) => {
                 <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-slate-200 text-[#0B1730] transition-all duration-300 group-hover:border-transparent group-hover:text-white group-hover:[background-color:var(--accent)]">
                   <Arrow className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5" />
                 </span>
-              </motion.a>
+              </m.a>
             ))}
           </div>
-        </motion.div>
+        </m.div>
       </div>
     </section>
   )

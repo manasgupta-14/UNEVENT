@@ -1,4 +1,4 @@
-import { motion } from 'framer-motion'
+import { m } from 'framer-motion'
 import { Logo } from './ui/Logo'
 import { GlyphIcon } from './ui/icons'
 import { services } from '../data/services'
@@ -22,7 +22,7 @@ const company = [
   { label: 'About Us', href: '/about' },
   { label: 'Industries', href: '/industries' },
   { label: 'Insights', href: '/insights' },
-  { label: 'Case Studies', href: '/case-studies' },
+  { label: 'Illustrative Scenarios', href: '/case-studies' },
   { label: 'Careers', href: '/careers' },
   { label: 'Contact Us', href: '/contact' },
 ]
@@ -82,7 +82,7 @@ const Footer = () => {
             </p>
             <div className="mt-7 flex gap-3">
               {socials.map((social) => (
-                <motion.a
+                <m.a
                   key={social.name}
                   href="#"
                   aria-label={social.name}
@@ -93,7 +93,7 @@ const Footer = () => {
                   <svg viewBox="0 0 24 24" fill="currentColor" className="h-4 w-4" aria-hidden="true">
                     <path d={social.d} />
                   </svg>
-                </motion.a>
+                </m.a>
               ))}
             </div>
           </div>
@@ -141,7 +141,7 @@ const Footer = () => {
             <FooterLink href="#">Privacy Policy</FooterLink>
             <FooterLink href="#">Terms of Service</FooterLink>
             <FooterLink href="#">Cookie Settings</FooterLink>
-            <motion.button
+            <m.button
               onClick={toTop}
               whileHover={{ y: -3 }}
               whileTap={{ scale: 0.92 }}
@@ -151,7 +151,7 @@ const Footer = () => {
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" className="h-4 w-4" aria-hidden="true">
                 <path d="M12 19V5M5 12l7-7 7 7" />
               </svg>
-            </motion.button>
+            </m.button>
           </div>
         </div>
       </div>

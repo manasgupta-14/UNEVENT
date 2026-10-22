@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { motion } from 'framer-motion'
+import { m } from 'framer-motion'
 import PanelShell from './PanelShell'
 import { rgba, tint } from '../../../lib/color'
 
@@ -63,7 +63,7 @@ const LabsVisual = ({ service }) => {
         </div>
         <div className="relative mx-7">
           <div className="absolute inset-x-0 top-3 h-[2px] rounded-full bg-white/10" />
-          <motion.div
+          <m.div
             className="absolute left-0 top-3 h-[2px] rounded-full"
             style={{ background: `linear-gradient(90deg, ${color}, ${light})` }}
             animate={{ width: `${(step / (steps.length - 1)) * 100}%` }}
@@ -74,7 +74,7 @@ const LabsVisual = ({ service }) => {
               const done = index <= step
               return (
                 <div key={label} className="flex w-0 flex-col items-center gap-2">
-                  <motion.span
+                  <m.span
                     className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full border-2 bg-[#0B1730] text-[10px] font-extrabold"
                     animate={{
                       borderColor: done ? color : 'rgba(255,255,255,0.18)',
@@ -85,7 +85,7 @@ const LabsVisual = ({ service }) => {
                     transition={{ duration: 0.4 }}
                   >
                     {index + 1}
-                  </motion.span>
+                  </m.span>
                   <span className="hidden whitespace-nowrap text-[10px] font-semibold text-slate-400 sm:block">{label}</span>
                 </div>
               )
@@ -96,14 +96,14 @@ const LabsVisual = ({ service }) => {
 
       <div className="mt-8 grid grid-cols-3 gap-3">
         {service.deliverables.slice(0, 3).map((label, index) => (
-          <motion.div
+          <m.div
             key={label}
-            className="rounded-xl border border-white/10 bg-white/[0.04] p-3 text-[11px] font-semibold leading-snug text-slate-300"
+            className="rounded-xl border border-white/10 bg-white/[0.04] min-w-0 break-words p-3 text-[10px] font-semibold leading-snug text-slate-300 sm:text-[11px]"
             animate={{ borderColor: ['rgba(255,255,255,0.1)', rgba(color, 0.6), 'rgba(255,255,255,0.1)'] }}
             transition={{ duration: 4, repeat: Infinity, delay: index * 1.3 }}
           >
             {label}
-          </motion.div>
+          </m.div>
         ))}
       </div>
     </PanelShell>

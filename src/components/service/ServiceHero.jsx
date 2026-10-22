@@ -1,4 +1,4 @@
-import { motion } from 'framer-motion'
+import { m } from 'framer-motion'
 import MagneticButton from '../ui/MagneticButton'
 import CountUp from '../ui/CountUp'
 import { GlyphIcon } from '../ui/icons'
@@ -9,7 +9,7 @@ import { ease, rise, stagger } from '../../lib/motion'
 
 const Word = ({ children, delay, style, className = '' }) => (
   <span className="inline-block overflow-hidden pb-[0.14em] align-bottom">
-    <motion.span
+    <m.span
       className={`inline-block ${className}`}
       style={style}
       initial={{ y: '115%' }}
@@ -17,7 +17,7 @@ const Word = ({ children, delay, style, className = '' }) => (
       transition={{ duration: 0.9, delay, ease }}
     >
       {children}
-    </motion.span>
+    </m.span>
   </span>
 )
 
@@ -36,19 +36,19 @@ const ServiceHero = ({ service }) => {
       <div className="pointer-events-none absolute -left-24 top-24 -z-10 h-[360px] w-[360px] animate-float rounded-full blur-[110px]" style={{ backgroundColor: rgba(service.color, 0.22) }} />
       <div className="pointer-events-none absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-[#0B1730] to-transparent" />
 
-      <div className="mx-auto grid max-w-7xl items-center gap-14 px-4 pb-20 pt-14 sm:px-6 lg:grid-cols-[1.02fr_0.98fr] lg:gap-10 lg:px-8 lg:pb-28 lg:pt-20">
-        <motion.div variants={stagger(0.1, 0.1)} initial="hidden" animate="show">
-          <motion.nav variants={rise} aria-label="Breadcrumb" className="flex flex-wrap items-center gap-2 text-sm font-semibold text-slate-400">
+      <div className="mx-auto grid max-w-7xl items-start gap-12 px-4 pb-16 pt-8 sm:px-6 lg:grid-cols-[1.02fr_0.98fr] lg:gap-10 lg:px-8 lg:pb-24 lg:pt-12">
+        <m.div variants={stagger(0.1, 0.1)} initial="hidden" animate="show">
+          <m.nav variants={rise} aria-label="Breadcrumb" className="flex flex-wrap items-center gap-2 text-sm font-semibold text-slate-400">
             <a href="/" className="outline-none transition-colors hover:text-white focus-visible:text-white">Home</a>
             <span aria-hidden="true">/</span>
             <a href="/#services" className="outline-none transition-colors hover:text-white focus-visible:text-white">Services</a>
             <span aria-hidden="true">/</span>
             <span className="text-white">{service.name}</span>
-          </motion.nav>
+          </m.nav>
 
-          <motion.span
+          <m.span
             variants={rise}
-            className="mt-7 inline-flex items-center gap-3 rounded-full border bg-white/5 py-1.5 pl-1.5 pr-4 text-sm font-semibold text-slate-200 backdrop-blur"
+            className="mt-6 inline-flex items-center gap-3 rounded-full border bg-white/5 py-1.5 pl-1.5 pr-4 text-sm font-semibold text-slate-200 backdrop-blur"
             style={{ borderColor: rgba(service.color, 0.45) }}
           >
             <span className="flex h-8 w-8 items-center justify-center rounded-full" style={{ backgroundColor: rgba(service.color, 0.22) }}>
@@ -57,7 +57,7 @@ const ServiceHero = ({ service }) => {
             UNEVENT {service.name}
             <span className="hidden h-1 w-1 rounded-full bg-slate-500 sm:block" />
             <span className="hidden text-slate-400 sm:inline">{service.area}</span>
-          </motion.span>
+          </m.span>
 
           <h1 className="mt-6 font-display text-[2.5rem] font-extrabold leading-[1.06] tracking-tight text-white sm:text-6xl lg:text-[3.9rem]">
             {words.map((word, index) => {
@@ -76,31 +76,31 @@ const ServiceHero = ({ service }) => {
             })}
           </h1>
 
-          <motion.p variants={rise} className="mt-7 max-w-xl text-lg leading-relaxed text-slate-300 sm:text-xl">
+          <m.p variants={rise} className="mt-7 max-w-xl text-lg leading-relaxed text-slate-300 sm:text-xl">
             {service.short}
-          </motion.p>
+          </m.p>
 
-          <motion.div variants={rise} className="mt-10 flex flex-col gap-4 sm:flex-row">
+          <m.div variants={rise} className="mt-10 flex flex-col gap-4 sm:flex-row">
             <MagneticButton href="#contact" size="lg">
               {service.cta}
             </MagneticButton>
             <MagneticButton href="/#services" tone="ghost" size="lg" arrow={false}>
               All services
             </MagneticButton>
-          </motion.div>
+          </m.div>
 
-          <motion.dl variants={rise} className="mt-12 grid max-w-md grid-cols-3 gap-4 border-t border-white/10 pt-8">
+          <m.dl variants={rise} className="mt-12 grid max-w-md grid-cols-3 gap-3 border-t border-white/10 pt-8">
             {stats.map((stat) => (
-              <div key={stat.label}>
+              <div key={stat.label} className="min-w-0">
                 <dt className="sr-only">{stat.label}</dt>
-                <dd className="font-display text-3xl font-bold" style={{ color: tint(service.color, 0.4) }}>
+                <dd className="font-display text-2xl font-bold sm:text-3xl" style={{ color: tint(service.color, 0.4) }}>
                   <CountUp to={stat.value} />
                 </dd>
                 <p className="mt-1 text-xs font-semibold text-slate-400">{stat.label}</p>
               </div>
             ))}
-          </motion.dl>
-        </motion.div>
+          </m.dl>
+        </m.div>
 
         <Visual service={service} />
       </div>

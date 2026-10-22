@@ -1,10 +1,11 @@
-import { lazy, Suspense } from 'react'
+import { lazy, Suspense, useEffect, useRef, useState } from 'react'
 import { Route, Routes } from 'react-router'
 import Navbar from './components/Navbar'
-import Footer from './components/Footer'
 import ScrollManager from './components/ScrollManager'
 import Home from './Home'
+import { PageSkeleton } from './components/ui/Skeletons'
 
+const Footer = lazy(() => import('./components/Footer'))
 const About = lazy(() => import('./components/About'))
 const Contact = lazy(() => import('./components/Contact'))
 const Book = lazy(() => import('./components/Book'))
@@ -21,7 +22,36 @@ const servicePages = Object.entries(modules).map(([path, loader]) => ({
   Page: lazy(loader),
 }))
 
-const loading = <div className="p-8">Loading...</div>
+const loading = <PageSkeleton />
+
+// Footer is far below the fold, so it is only loaded when the visitor gets near it.
+const LazyFooter = () => {
+  const [near, setNear] = useState(() => typeof window === 'undefined' || !('IntersectionObserver' in window))
+  const ref = useRef(null)
+
+  useEffect(() => {
+    const node = ref.current
+    if (near || !node) return undefined
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setNear(true)
+          observer.disconnect()
+        }
+      },
+      { rootMargin: '600px 0px' },
+    )
+    observer.observe(node)
+    return () => observer.disconnect()
+  }, [near])
+
+  if (!near) return <div ref={ref} aria-hidden="true" className="min-h-[24rem] bg-[#0B1730]" />
+  return (
+    <Suspense fallback={<div aria-hidden="true" className="min-h-[24rem] bg-[#0B1730]" />}>
+      <Footer />
+    </Suspense>
+  )
+}
 
 const App = () => (
   <div className="min-h-screen bg-[#F8FAFC] font-sans text-[#334155]">
@@ -121,7 +151,7 @@ const App = () => (
       </Routes>
     </main>
 
-    <Footer />
+    <LazyFooter />
   </div>
 )
 

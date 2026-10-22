@@ -1,4 +1,5 @@
 import { useEffect, useRef } from 'react'
+import { rectOf } from '../../lib/pointer'
 
 const NetworkCanvas = ({ className = '', density = 16000, reach = 130 }) => {
   const canvasRef = useRef(null)
@@ -12,6 +13,7 @@ const NetworkCanvas = ({ className = '', density = 16000, reach = 130 }) => {
     let height = 0
     let frame = 0
     let nodes = []
+    let visible = true
 
     const resize = () => {
       const dpr = Math.min(window.devicePixelRatio || 1, 2)
@@ -21,7 +23,7 @@ const NetworkCanvas = ({ className = '', density = 16000, reach = 130 }) => {
       canvas.width = width * dpr
       canvas.height = height * dpr
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0)
-      const count = Math.round(Math.min(95, Math.max(26, (width * height) / density)))
+      const count = Math.round(Math.min(width < 640 ? 44 : 85, Math.max(26, (width * height) / density)))
       nodes = Array.from({ length: count }, () => ({
         x: Math.random() * width,
         y: Math.random() * height,
@@ -89,7 +91,8 @@ const NetworkCanvas = ({ className = '', density = 16000, reach = 130 }) => {
     }
 
     const onMove = (event) => {
-      const rect = canvas.getBoundingClientRect()
+      if (!visible) return
+      const rect = rectOf(canvas)
       mouse.x = event.clientX - rect.left
       mouse.y = event.clientY - rect.top
     }
@@ -101,6 +104,7 @@ const NetworkCanvas = ({ className = '', density = 16000, reach = 130 }) => {
 
     const visibility = new IntersectionObserver(([entry]) => {
       cancelAnimationFrame(frame)
+      visible = entry.isIntersecting
       if (entry.isIntersecting && !reduce) frame = requestAnimationFrame(draw)
     })
 

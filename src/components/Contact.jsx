@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { useSearchParams } from 'react-router'
-import { motion } from 'framer-motion'
+import { m } from 'framer-motion'
 import usePageMeta from '../hooks/usePageMeta'
 import NetworkCanvas from './ui/NetworkCanvas'
 import SpotlightCard from './ui/SpotlightCard'
@@ -27,7 +27,7 @@ const validators = {
 }
 
 const Reveal = ({ children, className = '', delay = 0 }) => (
-  <motion.div
+  <m.div
     initial={{ opacity: 0, y: 28 }}
     whileInView={{ opacity: 1, y: 0 }}
     viewport={{ once: true, margin: '-60px' }}
@@ -35,7 +35,7 @@ const Reveal = ({ children, className = '', delay = 0 }) => (
     className={className}
   >
     {children}
-  </motion.div>
+  </m.div>
 )
 
 const Eyebrow = ({ children }) => (
@@ -50,14 +50,14 @@ const Eyebrow = ({ children }) => (
 
 const Word = ({ children, delay, className = '' }) => (
   <span className="inline-block overflow-hidden pb-[0.14em] align-bottom">
-    <motion.span
+    <m.span
       className={`inline-block ${className}`}
       initial={{ y: '115%' }}
       animate={{ y: 0 }}
       transition={{ duration: 0.9, delay, ease }}
     >
       {children}
-    </motion.span>
+    </m.span>
   </span>
 )
 
@@ -70,10 +70,10 @@ const Hero = () => (
 
     <div className="relative mx-auto max-w-7xl px-4 pb-16 pt-28 sm:px-6 sm:pt-32 lg:px-8 lg:pb-20 lg:pt-36">
       <div className="grid items-center gap-14 lg:grid-cols-[1.1fr_0.9fr] lg:gap-10">
-      <motion.div variants={stagger(0.1, 0.1)} initial="hidden" animate="show" className="max-w-3xl">
-        <motion.div variants={rise}>
+      <m.div variants={stagger(0.1, 0.1)} initial="hidden" animate="show" className="max-w-3xl">
+        <m.div variants={rise}>
           <Eyebrow>{hero.badge}</Eyebrow>
-        </motion.div>
+        </m.div>
         <h1 className="mt-7 font-display text-[2.3rem] font-extrabold leading-[1.08] tracking-tight text-white sm:text-5xl lg:text-6xl">
           {hero.lead.map((line, index) => (
             <span key={line} className="block">
@@ -89,10 +89,10 @@ const Hero = () => (
             </Word>
           </span>
         </h1>
-        <motion.p variants={rise} className="mt-7 max-w-xl text-lg leading-relaxed text-slate-300 sm:text-xl">
+        <m.p variants={rise} className="mt-7 max-w-xl text-lg leading-relaxed text-slate-300 sm:text-xl">
           {hero.text}
-        </motion.p>
-      </motion.div>
+        </m.p>
+      </m.div>
       <ContactChart />
       </div>
     </div>
@@ -157,14 +157,14 @@ const ContactForm = () => {
   if (sent) {
     return (
       <div className="flex h-full min-h-[420px] flex-col items-center justify-center p-8 text-center sm:p-12">
-        <motion.span
+        <m.span
           initial={{ scale: 0.5, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
           transition={{ duration: 0.6, ease }}
           className="flex h-16 w-16 items-center justify-center rounded-full border border-[#F5B82E]/60 bg-[#F5B82E]/15 shadow-[0_0_30px_rgba(245,184,46,0.4)]"
         >
           <Check className="h-8 w-8" color="#F5B82E" />
-        </motion.span>
+        </m.span>
         <h3 className="mt-6 font-display text-2xl font-bold text-white">{formCopy.successTitle}</h3>
         <p className="mt-3 max-w-sm text-base leading-relaxed text-slate-300">
           {formCopy.successText}{' '}
@@ -236,7 +236,7 @@ const ContactForm = () => {
       </div>
 
       <div className="mt-auto pt-8">
-      <motion.button
+      <m.button
         type="submit"
         whileHover={{ y: -2 }}
         whileTap={{ scale: 0.97 }}
@@ -245,7 +245,7 @@ const ContactForm = () => {
         <span className="pointer-events-none absolute inset-y-0 left-0 w-1/3 animate-shimmer bg-gradient-to-r from-transparent via-white/60 to-transparent" />
         <span className="relative">{formCopy.submit}</span>
         <Arrow className="relative h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
-      </motion.button>
+      </m.button>
       </div>
     </form>
   )
@@ -281,7 +281,7 @@ const DetailRow = ({ row }) => {
 const SocialLink = ({ social }) => {
   const [hovered, setHovered] = useState(false)
   return (
-    <motion.a
+    <m.a
       href={social.href}
       target="_blank"
       rel="noopener noreferrer"
@@ -304,7 +304,7 @@ const SocialLink = ({ social }) => {
       <svg viewBox="0 0 24 24" fill="currentColor" className="h-5 w-5" aria-hidden="true">
         <path d={social.d} fillRule={social.evenodd ? 'evenodd' : 'nonzero'} />
       </svg>
-    </motion.a>
+    </m.a>
   )
 }
 
