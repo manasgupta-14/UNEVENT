@@ -1,7 +1,7 @@
 import { m } from 'framer-motion'
 
-export const LogoMark = ({ className = 'h-[1.75rem] w-auto' }) => (
-  <svg viewBox="0 0 64 68" fill="none" className={className} style={{ filter: 'drop-shadow(0 3px 3px rgba(255,255,255,0.5))' }} aria-hidden="true">
+export const LogoMark = ({ className = 'h-[1.75rem] w-auto', glow = true }) => (
+  <svg viewBox="0 0 64 68" fill="none" className={className} style={glow ? { filter: 'drop-shadow(0 3px 3px rgba(255,255,255,0.5))' } : undefined} aria-hidden="true">
     <defs>
       <linearGradient id="logoBlue" x1="0" y1="0" x2="0" y2="1">
         <stop offset="0" stopColor="#3D8BFF" />

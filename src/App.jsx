@@ -26,7 +26,7 @@ const loading = <PageSkeleton />
 
 // Footer is far below the fold, so it is only loaded when the visitor gets near it.
 const LazyFooter = () => {
-  const [near, setNear] = useState(() => typeof window === 'undefined' || !('IntersectionObserver' in window))
+  const [near, setNear] = useState(true)
   const ref = useRef(null)
 
   useEffect(() => {
@@ -54,7 +54,7 @@ const LazyFooter = () => {
 }
 
 const App = () => (
-  <div className="min-h-screen bg-[#F8FAFC] font-sans text-[#334155]">
+  <div className="min-h-dvh bg-[#F8FAFC] font-sans text-[#334155]">
     <Navbar />
 
     <ScrollManager />
@@ -93,7 +93,7 @@ const App = () => (
         {servicePages.map(({ slug, Page }) => (
           <Route
             key={slug}
-            path={`/services/${slug}`}
+            path={`/practice/${slug}`}
             element={
               <Suspense fallback={loading}>
                 <Page />

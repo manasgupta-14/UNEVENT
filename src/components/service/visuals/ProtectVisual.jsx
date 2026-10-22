@@ -24,9 +24,9 @@ const ProtectVisual = ({ service }) => {
   return (
     <PanelShell
       color={color}
-      title="protect / scan.live"
+      title="protect / sample.scan"
       chips={[
-        { label: 'Threat blocked', pos: '-left-5 top-[20%]', delay: '0s' },
+        { label: 'Sample finding', pos: '-left-5 top-[20%]', delay: '0s' },
         { label: 'Findings ranked', pos: '-right-4 bottom-[26%]', delay: '1.6s', tone: '#FBBF24' },
       ]}
     >

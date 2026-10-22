@@ -1,7 +1,6 @@
 import { lazy, Suspense, useEffect, useRef, useState } from 'react'
 import Hero from './components/Hero'
 import Marquee from './components/Marquee'
-import { CardGridSkeleton } from './components/ui/Skeletons'
 import usePageMeta from './hooks/usePageMeta'
 
 const AboutSection = lazy(() => import('./components/AboutSection'))
@@ -13,8 +12,8 @@ const CtaSection = lazy(() => import('./components/CtaSection'))
 
 // Below-the-fold sections are only fetched/rendered when they come near the screen,
 // so the first paint (hero) is not competing with six other chunks on mobile.
-const Lazy = ({ children, id, count = 3, dark = false }) => {
-  const [near, setNear] = useState(() => typeof window === 'undefined' || !('IntersectionObserver' in window) || Boolean(window.location.hash))
+const Lazy = ({ children, id }) => {
+  const [near, setNear] = useState(true)
   const ref = useRef(null)
 
   useEffect(() => {
@@ -33,28 +32,29 @@ const Lazy = ({ children, id, count = 3, dark = false }) => {
     return () => observer.disconnect()
   }, [near])
 
-  const skeleton = <CardGridSkeleton id={id} count={count} dark={dark} />
+  // Invisible placeholder (keeps the #id anchor) instead of a grey skeleton, so nothing flashes under the hero on first load.
+  const placeholder = <div id={id} aria-hidden="true" />
 
-  if (!near) return <div ref={ref}>{skeleton}</div>
-  return <Suspense fallback={skeleton}>{children}</Suspense>
+  if (!near) return <div ref={ref}>{placeholder}</div>
+  return <Suspense fallback={placeholder}>{children}</Suspense>
 }
 
 const Home = () => {
   usePageMeta({
     title: 'UNEVENT | Risk Advisory: Cyber, Legal, Compliance & Technology',
-    description: 'UNEVENT is a risk advisory firm helping organisations identify and prioritise cyber, legal and compliance exposure, and turn findings into practical controls.',
+    description: 'UNEVENT is a risk advisory firm that helps organisations identify and prioritise cyber, legal and compliance exposure, turn findings into practical controls, and use curated products and services plus in-house technology to strengthen prevention, readiness and response.',
   })
 
   return (
     <>
       <Hero />
       <Marquee />
-      <Lazy id="about"><AboutSection /></Lazy>
-      <Lazy id="services" count={4}><ServicesSection /></Lazy>
-      <Lazy id="approach" count={4}><ApproachSection /></Lazy>
+      <Lazy id="practice"><ServicesSection /></Lazy>
+      <Lazy id="approach"><ApproachSection /></Lazy>
       <Lazy id="industries"><IndustriesSection /></Lazy>
       <Lazy id="insights"><InsightsSection /></Lazy>
-      <Lazy id="contact" count={2} dark><CtaSection /></Lazy>
+      <Lazy id="about"><AboutSection /></Lazy>
+      <Lazy id="contact"><CtaSection /></Lazy>
     </>
   )
 }

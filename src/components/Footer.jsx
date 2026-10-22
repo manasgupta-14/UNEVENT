@@ -1,5 +1,5 @@
 import { m } from 'framer-motion'
-import { Logo } from './ui/Logo'
+import { Logo, LogoMark } from './ui/Logo'
 import { GlyphIcon } from './ui/icons'
 import { services } from '../data/services'
 
@@ -99,7 +99,7 @@ const Footer = () => {
           </div>
 
           <div>
-            <h4 className="font-display text-base font-bold text-white">Services</h4>
+            <h4 className="font-display text-base font-bold text-white">Practice</h4>
             <div className="mt-6 flex flex-col gap-3.5">
               {services.map((service) => (
                 <FooterLink key={service.id} href={service.href}>
@@ -158,9 +158,14 @@ const Footer = () => {
 
       <div
         aria-hidden="true"
-        className="pointer-events-none -mb-[0.18em] select-none bg-gradient-to-b from-white/[0.14] to-transparent bg-clip-text text-center font-display text-[clamp(3.4rem,17vw,14rem)] font-extrabold leading-none tracking-[0.1em] text-transparent"
+        className="pointer-events-none -mb-[0.12em] flex select-none items-end justify-center gap-[0.18rem] font-display text-[clamp(3.4rem,17vw,14rem)] font-extrabold leading-none"
       >
-        UNEVENT
+        <LogoMark glow={false} className="h-[0.86em] w-auto opacity-25" />
+        <span className="flex items-center bg-gradient-to-b from-white/[0.14] to-transparent bg-clip-text tracking-[0.08em] text-transparent">
+          NEVEN
+          <span className="mx-[0.2em] inline-block h-[0.2em] w-[0.2em] translate-y-[0.1em] rounded-full bg-[#F5B82E]/50" />
+          T
+        </span>
       </div>
     </footer>
   )

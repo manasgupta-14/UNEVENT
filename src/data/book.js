@@ -2,18 +2,18 @@
 
 export const meta = {
   title: 'Book a consultation',
-  description: 'Pick a service, a time and book a call with UNEVENT.',
+  description: 'Pick a practice, a time and book a call with UNEVENT.',
 }
 
 export const hero = {
   badge: 'Book a consultation',
   lead: 'Four short steps.',
   accent: 'We will confirm by email.',
-  text: 'Choose a service, a meeting type and a time that suits you. No preparation needed.',
+  text: 'Choose a practice, a meeting type and a time that suits you. No preparation needed.',
 }
 
 export const steps = [
-  { key: 'service', label: 'Service', title: 'What do you need help with?', hint: 'Pick the closest area.' },
+  { key: 'service', label: 'Practice', title: 'What do you need help with?', hint: 'Pick the closest area.' },
   { key: 'meeting', label: 'Meeting', title: 'What kind of meeting suits you?', hint: 'You can change this later.' },
   { key: 'time', label: 'Time', title: 'Pick a day and a time.', hint: 'Weekdays only.' },
   { key: 'details', label: 'Details', title: 'Who should we expect?', hint: 'We use this only to confirm your booking.' },
@@ -40,7 +40,7 @@ export const summary = {
   title: 'Your booking',
   empty: 'Not chosen yet',
   rows: [
-    { key: 'service', label: 'Service' },
+    { key: 'service', label: 'Practice' },
     { key: 'meeting', label: 'Meeting' },
     { key: 'date', label: 'Date' },
     { key: 'time', label: 'Time' },

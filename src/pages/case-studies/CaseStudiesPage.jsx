@@ -118,7 +118,7 @@ const Hero = () => {
   const words = 'See exactly how we work.'.split(' ')
   const stats = [
     { value: cases.length, label: 'Example scenarios' },
-    { value: new Set(cases.map((item) => item.division)).size, label: 'Services shown' },
+    { value: new Set(cases.map((item) => item.division)).size, label: 'Practices shown' },
     { value: stages.length, label: 'Steps in each' },
   ]
 
@@ -129,7 +129,7 @@ const Hero = () => {
       <div className="pointer-events-none absolute -left-32 top-10 -z-10 h-[420px] w-[420px] animate-float rounded-full bg-[#1473E6]/20 blur-[110px]" />
       <div className="pointer-events-none absolute -right-24 bottom-0 -z-10 h-[380px] w-[380px] animate-float rounded-full bg-[#F5B82E]/10 blur-[110px]" style={{ animationDelay: '2s' }} />
 
-      <div className="mx-auto grid max-w-7xl items-center gap-14 px-4 pb-20 pt-14 sm:px-6 lg:grid-cols-[1.05fr_0.95fr] lg:gap-8 lg:px-8 lg:pb-28 lg:pt-20">
+      <div className="mx-auto grid max-w-7xl items-center gap-14 px-4 pb-20 pt-8 sm:px-6 lg:grid-cols-[1.05fr_0.95fr] lg:gap-8 lg:px-8 lg:pb-28 lg:pt-10">
         <m.div variants={stagger(0.1, 0.1)} initial="hidden" animate="show" className="relative z-10">
           <m.nav variants={rise} aria-label="Breadcrumb" className="flex items-center gap-2 text-sm font-semibold text-slate-400">
             <Link to="/" className="outline-none transition-colors hover:text-white focus-visible:text-white">Home</Link>
@@ -156,7 +156,7 @@ const Hero = () => {
           </h1>
 
           <m.p variants={rise} className="mt-7 max-w-xl text-lg leading-relaxed text-slate-300 sm:text-xl">
-            Each scenario shows the challenge, the risks we found, our solution and the outcome. Verified case studies will replace these once client work is cleared for publication.
+            Explore illustrative scenarios showing how UNEVENT could approach common risk situations. These examples are not real client results. Any expected outcomes are illustrative until validated.
           </m.p>
 
           <m.div variants={rise} className="mt-10 grid max-w-md grid-cols-3 gap-3 border-t sm:gap-6 border-white/10 pt-8">

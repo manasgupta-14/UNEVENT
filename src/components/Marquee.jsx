@@ -21,7 +21,7 @@ const Track = ({ hidden = false }) => (
 )
 
 const Marquee = () => (
-  <div className="relative overflow-hidden border-y border-white/10 bg-[#0B1730] py-5">
+  <div className="sticky bottom-0 z-30 overflow-hidden border-y border-white/10 bg-[#0B1730] py-5">
     <div className="[mask-image:linear-gradient(90deg,transparent,black_10%,black_90%,transparent)]">
       <div className="flex w-max animate-marquee hover:[animation-play-state:paused]">
         <Track />

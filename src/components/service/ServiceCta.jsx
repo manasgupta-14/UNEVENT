@@ -29,7 +29,7 @@ const ServiceCta = ({ service }) => {
                 Let&apos;s Discuss Your Requirements
               </m.h2>
               <m.p variants={rise} className="mt-6 max-w-2xl text-lg leading-relaxed text-slate-300">
-                Tell us what you are dealing with. Our team will come back with a proactive plan built around your business.
+                Tell us what you&apos;re dealing with. We&apos;ll help you identify the next practical step.
               </m.p>
               <m.div variants={rise} className="mt-10 flex flex-col gap-4 sm:flex-row">
                 <MagneticButton href={`mailto:hello@unevent.com?subject=${encodeURIComponent(service.cta)}`} size="lg">
@@ -45,7 +45,7 @@ const ServiceCta = ({ service }) => {
 
         <m.div variants={stagger(0.1)} initial="hidden" whileInView="show" viewport={viewport} className="mt-16">
           <m.h3 variants={rise} className="font-display text-xl font-bold text-[#0B1730]">
-            Explore other divisions
+            Explore other practices
           </m.h3>
           <div className="mt-6 grid gap-5 md:grid-cols-3">
             {others.map((item) => (
