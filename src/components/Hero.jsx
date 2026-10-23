@@ -76,7 +76,7 @@ const FloatingChip = ({ chip, sx, sy }) => {
   const y = useTransform(sy, [-0.5, 0.5], [-chip.depth, chip.depth])
 
   return (
-    <m.div style={{ x, y }} className={`absolute z-20 hidden sm:block ${chip.pos}`}>
+    <m.div style={{ x, y }} className={`absolute z-20 hidden sm:block md:landscape:hidden lg:landscape:block ${chip.pos}`}>
       <div className="animate-float" style={{ animationDelay: chip.delay }}>
         <ChipBody chip={chip} />
       </div>
@@ -197,9 +197,9 @@ const ShieldVisual = () => {
 }
 
 const ShieldBlock = () => (
-  <div className="mx-auto w-full max-w-[520px] min-w-0 lg:max-w-[min(430px,54vh)]">
+  <div className="mx-auto w-full max-w-[520px] min-w-0 md:portrait:max-w-[min(520px,40vh)] md:landscape:max-w-[min(560px,62vh)]">
     <ShieldVisual />
-    <div className="mt-6 grid grid-cols-2 gap-3 sm:hidden">
+    <div className="mt-6 grid grid-cols-2 gap-3 sm:hidden md:landscape:grid lg:landscape:hidden">
       {chips.map((chip) => (
         <ChipBody key={chip.id} chip={chip} />
       ))}
@@ -252,7 +252,7 @@ const Hero = () => {
       <div className="pointer-events-none absolute -right-24 bottom-0 -z-10 h-[380px] w-[380px] rounded-full bg-[#F5B82E]/10 blur-[110px]" style={{ animationDelay: '2s' }} />
       <div className="pointer-events-none absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-[#0B1730] to-transparent" />
 
-      <div className="relative mx-auto grid w-full max-w-7xl items-center gap-8 px-4 py-8 sm:px-6 lg:grid-cols-[1.1fr_0.9fr] lg:gap-6 lg:px-8 lg:py-6">
+      <div className="relative mx-auto grid w-full max-w-7xl items-center gap-8 px-4 py-8 sm:px-6 md:portrait:gap-10 md:landscape:grid-cols-[1.1fr_0.9fr] md:landscape:gap-6 md:landscape:py-[clamp(1rem,4vh,3rem)] lg:px-8">
         <m.div variants={stagger(0.07, 0.05)} initial="hidden" animate="show" className="relative z-10 min-w-0">
           <m.span
             variants={rise}
@@ -265,7 +265,7 @@ const Hero = () => {
             Risk advisory · Cyber · Legal · Compliance · Technology
           </m.span>
 
-          <h1 className="mt-4 font-display text-[2.3rem] font-extrabold leading-[1.04] tracking-tight text-white sm:text-5xl lg:text-[clamp(2.4rem,6.4vh,3.4rem)]">
+          <h1 className="mt-4 font-display text-[2.3rem] font-extrabold leading-[1.04] tracking-tight text-white sm:text-5xl md:portrait:text-[length:clamp(3rem,8vw,4.5rem)] md:landscape:text-[length:clamp(2.1rem,min(5.2vw,7.2vh),4.6rem)]">
             <span className="block">
               <Word delay={0.05}>Make</Word> <Word delay={0.11}>Risk</Word> <Word delay={0.17}>a</Word>
             </span>
@@ -279,11 +279,11 @@ const Hero = () => {
             </span>
           </h1>
 
-          <m.p variants={rise} className="mt-4 max-w-xl text-base leading-relaxed text-slate-300 lg:text-[17px]">
+          <m.p variants={rise} className="mt-4 max-w-xl text-base leading-relaxed text-slate-300 md:portrait:max-w-2xl md:portrait:text-lg md:landscape:mt-[clamp(1rem,3.5vh,2rem)] md:landscape:text-[length:clamp(0.9rem,min(1.9vw,2.2vh),1.25rem)]">
             UNEVENT is a risk advisory firm helping organisations identify and prioritise cyber, legal and compliance exposure—and turn findings into practical controls. We combine expert-led advisory with curated products and services and in-house technology to strengthen prevention, readiness and response.
           </m.p>
 
-          <m.div variants={rise} className="mt-6 flex flex-col gap-3 sm:flex-row">
+          <m.div variants={rise} className="mt-6 flex flex-col gap-3 sm:flex-row md:landscape:mt-[clamp(1.25rem,4vh,2.5rem)]">
             <MagneticButton href="/book" size="lg">
               Discuss a risk
             </MagneticButton>
@@ -292,7 +292,7 @@ const Hero = () => {
             </MagneticButton>
           </m.div>
 
-          <m.div variants={rise} className="mt-6 flex flex-wrap items-center gap-2">
+          <m.div variants={rise} className="mt-6 flex flex-wrap items-center gap-2 md:landscape:mt-[clamp(1.25rem,4vh,2.5rem)]">
             {services.map((service) => (
               <a
                 key={service.id}
