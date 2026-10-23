@@ -25,7 +25,6 @@ const navItems = [
   { key: 'contact', label: 'Contact', href: '/contact' },
 ]
 
-// Same order as the sections on the home page (and as the navbar items).
 const sectionKeys = {
   home: 'home',
   practice: 'practice',
@@ -483,7 +482,7 @@ const Navbar = () => {
                         {item.label}
                         {item.mega && <Chevron open={megaOpen} />}
                       </span>
-                      {isActive && (
+                      {isActive && pathname !== '/' && (
                         <m.span
                           layoutId="nav-active"
                           className="absolute inset-x-4 -bottom-0.5 h-[2px] rounded-full bg-[#F5B82E]"

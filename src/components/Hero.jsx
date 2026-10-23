@@ -197,7 +197,7 @@ const ShieldVisual = () => {
 }
 
 const ShieldBlock = () => (
-  <div className="mx-auto w-full max-w-[520px] min-w-0">
+  <div className="mx-auto w-full max-w-[520px] min-w-0 lg:max-w-[min(430px,54vh)]">
     <ShieldVisual />
     <div className="mt-6 grid grid-cols-2 gap-3 sm:hidden">
       {chips.map((chip) => (
@@ -211,7 +211,6 @@ const Hero = () => {
   const [showCanvas, setShowCanvas] = useState(false)
 
   useEffect(() => {
-    // Decorative background: start it after the page has finished loading so it never competes with the first paint.
     let idleId
     let timerId
     const start = () => setShowCanvas(true)
@@ -240,7 +239,7 @@ const Hero = () => {
     <section
       id="home"
       onPointerMove={handleMove}
-      className="relative isolate flex min-h-[calc(100svh-8.5rem)] items-center overflow-hidden bg-[#0B1730]"
+      className="relative isolate flex flex-1 items-center overflow-hidden bg-[#0B1730]"
     >
       {showCanvas && (
         <Suspense fallback={null}>
@@ -253,7 +252,7 @@ const Hero = () => {
       <div className="pointer-events-none absolute -right-24 bottom-0 -z-10 h-[380px] w-[380px] rounded-full bg-[#F5B82E]/10 blur-[110px]" style={{ animationDelay: '2s' }} />
       <div className="pointer-events-none absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-[#0B1730] to-transparent" />
 
-      <div className="relative mx-auto grid w-full max-w-7xl items-center gap-14 px-4 pb-16 pt-8 sm:px-6 lg:grid-cols-[1.05fr_0.95fr] lg:gap-8 lg:px-8 lg:pb-20 lg:pt-10">
+      <div className="relative mx-auto grid w-full max-w-7xl items-center gap-8 px-4 py-8 sm:px-6 lg:grid-cols-[1.1fr_0.9fr] lg:gap-6 lg:px-8 lg:py-6">
         <m.div variants={stagger(0.07, 0.05)} initial="hidden" animate="show" className="relative z-10 min-w-0">
           <m.span
             variants={rise}
@@ -266,7 +265,7 @@ const Hero = () => {
             Risk advisory · Cyber · Legal · Compliance · Technology
           </m.span>
 
-          <h1 className="mt-7 font-display text-[2.7rem] font-extrabold leading-[1.04] tracking-tight text-white sm:text-6xl lg:text-[4.3rem]">
+          <h1 className="mt-4 font-display text-[2.3rem] font-extrabold leading-[1.04] tracking-tight text-white sm:text-5xl lg:text-[clamp(2.4rem,6.4vh,3.4rem)]">
             <span className="block">
               <Word delay={0.05}>Make</Word> <Word delay={0.11}>Risk</Word> <Word delay={0.17}>a</Word>
             </span>
@@ -280,11 +279,11 @@ const Hero = () => {
             </span>
           </h1>
 
-          <m.p variants={rise} className="mt-7 max-w-xl text-lg leading-relaxed text-slate-300 sm:text-xl">
+          <m.p variants={rise} className="mt-4 max-w-xl text-base leading-relaxed text-slate-300 lg:text-[17px]">
             UNEVENT is a risk advisory firm helping organisations identify and prioritise cyber, legal and compliance exposure—and turn findings into practical controls. We combine expert-led advisory with curated products and services and in-house technology to strengthen prevention, readiness and response.
           </m.p>
 
-          <m.div variants={rise} className="mt-10 flex flex-col gap-4 sm:flex-row">
+          <m.div variants={rise} className="mt-6 flex flex-col gap-3 sm:flex-row">
             <MagneticButton href="/book" size="lg">
               Discuss a risk
             </MagneticButton>
@@ -293,7 +292,7 @@ const Hero = () => {
             </MagneticButton>
           </m.div>
 
-          <m.div variants={rise} className="mt-10 flex flex-wrap items-center gap-2.5">
+          <m.div variants={rise} className="mt-6 flex flex-wrap items-center gap-2">
             {services.map((service) => (
               <a
                 key={service.id}
@@ -310,12 +309,7 @@ const Hero = () => {
         <ShieldBlock />
       </div>
 
-      <div className="pointer-events-none absolute bottom-6 left-1/2 hidden -translate-x-1/2 md:block" aria-hidden="true">
-        <div className="flex h-9 w-6 justify-center rounded-full border border-white/25 pt-2">
-          <span className="h-1.5 w-1 animate-cue rounded-full bg-[#F5B82E]" />
-        </div>
-      </div>
-    </section>
+          </section>
   )
 }
 

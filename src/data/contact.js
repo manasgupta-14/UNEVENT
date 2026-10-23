@@ -1,5 +1,3 @@
-// All Contact-page copy and details live here. Replace the placeholders (address, phone,
-// social URLs) with the real ones and the page updates itself.
 
 export const meta = {
   title: 'Contact',
@@ -68,7 +66,6 @@ export const details = {
 
 export const email = 'hello@unevent.com'
 
-// Replace these with your real profile URLs.
 export const socials = [
   {
     name: 'YouTube',
@@ -110,8 +107,6 @@ export const map = {
   directionsLabel: 'Get directions',
 }
 
-// Hero side chart: what happens after someone reaches out. Bar heights show progress
-// toward a reply (an illustrative scale); the reply time comes from the details above.
 export const contactChart = {
   badge: 'What happens next',
   title: 'From your message to our reply.',

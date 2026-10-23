@@ -1,4 +1,3 @@
-// All Book-a-consultation copy lives here. Edit text, meeting types or time slots and the page updates.
 
 export const meta = {
   title: 'Book a consultation',

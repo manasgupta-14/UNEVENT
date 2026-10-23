@@ -18,7 +18,6 @@ const labelColor = (hex) => {
   return luma > 0.6 ? '#0B1730' : '#FFFFFF'
 }
 
-// Each bar value is a cumulative milestone (25, 60, 100). A pie needs shares, so slice = step from the previous milestone.
 const buildSlices = (bars) => {
   let start = -Math.PI / 2
   return bars.map((bar, index) => {

@@ -1,6 +1,3 @@
-// Job application submit helper.
-// Abhi sirf metadata jata hai (file nahi). Real backend lagane par VITE_API_URL set karo
-// (.env me: VITE_API_URL=https://your-api.com) aur wahan file storage + malware scan add karo.
 const API = import.meta.env.VITE_API_URL
 
 const localReference = () => `UNE-${Date.now().toString(36).toUpperCase().slice(-6)}`

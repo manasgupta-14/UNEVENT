@@ -1,6 +1,3 @@
-// Hero side chart. Illustrative scale only (not measured data, not client results).
-// It shows how DPDP (India's Digital Personal Data Protection Act) readiness work
-// is shared across the four UNEVENT practices.
 export const dpdpChart = {
   badge: 'DPDP readiness · Illustrative',
   title: 'Where DPDP work sits across our four practices.',
