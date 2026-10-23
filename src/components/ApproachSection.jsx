@@ -8,35 +8,35 @@ const steps = [
     id: '01',
     title: 'Discover',
     text: 'Understand the business, critical assets, obligations, dependencies and what cannot afford to fail.',
-    output: 'discovery brief and agreed scope.',
+    output: 'Discovery brief and agreed scope.',
     d: 'M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z',
   },
   {
     id: '02',
     title: 'Assess',
     text: 'Identify gaps and rank them by business impact, likelihood and urgency.',
-    output: 'risk register, findings and priorities.',
+    output: 'Risk register, findings and priorities.',
     d: 'M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4',
   },
   {
     id: '03',
     title: 'Implement',
     text: 'Agree and execute actions through advisory, client teams, qualified partners and suitable technology.',
-    output: 'action plan, ownership matrix, implemented controls or handover.',
+    output: 'Action plan, ownership matrix, implemented controls or handover.',
     d: 'M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z M15 12a3 3 0 11-6 0 3 3 0 016 0z',
   },
   {
     id: '04',
     title: 'Prepare & contain',
     text: 'Where included in scope, improve readiness, escalation paths, incident coordination and containment actions.',
-    output: 'runbook, escalation map, tabletop exercise or response plan.',
+    output: 'Runbook, escalation map, tabletop exercise or response plan.',
     d: 'M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z',
   },
   {
     id: '05',
     title: 'Review',
     text: 'Track open actions, test controls and update priorities as the business changes.',
-    output: 'review report, evidence status and next-step plan.',
+    output: 'Review report, evidence status and next-step plan.',
     d: 'M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z',
   },
 ]
@@ -55,11 +55,11 @@ const Step = ({ step, index, progress, onEnter, onLeave }) => {
     <li
       onMouseEnter={onEnter}
       onMouseLeave={onLeave}
-      className="relative flex cursor-pointer gap-5 lg:flex-col lg:items-center lg:px-5 lg:text-center"
+      className="relative grid cursor-pointer grid-cols-[68px_1fr] gap-x-5 lg:row-span-3 lg:grid-cols-1 lg:grid-rows-subgrid lg:justify-items-center lg:gap-x-0 lg:px-5 lg:text-center"
     >
       <m.div
         style={{ borderColor, boxShadow, scale }}
-        className="relative z-10 flex h-[68px] w-[68px] shrink-0 items-center justify-center rounded-2xl border-2 bg-[#0B1730]"
+        className="relative z-10 row-span-2 flex h-[68px] w-[68px] shrink-0 items-center justify-center rounded-2xl border-2 bg-[#0B1730] lg:row-span-1"
       >
         <m.span style={{ color }} className="flex">
           <GlyphIcon d={step.d} className="h-8 w-8" />
@@ -71,7 +71,10 @@ const Step = ({ step, index, progress, onEnter, onLeave }) => {
       <m.div style={{ opacity, y }} className="pt-1 lg:pt-6">
         <h3 className="font-display text-xl font-bold text-white">{step.title}</h3>
         <p className="mt-2 max-w-xs text-sm leading-relaxed text-slate-300">{step.text}</p>
-        <p className="mt-2 max-w-xs text-xs font-semibold leading-relaxed text-[#F5B82E]">Output: {step.output}</p>
+      </m.div>
+      <m.div style={{ opacity, y }} className="pt-3 lg:pt-5">
+        <h4 className="whitespace-nowrap text-xs font-extrabold uppercase tracking-widest text-[#F5B82E]">Output</h4>
+        <p className="mt-1 max-w-xs text-base font-semibold leading-snug text-white">{step.output}</p>
       </m.div>
     </li>
   )
@@ -119,7 +122,7 @@ const ApproachSection = () => {
             <m.div style={{ scaleX: lineProgress }} className="h-full origin-left rounded-full bg-gradient-to-r from-[#F5B82E] to-[#1473E6]" />
           </div>
 
-          <ol className="relative grid gap-10 lg:grid-cols-5 lg:gap-0">
+          <ol className="relative grid gap-10 lg:grid-cols-5 lg:grid-rows-[auto_auto_auto] lg:gap-x-0 lg:gap-y-0">
             {steps.map((step, index) => (
               <Step
                 key={step.id}

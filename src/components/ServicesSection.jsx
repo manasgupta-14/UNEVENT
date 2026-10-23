@@ -33,7 +33,7 @@ const ServiceCard = ({ service }) => {
       onMouseMove={handleMove}
       onMouseLeave={handleLeave}
       style={{ rotateX, rotateY, transformPerspective: 1000, '--accent': service.accent, '--glow': `${service.accent}66` }}
-      className="group relative flex flex-col overflow-hidden rounded-3xl border border-slate-200 bg-white p-7 outline-none transition-[border-color,box-shadow] duration-500 hover:border-[var(--accent)] hover:shadow-[0_34px_70px_-30px_var(--glow)] focus-visible:ring-2 focus-visible:ring-[#1473E6]"
+      className="group relative flex flex-col overflow-hidden rounded-3xl border border-slate-200 bg-white p-6 outline-none sm:p-7 transition-[border-color,box-shadow] duration-500 hover:border-[var(--accent)] hover:shadow-[0_34px_70px_-30px_var(--glow)] focus-visible:ring-2 focus-visible:ring-[#1473E6]"
     >
       <span
         className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-100"
@@ -47,22 +47,23 @@ const ServiceCard = ({ service }) => {
         className="pointer-events-none absolute -bottom-6 -right-6 h-44 w-44 rotate-12 opacity-[0.08] transition-all duration-700 group-hover:rotate-0 group-hover:scale-110 group-hover:opacity-[0.14]"
       />
 
-      <div className="relative flex h-16 w-16 items-center justify-center rounded-2xl border transition-transform duration-500 group-hover:-rotate-6 group-hover:scale-105" style={{ borderColor: `${service.accent}40`, backgroundColor: `${service.accent}1A` }}>
-        <GlyphIcon d={icons[service.id]} color={service.ink} className="h-8 w-8" />
-        <span className="absolute inset-0 rounded-2xl opacity-0 ring-4 transition-opacity duration-500 group-hover:opacity-100" style={{ '--tw-ring-color': `${service.accent}33` }} />
+      <div className="relative flex items-center gap-5">
+        <div className="relative flex h-16 w-16 shrink-0 items-center justify-center rounded-2xl border transition-transform duration-500 group-hover:-rotate-6 group-hover:scale-105" style={{ borderColor: `${service.accent}40`, backgroundColor: `${service.accent}1A` }}>
+          <GlyphIcon d={icons[service.id]} color={service.ink} className="h-8 w-8" />
+          <span className="absolute inset-0 rounded-2xl opacity-0 ring-4 transition-opacity duration-500 group-hover:opacity-100" style={{ '--tw-ring-color': `${service.accent}33` }} />
+        </div>
+        <div className="min-w-0">
+          <p className="text-sm font-semibold text-slate-400">UNEVENT</p>
+          <h3 className="font-display text-2xl font-bold text-[#0B1730]">{service.name}</h3>
+          <p className="text-sm font-bold" style={{ color: service.ink }}>
+            {service.field}
+          </p>
+        </div>
       </div>
 
-      <div className="relative mt-7">
-        <p className="text-sm font-semibold text-slate-400">UNEVENT</p>
-        <h3 className="font-display text-2xl font-bold text-[#0B1730]">{service.name}</h3>
-        <p className="mt-1 text-sm font-bold" style={{ color: service.ink }}>
-          {service.field}
-        </p>
-      </div>
+      <p className="relative mt-5 text-[15px] leading-relaxed text-[#334155]">{service.desc}</p>
 
-      <p className="relative mt-4 text-[15px] leading-relaxed text-[#334155]">{service.desc}</p>
-
-      <ul className="relative mt-6 space-y-2.5">
+      <ul className="relative mt-5 grid gap-x-6 gap-y-2.5 sm:grid-cols-2">
         {service.points.map((point) => (
           <li key={point} className="flex items-start gap-2.5 text-sm text-[#334155]">
             <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full" style={{ backgroundColor: `${service.accent}22` }}>
@@ -73,7 +74,7 @@ const ServiceCard = ({ service }) => {
         ))}
       </ul>
 
-      <div className="relative mt-auto flex items-center justify-between border-t border-slate-100 pt-6">
+      <div className="relative mt-auto flex items-center justify-between border-t border-slate-100 pt-5">
         <span className="text-sm font-bold text-[#0B1730]">Explore Practice</span>
         <span className="flex h-9 w-9 items-center justify-center rounded-full border border-slate-200 text-[#0B1730] transition-all duration-300 group-hover:border-transparent group-hover:text-white group-hover:[background-color:var(--accent)]">
           <Arrow className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5" />
@@ -110,7 +111,7 @@ const ServicesSection = () => (
         initial="hidden"
         whileInView="show"
         viewport={viewport}
-        className="mt-14 grid gap-6 md:grid-cols-2 xl:grid-cols-4"
+        className="mt-14 grid gap-6 md:grid-cols-2"
       >
         {services.map((service) => (
           <ServiceCard key={service.id} service={service} />

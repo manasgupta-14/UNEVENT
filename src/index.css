@@ -40,7 +40,6 @@
     100% { transform: translateY(170px); opacity: 0; }
   }
 
-  /* Right -> left. */
   @keyframes marquee {
     0% { transform: translateX(0); }
     100% { transform: translateX(-50%); }

@@ -24,7 +24,6 @@ const servicePages = Object.entries(modules).map(([path, loader]) => ({
 
 const loading = <PageSkeleton />
 
-// Footer is far below the fold, so it is only loaded when the visitor gets near it.
 const LazyFooter = () => {
   const [near, setNear] = useState(true)
   const ref = useRef(null)

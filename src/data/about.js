@@ -1,4 +1,3 @@
-// All About-page copy lives here. Edit text, add or remove items, and the page updates itself.
 
 export const meta = {
   title: 'About',
@@ -113,8 +112,6 @@ export const divisionsSection = {
   title: 'One team, four ways to make it a non-event.',
 }
 
-// Hero side chart. Values are an illustrative scale (not measured data) that shows
-// the story's point: the later a risk is caught, the more it costs to deal with.
 export const riskChart = {
   badge: 'Why early matters',
   title: 'The later a risk is caught, the more it costs.',

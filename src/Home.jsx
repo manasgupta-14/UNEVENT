@@ -10,8 +10,6 @@ const IndustriesSection = lazy(() => import('./components/IndustriesSection'))
 const InsightsSection = lazy(() => import('./components/InsightsSection'))
 const CtaSection = lazy(() => import('./components/CtaSection'))
 
-// Below-the-fold sections are only fetched/rendered when they come near the screen,
-// so the first paint (hero) is not competing with six other chunks on mobile.
 const Lazy = ({ children, id }) => {
   const [near, setNear] = useState(true)
   const ref = useRef(null)
@@ -32,7 +30,6 @@ const Lazy = ({ children, id }) => {
     return () => observer.disconnect()
   }, [near])
 
-  // Invisible placeholder (keeps the #id anchor) instead of a grey skeleton, so nothing flashes under the hero on first load.
   const placeholder = <div id={id} aria-hidden="true" />
 
   if (!near) return <div ref={ref}>{placeholder}</div>
@@ -47,8 +44,10 @@ const Home = () => {
 
   return (
     <>
-      <Hero />
-      <Marquee />
+      <div className="flex min-h-[calc(100svh-4.1rem)] flex-col">
+        <Hero />
+        <Marquee />
+      </div>
       <Lazy id="practice"><ServicesSection /></Lazy>
       <Lazy id="approach"><ApproachSection /></Lazy>
       <Lazy id="industries"><IndustriesSection /></Lazy>
