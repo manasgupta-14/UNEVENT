@@ -34,9 +34,9 @@ export const Logo = ({ onClick, className = '' }) => (
       </span>
     </span>
     <span className="mt-1.5 flex w-full items-center gap-1.5" aria-hidden="true">
-      <span className="h-px flex-1 bg-[#F5B82E]/80" />
-      <span className="whitespace-nowrap text-[0.5rem] font-medium leading-none tracking-[0.26em] text-slate-300 sm:text-[0.55rem]">MAKE IT A NON-EVENT.</span>
-      <span className="h-px flex-1 bg-[#F5B82E]/80" />
+      <span className="h-[2px] min-w-2 flex-1 rounded-full bg-[#F5B82E]" />
+      <span className="whitespace-nowrap text-[0.5rem] font-medium leading-none tracking-[0.26em] text-slate-300 sm:text-[0.55rem]">MAKE RISK A NON<span className="text-[#F5B82E]">-</span>EVENT.</span>
+      <span className="h-[2px] min-w-2 flex-1 rounded-full bg-[#F5B82E]" />
     </span>
   </m.a>
 )

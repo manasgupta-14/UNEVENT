@@ -30,9 +30,9 @@ const LabsVisual = ({ service }) => {
       color={color}
       title="labs / build.sh"
       chips={[
-        { label: 'React', pos: '-left-5 top-[12%]', delay: '0s', tone: '#61DAFB' },
-        { label: 'Node.js', pos: '-right-5 top-[30%]', delay: '1.2s', tone: '#34D399' },
-        { label: 'MongoDB', pos: 'right-10 -bottom-4', delay: '2.2s', tone: '#4ADE80' },
+        { label: 'Curated solution', pos: '-left-5 top-[12%]', delay: '0s', tone: '#61DAFB' },
+        { label: 'UNEVENT-built', pos: '-right-5 top-[30%]', delay: '1.2s', tone: '#34D399' },
+        { label: 'Custom build', pos: 'right-10 -bottom-4', delay: '2.2s', tone: '#4ADE80' },
       ]}
     >
       <div className="min-h-[9.5rem] rounded-2xl border border-white/10 bg-[#050B18]/80 p-4 font-mono text-[13px] leading-7">

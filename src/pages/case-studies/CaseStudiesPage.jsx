@@ -115,7 +115,7 @@ const Pipeline = () => {
 }
 
 const Hero = () => {
-  const words = 'See exactly how we work.'.split(' ')
+  const words = 'How we approach common risk situations.'.split(' ')
   const stats = [
     { value: cases.length, label: 'Example scenarios' },
     { value: new Set(cases.map((item) => item.division)).size, label: 'Practices shown' },
@@ -236,6 +236,17 @@ const CaseCard = ({ item }) => {
           })}
         </ol>
       </m.div>
+
+      <dl className="relative mt-8 grid gap-4 md:grid-cols-2">
+        <div className="rounded-2xl border border-slate-200 bg-white p-5">
+          <dt className="text-sm font-bold text-[#0B1730]">Deliverables</dt>
+          <dd className="mt-2 text-[15px] leading-relaxed text-[#334155]">{item.deliverables}</dd>
+        </div>
+        <div className="rounded-2xl border border-slate-200 bg-white p-5">
+          <dt className="text-sm font-bold text-[#0B1730]">Assumptions</dt>
+          <dd className="mt-2 text-[15px] leading-relaxed text-[#334155]">{item.assumptions}</dd>
+        </div>
+      </dl>
     </m.article>
   )
 }

@@ -5,7 +5,7 @@ import { Check } from '../ui/icons'
 import { rgba, tint } from '../../lib/color'
 import { rise, stagger, viewport } from '../../lib/motion'
 
-const Node = ({ label, index, count, progress, service }) => {
+const Node = ({ label, output, index, count, progress, service }) => {
   const start = (index / (count - 1)) * 0.86
   const lit = useTransform(progress, [start - 0.08, start + 0.02], [0, 1])
   const borderColor = useTransform(lit, [0, 1], ['#CBD5E1', service.color])
@@ -23,8 +23,9 @@ const Node = ({ label, index, count, progress, service }) => {
       >
         {index + 1}
       </m.span>
-      <m.span style={{ opacity }} className="min-w-0 font-display text-base font-bold leading-snug text-[#0B1730] sm:text-lg lg:text-center lg:text-base">
-        {label}
+      <m.span style={{ opacity }} className="min-w-0 lg:text-center">
+        <span className="block font-display text-base font-bold leading-snug text-[#0B1730] sm:text-lg lg:text-base">{label}</span>
+        {output && <span className="mt-1 block text-sm leading-snug text-slate-500">{output}</span>}
       </m.span>
     </li>
   )
@@ -33,6 +34,7 @@ const Node = ({ label, index, count, progress, service }) => {
 const ServiceProcess = ({ service }) => {
   const ref = useRef(null)
   const count = service.process.length
+  const outputs = Object.fromEntries(service.processOutputs ?? [])
   const { scrollYProgress } = useScroll({ target: ref, offset: ['start 65%', 'end 80%'] })
   const progress = useSpring(scrollYProgress, { stiffness: 120, damping: 26, mass: 0.4 })
 
@@ -44,7 +46,7 @@ const ServiceProcess = ({ service }) => {
           align="center"
           badge="How we work"
           title={`A clear path in ${count} steps`}
-          text="Every engagement follows the same sequence, so you always know what has happened and what comes next."
+          text="Each engagement follows the same sequence, with the output of every step agreed in the scope, so you know what has happened and what comes next."
         />
 
         <div className="relative mt-16 lg:mt-20">
@@ -56,10 +58,25 @@ const ServiceProcess = ({ service }) => {
           </div>
           <ol className="relative grid grid-cols-1 gap-8 lg:[grid-template-columns:repeat(var(--cols),minmax(0,1fr))] lg:gap-0" style={{ '--cols': count }}>
             {service.process.map((label, index) => (
-              <Node key={label} label={label} index={index} count={count} progress={progress} service={service} />
+              <Node key={label} label={label} output={outputs[label]} index={index} count={count} progress={progress} service={service} />
             ))}
           </ol>
         </div>
+
+        {service.altProcess && (
+          <m.div variants={rise} initial="hidden" whileInView="show" viewport={viewport} className="mt-12 rounded-3xl border border-slate-200 bg-[#F8FAFC] p-6 sm:p-7">
+            <h3 className="font-display text-lg font-bold text-[#0B1730]">{service.altProcessTitle}</h3>
+            <ol className="mt-4 flex flex-wrap items-center gap-x-3 gap-y-2 text-sm font-bold text-[#0B1730]">
+              {service.altProcess.map((step, index) => (
+                <li key={step} className="flex items-center gap-3">
+                  <span className="flex h-7 w-7 items-center justify-center rounded-full text-xs font-extrabold text-white" style={{ backgroundColor: service.ink }}>{index + 1}</span>
+                  {step}
+                  {index < service.altProcess.length - 1 && <span aria-hidden="true" className="text-slate-300">→</span>}
+                </li>
+              ))}
+            </ol>
+          </m.div>
+        )}
 
         <m.div
           variants={rise}

@@ -6,8 +6,8 @@ export const meta = {
 
 export const hero = {
   badge: 'About UNEVENT',
-  lead: ['Prevention', 'beats'],
-  accent: 'crisis management.',
+  lead: ['A risk advisory firm', 'built around'],
+  accent: 'four connected practices.',
   text: 'Risk rarely arrives as one isolated problem. A security weakness can delay a sale; a contract clause can expand liability; a compliance gap can leave evidence missing; and a disconnected workflow can make every control harder to operate. UNEVENT brings risk advisory and technology together across Protect, Counsel, Govern and Labs—helping teams identify what matters, act on it and stay ready as conditions change.',
   stats: [
     { key: 'divisions', label: 'Practices' },
@@ -18,9 +18,9 @@ export const hero = {
 
 export const story = {
   badge: 'Our story',
-  title: 'Built to own the warnings everyone else notices.',
-  intro: 'UNEVENT began with a simple observation about how business problems actually happen.',
-  closing: 'Make it a non-event.',
+  title: 'Built to give early warnings a clear owner.',
+  intro: 'UNEVENT is built on a simple observation about how business problems usually develop.',
+  closing: 'Make risk a non-event.',
   chapters: [
     {
       label: 'The signal',
@@ -35,7 +35,7 @@ export const story = {
     {
       label: 'The answer',
       title: 'One team that owns the gap.',
-      text: 'UNEVENT brings Protect, Counsel, Govern and Labs together. We find the issue early, give it a clear owner and close it before it turns into an event.',
+      text: 'UNEVENT brings Protect, Counsel, Govern and Labs together. We help find the issue early, give it a clear owner and work to resolve it before it escalates.',
     },
   ],
 }
@@ -76,7 +76,7 @@ export const values = [
   {
     title: 'Prevention',
     tagline: 'Early beats urgent.',
-    text: 'Fixing a cause costs far less than managing a crisis. We act on small signals while the fix is still simple.',
+    text: 'Acting early is usually simpler than managing a crisis. We prioritise small signals while the fix is still simple.',
     practice: 'Findings ranked by risk, not by volume.',
     color: '#F5B82E',
     icon: 'M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z',
@@ -92,7 +92,7 @@ export const values = [
   {
     title: 'Confidentiality',
     tagline: 'What you share stays with us.',
-    text: 'Your data, documents and findings stay between UNEVENT and your team. We share only what you approve, with the people you approve.',
+    text: 'Your data, documents and findings are shared only with the people you approve. Where a specialist partner is involved, that is agreed with you in writing first.',
     practice: 'Need-to-know access on every project.',
     color: '#4C9BFF',
     icon: 'M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z',
@@ -109,13 +109,13 @@ export const values = [
 
 export const divisionsSection = {
   badge: 'Four practices',
-  title: 'One team, four ways to make it a non-event.',
+  title: 'Four connected practices, one accountable relationship.',
 }
 
 export const riskChart = {
   badge: 'Why early matters',
   title: 'The later a risk is caught, the more it costs.',
-  note: 'Illustrative scale, not measured data.',
+  note: 'Illustrative scale only. These numbers are not measured data or research.',
   unit: 'Relative effort to fix',
   bars: [
     {
@@ -137,5 +137,34 @@ export const riskChart = {
       detail: 'Now it is a crisis: urgent, public and expensive to manage.',
     },
   ],
-  footer: 'UNEVENT keeps you on the left of this chart.',
+  footer: 'Early action keeps the effort on the left of this chart.',
+}
+
+export const delivery = {
+  badge: 'How we deliver',
+  title: 'One accountable advisory relationship. A transparent delivery ecosystem.',
+  text: 'Not every solution is proprietary and not every task is done by one team. We label which is which, so you always know who is responsible for what.',
+  modes: [
+    {
+      label: 'Advisory service',
+      text: 'Assessment, prioritisation, recommendations, governance, implementation guidance and review.',
+      how: 'Shown with scope, deliverables and an accountable lead.',
+    },
+    {
+      label: 'Partner or curated solution',
+      text: 'Third-party products or specialist services selected to fit the problem and integrated where needed.',
+      how: 'Shown with the vendor, licence, dependencies and support roles where appropriate.',
+    },
+    {
+      label: 'UNEVENT-built solution',
+      text: 'Software, automation or integrations developed by UNEVENT.',
+      how: 'Labelled as a prototype, an available product or a custom build, only when that is true.',
+    },
+  ],
+  boundaries: [
+    'Legal advice comes only from qualified lawyers. UNEVENT is not a law firm.',
+    'We help you prepare for audits and certifications. We do not certify or guarantee compliance.',
+    'Incident response and containment support are offered only where they are included in the agreed scope.',
+    'Credentials, accountable leads and partner details are shared during scoping for each engagement.',
+  ],
 }

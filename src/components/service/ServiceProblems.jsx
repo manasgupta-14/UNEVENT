@@ -34,7 +34,7 @@ const ProblemCard = ({ service, text, index }) => {
       <p className="relative mt-6 font-display text-lg font-semibold leading-snug text-[#0B1730]">{text}</p>
       <span className="relative mt-auto flex items-center gap-2 pt-6 text-sm font-bold opacity-100 transition-all duration-500 lg:translate-y-2 lg:opacity-0 lg:group-hover:translate-y-0 lg:group-hover:opacity-100" style={{ color: service.ink }}>
         <Check className="h-4 w-4" />
-        A non-event with UNEVENT
+        What we help reduce
       </span>
     </m.li>
   )
@@ -47,8 +47,8 @@ const ServiceProblems = ({ service }) => (
     <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
       <SectionHeading
         badge="Sound familiar?"
-        title="Problems we help you prevent"
-        text="These are the situations most teams meet right before an incident. They are also the easiest to fix early."
+        title="Problems we help you reduce"
+        text="These situations often come before an incident. They are usually simpler to address early."
       />
       <m.ul variants={stagger(0.1)} initial="hidden" whileInView="show" viewport={viewport} className="mt-14 grid gap-6 sm:grid-cols-2 xl:grid-cols-4">
         {service.problems.map((text, index) => (

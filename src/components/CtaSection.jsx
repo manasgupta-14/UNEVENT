@@ -2,6 +2,7 @@ import { m } from 'framer-motion'
 import MagneticButton from './ui/MagneticButton'
 import NetworkCanvas from './ui/NetworkCanvas'
 import { services } from '../data/services'
+import { company } from '../data/company'
 import { rise, stagger, viewport } from '../lib/motion'
 
 const CtaSection = () => (
@@ -22,14 +23,14 @@ const CtaSection = () => (
               Tell us your biggest risk.
             </m.h2>
             <m.p variants={rise} className="mt-6 max-w-2xl text-lg leading-relaxed text-slate-300">
-              Security, contracts, compliance or software: share what worries you and we will reply with a clear, practical plan.
+              Security, contracts, compliance or software: share what you are dealing with and we will suggest a practical next step.
             </m.p>
             <m.div variants={rise} className="mt-10 flex flex-col gap-4 sm:flex-row">
               <MagneticButton href="/book" size="lg">
-                Book a Consultation
+                Book an intro call
               </MagneticButton>
-              <MagneticButton href="mailto:hello@unevent.com" tone="ghost" size="lg" arrow={false}>
-                hello@unevent.com
+              <MagneticButton href={`mailto:${company.email}`} tone="ghost" size="lg" arrow={false}>
+                {company.email}
               </MagneticButton>
             </m.div>
             <m.div variants={rise} className="mt-10 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-sm font-semibold text-slate-400">

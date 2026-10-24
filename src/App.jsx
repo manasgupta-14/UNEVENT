@@ -1,5 +1,5 @@
 import { lazy, Suspense, useEffect, useRef, useState } from 'react'
-import { Route, Routes } from 'react-router'
+import { Navigate, Route, Routes } from 'react-router'
 import Navbar from './components/Navbar'
 import ScrollManager from './components/ScrollManager'
 import Home from './Home'
@@ -14,6 +14,8 @@ const InsightsPage = lazy(() => import('./pages/insights/InsightsPage'))
 const ArticlePage = lazy(() => import('./pages/insights/ArticlePage'))
 const CaseStudiesPage = lazy(() => import('./pages/case-studies/CaseStudiesPage'))
 const CareersPage = lazy(() => import('./pages/careers/CareersPage'))
+const SamplesPage = lazy(() => import('./pages/samples/SamplesPage'))
+const LegalPage = lazy(() => import('./pages/legal/LegalPage'))
 
 const modules = import.meta.glob('./pages/*Page.jsx')
 
@@ -54,11 +56,14 @@ const LazyFooter = () => {
 
 const App = () => (
   <div className="min-h-dvh bg-[#F8FAFC] font-sans text-[#334155]">
+    <a href="#main" className="sr-only z-[100] rounded-lg bg-[#F5B82E] px-4 py-2.5 text-sm font-bold text-[#0B1730] outline-none focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:ring-2 focus:ring-white">
+      Skip to main content
+    </a>
     <Navbar />
 
     <ScrollManager />
 
-    <main>
+    <main id="main" tabIndex={-1} className="outline-none">
       <Routes>
         <Route path="/" element={<Home />} />
 
@@ -128,8 +133,31 @@ const App = () => (
           }
         />
 
+        <Route path="/case-studies" element={<Navigate to="/scenarios" replace />} />
+
         <Route
-          path="/case-studies"
+          path="/samples"
+          element={
+            <Suspense fallback={loading}>
+              <SamplesPage />
+            </Suspense>
+          }
+        />
+
+        {['privacy', 'terms', 'cookies'].map((slug) => (
+          <Route
+            key={slug}
+            path={`/${slug}`}
+            element={
+              <Suspense fallback={loading}>
+                <LegalPage slug={slug} />
+              </Suspense>
+            }
+          />
+        ))}
+
+        <Route
+          path="/scenarios"
           element={
             <Suspense fallback={loading}>
               <CaseStudiesPage />

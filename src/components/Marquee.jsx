@@ -1,7 +1,7 @@
 const items = [
-  { label: 'Cyber threats', color: '#1685DB' },
-  { label: 'Legal risk', color: '#E9AB27' },
-  { label: 'Compliance failures', color: '#7146C8' },
+  { label: 'Cyber exposure', color: '#1685DB' },
+  { label: 'Legal and commercial risk', color: '#E9AB27' },
+  { label: 'Compliance gaps', color: '#7146C8' },
   { label: 'Technology challenges', color: '#C58A19' },
 ]
 
@@ -12,7 +12,7 @@ const Track = ({ hidden = false }) => (
         <span className="flex items-center gap-3 whitespace-nowrap font-display text-lg font-semibold text-white sm:text-xl">
           <span className="h-2 w-2 rotate-45 rounded-[2px]" style={{ backgroundColor: item.color, boxShadow: `0 0 12px ${item.color}` }} />
           {item.label}
-          <span className="font-medium text-slate-500">become a non-event</span>
+          <span className="font-medium text-slate-500">identified earlier, handled better</span>
         </span>
         <span className="h-px w-10 bg-gradient-to-r from-white/30 to-transparent" />
       </div>

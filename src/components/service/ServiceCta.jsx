@@ -3,6 +3,7 @@ import MagneticButton from '../ui/MagneticButton'
 import NetworkCanvas from '../ui/NetworkCanvas'
 import { Arrow } from '../ui/icons'
 import { services } from '../../data/services'
+import { company } from '../../data/company'
 import { rgba } from '../../lib/color'
 import { rise, stagger, viewport } from '../../lib/motion'
 
@@ -26,17 +27,17 @@ const ServiceCta = ({ service }) => {
                 UNEVENT {service.name}
               </m.span>
               <m.h2 variants={rise} className="mt-6 font-display text-3xl font-bold leading-[1.12] tracking-tight text-white sm:text-5xl">
-                Let&apos;s Discuss Your Requirements
+                Start with a scoped first step
               </m.h2>
               <m.p variants={rise} className="mt-6 max-w-2xl text-lg leading-relaxed text-slate-300">
-                Tell us what you&apos;re dealing with. We&apos;ll help you identify the next practical step.
+                Tell us what you&apos;re dealing with, your timeline and the support you need. We&apos;ll help you identify the next practical step.
               </m.p>
               <m.div variants={rise} className="mt-10 flex flex-col gap-4 sm:flex-row">
-                <MagneticButton href={`mailto:hello@unevent.com?subject=${encodeURIComponent(service.cta)}`} size="lg">
+                <MagneticButton href={`mailto:${company.email}?subject=${encodeURIComponent(service.cta)}`} size="lg">
                   {service.cta}
                 </MagneticButton>
-                <MagneticButton href="mailto:hello@unevent.com" tone="ghost" size="lg" arrow={false}>
-                  hello@unevent.com
+                <MagneticButton href={`mailto:${company.email}`} tone="ghost" size="lg" arrow={false}>
+                  {company.email}
                 </MagneticButton>
               </m.div>
             </m.div>

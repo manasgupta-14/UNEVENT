@@ -6,6 +6,7 @@ import usePageMeta from './hooks/usePageMeta'
 const AboutSection = lazy(() => import('./components/AboutSection'))
 const ServicesSection = lazy(() => import('./components/ServicesSection'))
 const ApproachSection = lazy(() => import('./components/ApproachSection'))
+const OffersSection = lazy(() => import('./components/OffersSection'))
 const IndustriesSection = lazy(() => import('./components/IndustriesSection'))
 const InsightsSection = lazy(() => import('./components/InsightsSection'))
 const CtaSection = lazy(() => import('./components/CtaSection'))
@@ -50,6 +51,7 @@ const Home = () => {
       </div>
       <Lazy id="practice"><ServicesSection /></Lazy>
       <Lazy id="approach"><ApproachSection /></Lazy>
+      <Lazy id="offers"><OffersSection /></Lazy>
       <Lazy id="industries"><IndustriesSection /></Lazy>
       <Lazy id="insights"><InsightsSection /></Lazy>
       <Lazy id="about"><AboutSection /></Lazy>

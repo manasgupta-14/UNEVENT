@@ -67,17 +67,17 @@ const Panel = ({ item, active, onActivate }) => {
       </div>
 
       <div
-        className={`relative flex h-full flex-col justify-end p-7 transition-opacity duration-500 lg:absolute lg:inset-y-0 lg:left-0 lg:w-[480px] lg:p-9 ${
+        className={`relative flex h-full flex-col justify-end p-6 sm:p-7 transition-opacity duration-500 lg:absolute lg:inset-y-0 lg:left-0 lg:w-[clamp(21rem,36vw,30rem)] lg:justify-center lg:p-8 xl:p-9 ${
           active ? 'lg:opacity-100 lg:delay-300' : 'lg:pointer-events-none lg:opacity-0'
         }`}
       >
         <GlyphIcon d={d} color={accent} strokeWidth={0.8} className="pointer-events-none absolute -right-6 -top-6 h-52 w-52 opacity-[0.1] lg:left-[270px] lg:right-auto" />
-        <span className="mb-5 flex h-14 w-14 items-center justify-center rounded-2xl border" style={{ borderColor: `${accent}66`, backgroundColor: `${accent}22` }}>
+        <span className="mb-4 flex h-14 w-14 items-center justify-center rounded-2xl border" style={{ borderColor: `${accent}66`, backgroundColor: `${accent}22` }}>
           <GlyphIcon d={d} color={accent} className="h-7 w-7" />
         </span>
         <h3 className="font-display text-2xl font-bold text-white sm:text-3xl">{item.name}</h3>
         <p className="mt-3 max-w-sm text-[15px] leading-relaxed text-slate-300">{item.challenge}</p>
-        <p className="mt-3 max-w-sm text-[14px] leading-relaxed text-slate-400">
+        <p className="mt-3 max-w-sm text-[14px] leading-relaxed text-slate-300">
           <span className="font-bold text-white">Our approach: </span>
           {item.approach}
         </p>
@@ -116,7 +116,7 @@ const IndustriesSection = () => {
           title="Built for sectors where one incident changes everything"
           text="We bring the same proactive approach to teams that handle sensitive data, regulated workflows and high-stakes operations."
         />
-        <m.div variants={stagger(0.1)} initial="hidden" whileInView="show" viewport={viewport} className="mt-14 flex flex-col gap-4 lg:h-[500px] lg:flex-row">
+        <m.div variants={stagger(0.1)} initial="hidden" whileInView="show" viewport={viewport} className="mt-14 flex flex-col gap-4 lg:h-[35rem] lg:flex-row">
           {industries.map((item, index) => (
             <Panel key={item.slug} item={item} active={active === index} onActivate={() => setActive(index)} />
           ))}

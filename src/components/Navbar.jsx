@@ -20,7 +20,8 @@ const navItems = [
   { key: 'practice', label: 'Practices', mega: true },
   { key: 'industries', label: 'Industries', href: '/industries' },
   { key: 'insights', label: 'Insights', href: '/insights' },
-  { key: 'case-studies', label: 'Scenarios', href: '/case-studies' },
+  { key: 'case-studies', label: 'Scenarios', href: '/scenarios' },
+  { key: 'samples', label: 'Samples', href: '/samples' },
   { key: 'about', label: 'About', href: '/about' },
   { key: 'contact', label: 'Contact', href: '/contact' },
 ]
@@ -37,7 +38,7 @@ const sectionKeys = {
 
 const sectionOrder = Object.keys(sectionKeys)
 
-const routeKeys = ['about', 'contact', 'industries', 'insights', 'case-studies']
+const routeKeys = ['about', 'contact', 'industries', 'insights', 'case-studies', 'samples']
 
 const ease = [0.22, 1, 0.36, 1]
 
@@ -322,9 +323,11 @@ const Navbar = () => {
     ? 'industries'
     : pathname.startsWith('/insights')
       ? 'insights'
-      : pathname.startsWith('/case-studies')
+      : pathname.startsWith('/scenarios')
         ? 'case-studies'
-        : onAbout
+        : pathname.startsWith('/samples')
+          ? 'samples'
+          : onAbout
           ? 'about'
           : onContact
             ? 'contact'

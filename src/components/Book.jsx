@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import { createPortal } from 'react-dom'
+import { useSearchParams } from 'react-router'
 import { AnimatePresence, m } from 'framer-motion'
 import usePageMeta from '../hooks/usePageMeta'
 import NetworkCanvas from './ui/NetworkCanvas'
@@ -9,6 +10,7 @@ import { inputClass } from '../lib/form'
 import { Arrow, Check, GlyphIcon } from './ui/icons'
 import { icons, services } from '../data/services'
 import { email } from '../data/contact'
+import { offers } from '../data/offers'
 import { hero, meetings, meta, popup, steps, summary, timeNote, times } from '../data/book'
 import { rgba, tint } from '../lib/color'
 import { ease, rise, stagger } from '../lib/motion'
@@ -49,7 +51,7 @@ const Eyebrow = ({ children }) => (
   </span>
 )
 
-const Hero = () => (
+const Hero = ({ startingPoint }) => (
   <section className="relative isolate overflow-hidden bg-[#0B1730]">
     <NetworkCanvas className="opacity-60" />
     <div className="pointer-events-none absolute inset-0 -z-10 bg-[linear-gradient(rgba(255,255,255,0.045)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.045)_1px,transparent_1px)] [background-size:56px_56px] [mask-image:radial-gradient(ellipse_at_center,black,transparent_78%)]" />
@@ -69,6 +71,11 @@ const Hero = () => (
         <m.p variants={rise} className="mt-6 max-w-xl text-lg leading-relaxed text-slate-300 sm:text-xl">
           {hero.text}
         </m.p>
+        {startingPoint && (
+          <m.p variants={rise} className="mt-5 inline-flex max-w-xl rounded-xl border border-[#F5B82E]/40 bg-[#F5B82E]/10 px-4 py-3 text-sm font-semibold text-[#FFE29A]">
+            Starting point: {startingPoint.name}. {startingPoint.output}
+          </m.p>
+        )}
       </m.div>
     </div>
   </section>
@@ -197,7 +204,7 @@ const SummaryCard = ({ booking, days }) => {
   )
 }
 
-const ConfirmPopup = ({ booking, reference, days, onClose }) => {
+const ConfirmPopup = ({ booking, reference, days, onClose, startingPoint }) => {
   const closeRef = useRef(null)
   const service = services.find((item) => item.slug === booking.service)
   const meeting = meetings.find((item) => item.key === booking.meeting)
@@ -212,6 +219,7 @@ const ConfirmPopup = ({ booking, reference, days, onClose }) => {
     ['Name', booking.name.trim()],
     ['Email', booking.email.trim()],
     ['Company', booking.company.trim()],
+    ...(startingPoint ? [['Starting point', startingPoint.name]] : []),
   ]
 
   useEffect(() => {
@@ -322,7 +330,9 @@ const ConfirmPopup = ({ booking, reference, days, onClose }) => {
 }
 
 const Book = () => {
-  usePageMeta(meta.title, meta.description)
+  usePageMeta(meta)
+  const [searchParams] = useSearchParams()
+  const startingPoint = offers.find((item) => item.slug === searchParams.get('offer')) ?? null
   const [days] = useState(() => nextDays(10))
   const [step, setStep] = useState(0)
   const [booking, setBooking] = useState(emptyBooking)
@@ -379,7 +389,7 @@ const Book = () => {
 
   return (
     <>
-      <Hero />
+      <Hero startingPoint={startingPoint} />
       <section className="relative bg-[#0E1D3B] py-16 lg:py-24">
         <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(rgba(255,255,255,0.06)_1px,transparent_1px)] [background-size:26px_26px] [mask-image:radial-gradient(ellipse_at_center,black,transparent_75%)]" />
         <div className="relative mx-auto grid max-w-7xl items-stretch gap-6 px-4 sm:px-6 lg:grid-cols-[1.4fr_0.6fr] lg:gap-8 lg:px-8">
@@ -510,7 +520,7 @@ const Book = () => {
       </section>
 
       <AnimatePresence>
-        {confirmed && <ConfirmPopup key="popup" booking={confirmed.booking} reference={confirmed.reference} days={days} onClose={closePopup} />}
+        {confirmed && <ConfirmPopup key="popup" startingPoint={startingPoint} booking={confirmed.booking} reference={confirmed.reference} days={days} onClose={closePopup} />}
       </AnimatePresence>
     </>
   )

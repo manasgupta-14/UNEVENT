@@ -16,6 +16,7 @@ import RiskChart from './ui/RiskChart'
 import { Arrow, GlyphIcon } from './ui/icons'
 import { icons, services } from '../data/services'
 import {
+  delivery,
   divisionsSection,
   hero,
   meta,
@@ -325,8 +326,44 @@ const DivisionsSection = () => (
   </section>
 )
 
+const DeliverySection = () => (
+  <section className="relative bg-[#0B1730] py-20 lg:py-28">
+    <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <Reveal>
+        <Eyebrow>{delivery.badge}</Eyebrow>
+        <h2 className="mt-5 max-w-3xl font-display text-3xl font-extrabold tracking-tight text-white sm:text-4xl">{delivery.title}</h2>
+        <p className="mt-5 max-w-2xl text-lg leading-relaxed text-slate-300">{delivery.text}</p>
+      </Reveal>
+
+      <div className="mt-12 grid gap-5 md:grid-cols-3">
+        {delivery.modes.map((mode, index) => (
+          <Reveal key={mode.label} delay={index * 0.08}>
+            <div className="h-full rounded-3xl border border-white/10 bg-white/[0.04] p-6">
+              <p className="font-display text-lg font-bold text-white">{mode.label}</p>
+              <p className="mt-3 text-sm leading-relaxed text-slate-300">{mode.text}</p>
+              <p className="mt-4 border-t border-white/10 pt-4 text-sm leading-relaxed text-slate-400">{mode.how}</p>
+            </div>
+          </Reveal>
+        ))}
+      </div>
+
+      <Reveal className="mt-10 rounded-3xl border border-[#F5B82E]/30 bg-[#F5B82E]/[0.06] p-6 sm:p-8">
+        <p className="font-display text-lg font-bold text-white">Service boundaries</p>
+        <ul className="mt-4 grid gap-3 text-sm leading-relaxed text-slate-300 md:grid-cols-2">
+          {delivery.boundaries.map((item) => (
+            <li key={item} className="flex gap-3">
+              <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-[#F5B82E]" />
+              {item}
+            </li>
+          ))}
+        </ul>
+      </Reveal>
+    </div>
+  </section>
+)
+
 const About = () => {
-  usePageMeta(meta.title, meta.description)
+  usePageMeta(meta)
 
   return (
     <>
@@ -335,6 +372,7 @@ const About = () => {
       <DirectionSection />
       <ValuesSection />
       <DivisionsSection />
+      <DeliverySection />
       <div className="bg-[#F8FAFC] pt-20 lg:pt-28">
         <CtaSection />
       </div>

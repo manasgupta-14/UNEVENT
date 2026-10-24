@@ -6,6 +6,7 @@ import NetworkCanvas from '../../components/ui/NetworkCanvas'
 import InsightCard from '../../components/InsightCard'
 import CtaSection from '../../components/CtaSection'
 import { articles } from '../../data/content'
+import { services } from '../../data/services'
 import { categoryColor, formatDate } from '../../lib/insights'
 import { rgba } from '../../lib/color'
 import { ease, rise, stagger, viewport } from '../../lib/motion'
@@ -31,6 +32,7 @@ const ArticlePage = () => {
   if (!article) return <Navigate to="/insights" replace />
 
   const color = categoryColor(article.category)
+  const relatedService = services.find((item) => item.id === article.practice)
   const others = articles.filter((item) => item.slug !== article.slug)
   const related = [...others.filter((item) => item.category === article.category), ...others.filter((item) => item.category !== article.category)].slice(0, 2)
   const share = `https://twitter.com/intent/tweet?text=${encodeURIComponent(article.title)}&url=${encodeURIComponent(window.location.href)}`
@@ -74,7 +76,7 @@ const ArticlePage = () => {
             </h1>
 
             <m.p variants={rise} className="mt-6 text-sm font-semibold text-slate-400">
-              {formatDate(article.date)} · {article.read} min read
+              By the UNEVENT team · Published {formatDate(article.date)} · {article.read} min read
             </m.p>
           </m.div>
         </section>
@@ -99,6 +101,27 @@ const ArticlePage = () => {
                 </m.p>
               ))}
             </m.div>
+
+            {relatedService && (
+              <aside className="mt-12 rounded-3xl border p-6 sm:p-7" style={{ borderColor: rgba(relatedService.color, 0.5), backgroundColor: rgba(relatedService.color, 0.06) }}>
+                <p className="text-sm font-bold text-slate-500">Next step</p>
+                <p className="mt-2 font-display text-lg font-bold text-[#0B1730]">{article.trigger}</p>
+                <div className="mt-4 flex flex-wrap gap-3">
+                  <Link to={relatedService.href} className="rounded-xl bg-[#0B1730] px-4 py-2.5 text-sm font-bold text-white outline-none hover:bg-[#13244a] focus-visible:ring-2 focus-visible:ring-[#1473E6]">
+                    {relatedService.cta}
+                  </Link>
+                  <Link to={`/samples#${relatedService.sample}`} className="rounded-xl border border-slate-300 px-4 py-2.5 text-sm font-bold text-[#0B1730] outline-none hover:border-[#1473E6] focus-visible:ring-2 focus-visible:ring-[#1473E6]">
+                    {relatedService.sampleLabel}
+                  </Link>
+                </div>
+              </aside>
+            )}
+
+            {article.category === 'Legal and Contract Risk' && (
+              <p className="mt-6 text-sm leading-relaxed text-slate-500">
+                This is general information, not legal advice. Laws differ by jurisdiction, so have a qualified lawyer review anything that matters.
+              </p>
+            )}
 
             <div className="mt-12 flex flex-wrap items-center gap-3 border-t border-slate-200 pt-8">
               <span className="text-sm font-bold text-[#0B1730]">Share this article</span>
