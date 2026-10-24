@@ -2,59 +2,28 @@ import { m } from 'framer-motion'
 import { Logo, LogoMark } from './ui/Logo'
 import { GlyphIcon } from './ui/icons'
 import { services } from '../data/services'
+import { company, legalNotice } from '../data/company'
+import { socials as profiles } from '../data/contact'
 
-const socials = [
-  {
-    name: 'LinkedIn',
-    d: 'M4.98 3.5a2.5 2.5 0 11-.02 5 2.5 2.5 0 01.02-5zM3 9.75h4V21H3zM9.75 9.75h3.83v1.54h.05c.53-1 1.84-2.07 3.79-2.07 4.05 0 4.8 2.67 4.8 6.13V21h-4v-4.9c0-1.17-.02-2.67-1.63-2.67-1.63 0-1.88 1.27-1.88 2.59V21h-4z',
-  },
-  {
-    name: 'X',
-    d: 'M18.244 2H21.5l-7.12 8.14L22.75 22h-6.55l-5.13-6.7L5.2 22H1.94l7.62-8.71L1.5 2h6.7l4.64 6.13L18.244 2zm-1.15 18h1.8L7.02 3.9H5.1L17.094 20z',
-  },
-  {
-    name: 'GitHub',
-    d: 'M12 .5a11.5 11.5 0 00-3.64 22.41c.58.11.79-.25.79-.56v-2c-3.2.7-3.88-1.37-3.88-1.37-.52-1.33-1.28-1.69-1.28-1.69-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.55-.29-5.24-1.28-5.24-5.69 0-1.26.45-2.28 1.19-3.09-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.17 1.18a10.9 10.9 0 015.78 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.83 1.19 3.09 0 4.42-2.69 5.39-5.25 5.68.41.36.78 1.06.78 2.14v3.17c0 .31.21.68.8.56A11.5 11.5 0 0012 .5z',
-  },
-]
-
-const company = [
+const companyLinks = [
   { label: 'About Us', href: '/about' },
   { label: 'Industries', href: '/industries' },
   { label: 'Insights', href: '/insights' },
-  { label: 'Illustrative Scenarios', href: '/case-studies' },
+  { label: 'Illustrative Scenarios', href: '/scenarios' },
+  { label: 'Sample Deliverables', href: '/samples' },
   { label: 'Careers', href: '/careers' },
   { label: 'Contact Us', href: '/contact' },
 ]
 
+const phoneIcon = 'M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z'
+const mailIcon = 'M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z'
+const pinIcon = 'M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z M15 11a3 3 0 11-6 0 3 3 0 016 0z'
+
 const contact = [
-  {
-    d: 'M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z M15 11a3 3 0 11-6 0 3 3 0 016 0z',
-    node: (
-      <span>
-        123 Security Blvd, Suite 400
-        <br />
-        Tech District, NY 10001
-      </span>
-    ),
-  },
-  {
-    d: 'M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z',
-    node: (
-      <a href="mailto:hello@unevent.com" className="transition-colors hover:text-white">
-        hello@unevent.com
-      </a>
-    ),
-  },
-  {
-    d: 'M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z',
-    node: (
-      <a href="tel:+18005550199" className="transition-colors hover:text-white">
-        +1 (800) 555-0199
-      </a>
-    ),
-  },
-]
+  company.address && { d: pinIcon, node: <span>{company.address}</span> },
+  { d: mailIcon, node: <a href={`mailto:${company.email}`} className="transition-colors hover:text-white">{company.email}</a> },
+  company.phone && { d: phoneIcon, node: <a href={`tel:${company.phone.replace(/[^+\d]/g, '')}`} className="transition-colors hover:text-white">{company.phone}</a> },
+].filter(Boolean)
 
 const FooterLink = ({ href, children }) => (
   <a
@@ -78,13 +47,16 @@ const Footer = () => {
           <div>
             <Logo onClick={(event) => { event.preventDefault(); toTop() }} />
             <p className="mt-6 max-w-sm text-sm leading-relaxed text-slate-400">
-              Make risk a non-event. Cybersecurity, legal risk, compliance and custom software, from one team.
+              Make risk a non-event. A risk advisory firm connecting cyber, legal and compliance insight with curated and in-house technology.
             </p>
-            <div className="mt-7 flex gap-3">
-              {socials.map((social) => (
+            <p className="mt-4 max-w-sm text-xs leading-relaxed text-slate-500">{legalNotice}</p>
+            {profiles.length > 0 && <div className="mt-7 flex gap-3">
+              {profiles.map((social) => (
                 <m.a
                   key={social.name}
-                  href="#"
+                  href={social.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   aria-label={social.name}
                   whileHover={{ y: -4 }}
                   whileTap={{ scale: 0.92 }}
@@ -95,7 +67,7 @@ const Footer = () => {
                   </svg>
                 </m.a>
               ))}
-            </div>
+            </div>}
           </div>
 
           <div>
@@ -112,7 +84,7 @@ const Footer = () => {
           <div>
             <h4 className="font-display text-base font-bold text-white">Company</h4>
             <div className="mt-6 flex flex-col gap-3.5">
-              {company.map((item) => (
+              {companyLinks.map((item) => (
                 <FooterLink key={item.label} href={item.href}>
                   {item.label}
                 </FooterLink>
@@ -136,11 +108,11 @@ const Footer = () => {
         </div>
 
         <div className="mt-16 flex flex-col items-center justify-between gap-5 border-t border-white/10 py-8 md:flex-row">
-          <p className="text-sm text-slate-500">&copy; {new Date().getFullYear()} UNEVENT. All rights reserved.</p>
+          <p className="text-sm text-slate-500">&copy; {new Date().getFullYear()} {company.legalName || 'UNEVENT'}. All rights reserved.</p>
           <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2">
-            <FooterLink href="#">Privacy Policy</FooterLink>
-            <FooterLink href="#">Terms of Service</FooterLink>
-            <FooterLink href="#">Cookie Settings</FooterLink>
+            <FooterLink href="/privacy">Privacy Policy</FooterLink>
+            <FooterLink href="/terms">Terms of Service</FooterLink>
+            <FooterLink href="/cookies">Cookie Settings</FooterLink>
             <m.button
               onClick={toTop}
               whileHover={{ y: -3 }}

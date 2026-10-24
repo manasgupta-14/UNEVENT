@@ -338,19 +338,22 @@ const DetailsCard = () => (
         <p className="mt-4 text-sm leading-relaxed text-slate-400">{details.helpText}</p>
       </div>
 
-      <div className="mt-6 border-t border-white/10 pt-6">
-        <p className="text-xs font-bold uppercase tracking-widest text-slate-500">{details.socialsTitle}</p>
-        <div className="mt-4 flex flex-wrap gap-3">
-          {socials.map((social) => (
-            <SocialLink key={social.name} social={social} />
-          ))}
+      {socials.length > 0 && (
+        <div className="mt-6 border-t border-white/10 pt-6">
+          <p className="text-xs font-bold uppercase tracking-widest text-slate-500">{details.socialsTitle}</p>
+          <div className="mt-4 flex flex-wrap gap-3">
+            {socials.map((social) => (
+              <SocialLink key={social.name} social={social} />
+            ))}
+          </div>
         </div>
-      </div>
+      )}
     </div>
   </SpotlightCard>
 )
 
 const MapCard = () => {
+  if (!map) return null
   const src = `https://www.google.com/maps?q=${encodeURIComponent(map.query)}&output=embed`
   const link = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(map.query)}`
   const directions = `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(map.query)}`
@@ -392,7 +395,7 @@ const MapCard = () => {
 }
 
 const Contact = () => {
-  usePageMeta(meta.title, meta.description)
+  usePageMeta(meta)
 
   return (
     <>
@@ -416,13 +419,15 @@ const Contact = () => {
         <CtaSection />
       </div>
 
-      <section className="relative bg-[#0B1730] py-16 lg:py-24">
-        <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <Reveal>
-            <MapCard />
-          </Reveal>
-        </div>
-      </section>
+      {map && (
+        <section className="relative bg-[#0B1730] py-16 lg:py-24">
+          <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <Reveal>
+              <MapCard />
+            </Reveal>
+          </div>
+        </section>
+      )}
     </>
   )
 }

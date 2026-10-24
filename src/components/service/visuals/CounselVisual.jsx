@@ -4,10 +4,10 @@ import PanelShell from './PanelShell'
 import { rgba, tint } from '../../../lib/color'
 
 const clauses = [
-  { label: 'Liability cap', note: 'Check against possible loss' },
-  { label: 'Data handling', note: 'Inside or outside the cap?' },
-  { label: 'Termination', note: 'Exit terms need a second read' },
-  { label: 'Subcontracting', note: 'Who else touches your data' },
+  { label: 'Liability cap', note: 'Check against possible loss', impact: 'A low cap can leave you carrying most of a loss.', action: 'Negotiate the cap or carve out data breaches.' },
+  { label: 'Data handling', note: 'Inside or outside the cap?', impact: 'Unclear terms can expose personal data.', action: 'Ask for explicit data-protection terms.' },
+  { label: 'Termination', note: 'Exit terms need a second read', impact: 'Hard exits can lock you in.', action: 'Add notice periods and data return on exit.' },
+  { label: 'Subcontracting', note: 'Who else touches your data', impact: 'Third parties may handle your data.', action: 'Require consent and flow-down of obligations.' },
 ]
 
 const CounselVisual = ({ service }) => {
@@ -84,6 +84,12 @@ const CounselVisual = ({ service }) => {
               <m.p animate={{ opacity: on ? 1 : 0.4 }} className="mt-3 text-xs font-semibold" style={{ color: on ? light : '#64748B' }}>
                 {clause.note}
               </m.p>
+              {on && (
+                <dl className="mt-2 space-y-1 text-[11px] leading-snug text-slate-300">
+                  <div><dt className="inline font-bold text-white">Why it matters: </dt><dd className="inline">{clause.impact}</dd></div>
+                  <div><dt className="inline font-bold text-white">Action: </dt><dd className="inline">{clause.action}</dd></div>
+                </dl>
+              )}
             </m.li>
           )
         })}

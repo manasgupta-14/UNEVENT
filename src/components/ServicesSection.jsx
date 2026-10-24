@@ -53,7 +53,7 @@ const ServiceCard = ({ service }) => {
           <span className="absolute inset-0 rounded-2xl opacity-0 ring-4 transition-opacity duration-500 group-hover:opacity-100" style={{ '--tw-ring-color': `${service.accent}33` }} />
         </div>
         <div className="min-w-0">
-          <p className="text-sm font-semibold text-slate-400">UNEVENT</p>
+          <p className="text-sm font-semibold text-slate-600">UNEVENT</p>
           <h3 className="font-display text-2xl font-bold text-[#0B1730]">{service.name}</h3>
           <p className="text-sm font-bold" style={{ color: service.ink }}>
             {service.field}
@@ -62,6 +62,7 @@ const ServiceCard = ({ service }) => {
       </div>
 
       <p className="relative mt-5 text-[15px] leading-relaxed text-[#334155]">{service.desc}</p>
+      <p className="relative mt-3 text-xs font-bold uppercase tracking-wider text-slate-500">{service.mode}</p>
 
       <ul className="relative mt-5 grid gap-x-6 gap-y-2.5 sm:grid-cols-2">
         {service.points.map((point) => (
@@ -102,7 +103,7 @@ const ServicesSection = () => (
           viewport={viewport}
           className="max-w-sm text-sm leading-relaxed text-slate-500"
         >
-          Pick one practice or combine them. We start by learning how your business works.
+          Three risk practices, enabled by technology. Pick one practice or combine them; we start by learning how your business works.
         </m.p>
       </div>
 

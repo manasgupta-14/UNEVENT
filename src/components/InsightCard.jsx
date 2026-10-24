@@ -5,6 +5,7 @@ import { categoryColor, formatDate } from '../lib/insights'
 import { rgba } from '../lib/color'
 import { ease } from '../lib/motion'
 import { rectOf } from '../lib/pointer'
+import { services } from '../data/services'
 
 const InsightCard = ({ article, index = 0 }) => {
   const color = categoryColor(article.category)
@@ -41,6 +42,8 @@ const InsightCard = ({ article, index = 0 }) => {
         </span>
         <h3 className="relative mt-5 font-display text-xl font-bold leading-snug text-[#0B1730]">{article.title}</h3>
         <p className="relative mt-3 text-[15px] leading-relaxed text-[#334155]">{article.summary}</p>
+        {article.trigger && <p className="relative mt-3 text-sm font-semibold text-[#0B1730]">{article.trigger}</p>}
+        {article.practice && <p className="relative mt-2 text-xs font-bold uppercase tracking-wider text-slate-500">Related practice: {services.find((item) => item.id === article.practice)?.name}</p>}
 
         <div className="relative mt-auto flex items-center justify-between border-t border-slate-100 pt-5 text-sm">
           <span className="text-slate-500">{formatDate(article.date)} · {article.read} min read</span>

@@ -48,8 +48,8 @@ export const summary = {
 }
 
 export const popup = {
-  title: 'Booking confirmed',
-  text: 'Here are your booking details. We will confirm by email.',
+  title: 'Your booking request is ready',
+  text: 'Send these details by email to complete your request. We will confirm the time by email.',
   reference: 'Reference',
   done: 'Done',
   email: 'Email these details to UNEVENT',

@@ -86,7 +86,7 @@ const Hero = () => {
           </h1>
 
           <m.p variants={rise} className="mt-7 max-w-xl text-lg leading-relaxed text-slate-300 sm:text-xl">
-            We hire people who like preventing problems. Join a team that blends cybersecurity, legal risk, governance and software to make risk a non-event.
+            We hire people who like spotting problems early. Join a team that blends cybersecurity, legal and commercial risk, governance and software to help make risk a non-event.
           </m.p>
 
           <m.div variants={rise} className="mt-9 flex flex-col gap-4 sm:flex-row">

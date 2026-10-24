@@ -5,6 +5,7 @@ const divisionByCategory = {
   'Legal and Contract Risk': 'counsel',
   'Governance and Compliance': 'govern',
   'AI and Technology': 'labs',
+  'Business Risk Management': 'govern',
 }
 
 export const categoryColor = (category) =>

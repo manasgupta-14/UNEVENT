@@ -2,6 +2,7 @@ import { Navigate } from 'react-router'
 import ServiceHero from './ServiceHero'
 import ServiceProblems from './ServiceProblems'
 import ServiceOfferings from './ServiceOfferings'
+import ServiceScope from './ServiceScope'
 import ServiceProcess from './ServiceProcess'
 import ServiceFaq from './ServiceFaq'
 import ServiceCta from './ServiceCta'
@@ -23,6 +24,7 @@ const ServiceLayout = ({ slug }) => {
       <ServiceHero service={service} />
       <ServiceProblems service={service} />
       <ServiceOfferings service={service} />
+      <ServiceScope service={service} />
       <ServiceProcess service={service} />
       <ServiceFaq service={service} />
       <ServiceCta service={service} />

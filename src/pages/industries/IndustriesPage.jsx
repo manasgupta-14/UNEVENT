@@ -36,7 +36,7 @@ const Matrix = ({ activeSlug, onPick }) => (
       <div className="relative grid grid-cols-[1.4fr_repeat(4,minmax(0,1fr))] items-end gap-2 px-2 pb-3 text-center">
         <span className="text-left text-[10px] font-semibold text-slate-400 sm:text-xs">Industry</span>
         {services.map((service) => (
-          <span key={service.id} className="truncate text-[10px] font-bold sm:text-xs" style={{ color: tint(service.accent, 0.35) }}>
+          <span key={service.id} className="min-w-0 break-words text-[10px] font-bold leading-tight sm:text-xs" style={{ color: tint(service.accent, 0.35) }}>
             {service.name}
           </span>
         ))}
@@ -72,7 +72,7 @@ const Matrix = ({ activeSlug, onPick }) => (
           </button>
         )
       })}
-      <p className="relative mt-4 px-2 text-xs leading-relaxed text-slate-400">A glowing dot means we use that practice for that industry. Tap a row for details.</p>
+      <p className="relative mt-4 px-2 text-xs leading-relaxed text-slate-400">A glowing dot shows where a practice typically applies to that industry. The mix is confirmed for each engagement. Tap a row for details.</p>
     </div>
   </TiltPanel>
 )
@@ -82,7 +82,7 @@ const Hero = ({ activeSlug, onPick }) => {
   const stats = [
     { value: industries.length, label: 'Industries' },
     { value: services.length, label: 'Practices' },
-    { value: industries.reduce((sum, item) => sum + item.divisions.length, 0), label: 'Ways we help' },
+    { value: industries.reduce((sum, item) => sum + item.divisions.length, 0), label: 'Practice pairings' },
   ]
 
   return (
@@ -148,13 +148,13 @@ const Explorer = ({ slug, onPick }) => {
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(rgba(11,23,48,0.07)_1px,transparent_1px)] [background-size:24px_24px] [mask-image:linear-gradient(to_bottom,black,transparent_70%)]" />
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <SectionHeading
-          badge="Pick your industry"
+          badge="Target sectors"
           title="What can go wrong, and how we help reduce it"
           text="Choose a sector to see its biggest risk, what we do about it, and which practices we bring."
         />
 
-        <div className="mt-12 grid gap-6 lg:grid-cols-[0.8fr_1.2fr]">
-          <div role="tablist" aria-label="Industries" className="flex gap-2 overflow-x-auto pb-2 lg:flex-col lg:overflow-visible lg:pb-0">
+        <div id="sector-detail" className="mt-12 grid scroll-mt-24 items-start gap-6 lg:scroll-mt-28 lg:grid-cols-[0.8fr_1.2fr]">
+          <div role="tablist" aria-label="Industries" className="grid grid-cols-1 gap-2 min-[480px]:grid-cols-2 lg:sticky lg:top-24 lg:grid-cols-1">
             {industries.map((entry) => {
               const on = entry.slug === item.slug
               return (
@@ -164,12 +164,12 @@ const Explorer = ({ slug, onPick }) => {
                   role="tab"
                   aria-selected={on}
                   onClick={() => onPick(entry.slug, false)}
-                  className={`relative shrink-0 rounded-2xl border px-5 py-4 text-left outline-none transition-colors focus-visible:ring-2 focus-visible:ring-[#1473E6] ${on ? 'border-transparent' : 'border-slate-200 bg-white hover:border-[#1473E6]/50'}`}
+                  className={`relative min-w-0 rounded-2xl border px-4 py-3.5 sm:px-5 sm:py-4 text-left outline-none transition-colors focus-visible:ring-2 focus-visible:ring-[#1473E6] ${on ? 'border-transparent' : 'border-slate-200 bg-white hover:border-[#1473E6]/50'}`}
                 >
                   {on && <m.span layoutId="industry-tab" transition={{ type: 'spring', stiffness: 380, damping: 34 }} className="absolute inset-0 rounded-2xl bg-[#0B1730]" />}
-                  <span className="relative flex items-center justify-between gap-6">
+                  <span className="relative flex items-center justify-between gap-3">
                     <span className={`font-display text-base font-bold ${on ? 'text-white' : 'text-[#0B1730]'}`}>{entry.name}</span>
-                    <span className="flex gap-1" aria-hidden="true">
+                    <span className="flex shrink-0 gap-1" aria-hidden="true">
                       {entry.divisions.map((id) => <span key={id} className="h-2 w-2 rounded-full" style={{ backgroundColor: byId(id)?.accent }} />)}
                     </span>
                   </span>
@@ -186,11 +186,11 @@ const Explorer = ({ slug, onPick }) => {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -12 }}
               transition={{ duration: 0.4, ease }}
-              className="relative isolate overflow-hidden rounded-3xl bg-[#0B1730] p-7 text-white shadow-[0_40px_80px_-40px_rgba(11,23,48,0.8)] sm:p-10"
+              className="relative isolate min-w-0 overflow-hidden rounded-3xl bg-[#0B1730] p-5 text-white shadow-[0_40px_80px_-40px_rgba(11,23,48,0.8)] sm:p-10"
             >
               <NetworkCanvas className="opacity-40" density={9000} reach={110} />
               <div className="pointer-events-none absolute inset-0 -z-10" style={{ background: `radial-gradient(520px circle at 85% 0%, ${rgba(glow, 0.32)}, transparent 65%)` }} />
-              <h3 className="font-display text-3xl font-bold sm:text-4xl">{item.name}</h3>
+              <h3 className="font-display text-2xl font-bold sm:text-4xl">{item.name}</h3>
 
               <div className="mt-8 grid gap-5 sm:grid-cols-2">
                 <div className="rounded-2xl border border-white/10 bg-white/5 p-5 backdrop-blur">
@@ -202,6 +202,27 @@ const Explorer = ({ slug, onPick }) => {
                   <p className="mt-2 leading-relaxed text-slate-200">{item.approach}</p>
                 </div>
               </div>
+
+              <m.ol key={`${item.slug}-path`} variants={stagger(0.07, 0.1)} initial="hidden" animate="show" aria-label="Pathway" className="mt-5 space-y-3">
+                {[
+                  ['Buying trigger', item.trigger],
+                  ['Typical exposure', item.exposure],
+                  ['Intervention', item.intervention],
+                  ['Likely output', item.output],
+                  ['Illustrative effect', item.effect],
+                ].map(([label, text], index) => (
+                  <m.li key={label} variants={rise} className="grid gap-2 rounded-2xl border border-white/10 bg-white/[0.04] p-4 sm:grid-cols-[10.5rem_minmax(0,1fr)] sm:items-start sm:gap-5 sm:p-5">
+                    <p className="flex items-center gap-3 text-xs font-extrabold uppercase tracking-wider text-[#F5B82E]">
+                      <span aria-hidden="true" className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full border border-[#F5B82E]/40 bg-[#F5B82E]/10">{index + 1}</span>
+                      {label}
+                    </p>
+                    <p className="min-w-0 text-sm leading-relaxed text-slate-200 sm:text-[15px]">{text}</p>
+                  </m.li>
+                ))}
+              </m.ol>
+              <p className="mt-4 text-xs leading-relaxed text-slate-400">
+                Target sector. This is an illustrative pathway, not a record of past client work. Effects are expected, not measured or promised.
+              </p>
 
               <p className="mt-9 text-sm font-bold text-slate-300">Practices we bring to {item.name.toLowerCase()}</p>
               <m.div variants={stagger(0.08, 0.15)} initial="hidden" animate="show" className="mt-3 flex flex-wrap gap-3">
@@ -241,9 +262,10 @@ const IndustriesPage = () => {
     description: `See the main risks in ${industries.map((item) => item.name.toLowerCase()).join(', ')} and the UNEVENT security, legal, compliance and technology practices that help reduce them.`,
   })
 
-  const pick = (next, scroll = true) => {
+  const pick = (next, fromHero = true) => {
     setSlug(next)
-    if (scroll) document.getElementById('explorer')?.scrollIntoView({ behavior: 'smooth' })
+    if (!fromHero && window.innerWidth >= 1024) return
+    window.setTimeout(() => document.getElementById('sector-detail')?.scrollIntoView({ behavior: 'smooth', block: 'start' }), fromHero ? 60 : 450)
   }
 
   return (

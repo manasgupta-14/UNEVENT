@@ -112,6 +112,7 @@ const ApproachSection = () => {
           align="center"
           badge="Our approach"
           title="A practical path from discovery to review"
+          text="Scope and cadence are agreed with you up front. Prepare & contain is included only where it is in the agreed scope."
         />
 
         <div className="relative mt-16 lg:mt-20">

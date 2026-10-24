@@ -199,6 +199,7 @@ const ShieldVisual = () => {
 const ShieldBlock = () => (
   <div className="mx-auto w-full max-w-[520px] min-w-0 md:portrait:max-w-[min(520px,40vh)] md:landscape:max-w-[min(560px,62vh)]">
     <ShieldVisual />
+    <p className="mt-3 text-center text-xs font-semibold text-slate-500">Illustrative visual. Labels show example outputs, not a live system.</p>
     <div className="mt-6 grid grid-cols-2 gap-3 sm:hidden md:landscape:grid lg:landscape:hidden">
       {chips.map((chip) => (
         <ChipBody key={chip.id} chip={chip} />
@@ -304,6 +305,10 @@ const Hero = () => {
               </a>
             ))}
           </m.div>
+
+          <m.p variants={rise} className="mt-4 max-w-xl text-sm text-slate-400">
+            Three risk practices, enabled by technology: Protect, Counsel and Govern, with Labs as the technology layer.
+          </m.p>
         </m.div>
 
         <ShieldBlock />
