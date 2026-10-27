@@ -6,7 +6,7 @@ export const samplesMeta = {
 export const samplesHero = {
   badge: 'Deliverables',
   title: 'See the work product, not just the promise.',
-  text: 'Every engagement ends with documents your team can act on. These are the formats we use. Entries show the typical structure and kind of content; the findings in a real engagement are specific to your business and kept confidential.',
+  text: 'Every engagement ends with documents your team can act on. These are the formats we use. Entries show the structure and kind of content; the findings in a real engagement are specific to your business and kept confidential.',
 }
 
 export const samples = [

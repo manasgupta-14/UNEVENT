@@ -72,7 +72,7 @@ const Matrix = ({ activeSlug, onPick }) => (
           </button>
         )
       })}
-      <p className="relative mt-4 px-2 text-xs leading-relaxed text-slate-400">A glowing dot shows where a practice typically applies to that industry. The mix is confirmed for each engagement. Tap a row for details.</p>
+      <p className="relative mt-4 px-2 text-xs leading-relaxed text-slate-400">A glowing dot shows where a practice applies to that industry. The mix is confirmed for each engagement. Tap a row for details.</p>
     </div>
   </TiltPanel>
 )
@@ -229,7 +229,7 @@ const SectorPanel = ({ item }) => {
       <m.ol variants={stagger(0.07, 0.1)} initial="hidden" whileInView="show" viewport={viewport} aria-label="Pathway" className="mt-5 space-y-3">
         {[
           ['Buying trigger', item.trigger],
-          ['Typical exposure', item.exposure],
+          ['Exposure', item.exposure],
           ['Intervention', item.intervention],
           ['Likely output', item.output],
           ['Expected effect', item.effect],

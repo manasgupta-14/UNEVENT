@@ -9,7 +9,7 @@ const companyLinks = [
   { label: 'About Us', href: '/about' },
   { label: 'Industries', href: '/industries' },
   { label: 'Insights', href: '/insights' },
-  { label: 'Typical Scenarios', href: '/scenarios' },
+  { label: 'Scenarios', href: '/scenarios' },
   { label: 'Deliverables', href: '/samples' },
   { label: 'Careers', href: '/careers' },
   { label: 'Contact Us', href: '/contact' },

@@ -42,7 +42,7 @@ const ServiceScope = ({ service }) => (
       />
 
       <m.div variants={stagger(0.1)} initial="hidden" whileInView="show" viewport={viewport} className="mt-12 grid gap-6 lg:grid-cols-3">
-        <Panel title="Typical trigger" service={service}>
+        <Panel title="Trigger" service={service}>
           <p>{service.buyer}</p>
           <p className="mt-4 rounded-xl bg-slate-50 px-4 py-3 text-sm font-semibold text-[#0B1730]">Delivery: {service.mode}</p>
         </Panel>

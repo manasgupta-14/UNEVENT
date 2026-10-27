@@ -115,7 +115,7 @@ export const divisionsSection = {
 export const riskChart = {
   badge: 'Why early matters',
   title: 'Risk escalates in three stages. Early is the easiest to fix.',
-  note: 'How an unmanaged risk typically progresses.',
+  note: 'How an unmanaged risk progresses.',
   unit: 'Escalation stage',
   bars: [
     {

@@ -26,7 +26,7 @@ const fromCase = (entry) => ({
   type: 'Case Study',
   title: entry.title,
   summary: entry.challenge,
-  meta: [services.find((service) => service.slug === entry.division).name, 'Typical case'],
+  meta: [services.find((service) => service.slug === entry.division).name, 'Case'],
 })
 
 const insights = [fromArticle(articles[0]), fromArticle(articles[1]), fromCase(cases[0])]

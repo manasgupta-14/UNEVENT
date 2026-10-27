@@ -286,7 +286,7 @@ export const cases = [
     assumptions: 'Assumes the team can name an owner for each fix. Remediation is carried out by your team or qualified partners unless agreed in writing, and a review does not guarantee any customer\'s approval.',
     division: 'protect',
     challenge: 'Growing SaaS teams often face detailed security questionnaires before an enterprise deal can proceed.',
-    risks: 'Typical gaps: no current asset list, shared admin accounts, no written incident response plan.', solution: 'We would assess current controls, rank the gaps and propose practical fixes and a basic incident plan.',
+    risks: 'Gaps: no current asset list, shared admin accounts, no written incident response plan.', solution: 'We would assess current controls, rank the gaps and propose practical fixes and a basic incident plan.',
     result: 'Intended outcome: clearer priorities and one maintained source for answering security questionnaires.'
   },
   {
@@ -295,7 +295,7 @@ export const cases = [
     assumptions: 'Assumes the partners agree on the checklist. UNEVENT is not a law firm: legal advice on individual contracts comes from a qualified lawyer in the relevant jurisdiction, engaged where needed.',
     division: 'counsel',
     challenge: 'Contracts are often reviewed differently by each partner, so risk positions vary between deals.',
-    risks: 'Typical issues: inconsistent liability, data protection and termination terms across active contracts.', solution: 'We would help build a shared clause checklist and a risk register with owners for first-pass review.',
+    risks: 'Issues: inconsistent liability, data protection and termination terms across active contracts.', solution: 'We would help build a shared clause checklist and a risk register with owners for first-pass review.',
     result: 'Intended outcome: a more consistent first-pass review and clearer escalation of higher-risk terms.'
   },
   {
@@ -304,7 +304,7 @@ export const cases = [
     assumptions: 'Assumes each policy has a named owner and review dates are kept. Applicable privacy and health-data obligations depend on the clinic\'s location and should be confirmed with qualified legal counsel. This is not a compliance certification.',
     division: 'govern',
     challenge: 'Policies and privacy procedures are often scattered across emails, with no clear current version.',
-    risks: 'Typical issues: outdated procedures, unclear ownership, missing review dates and weak evidence trails.',
+    risks: 'Issues: outdated procedures, unclear ownership, missing review dates and weak evidence trails.',
     solution: 'We would review existing policies and propose a library with owners, review cycles and approval records.', result: 'Intended outcome: one maintained set of policies and clearer evidence readiness for reviews.'
   },
   {
@@ -312,7 +312,7 @@ export const cases = [
     deliverables: 'Process map, agreed onboarding checklist, proposed workflow and, where a build is agreed, a lightweight tool or configured platform with reminders and a status view.',
     assumptions: 'Assumes the checks are agreed before any build and suppliers submit documents through the agreed channel. The right tool depends on your existing systems and may be an existing platform rather than a custom build.',
     division: 'labs',
-    challenge: 'Onboarding each supplier can involve repeated spreadsheet and email follow-ups.', risks: 'Typical issues: missing documents, inconsistent checks and no single view of onboarding status.',
+    challenge: 'Onboarding each supplier can involve repeated spreadsheet and email follow-ups.', risks: 'Issues: missing documents, inconsistent checks and no single view of onboarding status.',
     solution: 'We would map the current process and propose a checklist workflow with reminders and a status view.', result: 'Intended outcome: more consistent checks and onboarding status visible to the whole team.'
   },
 ]

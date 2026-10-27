@@ -15,7 +15,7 @@ import { ease, rise, stagger, viewport } from '../../lib/motion'
 
 const stages = [
   { key: 'challenge', label: 'Challenge' },
-  { key: 'risks', label: 'Typical risks' },
+  { key: 'risks', label: 'Risks' },
   { key: 'solution', label: 'How UNEVENT helps' },
   { key: 'result', label: 'Intended outcome' },
 ]
@@ -134,7 +134,7 @@ const Hero = () => {
           <m.nav variants={rise} aria-label="Breadcrumb" className="flex items-center gap-2 text-sm font-semibold text-slate-400">
             <Link to="/" className="outline-none transition-colors hover:text-white focus-visible:text-white">Home</Link>
             <span aria-hidden="true">/</span>
-            <span className="text-white">Typical scenarios</span>
+            <span className="text-white">Scenarios</span>
           </m.nav>
 
 
@@ -248,7 +248,7 @@ const CaseCard = ({ item }) => {
 
 const CaseStudiesPage = () => {
   usePageMeta({
-    title: 'Typical Scenarios | UNEVENT',
+    title: 'Scenarios | UNEVENT',
     description: 'Illustrative scenarios showing how UNEVENT may approach security, legal, compliance and technology risk situations.',
   })
 
@@ -261,7 +261,7 @@ const CaseStudiesPage = () => {
           <SectionHeading
             badge="How we work"
             title="Every scenario follows the same four steps"
-            text="Each scenario sets out the challenge, typical risks, how UNEVENT helps and the intended outcome. Actual scope is agreed with you."
+            text="Each scenario sets out the challenge, risks, how UNEVENT helps and the intended outcome. Actual scope is agreed with you."
           />
           <div className="mt-12 space-y-8">
             {cases.map((item) => (

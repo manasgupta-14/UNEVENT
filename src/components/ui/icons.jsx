@@ -1,8 +1,7 @@
 import { icons } from '../../data/services'
 
-/* Service icons are plain images: put protect.png, counsel.png, govern.png, labs.png in /public */
 export const ServiceImage = ({ id, className = 'h-6 w-6' }) => (
-  <img src={`/${id}.png`} alt="" aria-hidden="true" draggable="false" className={`${className} object-contain`} />
+  <img src={`/${id}.webp`} width="384" height="384" loading="lazy" decoding="async" alt="" aria-hidden="true" draggable="false" className={`${className} object-contain`} />
 )
 
 export const Arrow = ({ className = 'h-4 w-4' }) => (

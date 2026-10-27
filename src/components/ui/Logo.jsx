@@ -1,7 +1,7 @@
 import { m } from 'framer-motion'
 
 export const LogoMark = ({ className = 'h-[1.75rem] w-auto', glow = true }) => (
-  <img src="/unevent-logo.png" alt="" aria-hidden="true" draggable="false" className={className} style={glow ? { filter: 'drop-shadow(0 3px 3px rgba(255,255,255,0.5))' } : undefined} />
+  <img src="/unevent-logo.webp" width="128" height="128" decoding="async" alt="" aria-hidden="true" draggable="false" className={className} style={glow ? { filter: 'drop-shadow(0 3px 3px rgba(255,255,255,0.5))' } : undefined} />
 )
 
 export const Logo = ({ onClick, className = '', halo = false }) => (
