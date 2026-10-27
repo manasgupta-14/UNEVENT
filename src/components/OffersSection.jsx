@@ -54,7 +54,6 @@ const OffersSection = () => (
           </m.li>
         ))}
       </m.ul>
-      <p className="mt-6 text-sm text-slate-300">Dashed practice tags are added only when they are relevant to your situation.</p>
     </div>
   </section>
 )

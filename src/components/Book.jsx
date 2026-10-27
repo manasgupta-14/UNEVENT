@@ -244,7 +244,7 @@ const ConfirmPopup = ({ booking, reference, days, onClose, startingPoint }) => {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      className="fixed inset-0 z-[100] flex items-center justify-center overflow-y-auto bg-[#050B18]/80 p-4 backdrop-blur-sm"
+      className="fixed inset-0 z-[100] flex items-start justify-center overflow-y-auto overscroll-contain bg-[#050B18]/80 p-3 backdrop-blur-sm sm:p-4"
       onClick={onClose}
     >
       <m.div
@@ -256,7 +256,7 @@ const ConfirmPopup = ({ booking, reference, days, onClose, startingPoint }) => {
         exit={{ opacity: 0, y: 24, scale: 0.96 }}
         transition={{ duration: 0.5, ease }}
         onClick={(event) => event.stopPropagation()}
-        className="relative my-auto w-full max-w-lg overflow-hidden rounded-3xl border border-white/15 bg-[#0B1730] shadow-[0_40px_120px_-30px_rgba(20,115,230,0.7)]"
+        className="relative my-auto max-h-[calc(100dvh-1.5rem)] w-full max-w-lg overflow-y-auto overflow-x-hidden rounded-3xl border border-white/15 bg-[#0B1730] shadow-[0_40px_120px_-30px_rgba(20,115,230,0.7)]"
       >
         <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[#F5B82E] to-transparent" />
         <div className="pointer-events-none absolute -right-20 -top-20 h-56 w-56 rounded-full bg-[#F5B82E]/20 blur-[80px]" />
@@ -274,12 +274,12 @@ const ConfirmPopup = ({ booking, reference, days, onClose, startingPoint }) => {
           </svg>
         </button>
 
-        <div className="relative p-7 sm:p-9">
+        <div className="relative p-5 sm:p-9">
           <m.span
             initial={{ scale: 0.4, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             transition={{ duration: 0.6, delay: 0.15, ease }}
-            className="flex h-16 w-16 items-center justify-center rounded-full border border-[#F5B82E]/60 bg-[#F5B82E]/15 shadow-[0_0_34px_rgba(245,184,46,0.45)]"
+            className="flex h-14 w-14 items-center justify-center rounded-full border border-[#F5B82E]/60 bg-[#F5B82E]/15 shadow sm:h-16 sm:w-16-[0_0_34px_rgba(245,184,46,0.45)]"
           >
             <Check className="h-8 w-8" color="#F5B82E" />
           </m.span>

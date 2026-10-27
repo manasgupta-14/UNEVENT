@@ -26,7 +26,7 @@ const fromCase = (entry) => ({
   type: 'Case Study',
   title: entry.title,
   summary: entry.challenge,
-  meta: [services.find((service) => service.slug === entry.division).name, 'Illustrative case'],
+  meta: [services.find((service) => service.slug === entry.division).name, 'Case'],
 })
 
 const insights = [fromArticle(articles[0]), fromArticle(articles[1]), fromCase(cases[0])]
@@ -106,7 +106,7 @@ const InsightsSection = () => (
   <section id="insights" className="relative bg-[#F8FAFC] py-24 lg:py-32">
     <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
       <div className="flex flex-col justify-between gap-6 sm:flex-row sm:items-end">
-        <SectionHeading badge="Featured insights" title="Perspective from the front line of risk" text="Articles and illustrative scenarios on how teams reduce exposure and stay ready." />
+        <SectionHeading badge="Featured insights" title="Perspective from the front line of risk" />
         <MotionLink
           variants={rise}
           initial="hidden"

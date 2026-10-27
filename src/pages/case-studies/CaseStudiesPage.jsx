@@ -15,9 +15,9 @@ import { ease, rise, stagger, viewport } from '../../lib/motion'
 
 const stages = [
   { key: 'challenge', label: 'Challenge' },
-  { key: 'risks', label: 'Risks found' },
-  { key: 'solution', label: 'Solution' },
-  { key: 'result', label: 'Outcome' },
+  { key: 'risks', label: 'Risks' },
+  { key: 'solution', label: 'How UNEVENT helps' },
+  { key: 'result', label: 'Intended outcome' },
 ]
 
 const byId = (id) => services.find((service) => service.id === id)
@@ -61,7 +61,7 @@ const Pipeline = () => {
             </span>
             {service.name} · {service.field}
           </span>
-          <span className="text-xs font-semibold text-slate-400">Example {active + 1} of {cases.length}</span>
+          <span className="text-xs font-semibold text-slate-400">Scenario {active + 1} of {cases.length}</span>
         </div>
 
         <AnimatePresence mode="wait">
@@ -96,12 +96,12 @@ const Pipeline = () => {
           </m.div>
         </AnimatePresence>
 
-        <div className="relative mt-6 flex items-center gap-2" role="group" aria-label="Choose an example">
+        <div className="relative mt-6 flex items-center gap-2" role="group" aria-label="Choose a scenario">
           {cases.map((entry, index) => (
             <button
               key={entry.title}
               type="button"
-              aria-label={`Show example ${index + 1}`}
+              aria-label={`Show scenario ${index + 1}`}
               aria-pressed={index === active}
               onClick={() => setActive(index)}
               className={`h-2 rounded-full outline-none transition-all duration-300 focus-visible:ring-2 focus-visible:ring-[#F5B82E] ${index === active ? 'w-8' : 'w-2 opacity-50 hover:opacity-100'}`}
@@ -117,7 +117,7 @@ const Pipeline = () => {
 const Hero = () => {
   const words = 'How we approach common risk situations.'.split(' ')
   const stats = [
-    { value: cases.length, label: 'Example scenarios' },
+    { value: cases.length, label: 'Scenarios' },
     { value: new Set(cases.map((item) => item.division)).size, label: 'Practices shown' },
     { value: stages.length, label: 'Steps in each' },
   ]
@@ -134,13 +134,9 @@ const Hero = () => {
           <m.nav variants={rise} aria-label="Breadcrumb" className="flex items-center gap-2 text-sm font-semibold text-slate-400">
             <Link to="/" className="outline-none transition-colors hover:text-white focus-visible:text-white">Home</Link>
             <span aria-hidden="true">/</span>
-            <span className="text-white">Illustrative scenarios</span>
+            <span className="text-white">Scenarios</span>
           </m.nav>
 
-          <m.span variants={rise} className="mt-7 inline-flex items-center gap-2.5 rounded-full border border-[#F5B82E]/40 bg-[#F5B82E]/10 px-4 py-1.5 text-sm font-semibold text-[#FFE29A] backdrop-blur">
-            <span className="h-2 w-2 rounded-full bg-[#F5B82E]" />
-            Illustrative examples, not real client results
-          </m.span>
 
           <h1 className="mt-6 font-display text-[2.6rem] font-extrabold leading-[1.06] tracking-tight text-white sm:text-6xl lg:text-[3.8rem]">
             {words.map((word, index) => {
@@ -156,7 +152,7 @@ const Hero = () => {
           </h1>
 
           <m.p variants={rise} className="mt-7 max-w-xl text-lg leading-relaxed text-slate-300 sm:text-xl">
-            Explore illustrative scenarios showing how UNEVENT could approach common risk situations. These examples are not real client results. Any expected outcomes are illustrative until validated.
+            These illustrative scenarios demonstrate how UNEVENT may approach common business risk situations. They are not representations of specific client engagements or guaranteed outcomes.
           </m.p>
 
           <m.div variants={rise} className="mt-10 grid max-w-md grid-cols-3 gap-3 border-t sm:gap-6 border-white/10 pt-8">
@@ -195,8 +191,7 @@ const CaseCard = ({ item }) => {
               <GlyphIcon d={icons[service.id]} color={service.ink} className="h-4 w-4" strokeWidth={1.8} />
               {service.name} · {service.field}
             </span>
-            <span className="rounded-full bg-[#F5B82E]/20 px-3 py-1 text-xs font-bold text-[#92600A]">Illustrative example</span>
-          </div>
+                      </div>
           <h2 className="mt-4 max-w-2xl font-display text-2xl font-bold leading-snug text-[#0B1730] sm:text-3xl">{item.title}</h2>
         </div>
         <Link
@@ -239,7 +234,7 @@ const CaseCard = ({ item }) => {
 
       <dl className="relative mt-8 grid gap-4 md:grid-cols-2">
         <div className="rounded-2xl border border-slate-200 bg-white p-5">
-          <dt className="text-sm font-bold text-[#0B1730]">Deliverables</dt>
+          <dt className="text-sm font-bold text-[#0B1730]">What you receive</dt>
           <dd className="mt-2 text-[15px] leading-relaxed text-[#334155]">{item.deliverables}</dd>
         </div>
         <div className="rounded-2xl border border-slate-200 bg-white p-5">
@@ -253,8 +248,8 @@ const CaseCard = ({ item }) => {
 
 const CaseStudiesPage = () => {
   usePageMeta({
-    title: 'Illustrative Scenarios | UNEVENT',
-    description: 'Illustrative scenarios showing how UNEVENT approaches security, legal, compliance and technology problems. These are examples, not real client results.',
+    title: 'Scenarios | UNEVENT',
+    description: 'Illustrative scenarios showing how UNEVENT may approach security, legal, compliance and technology risk situations.',
   })
 
   return (
@@ -264,9 +259,9 @@ const CaseStudiesPage = () => {
         <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(rgba(11,23,48,0.07)_1px,transparent_1px)] [background-size:24px_24px] [mask-image:linear-gradient(to_bottom,black,transparent_70%)]" />
         <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <SectionHeading
-            badge="The examples"
+            badge="How we work"
             title="Every scenario follows the same four steps"
-            text="Challenge, risks found, solution and outcome. These illustrate how we work and are not real client results."
+            text="Each scenario sets out the challenge, risks, how UNEVENT helps and the intended outcome. Actual scope is agreed with you."
           />
           <div className="mt-12 space-y-8">
             {cases.map((item) => (

@@ -1,13 +1,12 @@
 export const samplesMeta = {
-  title: 'Sample Deliverables | UNEVENT',
-  description: 'Labelled sample deliverables from each UNEVENT practice: a ranked findings register, a clause review matrix, a control and evidence tracker, an incident-readiness plan and a workflow output. Illustrative data, not client results.',
+  title: 'Deliverables | UNEVENT',
+  description: 'The deliverable formats each UNEVENT practice produces: a ranked findings register, a clause review matrix, a control and evidence tracker, an incident-readiness plan and a workflow output.',
 }
 
 export const samplesHero = {
-  badge: 'Sample deliverables',
+  badge: 'Deliverables',
   title: 'See the work product, not just the promise.',
-  text: 'These are examples of what an engagement can produce. All data is illustrative and invented for demonstration. None of it comes from a client.',
-  note: 'Sample deliverable. Illustrative data, not a client result.',
+  text: 'Every engagement ends with documents your team can act on. These are the formats we use. Entries show the structure and kind of content; the findings in a real engagement are specific to your business and kept confidential.',
 }
 
 export const samples = [
@@ -15,7 +14,7 @@ export const samples = [
     id: 'risk-register',
     practice: 'protect',
     title: 'Ranked findings register',
-    intro: 'From a security assessment: findings ranked by business impact and likelihood, each with an owner and a next action.',
+    intro: 'Used in security assessments: findings ordered by priority, each with the reason it matters, a suggested action and an owner, so the first fixes are obvious.',
     kind: 'table',
     columns: ['Finding', 'Severity', 'Why it matters', 'Suggested action', 'Owner (role)'],
     rows: [
@@ -24,13 +23,12 @@ export const samples = [
       ['Known vulnerability awaiting a patch', 'Medium', 'Public exploits may exist for the affected software.', 'Patch within the agreed window and verify.', 'Engineering'],
       ['No written incident plan', 'Low', 'Response depends on who happens to be available.', 'Adopt the one-page incident plan below.', 'Operations'],
     ],
-    note: 'Severity combines likelihood and business impact in context. The same finding can rank differently in another business.',
   },
   {
     id: 'clause-matrix',
     practice: 'counsel',
     title: 'Clause review matrix',
-    intro: 'From a first-pass contract risk review of a software licence agreement. Legal advice on any clause comes from a qualified lawyer.',
+    intro: 'Used in first-pass contract risk reviews, for example of a software licence agreement.',
     kind: 'table',
     columns: ['Clause', 'Why it matters', 'Business impact', 'Suggested action'],
     rows: [
@@ -39,13 +37,12 @@ export const samples = [
       ['Termination', 'Defines how you can leave and what happens to your data.', 'Hard exit terms can lock the business in.', 'Seek reasonable notice, and data return or deletion on exit.'],
       ['Subcontracting', 'Shows who else may touch your data or service.', 'Third parties may carry risks you cannot see.', 'Require consent, and flow-down of the same obligations.'],
     ],
-    note: 'This matrix does not represent a review of any visitor’s contract.',
   },
   {
     id: 'control-tracker',
     practice: 'govern',
     title: 'Control and evidence tracker',
-    intro: 'From a governance review: each control has an owner, the evidence that proves it ran, and a review date.',
+    intro: 'Used in governance reviews: each control has an owner, the evidence that proves it ran, and a review date.',
     kind: 'table',
     columns: ['Control', 'Obligation it supports', 'Owner (role)', 'Evidence', 'Status', 'Next review'],
     rows: [
@@ -54,7 +51,6 @@ export const samples = [
       ['Vendor risk check', 'Third-party management', 'Procurement', 'Completed vendor questionnaire', 'Evidence missing', 'In 1 month'],
       ['Incident plan test', 'Readiness expectation', 'Security lead', 'Tabletop exercise notes', 'Planned', 'In 6 months'],
     ],
-    note: 'Illustrative sample only. A tracker supports audit preparation and does not guarantee compliance or certification.',
   },
   {
     id: 'incident-plan',
@@ -70,10 +66,10 @@ export const samples = [
     ],
   },
   {
-    id: 'workflow-demo',
+    id: 'workflow-output',
     practice: 'labs',
     title: 'Workflow output: supplier onboarding',
-    intro: 'A sample of what an automated workflow produces, with a human review step. Labelled by delivery type so you know what is bought in and what is built.',
+    intro: 'What an automated workflow produces, with a human review step. Labelled by delivery type so you know what is bought in and what is built.',
     kind: 'table',
     columns: ['Step', 'What happens', 'Output', 'Human review', 'Delivery type'],
     rows: [
@@ -82,6 +78,5 @@ export const samples = [
       ['Remind', 'Reminders go out for missing items.', 'Status view updated.', 'No', 'Curated product, configured'],
       ['Approve', 'Reviewer signs off the supplier.', 'Approval record with date and approver.', 'Yes', 'Custom build'],
     ],
-    note: 'A named person stays responsible for the result. Outputs are validated against agreed acceptance criteria before release.',
   },
 ]

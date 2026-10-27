@@ -38,6 +38,8 @@ export const services = [
         'It depends on scope. We agree the timeline with you before work starts.'],
       ['Do you need access to our systems?',
         'Only what is agreed in writing beforehand. Any testing happens with your authorization and within the scope we set together.'],
+      ['Does incident planning cover CERT-In reporting?',
+        'CERT-In’s 2022 directions expect covered organisations to report specified cyber incidents within six hours of becoming aware of them. Our incident-readiness work names who decides, who reports and what evidence to keep, so a report can be made in time. Whether the directions apply to you is a question for your counsel.'],
     ],
     cta: 'Request a security assessment',
     mode: 'Advisory service',
@@ -46,7 +48,7 @@ export const services = [
     boundaries: ['Remediation is carried out by your team or qualified partners unless it is agreed in the scope in writing.', 'Testing happens only with your written authorisation and within the agreed scope.', 'This is not an always-on monitoring or 24/7 incident response service.'],
     processOutputs: [['Scope', 'Agreed scope and rules of engagement'], ['Assess', 'Findings with evidence'], ['Prioritize', 'Ranked list by business impact'], ['Remediate', 'Fix plan with owners; execution by your team or a partner'], ['Review', 'Re-check and updated priorities']],
     sample: 'risk-register',
-    sampleLabel: 'See a sample ranked findings register',
+    sampleLabel: 'See the ranked findings register format',
   },
   {
     slug: 'counsel',
@@ -95,7 +97,7 @@ export const services = [
     boundaries: ['UNEVENT is not a law firm. Legal advice and representation come only from qualified lawyers in the relevant jurisdiction.', 'Where a matter needs legal advice, the lawyer providing it is named in the engagement scope before work starts.', 'We do not replace your own counsel.'],
     processOutputs: [['Intake', 'Documents received and questions agreed'], ['Review', 'Clause-by-clause notes'], ['Flag', 'Risk summary of the clauses that matter'], ['Advise', 'Negotiation points and options'], ['Track', 'Issue tracker and risk register']],
     sample: 'clause-matrix',
-    sampleLabel: 'See a sample clause review matrix',
+    sampleLabel: 'See the clause review matrix format',
   },
   {
     slug: 'govern',
@@ -136,6 +138,8 @@ export const services = [
         'Certification comes from the certifying body. We help you prepare and keep your records in order.'],
       ['Can we track progress ourselves?',
         'Yes. You receive the control register and evidence tracker as working files your team can keep updating, and regular status reports.'],
+      ['Can you help us prepare for India’s DPDP Act?',
+        'Yes, as readiness work. The DPDP Rules were notified in November 2025 with phased commencement, and most core obligations for data fiduciaries apply from 12 May 2027. We help you build the data inventory, notice and consent records, safeguards, breach-response steps and retention rules your team will need. How the Act applies to you is a question for your lawyers.'],
     ],
     cta: 'Request a governance and controls review',
     mode: 'Advisory service',
@@ -144,7 +148,7 @@ export const services = [
     boundaries: ['We help you prepare and keep records in order. We do not certify or guarantee compliance.', 'Frameworks and regulations covered are confirmed for each engagement.', 'Advisory deliverables are working documents, not a live software product, unless a Labs build is agreed.'],
     processOutputs: [['Baseline', 'Applicability map'], ['Gap review', 'Gap register'], ['Plan', 'Remediation plan and owner matrix'], ['Implement', 'Policies, controls and evidence tracker in use'], ['Report', 'Status report and next-step plan']],
     sample: 'control-tracker',
-    sampleLabel: 'See a sample control and evidence tracker',
+    sampleLabel: 'See the control and evidence tracker format',
   },
   {
     slug: 'labs',
@@ -194,14 +198,14 @@ export const services = [
     cta: 'Discuss a technology need',
     mode: 'Curated partner solutions, UNEVENT-built tools and custom builds, labelled separately',
     buyer: 'Teams that need a risk control to actually run day to day: evidence collection, approvals, reminders, integrations or an automated workflow.',
-    inScope: ['Selecting and configuring suitable third-party products', 'Integrating the systems you already use', 'Automating a named workflow and validating its output against agreed criteria', 'Prototypes and custom builds when no suitable product exists'],
+    inScope: ['Selecting and configuring suitable third-party products', 'Integrating the systems you already use', 'Automating a named workflow', 'Prototypes and custom builds when no suitable product exists'],
     boundaries: ['Every solution is labelled as partner or curated, UNEVENT-built, or custom-built for you. We do not imply that everything is proprietary.', 'Licensing, ownership and support are agreed in the contract before work begins.', 'AI-assisted workflows keep a named person responsible for the result.'],
     enables: 'Labs is the technology layer behind the other three practices. It turns agreed actions from Protect, Counsel and Govern into working tools through workflow automation, evidence management, integrations and purpose-built software. It also takes on standalone technology projects.',
     altProcess: ['Select', 'Configure and integrate', 'Validate', 'Support'],
     altProcessTitle: 'Using a curated product instead of building?',
     processOutputs: [['Discover', 'Use case and success criteria'], ['Design', 'Architecture and workflow design'], ['Prototype', 'Working prototype'], ['Build', 'Production build'], ['Test', 'Test results and review controls'], ['Deploy', 'Released application'], ['Maintain', 'Support plan']],
-    sample: 'workflow-demo',
-    sampleLabel: 'See a sample workflow output',
+    sample: 'workflow-output',
+    sampleLabel: 'See the workflow output format',
   },
 ]
 
@@ -277,39 +281,39 @@ export const industries = [
 
 export const cases = [
   {
-    title: 'A SaaS team prepares for its first enterprise security review',
-    deliverables: 'Security assessment report, ranked fix list, one-page incident plan, questionnaire answer bank.',
-    assumptions: 'Assumes the team can assign owners for the fixes and that the questionnaire topics are typical for its customers.',
+    title: 'Enterprise security review readiness for a SaaS company',
+    deliverables: 'Security gap register, prioritised remediation roadmap, one-page incident response outline and a questionnaire answer bank.',
+    assumptions: 'Assumes the team can name an owner for each fix. Remediation is carried out by your team or qualified partners unless agreed in writing, and a review does not guarantee any customer\'s approval.',
     division: 'protect',
-    challenge: 'A growing product team kept losing deals at the security questionnaire stage.',
-    risks: 'No asset list, shared admin accounts, no written incident plan.', solution: 'Assessment, a ranked fix list and a one-page incident plan.',
-    result: 'Illustrative outcome: the team answers questionnaires from one maintained document.'
+    challenge: 'Growing SaaS teams often face detailed security questionnaires before an enterprise deal can proceed.',
+    risks: 'Gaps: no current asset list, shared admin accounts, no written incident response plan.', solution: 'We would assess current controls, rank the gaps and propose practical fixes and a basic incident plan.',
+    result: 'Intended outcome: clearer priorities and one maintained source for answering security questionnaires.'
   },
   {
-    title: 'A services firm brings contract review into one process',
-    deliverables: 'Shared clause checklist, risk summary per contract, risk register with owners.',
-    assumptions: 'Assumes the partners agree on the checklist and that a qualified lawyer handles legal advice on individual matters.',
+    title: 'Contract risk review for a services business',
+    deliverables: 'Clause risk matrix, shared review checklist, and a contract risk register with suggested owners and next steps.',
+    assumptions: 'Assumes the partners agree on the checklist. UNEVENT is not a law firm: legal advice on individual contracts comes from a qualified lawyer in the relevant jurisdiction, engaged where needed.',
     division: 'counsel',
-    challenge: 'Client contracts were reviewed differently by every partner.',
-    risks: 'Inconsistent liability and data clauses across active engagements.', solution: 'A shared clause checklist and a risk register with owners.',
-    result: 'Illustrative outcome: every new contract gets the same first-pass review'
+    challenge: 'Contracts are often reviewed differently by each partner, so risk positions vary between deals.',
+    risks: 'Issues: inconsistent liability, data protection and termination terms across active contracts.', solution: 'We would help build a shared clause checklist and a risk register with owners for first-pass review.',
+    result: 'Intended outcome: a more consistent first-pass review and clearer escalation of higher-risk terms.'
   },
   {
-    title: 'A clinic group turns scattered policies into one set',
-    deliverables: 'Policy library with owners, review dates and an approval trail.',
-    assumptions: 'Assumes each policy has a named owner and that review dates are kept.',
+    title: 'Privacy and policy management for a clinic',
+    deliverables: 'Policy inventory, a policy tracker with owners, review dates and approval records, and an evidence checklist for key privacy procedures.',
+    assumptions: 'Assumes each policy has a named owner and review dates are kept. Applicable privacy and health-data obligations depend on the clinic\'s location and should be confirmed with qualified legal counsel. This is not a compliance certification.',
     division: 'govern',
-    challenge: 'Policies lived in email attachments and nobody knew which version was current.',
-    risks: 'Outdated procedures and missing review dates.',
-    solution: 'A policy library with owners, review cycles and an approval trail.', result: 'Illustrative outcome: one source of truth, reviewed on a schedule.'
+    challenge: 'Policies and privacy procedures are often scattered across emails, with no clear current version.',
+    risks: 'Issues: outdated procedures, unclear ownership, missing review dates and weak evidence trails.',
+    solution: 'We would review existing policies and propose a library with owners, review cycles and approval records.', result: 'Intended outcome: one maintained set of policies and clearer evidence readiness for reviews.'
   },
   {
-    title: 'An online retailer automates its supplier onboarding',
-    deliverables: 'Checklist-driven onboarding app, reminders and a status view.',
-    assumptions: 'Assumes suppliers submit documents through the agreed channel and the checks are agreed before the build.',
+    title: 'Supplier onboarding automation for a retail business',
+    deliverables: 'Process map, agreed onboarding checklist, proposed workflow and, where a build is agreed, a lightweight tool or configured platform with reminders and a status view.',
+    assumptions: 'Assumes the checks are agreed before any build and suppliers submit documents through the agreed channel. The right tool depends on your existing systems and may be an existing platform rather than a custom build.',
     division: 'labs',
-    challenge: 'Onboarding each supplier took days of spreadsheet and email work.', risks: 'Missing documents and inconsistent checks.',
-    solution: 'A small internal app with a checklist, reminders and status view.', result: 'Illustrative outcome: onboarding status visible to the whole team.'
+    challenge: 'Onboarding each supplier can involve repeated spreadsheet and email follow-ups.', risks: 'Issues: missing documents, inconsistent checks and no single view of onboarding status.',
+    solution: 'We would map the current process and propose a checklist workflow with reminders and a status view.', result: 'Intended outcome: more consistent checks and onboarding status visible to the whole team.'
   },
 ]
 

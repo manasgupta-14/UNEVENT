@@ -23,7 +23,7 @@ export const legalPages = {
     intro: 'These terms apply to your use of this website. Services are provided under a separate written agreement for each engagement.',
     sections: [
       ['Information only', 'Content on this site is general information. It is not legal, financial or compliance advice. UNEVENT is not a law firm. Legal advice comes only from qualified lawyers in the relevant jurisdiction.'],
-      ['Illustrative content', 'Charts, dashboards, scenarios and sample deliverables are illustrative and use invented data. They are not client results and do not predict outcomes.'],
+      ['Scenarios and deliverable formats', 'Charts, scenarios and deliverable formats on this site describe how UNEVENT works. They do not describe specific client engagements and do not predict outcomes. Client work is confidential.'],
       ['No guarantee of outcomes', 'Risk can be reduced and readiness improved, but no service can guarantee that incidents, compliance failures or legal disputes will not occur.'],
       ['Engagements', 'Scope, deliverables, timelines, ownership and fees for any engagement are agreed in writing before work begins.'],
       ['Acceptable use', 'Please do not misuse the site, attempt to disrupt it, or submit unlawful content.'],

@@ -2,15 +2,15 @@ import { m } from 'framer-motion'
 import { Logo, LogoMark } from './ui/Logo'
 import { GlyphIcon } from './ui/icons'
 import { services } from '../data/services'
-import { company, legalNotice } from '../data/company'
+import { company } from '../data/company'
 import { socials as profiles } from '../data/contact'
 
 const companyLinks = [
   { label: 'About Us', href: '/about' },
   { label: 'Industries', href: '/industries' },
   { label: 'Insights', href: '/insights' },
-  { label: 'Illustrative Scenarios', href: '/scenarios' },
-  { label: 'Sample Deliverables', href: '/samples' },
+  { label: 'Scenarios', href: '/scenarios' },
+  { label: 'Deliverables', href: '/samples' },
   { label: 'Careers', href: '/careers' },
   { label: 'Contact Us', href: '/contact' },
 ]
@@ -49,7 +49,6 @@ const Footer = () => {
             <p className="mt-6 max-w-sm text-sm leading-relaxed text-slate-400">
               Make risk a non-event. A risk advisory firm connecting cyber, legal and compliance insight with curated and in-house technology.
             </p>
-            <p className="mt-4 max-w-sm text-xs leading-relaxed text-slate-500">{legalNotice}</p>
             {profiles.length > 0 && <div className="mt-7 flex gap-3">
               {profiles.map((social) => (
                 <m.a

@@ -114,30 +114,33 @@ export const divisionsSection = {
 
 export const riskChart = {
   badge: 'Why early matters',
-  title: 'The later a risk is caught, the more it costs.',
-  note: 'Illustrative scale only. These numbers are not measured data or research.',
-  unit: 'Relative effort to fix',
+  title: 'Risk escalates in three stages. Early is the easiest to fix.',
+  note: 'How an unmanaged risk progresses.',
+  unit: 'Escalation stage',
   bars: [
     {
       label: 'Early signal',
-      value: 10,
+      display: 'Stage 1',
+      value: 34,
       color: '#1473E6',
       detail: 'A reused password or a missed clause, caught while the fix is still simple.',
     },
     {
       label: 'Unowned gap',
-      value: 45,
+      display: 'Stage 2',
+      value: 67,
       color: '#F5B82E',
       detail: 'The warning is noticed but nobody owns it, so it keeps growing between teams.',
     },
     {
       label: 'Live incident',
+      display: 'Stage 3',
       value: 100,
       color: '#F08A3C',
       detail: 'Now it is a crisis: urgent, public and expensive to manage.',
     },
   ],
-  footer: 'Early action keeps the effort on the left of this chart.',
+  footer: 'Early action keeps a risk at stage 1.',
 }
 
 export const delivery = {

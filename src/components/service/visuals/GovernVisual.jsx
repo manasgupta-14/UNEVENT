@@ -47,16 +47,16 @@ const GovernVisual = ({ service }) => {
               strokeLinecap="round"
               transform="rotate(-90 60 60)"
               initial={{ pathLength: 0 }}
-              animate={{ pathLength: 0.82 }}
+              animate={{ pathLength: 1 }}
               transition={{ duration: 1.8, delay: 0.7, ease: 'easeOut' }}
               style={{ filter: `drop-shadow(0 0 8px ${rgba(color, 0.8)})` }}
             />
           </svg>
           <div className="absolute inset-0 flex flex-col items-center justify-center">
             <span className="font-display text-2xl font-bold text-white">
-              <CountUp to={82} />%
+              <CountUp to={service.deliverables.length} />
             </span>
-            <span className="text-[10px] font-semibold text-slate-400">reviewed</span>
+            <span className="text-[10px] font-semibold text-slate-400">deliverables</span>
           </div>
         </div>
         <ul className="flex-1 space-y-3">
@@ -68,8 +68,8 @@ const GovernVisual = ({ service }) => {
 
       <div className="mt-6 rounded-2xl border border-white/10 bg-white/[0.03] p-4">
         <div className="flex items-center justify-between text-xs font-semibold text-slate-400">
-          <span>Monthly evidence review</span>
-          <span style={{ color: light }}>7 months</span>
+          <span>Evidence review cycle</span>
+          <span style={{ color: light }}>Monthly</span>
         </div>
         <div className="mt-4 flex h-20 items-end gap-2.5">
           {bars.map((height, index) => (

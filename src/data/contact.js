@@ -44,7 +44,7 @@ export const details = {
     { key: 'email', label: 'Email us', value: company.email, href: `mailto:${company.email}`, icon: icon.email },
     company.phone && { key: 'phone', label: 'Call us', value: company.phone, href: `tel:${company.phone.replace(/[^+\d]/g, '')}`, icon: icon.phone },
     company.hours && { key: 'hours', label: 'Office hours', value: company.hours, icon: icon.hours },
-    { key: 'reply', label: 'Reply time', value: company.typicalReply, icon: icon.reply },
+    { key: 'reply', label: 'Reply time', value: company.replyTime, icon: icon.reply },
   ].filter(Boolean),
   helpTitle: 'Who we help with what',
   helpText: 'Not sure where your question fits? Pick the closest area in the form, or choose "Not sure yet".',
@@ -77,7 +77,7 @@ export const map = company.address
 export const contactChart = {
   badge: 'What happens next',
   title: 'From your message to our reply.',
-  note: 'Typical timing, not a guaranteed turnaround.',
+  note: 'Timing, not a guaranteed turnaround.',
   unit: 'Progress toward your reply',
   bars: [
     {
@@ -102,5 +102,4 @@ export const contactChart = {
       detail: 'We reply with a suggested next step, usually within two business days.',
     },
   ],
-  footer: 'Reply times are typical and can vary with scope.',
 }

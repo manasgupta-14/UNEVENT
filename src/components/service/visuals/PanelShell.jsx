@@ -14,7 +14,6 @@ const PanelShell = ({ color, title, chips = [], children }) => (
           <span className="h-2.5 w-2.5 rounded-full bg-white/20" />
           <span className="ml-3 truncate font-mono text-xs text-slate-400">{title}</span>
         </div>
-        <span className="ml-2 shrink-0 rounded-full border border-white/10 bg-white/5 px-2.5 py-0.5 text-[10px] sm:text-[11px] font-semibold text-slate-400">Illustrative sample data</span>
       </div>
       <div className="relative p-5 sm:p-6">{children}</div>
     </div>

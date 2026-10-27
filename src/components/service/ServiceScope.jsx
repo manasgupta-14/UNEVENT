@@ -2,7 +2,6 @@ import { Link } from 'react-router'
 import { m } from 'framer-motion'
 import SectionHeading from '../ui/SectionHeading'
 import { Arrow, Check } from '../ui/icons'
-import { legalNotice } from '../../data/company'
 import { rise, stagger, viewport } from '../../lib/motion'
 
 const Panel = ({ title, children, tone = 'light', service }) => (
@@ -43,7 +42,7 @@ const ServiceScope = ({ service }) => (
       />
 
       <m.div variants={stagger(0.1)} initial="hidden" whileInView="show" viewport={viewport} className="mt-12 grid gap-6 lg:grid-cols-3">
-        <Panel title="Typical trigger" service={service}>
+        <Panel title="Trigger" service={service}>
           <p>{service.buyer}</p>
           <p className="mt-4 rounded-xl bg-slate-50 px-4 py-3 text-sm font-semibold text-[#0B1730]">Delivery: {service.mode}</p>
         </Panel>
@@ -62,11 +61,6 @@ const ServiceScope = ({ service }) => (
         </m.p>
       )}
 
-      {service.slug === 'counsel' && (
-        <m.p variants={rise} initial="hidden" whileInView="show" viewport={viewport} className="mt-8 text-sm leading-relaxed text-slate-500">
-          {legalNotice} Professional conduct rules in the relevant jurisdiction apply to any legal advice given.
-        </m.p>
-      )}
 
       {service.sample && (
         <m.div variants={rise} initial="hidden" whileInView="show" viewport={viewport} className="mt-8">

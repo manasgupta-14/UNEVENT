@@ -32,7 +32,7 @@ const links = [
 ]
 
 const chips = [
-  { id: 'protect', label: 'Sample finding', pos: 'left-[3%] top-[8%]', depth: 22, delay: '0s' },
+  { id: 'protect', label: 'Finding flagged', pos: 'left-[3%] top-[8%]', depth: 22, delay: '0s' },
   { id: 'counsel', label: 'Flagged clause', pos: 'right-[3%] top-[20%]', depth: 30, delay: '1.2s' },
   { id: 'govern', label: 'Control status', pos: 'left-[3%] bottom-[16%]', depth: 26, delay: '2.1s' },
   { id: 'labs', label: 'Automation output', pos: 'right-[3%] bottom-[8%]', depth: 34, delay: '0.6s' },
@@ -199,7 +199,6 @@ const ShieldVisual = () => {
 const ShieldBlock = () => (
   <div className="mx-auto w-full max-w-[520px] min-w-0 md:portrait:max-w-[min(520px,40vh)] md:landscape:max-w-[min(560px,62vh)]">
     <ShieldVisual />
-    <p className="mt-3 text-center text-xs font-semibold text-slate-500">Illustrative visual. Labels show example outputs, not a live system.</p>
     <div className="mt-6 grid grid-cols-2 gap-3 sm:hidden md:landscape:grid lg:landscape:hidden">
       {chips.map((chip) => (
         <ChipBody key={chip.id} chip={chip} />

@@ -62,7 +62,7 @@ const Step = ({ step, index, progress, onEnter, onLeave }) => {
         className="relative z-10 row-span-2 flex h-[68px] w-[68px] shrink-0 items-center justify-center rounded-2xl border-2 bg-[#0B1730] lg:row-span-1"
       >
         <m.span style={{ color }} className="flex">
-          <GlyphIcon d={step.d} className="h-8 w-8" />
+          <GlyphIcon d={step.d} plain className="h-8 w-8" />
         </m.span>
         <span className="absolute -right-2.5 -top-2.5 flex h-6 min-w-6 items-center justify-center rounded-full bg-[#F5B82E] px-1 text-[11px] font-extrabold text-[#0B1730]">
           {step.id}
