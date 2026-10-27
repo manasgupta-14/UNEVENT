@@ -11,8 +11,8 @@ import {
 } from 'framer-motion'
 import MagneticButton from './ui/MagneticButton'
 import { Logo } from './ui/Logo'
-import { Arrow } from './ui/icons'
-import { icons, services } from '../data/services'
+import { Arrow, ServiceImage } from './ui/icons'
+import { services } from '../data/services'
 import { rectOf } from '../lib/pointer'
 
 const navItems = [
@@ -21,7 +21,7 @@ const navItems = [
   { key: 'industries', label: 'Industries', href: '/industries' },
   { key: 'insights', label: 'Insights', href: '/insights' },
   { key: 'case-studies', label: 'Scenarios', href: '/scenarios' },
-  { key: 'samples', label: 'Samples', href: '/samples' },
+  { key: 'samples', label: 'Deliverables', href: '/samples' },
   { key: 'about', label: 'About', href: '/about' },
   { key: 'contact', label: 'Contact', href: '/contact' },
 ]
@@ -52,20 +52,7 @@ const itemVariants = {
   show: { opacity: 1, y: 0, transition: { duration: 0.35, ease } },
 }
 
-const ServiceIcon = ({ id, color, className = 'h-5 w-5' }) => (
-  <svg
-    viewBox="0 0 24 24"
-    fill="none"
-    stroke={color}
-    strokeWidth="1.7"
-    strokeLinecap="round"
-    strokeLinejoin="round"
-    className={className}
-    aria-hidden="true"
-  >
-    <path d={icons[id]} />
-  </svg>
-)
+const ServiceIcon = ({ id, className = 'h-5 w-5' }) => <ServiceImage id={id} className={className} />
 
 const Chevron = ({ open }) => (
   <m.svg
@@ -139,7 +126,7 @@ const MegaMenu = ({ onNavigate, onEnter, onLeave }) => (
     exit={{ opacity: 0, y: -6, clipPath: 'inset(0 0 40% 0)', pointerEvents: 'none', transition: { duration: 0.18 } }}
     onMouseEnter={onEnter}
     onMouseLeave={onLeave}
-    className="absolute inset-x-0 top-full hidden border-t border-white/10 bg-[#0B1730]/95 shadow-[0_40px_80px_-20px_rgba(0,0,0,0.75)] backdrop-blur-2xl lg:block"
+    className="absolute inset-x-0 top-full hidden border-t border-white/10 bg-[#101F3D]/95 shadow-[0_40px_80px_-20px_rgba(0,0,0,0.75)] backdrop-blur-2xl xl:block"
   >
     <div className="pointer-events-none absolute inset-0 animate-scan bg-[radial-gradient(rgba(255,255,255,0.07)_1px,transparent_1px)] [background-size:22px_22px] [mask-image:linear-gradient(to_bottom,black,transparent_85%)]" />
     <div className="pointer-events-none absolute -top-24 left-1/4 h-48 w-96 rounded-full bg-[#1473E6]/20 blur-3xl" />
@@ -189,7 +176,7 @@ const MobileDrawer = ({ open, onClose, active, onNavigate }) => {
   return createPortal(
     <AnimatePresence>
       {open && (
-        <div className="fixed inset-0 z-[70] lg:hidden">
+        <div className="fixed inset-0 z-[70] xl:hidden">
           <m.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -383,7 +370,7 @@ const Navbar = () => {
       if (headerRef.current && !headerRef.current.contains(event.target)) setMegaOpen(false)
     }
     const onResize = () => {
-      if (window.innerWidth >= 1024) setMenuOpen(false)
+      if (window.innerWidth >= 1280) setMenuOpen(false)
     }
     window.addEventListener('keydown', onKey)
     document.addEventListener('pointerdown', onPointer)
@@ -458,16 +445,16 @@ const Navbar = () => {
     <MotionConfig reducedMotion="user">
       <header
         ref={headerRef}
-        className={`sticky top-0 z-50 border-b pt-[env(safe-area-inset-top)] transition-[background-color,border-color,box-shadow] duration-300 ${scrolled
-            ? 'border-white/10 bg-[#0B1730]/80 shadow-[0_12px_40px_-14px_rgba(0,0,0,0.7)] backdrop-blur-xl'
-            : 'border-transparent bg-[#0B1730]'
+        className={`sticky top-0 z-50 border-b border-white/10 pt-[env(safe-area-inset-top)] transition-[background-color,box-shadow] duration-300 ${scrolled
+            ? 'bg-[#101F3D]/90 shadow-[0_14px_36px_-16px_rgba(0,0,0,0.75)] backdrop-blur-xl'
+            : 'bg-[#101F3D] shadow-[0_8px_24px_-14px_rgba(0,0,0,0.55)]'
           }`}
       >
         <div className="mx-auto flex max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
           <div className="flex h-16 w-full items-center justify-between">
-            <Logo onClick={handleHome} />
+            <Logo onClick={handleHome} halo />
 
-            <nav aria-label="Primary" className="hidden lg:block">
+            <nav aria-label="Primary" className="hidden xl:block">
               <ul className="flex items-center gap-1" onMouseLeave={() => setHovered(null)}>
                 {navItems.map((item) => {
                   const isActive = current === item.key
@@ -488,7 +475,7 @@ const Navbar = () => {
                       {isActive && pathname !== '/' && (
                         <m.span
                           layoutId="nav-active"
-                          className="absolute inset-x-4 -bottom-0.5 h-[2px] rounded-full bg-[#F5B82E]"
+                          className="absolute inset-x-3 bottom-0.5 h-[2px] rounded-full bg-[#F5B82E]"
                           transition={{ type: 'spring', stiffness: 420, damping: 34 }}
                         />
                       )}
@@ -496,7 +483,9 @@ const Navbar = () => {
                   )
 
                   const bridge = item.mega ? 'before:absolute before:inset-x-0 before:-inset-y-4' : ''
-                  const cls = `${bridge} relative block rounded-lg px-3 py-2 text-sm font-semibold outline-none transition-colors duration-200 xl:px-4 focus-visible:ring-2 focus-visible:ring-[#F5B82E] ${lit ? 'text-white' : 'text-slate-300 hover:text-white'
+                  const marked = isActive && pathname !== '/'
+                  const pageState = isActive ? (pathname === '/' ? 'location' : 'page') : undefined
+                  const cls = `${bridge} relative block rounded-lg px-3 py-2 text-sm font-semibold outline-none transition-colors duration-200 focus-visible:ring-2 focus-visible:ring-[#F5B82E] focus-visible:ring-offset-2 focus-visible:ring-offset-[#101F3D] 2xl:px-4 ${marked ? 'bg-white/[0.07]' : ''} ${lit ? 'text-white' : 'text-slate-200 hover:text-white'
                     }`
 
                   return (
@@ -515,6 +504,7 @@ const Navbar = () => {
                           type="button"
                           aria-haspopup="true"
                           aria-expanded={megaOpen}
+                          aria-current={pageState}
                           onMouseEnter={openMega}
                           onMouseLeave={closeMega}
                           onClick={openMega}
@@ -525,6 +515,7 @@ const Navbar = () => {
                       ) : (
                         <a
                           href={item.href}
+                          aria-current={pageState}
                           onClick={item.key === 'home' ? handleHome : (event) => handleRoute(event, item.key, item.href)}
                           className={cls}
                         >
@@ -537,7 +528,7 @@ const Navbar = () => {
               </ul>
             </nav>
 
-            <div className="hidden items-center lg:flex">
+            <div className="hidden items-center xl:flex">
               <MagneticButton href="/book" onClick={() => handleNavigate('book')}>
                 Book a Consultation
               </MagneticButton>
@@ -548,7 +539,7 @@ const Navbar = () => {
               whileTap={{ scale: 0.92 }}
               aria-label="Open menu"
               aria-expanded={menuOpen}
-              className="group flex h-11 w-11 items-center justify-center rounded-xl border border-white/15 bg-white/5 outline-none transition-colors hover:bg-white/10 focus-visible:ring-2 focus-visible:ring-[#F5B82E] lg:hidden"
+              className="group flex h-11 w-11 items-center justify-center rounded-xl border border-white/15 bg-white/5 outline-none transition-colors hover:bg-white/10 focus-visible:ring-2 focus-visible:ring-[#F5B82E] xl:hidden"
             >
               <span className="flex w-5 flex-col items-end gap-[5px]">
                 <span className="h-[2px] w-5 rounded-full bg-white" />

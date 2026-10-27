@@ -24,9 +24,9 @@ const ProtectVisual = ({ service }) => {
   return (
     <PanelShell
       color={color}
-      title="protect / sample.scan"
+      title="protect / assessment"
       chips={[
-        { label: 'Sample finding', pos: '-left-5 top-[20%]', delay: '0s' },
+        { label: 'Finding flagged', pos: '-left-5 top-[20%]', delay: '0s' },
         { label: 'Findings ranked', pos: '-right-4 bottom-[26%]', delay: '1.6s', tone: '#FBBF24' },
       ]}
     >
@@ -74,7 +74,7 @@ const ProtectVisual = ({ service }) => {
         ))}
       </ul>
       <p className="mt-5 text-[11px] leading-relaxed text-slate-400">
-        Severity reflects likelihood and business impact in context: High needs action first, Medium is planned, Low is tracked. The same finding can rank differently in another business.
+        High needs action first, Medium is planned and Low is tracked.
       </p>
     </PanelShell>
   )

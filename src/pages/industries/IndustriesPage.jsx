@@ -1,6 +1,6 @@
-import { useState } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router'
-import { AnimatePresence, MotionConfig, m } from 'framer-motion'
+import { MotionConfig, m } from 'framer-motion'
 import usePageMeta from '../../hooks/usePageMeta'
 import MagneticButton from '../../components/ui/MagneticButton'
 import NetworkCanvas from '../../components/ui/NetworkCanvas'
@@ -12,7 +12,7 @@ import { Arrow, GlyphIcon } from '../../components/ui/icons'
 import { industries } from '../../data/content'
 import { icons, services } from '../../data/services'
 import { rgba, tint } from '../../lib/color'
-import { ease, rise, stagger } from '../../lib/motion'
+import { ease, rise, stagger, viewport } from '../../lib/motion'
 
 const byId = (id) => services.find((service) => service.id === id)
 
@@ -138,13 +138,228 @@ const Hero = ({ activeSlug, onPick }) => {
   )
 }
 
-const Explorer = ({ slug, onPick }) => {
-  const item = industries.find((entry) => entry.slug === slug) ?? industries[0]
+const glanceSteps = [
+  ['Identify exposure', 'Map where your data, systems, contracts and vendors create risk.'],
+  ['Prioritise gaps', 'Rank what matters first by likelihood, impact and effort.'],
+  ['Plan practical controls', 'Agree safeguards and next steps your team can act on.'],
+]
+
+const panelId = (slug) => `sector-${slug}`
+
+const isDesktop = () => window.matchMedia('(min-width: 1024px)').matches
+const reducedMotion = () => window.matchMedia('(prefers-reduced-motion: reduce)').matches
+
+const SectorNav = ({ navRef, activeSlug, onPick }) => (
+  <nav
+    ref={navRef}
+    aria-label="Industries"
+    className="sticky top-[calc(4rem+env(safe-area-inset-top))] z-20 -mx-4 flex gap-2 overflow-x-auto bg-[#F8FAFC]/90 px-4 py-2 backdrop-blur [scrollbar-width:none] sm:-mx-6 sm:px-6 lg:static lg:mx-0 lg:grid lg:grid-cols-1 lg:overflow-visible lg:bg-transparent lg:p-0 lg:backdrop-blur-none [&::-webkit-scrollbar]:hidden"
+  >
+    {industries.map((entry) => {
+      const on = entry.slug === activeSlug
+      return (
+        <button
+          key={entry.slug}
+          type="button"
+          aria-current={on ? 'true' : undefined}
+          onClick={() => onPick(entry.slug)}
+          className={`relative shrink-0 rounded-2xl border px-4 py-3 text-left outline-none transition-colors focus-visible:ring-2 focus-visible:ring-[#1473E6] lg:w-full lg:shrink lg:px-5 lg:py-3.5 ${on ? 'border-transparent' : 'border-slate-200 bg-white hover:border-[#1473E6]/50'}`}
+        >
+          {on && <m.span layoutId="industry-tab" transition={{ type: 'spring', stiffness: 380, damping: 34 }} className="absolute inset-0 rounded-2xl bg-[#0B1730]" />}
+          <span className="relative flex items-center justify-between gap-3">
+            <span className={`whitespace-nowrap font-display text-base font-bold lg:whitespace-normal ${on ? 'text-white' : 'text-[#0B1730]'}`}>{entry.name}</span>
+            <span className="flex shrink-0 gap-1" aria-hidden="true">
+              {entry.divisions.map((id) => <span key={id} className="h-2 w-2 rounded-full" style={{ backgroundColor: byId(id)?.accent }} />)}
+            </span>
+          </span>
+        </button>
+      )
+    })}
+  </nav>
+)
+
+const Glance = () => (
+  <section aria-labelledby="glance-title" className="rounded-3xl border border-slate-200 bg-white/80 p-4 shadow-[0_2px_10px_-6px_rgba(11,23,48,0.15)] backdrop-blur max-lg:order-last">
+    <p className="text-[11px] font-extrabold uppercase tracking-wider text-[#1473E6]">How we work</p>
+    <h3 id="glance-title" className="mt-1 font-display text-lg font-bold text-[#0B1730]">Risk Advisory at a Glance</h3>
+    <ol className="mt-3 space-y-2">
+      {glanceSteps.map(([title, text], index) => (
+        <li key={title} className="flex items-start gap-3 rounded-2xl border border-slate-200 bg-[#F8FAFC] p-3">
+          <span aria-hidden="true" className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full border border-[#F5B82E]/60 bg-[#F5B82E]/15 text-xs font-extrabold text-[#0B1730]">{index + 1}</span>
+          <span className="min-w-0">
+            <span className="block text-sm font-bold text-[#0B1730]">{title}</span>
+            <span className="mt-0.5 block text-[13px] leading-snug text-slate-600">{text}</span>
+          </span>
+        </li>
+      ))}
+    </ol>
+  </section>
+)
+
+const SectorPanel = ({ item }) => {
   const used = item.divisions.map(byId).filter(Boolean)
   const glow = used[0]?.accent ?? '#1473E6'
 
   return (
-    <section id="explorer" className="relative overflow-hidden bg-[#F8FAFC] py-24 lg:py-28">
+    <m.article
+      id={panelId(item.slug)}
+      aria-labelledby={`${panelId(item.slug)}-title`}
+      data-sector={item.slug}
+      initial={{ opacity: 0, y: 22 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={viewport}
+      transition={{ duration: 0.5, ease }}
+      className="relative isolate min-w-0 scroll-mt-40 overflow-hidden rounded-3xl bg-[#0B1730] p-5 text-white shadow-[0_40px_80px_-40px_rgba(11,23,48,0.8)] sm:p-10 lg:scroll-mt-28"
+    >
+      <NetworkCanvas className="opacity-40" density={9000} reach={110} />
+      <div className="pointer-events-none absolute inset-0 -z-10" style={{ background: `radial-gradient(520px circle at 85% 0%, ${rgba(glow, 0.32)}, transparent 65%)` }} />
+      <h3 id={`${panelId(item.slug)}-title`} className="font-display text-2xl font-bold sm:text-4xl">{item.name}</h3>
+
+      <div className="mt-8 grid gap-5 sm:grid-cols-2">
+        <div className="rounded-2xl border border-white/10 bg-white/5 p-5 backdrop-blur">
+          <p className="text-sm font-bold text-[#F5B82E]">The risk</p>
+          <p className="mt-2 leading-relaxed text-slate-200">{item.challenge}</p>
+        </div>
+        <div className="rounded-2xl border border-white/10 bg-white/5 p-5 backdrop-blur">
+          <p className="text-sm font-bold text-[#60A5FA]">How we help</p>
+          <p className="mt-2 leading-relaxed text-slate-200">{item.approach}</p>
+        </div>
+      </div>
+
+      <m.ol variants={stagger(0.07, 0.1)} initial="hidden" whileInView="show" viewport={viewport} aria-label="Pathway" className="mt-5 space-y-3">
+        {[
+          ['Buying trigger', item.trigger],
+          ['Typical exposure', item.exposure],
+          ['Intervention', item.intervention],
+          ['Likely output', item.output],
+          ['Expected effect', item.effect],
+        ].map(([label, text], index) => (
+          <m.li key={label} variants={rise} className="grid gap-2 rounded-2xl border border-white/10 bg-white/[0.04] p-4 sm:grid-cols-[10.5rem_minmax(0,1fr)] sm:items-start sm:gap-5 sm:p-5">
+            <p className="flex items-center gap-3 text-xs font-extrabold uppercase tracking-wider text-[#F5B82E]">
+              <span aria-hidden="true" className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full border border-[#F5B82E]/40 bg-[#F5B82E]/10">{index + 1}</span>
+              {label}
+            </p>
+            <p className="min-w-0 text-sm leading-relaxed text-slate-200 sm:text-[15px]">{text}</p>
+          </m.li>
+        ))}
+      </m.ol>
+
+      <p className="mt-9 text-sm font-bold text-slate-300">Practices we bring to {item.name.toLowerCase()}</p>
+      <m.div variants={stagger(0.08, 0.15)} initial="hidden" whileInView="show" viewport={viewport} className="mt-3 flex flex-wrap gap-3">
+        {used.map((service) => (
+          <m.div key={service.id} variants={rise}>
+            <Link
+              to={service.href}
+              className="group inline-flex items-center gap-3 rounded-xl border px-4 py-3 outline-none transition-transform duration-300 hover:-translate-y-0.5 focus-visible:ring-2 focus-visible:ring-[#F5B82E]"
+              style={{ borderColor: rgba(service.accent, 0.5), backgroundColor: rgba(service.accent, 0.12) }}
+            >
+              <GlyphIcon d={icons[service.id]} color={tint(service.accent, 0.35)} className="h-5 w-5" strokeWidth={1.8} />
+              <span className="leading-tight">
+                <span className="block text-sm font-bold text-white">{service.name}</span>
+                <span className="block text-xs text-slate-300">{service.field}</span>
+              </span>
+              <Arrow className="h-4 w-4 text-slate-300 transition-transform duration-300 group-hover:translate-x-1" />
+            </Link>
+          </m.div>
+        ))}
+      </m.div>
+    </m.article>
+  )
+}
+
+const Explorer = ({ slug, onActive, registerScroll }) => {
+  const navRef = useRef(null)
+  const visible = useRef(new Set())
+  const locked = useRef(false)
+  const lockTimer = useRef(0)
+  const syncRef = useRef(() => {})
+
+  const offset = useCallback(() => {
+    const header = document.querySelector('header')?.offsetHeight ?? 64
+    const strip = !isDesktop() && navRef.current ? navRef.current.offsetHeight : 0
+    return header + strip
+  }, [])
+
+  const scrollToPanel = useCallback((target) => {
+    const el = document.getElementById(panelId(target))
+    if (!el) return
+    window.clearTimeout(lockTimer.current)
+    locked.current = true
+    const release = () => {
+      window.clearTimeout(lockTimer.current)
+      window.removeEventListener('scrollend', release)
+      locked.current = false
+      syncRef.current()
+    }
+    window.addEventListener('scrollend', release, { once: true })
+    lockTimer.current = window.setTimeout(release, 1400)
+    const top = el.getBoundingClientRect().top + window.scrollY - offset() - 16
+    window.scrollTo({ top: Math.max(0, top), behavior: reducedMotion() ? 'auto' : 'smooth' })
+  }, [offset])
+
+  const handlePick = useCallback((target) => {
+    onActive(target)
+    scrollToPanel(target)
+  }, [onActive, scrollToPanel])
+
+  useEffect(() => {
+    registerScroll(scrollToPanel)
+    return () => registerScroll(null)
+  }, [registerScroll, scrollToPanel])
+
+  useEffect(() => {
+    const panels = industries.map((entry) => document.getElementById(panelId(entry.slug))).filter(Boolean)
+    if (!panels.length) return undefined
+    let observer = null
+
+    const sync = () => {
+      if (locked.current) return
+      let next = null
+      industries.forEach((entry) => {
+        if (visible.current.has(entry.slug)) next = entry.slug
+      })
+      if (next) onActive(next)
+    }
+    syncRef.current = sync
+
+    const connect = () => {
+      observer?.disconnect()
+      visible.current.clear()
+      const top = offset() + 8
+      const bandBottom = Math.max(top + 120, window.innerHeight * 0.5)
+      const bottom = Math.max(0, window.innerHeight - bandBottom)
+      observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            const key = entry.target.dataset.sector
+            if (entry.isIntersecting) visible.current.add(key)
+            else visible.current.delete(key)
+          })
+          sync()
+        },
+        { rootMargin: `-${top}px 0px -${bottom}px 0px`, threshold: 0 },
+      )
+      panels.forEach((panel) => observer.observe(panel))
+    }
+
+    connect()
+    window.addEventListener('resize', connect)
+    return () => {
+      window.removeEventListener('resize', connect)
+      observer?.disconnect()
+      window.clearTimeout(lockTimer.current)
+    }
+  }, [offset, onActive])
+
+  useEffect(() => {
+    const nav = navRef.current
+    const button = nav?.querySelector('[aria-current="true"]')
+    if (!nav || !button || nav.scrollWidth <= nav.clientWidth) return
+    nav.scrollTo({ left: button.offsetLeft - (nav.clientWidth - button.offsetWidth) / 2, behavior: reducedMotion() ? 'auto' : 'smooth' })
+  }, [slug])
+
+  return (
+    <section id="explorer" className="relative overflow-clip bg-[#F8FAFC] py-20 lg:py-28">
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(rgba(11,23,48,0.07)_1px,transparent_1px)] [background-size:24px_24px] [mask-image:linear-gradient(to_bottom,black,transparent_70%)]" />
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <SectionHeading
@@ -153,98 +368,15 @@ const Explorer = ({ slug, onPick }) => {
           text="Choose a sector to see its biggest risk, what we do about it, and which practices we bring."
         />
 
-        <div id="sector-detail" className="mt-12 grid scroll-mt-24 items-start gap-6 lg:scroll-mt-28 lg:grid-cols-[0.8fr_1.2fr]">
-          <div role="tablist" aria-label="Industries" className="grid grid-cols-1 gap-2 min-[480px]:grid-cols-2 lg:sticky lg:top-24 lg:grid-cols-1">
-            {industries.map((entry) => {
-              const on = entry.slug === item.slug
-              return (
-                <button
-                  key={entry.slug}
-                  type="button"
-                  role="tab"
-                  aria-selected={on}
-                  onClick={() => onPick(entry.slug, false)}
-                  className={`relative min-w-0 rounded-2xl border px-4 py-3.5 sm:px-5 sm:py-4 text-left outline-none transition-colors focus-visible:ring-2 focus-visible:ring-[#1473E6] ${on ? 'border-transparent' : 'border-slate-200 bg-white hover:border-[#1473E6]/50'}`}
-                >
-                  {on && <m.span layoutId="industry-tab" transition={{ type: 'spring', stiffness: 380, damping: 34 }} className="absolute inset-0 rounded-2xl bg-[#0B1730]" />}
-                  <span className="relative flex items-center justify-between gap-3">
-                    <span className={`font-display text-base font-bold ${on ? 'text-white' : 'text-[#0B1730]'}`}>{entry.name}</span>
-                    <span className="flex shrink-0 gap-1" aria-hidden="true">
-                      {entry.divisions.map((id) => <span key={id} className="h-2 w-2 rounded-full" style={{ backgroundColor: byId(id)?.accent }} />)}
-                    </span>
-                  </span>
-                </button>
-              )
-            })}
+        <div id="sector-detail" className="mt-10 grid gap-6 lg:mt-12 lg:grid-cols-[0.8fr_1.2fr] lg:items-start">
+          <div className="max-lg:contents lg:sticky lg:top-24 lg:flex lg:flex-col lg:gap-4 lg:[@media(max-height:700px)]:static">
+            <SectorNav navRef={navRef} activeSlug={slug} onPick={handlePick} />
+            <Glance />
           </div>
 
-          <AnimatePresence mode="wait">
-            <m.article
-              key={item.slug}
-              role="tabpanel"
-              initial={{ opacity: 0, y: 22 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -12 }}
-              transition={{ duration: 0.4, ease }}
-              className="relative isolate min-w-0 overflow-hidden rounded-3xl bg-[#0B1730] p-5 text-white shadow-[0_40px_80px_-40px_rgba(11,23,48,0.8)] sm:p-10"
-            >
-              <NetworkCanvas className="opacity-40" density={9000} reach={110} />
-              <div className="pointer-events-none absolute inset-0 -z-10" style={{ background: `radial-gradient(520px circle at 85% 0%, ${rgba(glow, 0.32)}, transparent 65%)` }} />
-              <h3 className="font-display text-2xl font-bold sm:text-4xl">{item.name}</h3>
-
-              <div className="mt-8 grid gap-5 sm:grid-cols-2">
-                <div className="rounded-2xl border border-white/10 bg-white/5 p-5 backdrop-blur">
-                  <p className="text-sm font-bold text-[#F5B82E]">The risk</p>
-                  <p className="mt-2 leading-relaxed text-slate-200">{item.challenge}</p>
-                </div>
-                <div className="rounded-2xl border border-white/10 bg-white/5 p-5 backdrop-blur">
-                  <p className="text-sm font-bold text-[#60A5FA]">How we help</p>
-                  <p className="mt-2 leading-relaxed text-slate-200">{item.approach}</p>
-                </div>
-              </div>
-
-              <m.ol key={`${item.slug}-path`} variants={stagger(0.07, 0.1)} initial="hidden" animate="show" aria-label="Pathway" className="mt-5 space-y-3">
-                {[
-                  ['Buying trigger', item.trigger],
-                  ['Typical exposure', item.exposure],
-                  ['Intervention', item.intervention],
-                  ['Likely output', item.output],
-                  ['Illustrative effect', item.effect],
-                ].map(([label, text], index) => (
-                  <m.li key={label} variants={rise} className="grid gap-2 rounded-2xl border border-white/10 bg-white/[0.04] p-4 sm:grid-cols-[10.5rem_minmax(0,1fr)] sm:items-start sm:gap-5 sm:p-5">
-                    <p className="flex items-center gap-3 text-xs font-extrabold uppercase tracking-wider text-[#F5B82E]">
-                      <span aria-hidden="true" className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full border border-[#F5B82E]/40 bg-[#F5B82E]/10">{index + 1}</span>
-                      {label}
-                    </p>
-                    <p className="min-w-0 text-sm leading-relaxed text-slate-200 sm:text-[15px]">{text}</p>
-                  </m.li>
-                ))}
-              </m.ol>
-              <p className="mt-4 text-xs leading-relaxed text-slate-400">
-                Target sector. This is an illustrative pathway, not a record of past client work. Effects are expected, not measured or promised.
-              </p>
-
-              <p className="mt-9 text-sm font-bold text-slate-300">Practices we bring to {item.name.toLowerCase()}</p>
-              <m.div variants={stagger(0.08, 0.15)} initial="hidden" animate="show" className="mt-3 flex flex-wrap gap-3">
-                {used.map((service) => (
-                  <m.div key={service.id} variants={rise}>
-                    <Link
-                      to={service.href}
-                      className="group inline-flex items-center gap-3 rounded-xl border px-4 py-3 outline-none transition-transform duration-300 hover:-translate-y-0.5 focus-visible:ring-2 focus-visible:ring-[#F5B82E]"
-                      style={{ borderColor: rgba(service.accent, 0.5), backgroundColor: rgba(service.accent, 0.12) }}
-                    >
-                      <GlyphIcon d={icons[service.id]} color={tint(service.accent, 0.35)} className="h-5 w-5" strokeWidth={1.8} />
-                      <span className="leading-tight">
-                        <span className="block text-sm font-bold text-white">{service.name}</span>
-                        <span className="block text-xs text-slate-300">{service.field}</span>
-                      </span>
-                      <Arrow className="h-4 w-4 text-slate-300 transition-transform duration-300 group-hover:translate-x-1" />
-                    </Link>
-                  </m.div>
-                ))}
-              </m.div>
-            </m.article>
-          </AnimatePresence>
+          <div className="min-w-0 space-y-6">
+            {industries.map((entry) => <SectorPanel key={entry.slug} item={entry} />)}
+          </div>
         </div>
       </div>
     </section>
@@ -256,22 +388,33 @@ const IndustriesPage = () => {
     const hash = window.location.hash.slice(1)
     return industries.some((item) => item.slug === hash) ? hash : industries[0].slug
   })
+  const scroller = useRef(null)
+  const initialSlug = useRef(slug)
 
   usePageMeta({
     title: 'Industries We Serve | UNEVENT',
     description: `See the main risks in ${industries.map((item) => item.name.toLowerCase()).join(', ')} and the UNEVENT security, legal, compliance and technology practices that help reduce them.`,
   })
 
-  const pick = (next, fromHero = true) => {
+  const registerScroll = useCallback((fn) => {
+    scroller.current = fn
+  }, [])
+
+  useEffect(() => {
+    if (window.location.hash.slice(1) !== initialSlug.current) return undefined
+    const timer = window.setTimeout(() => scroller.current?.(initialSlug.current), 400)
+    return () => window.clearTimeout(timer)
+  }, [])
+
+  const pick = useCallback((next) => {
     setSlug(next)
-    if (!fromHero && window.innerWidth >= 1024) return
-    window.setTimeout(() => document.getElementById('sector-detail')?.scrollIntoView({ behavior: 'smooth', block: 'start' }), fromHero ? 60 : 450)
-  }
+    scroller.current?.(next)
+  }, [])
 
   return (
     <MotionConfig reducedMotion="user">
       <Hero activeSlug={slug} onPick={pick} />
-      <Explorer slug={slug} onPick={pick} />
+      <Explorer slug={slug} onActive={setSlug} registerScroll={registerScroll} />
       <CtaSection />
     </MotionConfig>
   )

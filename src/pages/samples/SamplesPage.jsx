@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 import { Link, useLocation } from 'react-router'
-import { m, useScroll, useSpring } from 'framer-motion'
+import { m } from 'framer-motion'
 import usePageMeta from '../../hooks/usePageMeta'
 import NetworkCanvas from '../../components/ui/NetworkCanvas'
 import CtaSection from '../../components/CtaSection'
@@ -103,7 +103,6 @@ const Sample = ({ sample }) => {
           <span className="h-1.5 w-1.5 rounded-full" style={{ backgroundColor: service.accent }} />
           {service.name} · {service.area}
         </span>
-        <span className="rounded-full bg-[#F5B82E]/20 px-3 py-1 text-xs font-bold text-[#92600A]">{samplesHero.note}</span>
       </div>
       <h2 className="mt-4 font-display text-2xl font-bold leading-tight text-[#0B1730] sm:text-3xl">{sample.title}</h2>
       <p className="mt-3 max-w-3xl text-[15px] leading-relaxed text-[#334155]">{sample.intro}</p>
@@ -127,12 +126,8 @@ const SamplesPage = () => {
     return () => window.clearTimeout(timer)
   }, [hash])
 
-  const { scrollYProgress } = useScroll()
-  const progress = useSpring(scrollYProgress, { stiffness: 120, damping: 24, mass: 0.4 })
-
   return (
     <>
-      <m.div aria-hidden="true" style={{ scaleX: progress }} className="fixed inset-x-0 top-0 z-[70] h-[3px] origin-left bg-gradient-to-r from-[#F5B82E] to-[#1473E6]" />
       <section className="relative isolate overflow-hidden bg-[#0B1730]">
         <NetworkCanvas className="opacity-60" />
         <div className="pointer-events-none absolute inset-0 -z-10 bg-[linear-gradient(rgba(255,255,255,0.045)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.045)_1px,transparent_1px)] [background-size:56px_56px] [mask-image:radial-gradient(ellipse_at_center,black,transparent_78%)]" />
@@ -141,7 +136,7 @@ const SamplesPage = () => {
           <m.nav variants={rise} aria-label="Breadcrumb" className="flex items-center gap-2 text-sm font-semibold text-slate-400">
             <Link to="/" className="outline-none transition-colors hover:text-white focus-visible:text-white">Home</Link>
             <span aria-hidden="true">/</span>
-            <span className="text-white">Samples</span>
+            <span className="text-white">Deliverables</span>
           </m.nav>
           <m.span variants={rise} className="mt-7 inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-3.5 py-1.5 text-sm font-semibold text-blue-200">
             <span className="h-1.5 w-1.5 rounded-full bg-[#F5B82E]" />
@@ -149,7 +144,7 @@ const SamplesPage = () => {
           </m.span>
           <m.h1 variants={rise} transition={{ ease }} className="mt-6 font-display text-[clamp(1.9rem,8.5vw,2.4rem)] font-extrabold leading-[1.08] tracking-tight text-white sm:text-5xl lg:text-6xl">{samplesHero.title}</m.h1>
           <m.p variants={rise} className="mt-6 max-w-2xl text-lg leading-relaxed text-slate-300 sm:text-xl">{samplesHero.text}</m.p>
-          <m.ul variants={rise} aria-label="Jump to a sample" className="mt-8 flex flex-wrap gap-2.5">
+          <m.ul variants={rise} aria-label="Jump to a deliverable" className="mt-8 flex flex-wrap gap-2.5">
             {samples.map((sample) => (
               <li key={sample.id}>
                 <a href={`#${sample.id}`} className="inline-flex min-h-11 items-center gap-2 rounded-full border border-white/15 bg-white/5 px-4 text-sm font-semibold text-white outline-none backdrop-blur transition-[background-color,border-color,transform] duration-300 hover:-translate-y-0.5 hover:border-[#F5B82E]/70 hover:bg-white/10 focus-visible:ring-2 focus-visible:ring-[#F5B82E]">

@@ -63,7 +63,6 @@ const PieChartPanel = ({ chart }) => {
 
           <div className="relative flex flex-wrap items-center justify-between gap-2">
             <p className="text-xs font-bold uppercase tracking-widest text-[#F5B82E]">{chart.badge}</p>
-            <p className="text-xs font-medium text-slate-400">Hover or tap a slice</p>
           </div>
           <h3 className="relative mt-2 font-display text-xl font-bold leading-snug text-white sm:text-2xl">{chart.title}</h3>
 
@@ -75,7 +74,7 @@ const PieChartPanel = ({ chart }) => {
               transition={{ duration: 1.2, delay: 0.3, ease }}
               className="mx-auto aspect-square w-full max-w-[250px]"
             >
-              <svg viewBox="0 0 200 200" role="group" aria-label={`${chart.unit}. ${chart.note}`} className="h-full w-full overflow-visible">
+              <svg viewBox="0 0 200 200" role="group" aria-label={chart.note ? `${chart.unit}. ${chart.note}` : chart.unit} className="h-full w-full overflow-visible">
                 {slices.map((slice, index) => {
                   const isActive = index === active
                   return (
@@ -156,11 +155,13 @@ const PieChartPanel = ({ chart }) => {
             </div>
           </div>
 
-          <div className="relative mt-5 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-            <div>
-              <p className="bg-gradient-to-r from-[#F5B82E] to-[#FFE29A] bg-clip-text text-sm font-bold text-transparent">{chart.footer}</p>
-              <p className="mt-1 text-xs text-slate-400">{chart.unit} · {chart.note}</p>
-            </div>
+          <div className={`relative mt-5 flex flex-col gap-4 sm:flex-row sm:items-center ${chart.footer ? 'sm:justify-between' : 'sm:justify-end'}`}>
+            {chart.footer && (
+              <div>
+                <p className="bg-gradient-to-r from-[#F5B82E] to-[#FFE29A] bg-clip-text text-sm font-bold text-transparent">{chart.footer}</p>
+                <p className="mt-1 text-xs text-slate-400">{chart.unit}{chart.note ? ` · ${chart.note}` : ''}</p>
+              </div>
+            )}
             <MagneticButton href="/book" className="shrink-0 self-start sm:self-auto">
               Book a Consultation
             </MagneticButton>

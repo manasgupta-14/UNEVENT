@@ -32,13 +32,12 @@ const BarChartPanel = ({ chart }) => {
 
           <div className="relative flex flex-wrap items-center justify-between gap-2">
             <p className="text-xs font-bold uppercase tracking-widest text-[#F5B82E]">{chart.badge}</p>
-            <p className="text-xs font-medium text-slate-400">Hover or tap a bar</p>
           </div>
           <h3 className="relative mt-2 font-display text-xl font-bold leading-snug text-white sm:text-2xl">
             {chart.title}
           </h3>
 
-          <div role="group" aria-label={`${chart.unit}. ${chart.note}`} className="relative mt-8 flex h-56 items-end gap-4 border-b border-white/15 sm:gap-6">
+          <div role="group" aria-label={chart.note ? `${chart.unit}. ${chart.note}` : chart.unit} className="relative mt-8 flex h-56 items-end gap-4 border-b border-white/15 sm:gap-6">
             {[25, 50, 75].map((line) => (
               <span
                 key={line}
@@ -116,7 +115,7 @@ const BarChartPanel = ({ chart }) => {
               <p className="bg-gradient-to-r from-[#F5B82E] to-[#FFE29A] bg-clip-text text-sm font-bold text-transparent">
                 {chart.footer}
               </p>
-              <p className="mt-1 text-xs text-slate-400">{chart.unit} · {chart.note}</p>
+              <p className="mt-1 text-xs text-slate-400">{chart.unit}{chart.note ? ` · ${chart.note}` : ''}</p>
             </div>
             <MagneticButton href="/book" className="shrink-0 self-start sm:self-auto">
               Book a Consultation

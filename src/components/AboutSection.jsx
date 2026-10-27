@@ -1,5 +1,4 @@
 import SectionHeading from './ui/SectionHeading'
-import { legalNotice } from '../data/company'
 
 const triggers = [
   'An enterprise security review',
@@ -27,7 +26,6 @@ const AboutSection = () => (
         </ul>
       </div>
 
-      <p className="mt-8 text-sm text-slate-500">{legalNotice}</p>
     </div>
   </section>
 )

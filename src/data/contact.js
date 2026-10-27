@@ -102,5 +102,4 @@ export const contactChart = {
       detail: 'We reply with a suggested next step, usually within two business days.',
     },
   ],
-  footer: 'Reply times are typical and can vary with scope.',
 }

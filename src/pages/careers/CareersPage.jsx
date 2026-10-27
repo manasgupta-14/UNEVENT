@@ -175,7 +175,7 @@ const Values = () => (
           >
             <span className="absolute inset-x-0 top-0 h-1 origin-left scale-x-0 bg-gradient-to-r from-[#1473E6] to-[#F5B82E] transition-transform duration-500 group-hover:scale-x-100" />
             <span className="flex h-12 w-12 items-center justify-center rounded-2xl bg-[#1473E6]/10">
-              <GlyphIcon d={item.d} color="#1473E6" className="h-6 w-6" strokeWidth={1.7} />
+              <GlyphIcon d={item.d} plain color="#1473E6" className="h-6 w-6" strokeWidth={1.7} />
             </span>
             <p className="mt-5 text-xs font-bold text-[#92600A]">0{index + 1}</p>
             <h3 className="mt-1 font-display text-lg font-bold leading-snug text-[#0B1730]">{item.title}</h3>
